@@ -1,0 +1,881 @@
+import type { ReactNode } from 'react';
+import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
+import { Step, Steps } from '@open-slide/core';
+
+export const design: DesignSystem = {
+  palette: { bg: '#0d1b2e', text: '#f2f6fc', accent: '#ffcd01' },
+  fonts: {
+    display: '-apple-system, "PingFang TC", "Noto Sans TC", system-ui, sans-serif',
+    body: '-apple-system, "PingFang TC", "Noto Sans TC", system-ui, sans-serif',
+  },
+  typeScale: { hero: 120, body: 36 },
+  radius: 20,
+};
+
+// Formal variant of the house style: deep navy ground, one loud accent.
+const yellow = '#ffcd01';
+const blue = '#4190de';
+const card = '#16263f';
+const line = 'rgba(255,255,255,0.14)';
+const muted = '#8ba0bf';
+const ink = '#111111';
+
+const EASE_OUT = 'cubic-bezier(0, 0, 0.2, 1)';
+const EASE_IN = 'cubic-bezier(0.4, 0, 1, 1)';
+
+export const transition: SlideTransition = {
+  duration: 200,
+  exit: {
+    duration: 140,
+    easing: EASE_IN,
+    keyframes: [
+      { opacity: 1, transform: 'translateY(0)' },
+      { opacity: 0, transform: 'translateY(-4px)' },
+    ],
+  },
+  enter: {
+    duration: 200,
+    delay: 80,
+    easing: EASE_OUT,
+    keyframes: [
+      { opacity: 0, transform: 'translateY(6px)' },
+      { opacity: 1, transform: 'translateY(0)' },
+    ],
+  },
+};
+
+const fill = {
+  width: '100%',
+  height: '100%',
+  fontFamily: 'var(--osd-font-body)',
+  position: 'relative',
+} as const;
+
+const PageRefs = ({ children }: { children: ReactNode }) => (
+  <div
+    style={{
+      position: 'absolute',
+      left: 120,
+      bottom: 36,
+      fontSize: 20,
+      fontWeight: 600,
+      color: muted,
+      opacity: 0.9,
+    }}
+  >
+    Refs: {children}
+  </div>
+);
+
+const Heading = ({ children }: { children: ReactNode }) => (
+  <h2
+    style={{
+      fontFamily: 'var(--osd-font-display)',
+      fontSize: 72,
+      fontWeight: 900,
+      margin: 0,
+      lineHeight: 1.15,
+      letterSpacing: -1,
+    }}
+  >
+    {children}
+  </h2>
+);
+
+const Bullet = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 26 }}>
+    <span
+      style={{
+        width: 18,
+        height: 18,
+        borderRadius: 999,
+        background: yellow,
+        flexShrink: 0,
+        marginTop: 17,
+      }}
+    />
+    <span style={{ fontSize: 'var(--osd-size-body)', lineHeight: 1.5 }}>{children}</span>
+  </div>
+);
+
+const B = ({ children }: { children: ReactNode }) => (
+  <strong style={{ color: yellow, fontWeight: 800 }}>{children}</strong>
+);
+
+const Banner = ({ children }: { children: ReactNode }) => (
+  <div
+    style={{
+      marginTop: 56,
+      background: yellow,
+      color: ink,
+      borderRadius: 'var(--osd-radius)',
+      padding: '30px 52px',
+      fontSize: 34,
+      fontWeight: 800,
+      lineHeight: 1.45,
+    }}
+  >
+    {children}
+  </div>
+);
+
+const VsRow = ({ dot, children }: { dot: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
+    <span style={{ width: 14, height: 14, borderRadius: 999, background: dot, flexShrink: 0, marginTop: 15 }} />
+    <span style={{ fontSize: 30, lineHeight: 1.45 }}>{children}</span>
+  </div>
+);
+
+/* ------------------------------------------------ 01 · Cover */
+
+const Cover: Page = () => (
+  <div
+    style={{
+      ...fill,
+      background: 'var(--osd-bg)',
+      color: 'var(--osd-text)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: '0 160px',
+    }}
+  >
+    <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 6, color: muted, marginBottom: 44 }}>
+      @RYANYCW · ETHEREUM × TRADFI · 15 MIN
+    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 'var(--osd-size-hero)',
+        fontWeight: 900,
+        margin: 0,
+        lineHeight: 1.08,
+        letterSpacing: -2,
+      }}
+    >
+      Bridging Regulation
+      <br />& Decentralization
+    </h1>
+    <div style={{ width: 220, height: 10, background: yellow, borderRadius: 999, margin: '48px 0' }} />
+    <p style={{ fontSize: 42, fontWeight: 700, margin: 0, color: 'var(--osd-text)' }}>
+      Tech Stacks for <span style={{ color: yellow }}>Compliant Adoption</span>
+    </p>
+  </div>
+);
+
+Cover.transition = {
+  duration: 280,
+  exit: {
+    duration: 160,
+    easing: EASE_IN,
+    keyframes: [
+      { opacity: 1, transform: 'translateY(0)' },
+      { opacity: 0, transform: 'translateY(-6px)' },
+    ],
+  },
+  enter: {
+    duration: 280,
+    delay: 100,
+    easing: EASE_OUT,
+    keyframes: [
+      { opacity: 0, transform: 'translateY(12px)', filter: 'blur(4px)' },
+      { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
+    ],
+  },
+};
+
+/* ------------------------------------------------ 02 · Hook */
+
+const Hook: Page = () => (
+  <div
+    style={{
+      ...fill,
+      background: 'var(--osd-bg)',
+      color: 'var(--osd-text)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: '0 160px',
+    }}
+  >
+    <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: 4, color: muted, marginBottom: 40 }}>
+      THE THESIS
+    </div>
+    <h2
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 92,
+        fontWeight: 900,
+        margin: 0,
+        lineHeight: 1.15,
+        letterSpacing: -1,
+      }}
+    >
+      The next major wave of capital
+      <br />
+      entering Ethereum is <span style={{ color: yellow }}>TradFi</span>.
+    </h2>
+    <div
+      style={{
+        marginTop: 64,
+        background: yellow,
+        color: ink,
+        borderRadius: 'var(--osd-radius)',
+        padding: '34px 52px',
+        fontSize: 38,
+        fontWeight: 800,
+        lineHeight: 1.4,
+        alignSelf: 'flex-start',
+      }}
+    >
+      Institutional liquidity requires institutional-grade compliance.
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------ 03 · Why now */
+
+const WhyNow: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      The regulators <span style={{ color: yellow }}>aren't waiting</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        <B>MiCA & DORA</B> are live in the EU — licensing and resilience rules apply
+      </Bullet>
+      <Bullet>
+        <B>Travel Rule</B> enforcement keeps expanding across jurisdictions
+      </Bullet>
+      <Bullet>
+        <B>Basel</B> frameworks now price banks' crypto exposure
+      </Bullet>
+      <Bullet>
+        Qualified custody rules decide <B>who may hold institutional assets</B>
+      </Bullet>
+    </div>
+    <Banner>Compliance is no longer optional homework — it's the entry exam. 🏛️</Banner>
+    <PageRefs>hackmd.io (Compliance Need) · fireblocks.com · bitgo.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 04 · The tension */
+
+const Tension: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <Heading>
+      Two worlds, <span style={{ color: yellow }}>one bridge to build</span>
+    </Heading>
+    <div style={{ display: 'flex', gap: 32, marginTop: 52 }}>
+      <div style={{ flex: 1, background: card, borderRadius: 'var(--osd-radius)', padding: '40px 44px', border: `1px solid ${line}` }}>
+        <div style={{ fontSize: 36, fontWeight: 900, color: yellow, marginBottom: 30 }}>
+          What institutions need
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+          <VsRow dot={yellow}>KYC'd counterparties</VsRow>
+          <VsRow dot={yellow}>Policy controls & approvals</VsRow>
+          <VsRow dot={yellow}>Audit trails & reporting</VsRow>
+          <VsRow dot={yellow}>Licensed, insured rails</VsRow>
+        </div>
+      </div>
+      <div style={{ flex: 1, background: card, borderRadius: 'var(--osd-radius)', padding: '40px 44px', border: `1px solid ${line}` }}>
+        <div style={{ fontSize: 36, fontWeight: 900, color: blue, marginBottom: 30 }}>
+          What Ethereum promises
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+          <VsRow dot={blue}>Permissionless access</VsRow>
+          <VsRow dot={blue}>Censorship resistance</VsRow>
+          <VsRow dot={blue}>Credible neutrality</VsRow>
+          <VsRow dot={blue}>Global, always-on settlement</VsRow>
+        </div>
+      </div>
+    </div>
+    <div
+      style={{
+        marginTop: 44,
+        background: yellow,
+        color: ink,
+        borderRadius: 'var(--osd-radius)',
+        padding: '28px 52px',
+        fontSize: 32,
+        fontWeight: 800,
+      }}
+    >
+      The bridge is an architecture problem — not a compromise. 🌉
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------ 05 · Stack overview */
+
+const LayerBar = ({
+  num,
+  name,
+  desc,
+  base = false,
+}: {
+  num?: string;
+  name: string;
+  desc: string;
+  base?: boolean;
+}) => (
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 30,
+      background: base ? blue : card,
+      border: `1px solid ${base ? blue : line}`,
+      borderRadius: 16,
+      padding: '0 40px',
+      height: 104,
+    }}
+  >
+    {num ? (
+      <span
+        style={{
+          background: yellow,
+          color: ink,
+          borderRadius: 999,
+          width: 56,
+          height: 56,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 28,
+          fontWeight: 900,
+          flexShrink: 0,
+        }}
+      >
+        {num}
+      </span>
+    ) : (
+      <span style={{ fontSize: 34, flexShrink: 0 }}>⚖️</span>
+    )}
+    <span style={{ fontSize: 34, fontWeight: 900, flexShrink: 0 }}>{name}</span>
+    <span style={{ fontSize: 25, color: base ? 'rgba(255,255,255,0.9)' : muted }}>{desc}</span>
+  </div>
+);
+
+const StackOverview: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <Heading>
+      The <span style={{ color: yellow }}>compliant stack</span>, top to bottom
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 48 }}>
+      <Steps>
+        <Step>
+          <div style={{ marginBottom: 14 }}>
+            <LayerBar num="5" name="Compliant frontends" desc="geo-fencing, gated pools, screened access" />
+          </div>
+        </Step>
+        <Step>
+          <div style={{ marginBottom: 14 }}>
+            <LayerBar num="4" name="Screening & Travel Rule" desc="risk scoring, sanctions, VASP messaging" />
+          </div>
+        </Step>
+        <Step>
+          <div style={{ marginBottom: 14 }}>
+            <LayerBar num="3" name="Policy engines" desc="limits, whitelists, approval quorums" />
+          </div>
+        </Step>
+        <Step>
+          <div style={{ marginBottom: 14 }}>
+            <LayerBar num="2" name="Keys & custody" desc="multisig, MPC, TEE / HSM roots" />
+          </div>
+        </Step>
+        <Step>
+          <div style={{ marginBottom: 14 }}>
+            <LayerBar num="1" name="Identity & attestations" desc="KYC once, prove everywhere" />
+          </div>
+        </Step>
+        <LayerBar base name="Neutral protocol core" desc="permissionless, untouched — and it must stay that way" />
+      </Steps>
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------ 06 · Layer 1 Identity */
+
+const LayerIdentity: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Layer 1 — <span style={{ color: yellow }}>Identity & attestation registries</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        <B>KYC once, prove everywhere</B> — attestations instead of document copies
+      </Bullet>
+      <Bullet>
+        VASP registries & directories: <B>TRUST · VerifyVASP · Sumsub</B>
+      </Bullet>
+      <Bullet>
+        <B>IVMS 101</B> as the shared data language between institutions
+      </Bullet>
+      <Bullet>
+        Onchain: screened-address attestations, <B>zero raw PII</B> on the chain
+      </Bullet>
+    </div>
+    <Banner>Identity lives beside the chain — never on it. 🪪</Banner>
+    <PageRefs>21analytics.co (IVMS 101) · verifyvasp.com · sumsub.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 07 · Layer 2 Custody */
+
+const LayerCustody: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Layer 2 — <span style={{ color: yellow }}>Keys & custody</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        <B>Multisig (Safe)</B>: thresholds on-chain, transparent by design
+      </Bullet>
+      <Bullet>
+        <B>MPC (CMP · DKLs)</B>: chain-agnostic, threshold invisible, the full key never exists
+      </Bullet>
+      <Bullet>
+        Hardware roots: <B>TEE</B> (SGX, Nitro) and <B>HSM</B> — mature setups layer both
+      </Bullet>
+      <Bullet>
+        Key refresh & approval quorums make signer rotation an <B>off-chain event</B>
+      </Bullet>
+    </div>
+    <Banner>Qualified custody is the entry ticket for regulated capital. 🎫</Banner>
+    <PageRefs>safe.global · fireblocks.com (What is MPC) · bitgo.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 08 · Layer 3 Policy */
+
+const LayerPolicy: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Layer 3 — <span style={{ color: yellow }}>Automated policy engines</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        Programmable guardrails: <B>limits, whitelists, approval matrices</B>
+      </Bullet>
+      <Bullet>
+        Four-eyes and role-based quorums <B>before any signature happens</B>
+      </Bullet>
+      <Bullet>
+        Humans set the rules, machines enforce them (<B>Fireblocks · Narval</B>)
+      </Bullet>
+      <Bullet>
+        Agent-ready: the same rails let <B>AI agents spend safely</B>
+      </Bullet>
+    </div>
+    <Banner>Paper policy becomes executable policy. 📜→⚙️</Banner>
+    <PageRefs>fireblocks.com · narval.xyz</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 09 · Layer 4 Screening */
+
+const LayerScreening: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Layer 4 — <span style={{ color: yellow }}>Screening & Travel Rule rails</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        Transaction screening & risk scoring: <B>Chainalysis · Elliptic</B>
+      </Bullet>
+      <Bullet>
+        Travel Rule messaging between VASPs: <B>Notabene · Sumsub</B>
+      </Bullet>
+      <Bullet>
+        Today: alliances — <B>TRUST 200+ · VerifyVASP 150+ · GTR 116</B>
+      </Bullet>
+      <Bullet>
+        Tomorrow: open standards — <B>TRP + IVMS 101</B>
+      </Bullet>
+    </div>
+    <Banner>From compliance cliques to a TCP/IP moment. 🌐</Banner>
+    <PageRefs>notabene.id · 21analytics.co · globaltravelrule.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 10 · Layer 5 Frontends */
+
+const LayerFrontend: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Layer 5 — <span style={{ color: yellow }}>Compliant DeFi frontends</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        Geo-fencing, screened wallets and <B>permissioned pools at the frontend</B>
+      </Bullet>
+      <Bullet>
+        Attestation-gated DeFi: <B>prove compliance, not identity</B>
+      </Bullet>
+      <Bullet>
+        Institutional access through custody rails (<B>Fireblocks DeFi · Liminal on Safe</B>)
+      </Bullet>
+      <Bullet>
+        Underneath it all, the protocol <B>stays permissionless</B>
+      </Bullet>
+    </div>
+    <Banner>Regulate the doorway — not the road. 🚪</Banner>
+    <PageRefs>liminalcustody.com · fireblocks.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 11 · Case study: pipeline */
+
+const FlowHeading = ({ children }: { children: ReactNode }) => (
+  <h2
+    style={{
+      position: 'absolute',
+      left: 100,
+      top: 84,
+      margin: 0,
+      fontFamily: 'var(--osd-font-display)',
+      fontSize: 58,
+      fontWeight: 900,
+      lineHeight: 1.2,
+      letterSpacing: -1,
+    }}
+  >
+    {children}
+  </h2>
+);
+
+const FlowNode = ({
+  left,
+  top,
+  w,
+  emoji,
+  title,
+  desc,
+}: {
+  left: number;
+  top: number;
+  w: number;
+  emoji: string;
+  title: string;
+  desc: string;
+}) => (
+  <div
+    style={{
+      position: 'absolute',
+      left,
+      top,
+      width: w,
+      background: card,
+      border: `1px solid ${line}`,
+      color: 'var(--osd-text)',
+      borderRadius: 'var(--osd-radius)',
+      padding: '30px 34px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12,
+    }}
+  >
+    <div style={{ fontSize: 40, lineHeight: 1 }}>{emoji}</div>
+    <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 33, fontWeight: 900, lineHeight: 1.2, color: yellow }}>
+      {title}
+    </div>
+    <div style={{ fontSize: 23, lineHeight: 1.45, color: muted }}>{desc}</div>
+  </div>
+);
+
+const FlowLink = ({
+  x1,
+  y1,
+  x2,
+  y2,
+  dir = 'right',
+}: {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  dir?: 'right' | 'left' | 'down';
+}) => {
+  const pad = 24;
+  const left = Math.min(x1, x2) - pad;
+  const top = Math.min(y1, y2) - pad;
+  const wdt = Math.abs(x2 - x1) + pad * 2;
+  const hgt = Math.abs(y2 - y1) + pad * 2;
+  const ax = x1 - left;
+  const ay = y1 - top;
+  const bx = x2 - left;
+  const by = y2 - top;
+  const mx = ax + (bx - ax) / 2;
+  const my = ay + (by - ay) / 2;
+  const stroke = '#f2f6fc';
+  const path =
+    dir === 'down'
+      ? `M ${ax} ${ay} C ${ax} ${my}, ${bx} ${my}, ${bx} ${by - 12}`
+      : dir === 'left'
+        ? `M ${ax} ${ay} C ${mx} ${ay}, ${mx} ${by}, ${bx + 12} ${by}`
+        : `M ${ax} ${ay} C ${mx} ${ay}, ${mx} ${by}, ${bx - 12} ${by}`;
+  const head =
+    dir === 'down'
+      ? `${bx - 12},${by - 20} ${bx},${by} ${bx + 12},${by - 20}`
+      : dir === 'left'
+        ? `${bx + 20},${by - 12} ${bx},${by} ${bx + 20},${by + 12}`
+        : `${bx - 20},${by - 12} ${bx},${by} ${bx - 20},${by + 12}`;
+  return (
+    <svg style={{ position: 'absolute', left, top, pointerEvents: 'none' }} width={wdt} height={hgt}>
+      <path d={path} stroke={stroke} strokeWidth={4} fill="none" strokeLinecap="round" opacity={0.8} />
+      <polygon points={head} fill={stroke} opacity={0.9} />
+    </svg>
+  );
+};
+
+const CasePipeline: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', overflow: 'hidden' }}>
+    <FlowHeading>
+      Case study: <span style={{ color: yellow }}>life of a compliant transaction</span>
+    </FlowHeading>
+    <Steps>
+      <FlowNode left={100} top={230} w={480} emoji="🧾" title="① Initiate" desc="user or API requests a withdrawal" />
+      <Step>
+        <div>
+          <FlowLink x1={580} y1={340} x2={710} y2={340} />
+          <FlowNode left={720} top={230} w={480} emoji="🛡" title="② Policy engine" desc="limits, whitelists, approval matrix" />
+        </div>
+      </Step>
+      <Step>
+        <div>
+          <FlowLink x1={1200} y1={340} x2={1330} y2={340} />
+          <FlowNode left={1340} top={230} w={480} emoji="🔍" title="③ Screening" desc="risk score, sanctions, Travel Rule" />
+        </div>
+      </Step>
+      <Step>
+        <div>
+          <FlowLink x1={1580} y1={460} x2={1580} y2={620} dir="down" />
+          <FlowNode left={1340} top={630} w={480} emoji="👀" title="④ Manual review" desc="high-risk cases go four-eyes" />
+        </div>
+      </Step>
+      <Step>
+        <div>
+          <FlowLink x1={1330} y1={740} x2={1210} y2={740} dir="left" />
+          <FlowNode left={720} top={630} w={480} emoji="✍️" title="⑤ MPC / HSM sign" desc="shares co-sign, key never assembles" />
+        </div>
+      </Step>
+      <Step>
+        <div>
+          <FlowLink x1={710} y1={740} x2={590} y2={740} dir="left" />
+          <FlowNode left={100} top={630} w={480} emoji="⛓" title="⑥ Settle & report" desc="broadcast, audit trail, SAR filings" />
+        </div>
+      </Step>
+    </Steps>
+    <div
+      style={{
+        position: 'absolute',
+        left: 100,
+        bottom: 70,
+        fontSize: 26,
+        fontWeight: 700,
+        color: muted,
+      }}
+    >
+      🐢 The slow steps are ③ and ④ — the crypto is never the bottleneck.
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------ 12 · Credible neutrality */
+
+const Neutrality: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Keep the core <span style={{ color: yellow }}>credibly neutral</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        Compliance lives <B>at the edges</B>: frontends, custody, identity rails
+      </Bullet>
+      <Bullet>
+        Core contracts: <B>no allowlists, no admin backdoors</B>, no special cases
+      </Bullet>
+      <Bullet>
+        Neutrality is <B>why the asset is worth regulating into</B> in the first place
+      </Bullet>
+    </div>
+    <Banner>A biased core can't be un-biased later. Neutrality is load-bearing. ⚖️</Banner>
+  </div>
+);
+
+/* ------------------------------------------------ 13 · Future-proofing */
+
+const CheckRow = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 24 }}>
+    <span
+      style={{
+        background: yellow,
+        color: ink,
+        borderRadius: 10,
+        width: 44,
+        height: 44,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 26,
+        fontWeight: 900,
+        flexShrink: 0,
+        marginTop: 4,
+      }}
+    >
+      ✓
+    </span>
+    <span style={{ fontSize: 34, lineHeight: 1.45 }}>{children}</span>
+  </div>
+);
+
+const FutureProofing: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <Heading>
+      Future-proofing <span style={{ color: yellow }}>checklist</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 56 }}>
+      <CheckRow>Put compliance in swappable modules — never in the protocol</CheckRow>
+      <CheckRow>Prefer open standards (IVMS 101, TRP) over closed alliances</CheckRow>
+      <CheckRow>Design for attestations: prove properties, not documents</CheckRow>
+      <CheckRow>Keep audit trails and proofs exportable from day one</CheckRow>
+      <CheckRow>Assume the rules will change — your architecture shouldn't have to</CheckRow>
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------ 14 · Takeaways */
+
+const Takeaway = ({ num, children }: { num: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 32 }}>
+    <span
+      style={{
+        background: yellow,
+        color: ink,
+        borderRadius: 999,
+        width: 64,
+        height: 64,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 34,
+        fontWeight: 900,
+        flexShrink: 0,
+      }}
+    >
+      {num}
+    </span>
+    <span style={{ fontSize: 38, fontWeight: 700, lineHeight: 1.45 }}>{children}</span>
+  </div>
+);
+
+const Takeaways: Page = () => (
+  <div
+    style={{
+      ...fill,
+      background: 'var(--osd-bg)',
+      color: 'var(--osd-text)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: '0 160px',
+    }}
+  >
+    <h2
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 88,
+        fontWeight: 900,
+        margin: '0 0 72px',
+        letterSpacing: -1,
+      }}
+    >
+      Three things to take home 🎒
+    </h2>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 44 }}>
+      <Takeaway num="1">TradFi capital arrives through compliant gateways — someone has to build them</Takeaway>
+      <Takeaway num="2">The stack: identity → custody → policy → screening → frontend</Takeaway>
+      <Takeaway num="3">Compliance at the edges is what keeps the core credibly neutral</Takeaway>
+    </div>
+  </div>
+);
+
+/* ------------------------------------------------ 15 · Thanks */
+
+const Thanks: Page = () => (
+  <div
+    style={{
+      ...fill,
+      background: 'var(--osd-bg)',
+      color: 'var(--osd-text)',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+      padding: '0 160px',
+    }}
+  >
+    <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 8, color: muted, marginBottom: 44 }}>
+      THANK YOU
+    </div>
+    <div
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 120,
+        fontWeight: 900,
+        lineHeight: 1.1,
+        letterSpacing: -2,
+      }}
+    >
+      Let's build the bridge 🌉
+    </div>
+    <div style={{ width: 220, height: 10, background: yellow, borderRadius: 999, margin: '52px 0' }} />
+    <div style={{ fontSize: 34, fontWeight: 700 }}>
+      @ryanycw · full research notes: hackmd.io/@ryanycw
+    </div>
+  </div>
+);
+
+// Presenter-mode speaker notes — one entry per page.
+export const notes: (string | undefined)[] = [
+  undefined, // 1 Cover
+  'Frame: this is not a talk about killing DeFi with paperwork — it is about the plumbing that lets regulated money touch neutral protocols.', // 2 Hook
+  'MiCA/DORA live in EU; Travel Rule thresholds tightening; Basel gives banks capital treatment for crypto; qualified custody decides who may hold client assets.', // 3 Why now
+  'Neither column wins by defeating the other — the architecture assigns each requirement a layer where it can live without touching the core.', // 4 Tension
+  'Read bottom-up: the base never changes; every compliance requirement maps to exactly one layer above it.', // 5 Stack overview
+  'IVMS 101 = interVASP Messaging Standard, the shared schema. Attestations mean a venue can verify "this address passed KYC at X" without ever seeing documents.', // 6 L1 Identity
+  'One-line recap of the custody talk: Safe = transparent on-chain thresholds; MPC (CMP by Fireblocks, DKLs by BitGo/Silence Labs) = invisible thresholds, standard single sig on-chain; TEE vs HSM both used in layered setups.', // 7 L2 Custody
+  'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 8 L3 Policy
+  'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 9 L4 Screening
+  'Permissioned frontends over permissionless protocols: Uniswap-style neutrality below, gated doorways above. Attestation-gating beats identity-gating for privacy.', // 10 L5 Frontends
+  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 11 Case pipeline
+  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 12 Neutrality
+  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 13 Checklist
+  undefined, // 14 Takeaways
+  undefined, // 15 Thanks
+];
+
+export const meta: SlideMeta = {
+  title: 'Bridging Regulation & Decentralization',
+  createdAt: '2026-09-12T18:41:23.046Z',
+};
+
+export default [
+  Cover,
+  Hook,
+  WhyNow,
+  Tension,
+  StackOverview,
+  LayerIdentity,
+  LayerCustody,
+  LayerPolicy,
+  LayerScreening,
+  LayerFrontend,
+  CasePipeline,
+  Neutrality,
+  FutureProofing,
+  Takeaways,
+  Thanks,
+] satisfies Page[];
