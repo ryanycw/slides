@@ -1,6 +1,6 @@
 # Bridging Regulation & Decentralization — content draft
 
-> Maps 1:1 to `slides/compliant-stack/index.tsx` (15 pages, ~15-minute talk, English).
+> Maps 1:1 to `slides/compliant-stack/index.tsx` (16 pages, ~15-minute talk, English).
 > Edit the text here, then ask Claude to sync it back to the slide.
 > Style: formal variant of the house design — deep navy `#0d1b2e` ground, single yellow `#ffcd01` accent, blue `#4190de` as secondary. Refs render bottom-left on slides.
 
@@ -129,7 +129,26 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 11 · Case study: life of a compliant transaction【snake diagram · stepped】
+## Page 11 · The RegTech ecosystem, at a glance【2×3 grid】
+
+| Category | Vendors |
+|----------|---------|
+| 🪪 KYC & identity | Sumsub · Jumio · Onfido · Persona |
+| 📜 Onchain attestations | EAS · Gitcoin Passport · Coinbase Verifications |
+| 🔐 Custody & policy | Fireblocks · BitGo · Cobo Argus · Narval |
+| 🔍 Analytics & monitoring | Chainalysis · Elliptic · TRM Labs · Crystal |
+| ✉️ Travel Rule messaging | Notabene · Sygna · VerifyVASP · 21 Analytics |
+| 🧾 Tax & Proof of Reserves | TaxBit · Koinly · Chainlink PoR |
+
+- Bottom note: Non-exhaustive — the point: every layer of the stack already has vendors. You don't build this alone.
+
+**Speaker Notes**: categories are converging — Chainalysis pairs with Notabene, Sumsub does KYC + Travel Rule, custody vendors ship policy engines. Expect consolidation; pick vendors with open interfaces so you can swap them.
+
+> Refs: [Chainalysis](https://www.chainalysis.com/) · [Notabene](https://notabene.id/) · [EAS](https://attest.org/) · [Sumsub](https://sumsub.com/)
+
+---
+
+## Page 12 · Case study: life of a compliant transaction【snake diagram · stepped】
 
 ① 🧾 Initiate (user or API requests a withdrawal) → ② 🛡 Policy engine (limits, whitelists, approval matrix) → ③ 🔍 Screening (risk score, sanctions, Travel Rule) → ④ 👀 Manual review (high-risk cases go four-eyes) → ⑤ ✍️ MPC / HSM sign (shares co-sign, key never assembles) → ⑥ ⛓ Settle & report (broadcast, audit trail, SAR filings)
 
@@ -137,7 +156,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 12 · Keep the core credibly neutral
+## Page 13 · Keep the core credibly neutral
 
 - Compliance lives **at the edges**: frontends, custody, identity rails
 - Core contracts: **no allowlists, no admin backdoors**, no special cases
@@ -147,7 +166,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 13 · Future-proofing checklist【✓ rows】
+## Page 14 · Future-proofing checklist【✓ rows】
 
 - ✓ Put compliance in swappable modules — never in the protocol
 - ✓ Prefer open standards (IVMS 101, TRP) over closed alliances
@@ -157,7 +176,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 14 · Three things to take home 🎒
+## Page 15 · Three things to take home 🎒
 
 1. TradFi capital arrives through compliant gateways — someone has to build them
 2. The stack: identity → custody → policy → screening → frontend
@@ -165,7 +184,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 15 · Thanks【navy】
+## Page 16 · Thanks【navy】
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉

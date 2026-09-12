@@ -525,7 +525,55 @@ const LayerFrontend: Page = () => (
   </div>
 );
 
-/* ------------------------------------------------ 11 · Case study: pipeline */
+/* ------------------------------------------------ 11 · RegTech ecosystem map */
+
+const EcoCard = ({ emoji, title, names }: { emoji: string; title: string; names: string }) => (
+  <div
+    style={{
+      background: card,
+      border: `1px solid ${line}`,
+      borderRadius: 'var(--osd-radius)',
+      padding: '36px 40px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 18,
+    }}
+  >
+    <div style={{ fontSize: 32, fontWeight: 900, color: yellow }}>
+      {emoji} {title}
+    </div>
+    <div style={{ fontSize: 27, lineHeight: 1.5, color: 'var(--osd-text)' }}>{names}</div>
+  </div>
+);
+
+const EcosystemMap: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '90px 120px' }}>
+    <Heading>
+      The RegTech ecosystem, <span style={{ color: yellow }}>at a glance</span>
+    </Heading>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gap: 28,
+        marginTop: 48,
+      }}
+    >
+      <EcoCard emoji="🪪" title="KYC & identity" names="Sumsub · Jumio · Onfido · Persona" />
+      <EcoCard emoji="📜" title="Onchain attestations" names="EAS · Gitcoin Passport · Coinbase Verifications" />
+      <EcoCard emoji="🔐" title="Custody & policy" names="Fireblocks · BitGo · Cobo Argus · Narval" />
+      <EcoCard emoji="🔍" title="Analytics & monitoring" names="Chainalysis · Elliptic · TRM Labs · Crystal" />
+      <EcoCard emoji="✉️" title="Travel Rule messaging" names="Notabene · Sygna · VerifyVASP · 21 Analytics" />
+      <EcoCard emoji="🧾" title="Tax & Proof of Reserves" names="TaxBit · Koinly · Chainlink PoR" />
+    </div>
+    <div style={{ marginTop: 44, fontSize: 26, fontWeight: 700, color: muted }}>
+      Non-exhaustive — the point: every layer of the stack already has vendors. You don't build this alone.
+    </div>
+    <PageRefs>chainalysis.com · notabene.id · attest.org · sumsub.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 12 · Case study: pipeline */
 
 const FlowHeading = ({ children }: { children: ReactNode }) => (
   <h2
@@ -850,11 +898,12 @@ export const notes: (string | undefined)[] = [
   'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 8 L3 Policy
   'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 9 L4 Screening
   'Permissioned frontends over permissionless protocols: Uniswap-style neutrality below, gated doorways above. Attestation-gating beats identity-gating for privacy.', // 10 L5 Frontends
-  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 11 Case pipeline
-  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 12 Neutrality
-  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 13 Checklist
-  undefined, // 14 Takeaways
-  undefined, // 15 Thanks
+  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 11 Ecosystem map
+  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 12 Case pipeline
+  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 13 Neutrality
+  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 14 Checklist
+  undefined, // 15 Takeaways
+  undefined, // 16 Thanks
 ];
 
 export const meta: SlideMeta = {
@@ -873,6 +922,7 @@ export default [
   LayerPolicy,
   LayerScreening,
   LayerFrontend,
+  EcosystemMap,
   CasePipeline,
   Neutrality,
   FutureProofing,
