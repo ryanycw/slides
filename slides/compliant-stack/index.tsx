@@ -479,7 +479,7 @@ const LayerBar = ({
       border: `1px solid ${base ? blue : line}`,
       borderRadius: 16,
       padding: '0 40px',
-      height: 104,
+      height: 90,
     }}
   >
     {num ? (
@@ -513,30 +513,35 @@ const StackOverview: Page = () => (
     <Heading>
       The <span style={{ color: yellow }}>compliant stack</span>, top to bottom
     </Heading>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginTop: 48 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 44 }}>
       <Steps>
         <Step>
-          <div style={{ marginBottom: 14 }}>
-            <LayerBar num="5" name="Compliant frontends" desc="geo-fencing, gated pools, screened access" />
+          <div style={{ marginBottom: 12 }}>
+            <LayerBar num="6" name="Compliant frontends" desc="geo-fencing, gated pools, screened access" />
           </div>
         </Step>
         <Step>
-          <div style={{ marginBottom: 14 }}>
-            <LayerBar num="4" name="Screening & Travel Rule" desc="risk scoring, sanctions, VASP messaging" />
+          <div style={{ marginBottom: 12 }}>
+            <LayerBar num="5" name="Travel Rule rails" desc="VASP discovery, IVMS messaging" />
           </div>
         </Step>
         <Step>
-          <div style={{ marginBottom: 14 }}>
+          <div style={{ marginBottom: 12 }}>
+            <LayerBar num="4" name="AML screening" desc="sanctions, risk scoring, monitoring, forensics" />
+          </div>
+        </Step>
+        <Step>
+          <div style={{ marginBottom: 12 }}>
             <LayerBar num="3" name="Policy engines" desc="limits, whitelists, approval quorums" />
           </div>
         </Step>
         <Step>
-          <div style={{ marginBottom: 14 }}>
+          <div style={{ marginBottom: 12 }}>
             <LayerBar num="2" name="Keys & custody" desc="multisig, MPC, TEE / HSM roots" />
           </div>
         </Step>
         <Step>
-          <div style={{ marginBottom: 14 }}>
+          <div style={{ marginBottom: 12 }}>
             <LayerBar num="1" name="Identity & attestations" desc="KYC once, prove everywhere" />
           </div>
         </Step>
@@ -615,65 +620,98 @@ const LayerCustody: Page = () => (
 /* ------------------------------------------------ 08 · Layer 3 Policy */
 
 const LayerPolicy: Page = () => (
-  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
     <Heading>
       Layer 3 — <span style={{ color: yellow }}>Automated policy engines</span>
     </Heading>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 52 }}>
       <Bullet>
-        Programmable guardrails: <B>limits, whitelists, approval matrices</B>
+        <B>Custody-side workflows</B> — limits, velocity caps, four-eyes approvals
       </Bullet>
       <Bullet>
-        Four-eyes and role-based quorums <B>before any signature happens</B>
+        <B>Onchain permission frameworks</B> — roles & scoped delegation on smart accounts
       </Bullet>
       <Bullet>
-        Humans set the rules, <B>machines enforce them</B>
+        <B>Decoupled policy-as-code</B> — one engine, any key or custodian
       </Bullet>
       <Bullet>
-        Agent-ready: the same rails let <B>AI agents spend safely</B>
+        <B>Agent guardrails</B> — spending policies for autonomous AI wallets
       </Bullet>
     </div>
     <PlayerStrip>
       <Player>Fireblocks Policy Engine</Player>
-      <Player>Narval</Player>
-      <Player>Cobo Argus</Player>
+      <Player>BitGo</Player>
       <Player>Safe Modules</Player>
+      <Player>Cobo Argus</Player>
+      <Player>Narval</Player>
+      <Player>Coinbase Agentic</Player>
     </PlayerStrip>
     <Banner>Paper policy becomes executable policy. 📜→⚙️</Banner>
     <PageRefs>fireblocks.com · narval.xyz</PageRefs>
   </div>
 );
 
-/* ------------------------------------------------ 09 · Layer 4 Screening */
+/* ------------------------------------------------ 10 · Layer 4 AML screening */
 
-const LayerScreening: Page = () => (
+const LayerAml: Page = () => (
   <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
     <Heading>
-      Layer 4 — <span style={{ color: yellow }}>Screening & Travel Rule rails</span>
+      Layer 4 — <span style={{ color: yellow }}>AML screening & monitoring</span>
     </Heading>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
       <Bullet>
-        Transaction screening & <B>risk scoring</B> on every transfer
+        <B>Before</B>: wallet & address screening — sanctions lists, risk scores
       </Bullet>
       <Bullet>
-        <B>Travel Rule messaging</B> between VASPs
+        <B>During</B>: real-time monitoring — velocity, exposure, behavioral baselines
       </Bullet>
       <Bullet>
-        Today: alliances — <B>TRUST 200+ · VerifyVASP 150+ · GTR 116</B>
+        <B>After</B>: forensics & tracing for investigations and SAR filings
       </Bullet>
       <Bullet>
-        Tomorrow: open standards — <B>TRP + IVMS 101</B>
+        Coverage keeps widening: <B>DeFi hops, bridges, mixers</B>
       </Bullet>
     </div>
     <PlayerStrip>
       <Player>Chainalysis</Player>
       <Player>Elliptic</Player>
       <Player>TRM Labs</Player>
+      <Player>Crystal</Player>
+    </PlayerStrip>
+    <Banner>Know the address before, watch the flow during, trace the trail after. 🔍</Banner>
+    <PageRefs>chainalysis.com · elliptic.co · trmlabs.com</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 11 · Layer 5 Travel Rule */
+
+const LayerTravelRule: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+    <Heading>
+      Layer 5 — <span style={{ color: yellow }}>Travel Rule rails</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
+      <Bullet>
+        Counterparty <B>VASP discovery & due diligence</B> — who runs that address?
+      </Bullet>
+      <Bullet>
+        <B>IVMS 101</B> payloads travel off-chain, alongside the transfer
+      </Bullet>
+      <Bullet>
+        Today: alliances — <B>TRUST 200+ · VerifyVASP 150+ · GTR 116</B>
+      </Bullet>
+      <Bullet>
+        Tomorrow: open standard — <B>TRP</B>; unhosted wallets via Satoshi Test
+      </Bullet>
+    </div>
+    <PlayerStrip>
       <Player>Notabene</Player>
+      <Player>Sygna</Player>
+      <Player>VerifyVASP</Player>
       <Player>21 Analytics</Player>
     </PlayerStrip>
     <Banner>From compliance cliques to a TCP/IP moment. 🌐</Banner>
-    <PageRefs>notabene.id · 21analytics.co · globaltravelrule.com</PageRefs>
+    <PageRefs>notabene.id · sygna.io · 21analytics.co · globaltravelrule.com</PageRefs>
   </div>
 );
 
@@ -682,7 +720,7 @@ const LayerScreening: Page = () => (
 const LayerFrontend: Page = () => (
   <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
     <Heading>
-      Layer 5 — <span style={{ color: yellow }}>Compliant DeFi frontends</span>
+      Layer 6 — <span style={{ color: yellow }}>Compliant DeFi frontends</span>
     </Heading>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
       <Bullet>
@@ -1028,7 +1066,7 @@ const Takeaways: Page = () => (
     </h2>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 44 }}>
       <Takeaway num="1">TradFi capital arrives through compliant gateways — someone has to build them</Takeaway>
-      <Takeaway num="2">The stack: identity → custody → policy → screening → frontend</Takeaway>
+      <Takeaway num="2">The stack: identity → custody → policy → AML → travel rule → frontend</Takeaway>
       <Takeaway num="3">Compliance at the edges is what keeps the core credibly neutral</Takeaway>
     </div>
   </div>
@@ -1081,15 +1119,16 @@ export const notes: (string | undefined)[] = [
   'Read bottom-up: the base never changes; every compliance requirement maps to exactly one layer above it.', // 6 Stack overview
   'Attestations mean a venue can verify "this address passed KYC at provider X" without ever seeing documents. EAS is the general-purpose attestation rail; zk-credentials go further — prove a property (KYC\'d, accredited, not sanctioned) while revealing nothing else. VASP directories and IVMS belong to Layer 4, not here.', // 7 L1 Identity
   'One-line recap of the custody talk: Safe = transparent on-chain thresholds; MPC (CMP by Fireblocks, DKLs by BitGo/Silence Labs) = invisible thresholds, standard single sig on-chain; TEE vs HSM both used in layered setups.', // 8 L2 Custody
-  'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 9 L3 Policy
-  'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 10 L4 Screening
-  'Permissioned frontends over permissionless protocols: the Uniswap Labs app geo-blocks and screens wallets via TRM while the protocol below stays neutral. Aave Arc pioneered permissioned pools in 2022 but has since wound down — cite it as history, not as a live product. Attestation-gating beats identity-gating for privacy.', // 11 L5 Frontends
-  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 12 Ecosystem map
-  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 13 Case pipeline
-  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 14 Neutrality
-  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 15 Checklist
-  undefined, // 16 Takeaways
-  undefined, // 17 Thanks
+  'Four sub-categories: custody-side workflows (Fireblocks, BitGo) live where the keys are; onchain permission frameworks (Safe Modules / Zodiac Roles, Cobo Argus) live on the smart account; Narval is the decoupled policy-as-code play — one engine over any custodian; agent guardrails (Coinbase Agentic, Circle) are the newest branch. Same idea everywhere: the compliance manual becomes code that runs before signing.', // 9 L3 Policy
+  'One vendor often covers all three phases — Chainalysis KYT screens pre-flight, monitoring watches exposure in-flight, Reactor traces post-hoc. Coverage race is now about DeFi hops, bridges and mixers.', // 10 L4 AML
+  'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol. Unhosted wallets are handled with ownership proofs like the Satoshi Test.', // 11 L5 Travel Rule
+  'Permissioned frontends over permissionless protocols: the Uniswap Labs app geo-blocks and screens wallets via TRM while the protocol below stays neutral. Aave Arc pioneered permissioned pools in 2022 but has since wound down — cite it as history, not as a live product. Attestation-gating beats identity-gating for privacy.', // 12 L6 Frontends
+  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 13 Ecosystem map
+  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 14 Case pipeline
+  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 15 Neutrality
+  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 16 Checklist
+  undefined, // 17 Takeaways
+  undefined, // 18 Thanks
 ];
 
 export const meta: SlideMeta = {
@@ -1107,7 +1146,8 @@ export default [
   LayerIdentity,
   LayerCustody,
   LayerPolicy,
-  LayerScreening,
+  LayerAml,
+  LayerTravelRule,
   LayerFrontend,
   EcosystemMap,
   CasePipeline,

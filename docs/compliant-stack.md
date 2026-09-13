@@ -1,6 +1,6 @@
 # Bridging Regulation & Decentralization — content draft
 
-> Maps 1:1 to `slides/compliant-stack/index.tsx` (17 pages, ~15-minute talk, English).
+> Maps 1:1 to `slides/compliant-stack/index.tsx` (18 pages, ~15-minute talk, English).
 > Edit the text here, then ask Claude to sync it back to the slide.
 > Style: formal variant of the house design — deep navy `#0d1b2e` ground, single yellow `#ffcd01` accent, blue `#4190de` as secondary. Refs render bottom-left on slides.
 
@@ -67,8 +67,9 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 | # | Layer | One-liner |
 |---|-------|-----------|
-| 5 | Compliant frontends | geo-fencing, gated pools, screened access |
-| 4 | Screening & Travel Rule | risk scoring, sanctions, VASP messaging |
+| 6 | Compliant frontends | geo-fencing, gated pools, screened access |
+| 5 | Travel Rule rails | VASP discovery, IVMS messaging |
+| 4 | AML screening | sanctions, risk scoring, monitoring, forensics |
 | 3 | Policy engines | limits, whitelists, approval quorums |
 | 2 | Keys & custody | multisig, MPC, TEE / HSM roots |
 | 1 | Identity & attestations | KYC once, prove everywhere |
@@ -110,12 +111,16 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ## Page 9 · Layer 3 — Automated policy engines
 
-- Programmable guardrails: **limits, whitelists, approval matrices**
-- Four-eyes and role-based quorums **before any signature happens**
-- Humans set the rules, **machines enforce them**
-- Agent-ready: the same rails let **AI agents spend safely**
+四個子分類（bullets 即分類法）：
 
-**Major players**: Fireblocks Policy Engine · Narval · Cobo Argus · Safe Modules
+- **Custody-side workflows** — limits, velocity caps, four-eyes approvals
+- **Onchain permission frameworks** — roles & scoped delegation on smart accounts
+- **Decoupled policy-as-code** — one engine, any key or custodian
+- **Agent guardrails** — spending policies for autonomous AI wallets
+
+**Major players**: Fireblocks Policy Engine · BitGo · Safe Modules · Cobo Argus · Narval · Coinbase Agentic
+
+**Speaker Notes**: custody-side 住在金鑰旁（Fireblocks/BitGo）；onchain framework 住在智能帳戶上（Safe Modules/Zodiac Roles、Cobo Argus）；Narval 是解耦的 policy-as-code — 一套引擎管任何託管商；agent guardrails 是最新分支（Coinbase Agentic、Circle）。
 
 > Yellow banner: Paper policy becomes executable policy. 📜→⚙️
 
@@ -123,22 +128,37 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 10 · Layer 4 — Screening & Travel Rule rails
+## Page 10 · Layer 4 — AML screening & monitoring
 
-- Transaction screening & **risk scoring** on every transfer
-- **Travel Rule messaging** between VASPs
-- Today: alliances — **TRUST 200+ · VerifyVASP 150+ · GTR 116**
-- Tomorrow: open standards — **TRP + IVMS 101**
+- **Before**: wallet & address screening — sanctions lists, risk scores
+- **During**: real-time monitoring — velocity, exposure, behavioral baselines
+- **After**: forensics & tracing for investigations and SAR filings
+- Coverage keeps widening: **DeFi hops, bridges, mixers**
 
-**Major players**: Chainalysis · Elliptic · TRM Labs · Notabene · 21 Analytics
+**Major players**: Chainalysis · Elliptic · TRM Labs · Crystal
 
-> Yellow banner: From compliance cliques to a TCP/IP moment. 🌐
+> Yellow banner: Know the address before, watch the flow during, trace the trail after. 🔍
 
-> Refs: [Notabene](https://notabene.id/solutions/safe-connect) · [21 Analytics](https://www.21analytics.co/glossary/inter-vasp-messaging-standard-ivms/) · [Global Travel Rule](https://www.globaltravelrule.com/en/home)
+> Refs: [Chainalysis](https://www.chainalysis.com/) · [Elliptic](https://www.elliptic.co/) · [TRM Labs](https://www.trmlabs.com/)
 
 ---
 
-## Page 11 · Layer 5 — Compliant DeFi frontends
+## Page 11 · Layer 5 — Travel Rule rails
+
+- Counterparty **VASP discovery & due diligence** — who runs that address?
+- **IVMS 101** payloads travel off-chain, alongside the transfer
+- Today: alliances — **TRUST 200+ · VerifyVASP 150+ · GTR 116**
+- Tomorrow: open standard — **TRP**; unhosted wallets via Satoshi Test
+
+**Major players**: Notabene · Sygna · VerifyVASP · 21 Analytics
+
+> Yellow banner: From compliance cliques to a TCP/IP moment. 🌐
+
+> Refs: [Notabene](https://notabene.id/solutions/safe-connect) · [Sygna](https://www.sygna.io/bridge/) · [21 Analytics](https://www.21analytics.co/glossary/inter-vasp-messaging-standard-ivms/) · [Global Travel Rule](https://www.globaltravelrule.com/en/home)
+
+---
+
+## Page 12 · Layer 6 — Compliant DeFi frontends
 
 - Geo-fencing, screened wallets and **permissioned pools at the frontend**
 - Attestation-gated DeFi: **prove compliance, not identity**
@@ -155,7 +175,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 12 · The RegTech ecosystem, at a glance【2×3 grid】
+## Page 13 · The RegTech ecosystem, at a glance【2×3 grid】
 
 | Category | Vendors |
 |----------|---------|
@@ -174,7 +194,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 13 · Case study: life of a compliant transaction【snake diagram · stepped】
+## Page 14 · Case study: life of a compliant transaction【snake diagram · stepped】
 
 ① 🧾 Initiate (user or API requests a withdrawal) → ② 🛡 Policy engine (limits, whitelists, approval matrix) → ③ 🔍 Screening (risk score, sanctions, Travel Rule) → ④ 👀 Manual review (high-risk cases go four-eyes) → ⑤ ✍️ MPC / HSM sign (shares co-sign, key never assembles) → ⑥ ⛓ Settle & report (broadcast, audit trail, SAR filings)
 
@@ -182,7 +202,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 14 · Keep the core credibly neutral
+## Page 15 · Keep the core credibly neutral
 
 - Compliance lives **at the edges**: frontends, custody, identity rails
 - Core contracts: **no allowlists, no admin backdoors**, no special cases
@@ -192,7 +212,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 15 · Future-proofing checklist【✓ rows】
+## Page 16 · Future-proofing checklist【✓ rows】
 
 - ✓ Put compliance in swappable modules — never in the protocol
 - ✓ Prefer open standards (IVMS 101, TRP) over closed alliances
@@ -202,15 +222,15 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 16 · Three things to take home 🎒
+## Page 17 · Three things to take home 🎒
 
 1. TradFi capital arrives through compliant gateways — someone has to build them
-2. The stack: identity → custody → policy → screening → frontend
+2. The stack: identity → custody → policy → AML → travel rule → frontend
 3. Compliance at the edges is what keeps the core credibly neutral
 
 ---
 
-## Page 17 · Thanks【navy】
+## Page 18 · Thanks【navy】
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉
