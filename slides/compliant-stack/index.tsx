@@ -613,8 +613,8 @@ const LayerCustody: Page = () => (
     </div>
     <PlayerStrip>
       <Player>Safe</Player>
-      <Player>Fireblocks</Player>
       <Player>BitGo</Player>
+      <Player>Fireblocks</Player>
       <Player>Anchorage</Player>
       <Player>Cobo</Player>
     </PlayerStrip>

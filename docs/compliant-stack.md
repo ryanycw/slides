@@ -104,7 +104,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Hardware roots: **TEE** (SGX, Nitro) and **HSM** — mature setups layer both
 - Key refresh & approval quorums make signer rotation an **off-chain event**
 
-**Major players**: Safe · Fireblocks · BitGo · Anchorage · Cobo
+**Major players**: Safe · BitGo · Fireblocks · Anchorage · Cobo
 
 > Yellow banner: Qualified custody is the entry ticket for regulated capital. 🎫
 
