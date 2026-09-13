@@ -755,7 +755,36 @@ const LayerFrontend: Page = () => (
   </div>
 );
 
-/* ------------------------------------------------ 11 · RegTech ecosystem map */
+/* ------------------------------------------------ 13 · Unlicensed question */
+
+const UnlicensedQuestion: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: 5, color: muted, marginBottom: 28 }}>
+      ASK YOURSELF
+    </div>
+    <Heading>
+      What if a custodial provider is <span style={{ color: yellow }}>unlicensed</span>?
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 52 }}>
+      <Bullet>
+        <B>The provider</B>: criminal exposure — 18 U.S.C. §1960, MiCA fines & shutdown
+      </Bullet>
+      <Bullet>
+        <B>Its peers</B>: licensed VASPs de-risk you, banks pull the rails
+      </Bullet>
+      <Bullet>
+        <B>Its users</B>: no segregation, no insurance — unsecured creditors
+      </Bullet>
+      <Bullet>
+        <B>Institutions</B>: qualified-custodian rules mean they legally can't touch you
+      </Bullet>
+    </div>
+    <Banner>No license → no counterparties, no banking, no institutional money. 🚫</Banner>
+    <PageRefs>fincen.gov · eur-lex.europa.eu (MiCA) · sec.gov (custody rule)</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ 13 · RegTech ecosystem map */
 
 const EcoCard = ({ emoji, title, names }: { emoji: string; title: string; names: string }) => (
   <div
@@ -1130,12 +1159,13 @@ export const notes: (string | undefined)[] = [
   'One vendor often covers all three phases — Chainalysis KYT screens pre-flight, monitoring watches exposure in-flight, Reactor traces post-hoc. Coverage race is now about DeFi hops, bridges and mixers.', // 10 L4 AML
   'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol. Unhosted wallets are handled with ownership proofs like the Satoshi Test.', // 11 L5 Travel Rule
   'Permissioned frontends over permissionless protocols: the Uniswap Labs app geo-blocks and screens wallets via TRM while the protocol below stays neutral. Aave Arc pioneered permissioned pools in 2022 but has since wound down — cite it as history, not as a live product. Attestation-gating beats identity-gating for privacy.', // 12 L6 Frontends
-  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 13 Ecosystem map
-  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 14 Case pipeline
-  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 15 Neutrality
-  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 16 Checklist
-  undefined, // 17 Takeaways
-  undefined, // 18 Thanks
+  'Four layers of fallout. Provider: unlicensed money transmission is criminal in the US (18 U.S.C. §1960 — Bitzlato, Samourai arrests) and MiCA authorization is mandatory in the EU. Peers: licensed VASPs de-risk you, Travel Rule has no counterparty, banks cut fiat rails. Users: no asset segregation, no PoR, no insurance — unsecured creditors in bankruptcy, funds frozen in enforcement. Institutions: SEC custody rule requires qualified custodians, so regulated money legally cannot touch you. Punchline: unlicensed is not a missing paper — it is a missing future.', // 13 Unlicensed question
+  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 14 Ecosystem map
+  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 15 Case pipeline
+  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 16 Neutrality
+  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 17 Checklist
+  undefined, // 18 Takeaways
+  undefined, // 19 Thanks
 ];
 
 export const meta: SlideMeta = {
@@ -1156,6 +1186,7 @@ export default [
   LayerAml,
   LayerTravelRule,
   LayerFrontend,
+  UnlicensedQuestion,
   EcosystemMap,
   CasePipeline,
   Neutrality,

@@ -1,6 +1,6 @@
 # Bridging Regulation & Decentralization — content draft
 
-> Maps 1:1 to `slides/compliant-stack/index.tsx` (18 pages, ~15-minute talk, English).
+> Maps 1:1 to `slides/compliant-stack/index.tsx` (19 pages, ~15-minute talk, English).
 > Edit the text here, then ask Claude to sync it back to the slide.
 > Style: formal variant of the house design — deep navy `#0d1b2e` ground, single yellow `#ffcd01` accent, blue `#4190de` as secondary. Refs render bottom-left on slides.
 
@@ -180,7 +180,23 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 13 · The RegTech ecosystem, at a glance【2×3 grid】
+## Page 13 · What if a custodial provider is unlicensed?【question page】
+
+- Eyebrow: `ASK YOURSELF`
+- **The provider**: criminal exposure — 18 U.S.C. §1960, MiCA fines & shutdown
+- **Its peers**: licensed VASPs de-risk you, banks pull the rails
+- **Its users**: no segregation, no insurance — unsecured creditors
+- **Institutions**: qualified-custodian rules mean they legally can't touch you
+
+> Yellow banner: No license → no counterparties, no banking, no institutional money. 🚫
+
+**Speaker Notes**: 四層後果 — 服務商（美國 §1960 刑責：Bitzlato、Samourai 被捕案例；歐盟 MiCA 強制授權）；同業（持牌 VASP de-risk、Travel Rule 沒對口、銀行切法幣通道）；用戶（無資產隔離/儲備證明/保險，破產時是無擔保債權人，執法時資金連帶凍結）；機構（SEC custody rule 要求 qualified custodian，法律上碰不得）。收尾：無照不是少一張紙，是少一個未來。
+
+> Refs: [FinCEN](https://www.fincen.gov/) · [MiCA (eur-lex)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1114) · [SEC custody rule](https://www.sec.gov/)
+
+---
+
+## Page 14 · The RegTech ecosystem, at a glance【2×3 grid】
 
 | Category | Vendors |
 |----------|---------|
@@ -199,7 +215,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 14 · Case study: life of a compliant transaction【snake diagram · stepped】
+## Page 15 · Case study: life of a compliant transaction【snake diagram · stepped】
 
 ① 🧾 Initiate (user or API requests a withdrawal) → ② 🛡 Policy engine (limits, whitelists, approval matrix) → ③ 🔍 Screening (risk score, sanctions, Travel Rule) → ④ 👀 Manual review (high-risk cases go four-eyes) → ⑤ ✍️ MPC / HSM sign (shares co-sign, key never assembles) → ⑥ ⛓ Settle & report (broadcast, audit trail, SAR filings)
 
@@ -207,7 +223,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 15 · Keep the core credibly neutral
+## Page 16 · Keep the core credibly neutral
 
 - Compliance lives **at the edges**: frontends, custody, identity rails
 - Core contracts: **no allowlists, no admin backdoors**, no special cases
@@ -217,7 +233,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 16 · Future-proofing checklist【✓ rows】
+## Page 17 · Future-proofing checklist【✓ rows】
 
 - ✓ Put compliance in swappable modules — never in the protocol
 - ✓ Prefer open standards (IVMS 101, TRP) over closed alliances
@@ -227,7 +243,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 17 · Three things to take home 🎒
+## Page 18 · Three things to take home 🎒
 
 1. TradFi capital arrives through compliant gateways — someone has to build them
 2. The stack: identity → custody → policy → AML → travel rule → frontend
@@ -235,7 +251,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 18 · Thanks【navy】
+## Page 19 · Thanks【navy】
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉
