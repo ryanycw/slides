@@ -121,7 +121,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - **Decoupled policy-as-code** — one engine, any key or custodian
 - **Agent guardrails** — spending policies for autonomous AI wallets
 
-**Major players**: Fireblocks Policy Engine · BitGo · Safe Modules · Cobo Argus · Narval · Coinbase Agentic
+**Major players**: BitGo · Fireblocks Policy Engine · Safe Modules · Cobo Argus · Narval · Coinbase Agentic
 
 **Speaker Notes**: custody-side 住在金鑰旁（Fireblocks/BitGo）；onchain framework 住在智能帳戶上（Safe Modules/Zodiac Roles、Cobo Argus）；Narval 是解耦的 policy-as-code — 一套引擎管任何託管商；agent guardrails 是最新分支（Coinbase Agentic、Circle）。
 
@@ -168,7 +168,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Institutional access flows **through custody rails**
 - Underneath it all, the protocol **stays permissionless**
 
-**Major players**: Uniswap Labs (screened app) · Ondo · Securitize · Liminal · Fireblocks DeFi
+**Major players**: Uniswap Labs (screened app) · Ondo · Securitize · Liminal · BitGo DeFi · Fireblocks DeFi
 
 （Aave Arc 已於改版查證中確認停止運作 — 移至 speaker note 當歷史案例；Uniswap Labs 前端以 TRM 篩查錢包＋geo-blocking，是現役的 compliant frontend 經典）
 

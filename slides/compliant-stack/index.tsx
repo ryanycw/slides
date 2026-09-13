@@ -645,8 +645,8 @@ const LayerPolicy: Page = () => (
       </Bullet>
     </div>
     <PlayerStrip>
-      <Player>Fireblocks Policy Engine</Player>
       <Player>BitGo</Player>
+      <Player>Fireblocks Policy Engine</Player>
       <Player>Safe Modules</Player>
       <Player>Cobo Argus</Player>
       <Player>Narval</Player>
@@ -747,6 +747,7 @@ const LayerFrontend: Page = () => (
       <Player>Ondo</Player>
       <Player>Securitize</Player>
       <Player>Liminal</Player>
+      <Player>BitGo DeFi</Player>
       <Player>Fireblocks DeFi</Player>
     </PlayerStrip>
     <Banner>Regulate the doorway — not the road. 🚪</Banner>
