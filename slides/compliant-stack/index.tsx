@@ -134,10 +134,10 @@ const Player = ({ children }: { children: ReactNode }) => (
   </span>
 );
 
-const PlayerStrip = ({ children }: { children: ReactNode }) => (
-  <div style={{ marginTop: 48 }}>
+const PlayerStrip = ({ label = 'MAJOR PLAYERS', top = 48, children }: { label?: string; top?: number; children: ReactNode }) => (
+  <div style={{ marginTop: top }}>
     <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: 3, color: muted, marginBottom: 16 }}>
-      MAJOR PLAYERS
+      {label}
     </div>
     <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>{children}</div>
   </div>
@@ -554,7 +554,7 @@ const StackOverview: Page = () => (
 /* ------------------------------------------------ 06 · Layer 1 Identity */
 
 const LayerIdentity: Page = () => (
-  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: 120 }}>
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
     <Heading>
       Layer 1 — <span style={{ color: yellow }}>Identity & attestation registries</span>
     </Heading>
@@ -572,9 +572,12 @@ const LayerIdentity: Page = () => (
         <B>Zero raw PII</B> ever touches the chain
       </Bullet>
     </div>
-    <PlayerStrip>
+    <PlayerStrip label="KYC VERIFIERS" top={40}>
       <Player>Sumsub</Player>
       <Player>Persona</Player>
+      <Player>Jumio</Player>
+    </PlayerStrip>
+    <PlayerStrip label="ATTESTATION RAILS & ISSUERS" top={22}>
       <Player>EAS</Player>
       <Player>Coinbase Verifications</Player>
       <Player>Human Passport (ex-Gitcoin)</Player>

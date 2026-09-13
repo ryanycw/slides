@@ -84,7 +84,10 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - zk-credentials: prove **"KYC'd, not sanctioned, accredited"** — without doxxing
 - **Zero raw PII** ever touches the chain
 
-**Major players**: Sumsub · Persona · EAS · Coinbase Verifications · Human Passport (ex-Gitcoin)
+**KYC verifiers**: Sumsub · Persona · Jumio
+**Attestation rails & issuers**: EAS · Coinbase Verifications · Human Passport (ex-Gitcoin)
+
+（註：EAS 本身不做 KYC — 它是通用 attestation 基礎設施；KYC 供應商驗證後把結果發成 attestation，Coinbase Verifications 就是「Coinbase 當 issuer、EAS 當軌道」）
 
 （VASP registry 與 IVMS 101 移出此頁 — 那是 Travel Rule 管線，屬於 Layer 4 / Page 10）
 
