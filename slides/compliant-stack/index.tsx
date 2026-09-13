@@ -119,6 +119,30 @@ const Banner = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
+const Player = ({ children }: { children: ReactNode }) => (
+  <span
+    style={{
+      background: card,
+      border: `1px solid ${line}`,
+      borderRadius: 999,
+      padding: '10px 26px',
+      fontSize: 25,
+      fontWeight: 700,
+    }}
+  >
+    {children}
+  </span>
+);
+
+const PlayerStrip = ({ children }: { children: ReactNode }) => (
+  <div style={{ marginTop: 48 }}>
+    <div style={{ fontSize: 20, fontWeight: 800, letterSpacing: 3, color: muted, marginBottom: 16 }}>
+      MAJOR PLAYERS
+    </div>
+    <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>{children}</div>
+  </div>
+);
+
 const VsRow = ({ dot, children }: { dot: string; children: ReactNode }) => (
   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
     <span style={{ width: 14, height: 14, borderRadius: 999, background: dot, flexShrink: 0, marginTop: 15 }} />
@@ -534,7 +558,7 @@ const LayerIdentity: Page = () => (
         <B>KYC once, prove everywhere</B> — attestations instead of document copies
       </Bullet>
       <Bullet>
-        Onchain attestation infra: <B>EAS · Coinbase Verifications · Gitcoin Passport</B>
+        Onchain attestation infra: <B>reusable, revocable, composable</B>
       </Bullet>
       <Bullet>
         zk-credentials: prove <B>"KYC'd, not sanctioned, accredited"</B> — without doxxing
@@ -543,6 +567,13 @@ const LayerIdentity: Page = () => (
         <B>Zero raw PII</B> ever touches the chain
       </Bullet>
     </div>
+    <PlayerStrip>
+      <Player>Sumsub</Player>
+      <Player>Persona</Player>
+      <Player>EAS</Player>
+      <Player>Coinbase Verifications</Player>
+      <Player>Gitcoin Passport</Player>
+    </PlayerStrip>
     <Banner>Identity lives beside the chain — never on it. 🪪</Banner>
     <PageRefs>attest.org · sumsub.com</PageRefs>
   </div>
@@ -569,6 +600,13 @@ const LayerCustody: Page = () => (
         Key refresh & approval quorums make signer rotation an <B>off-chain event</B>
       </Bullet>
     </div>
+    <PlayerStrip>
+      <Player>Safe</Player>
+      <Player>Fireblocks</Player>
+      <Player>BitGo</Player>
+      <Player>Anchorage</Player>
+      <Player>Cobo</Player>
+    </PlayerStrip>
     <Banner>Qualified custody is the entry ticket for regulated capital. 🎫</Banner>
     <PageRefs>safe.global · fireblocks.com (What is MPC) · bitgo.com</PageRefs>
   </div>
@@ -589,12 +627,18 @@ const LayerPolicy: Page = () => (
         Four-eyes and role-based quorums <B>before any signature happens</B>
       </Bullet>
       <Bullet>
-        Humans set the rules, machines enforce them (<B>Fireblocks · Narval</B>)
+        Humans set the rules, <B>machines enforce them</B>
       </Bullet>
       <Bullet>
         Agent-ready: the same rails let <B>AI agents spend safely</B>
       </Bullet>
     </div>
+    <PlayerStrip>
+      <Player>Fireblocks Policy Engine</Player>
+      <Player>Narval</Player>
+      <Player>Cobo Argus</Player>
+      <Player>Safe Modules</Player>
+    </PlayerStrip>
     <Banner>Paper policy becomes executable policy. 📜→⚙️</Banner>
     <PageRefs>fireblocks.com · narval.xyz</PageRefs>
   </div>
@@ -609,10 +653,10 @@ const LayerScreening: Page = () => (
     </Heading>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 60 }}>
       <Bullet>
-        Transaction screening & risk scoring: <B>Chainalysis · Elliptic</B>
+        Transaction screening & <B>risk scoring</B> on every transfer
       </Bullet>
       <Bullet>
-        Travel Rule messaging between VASPs: <B>Notabene · Sumsub</B>
+        <B>Travel Rule messaging</B> between VASPs
       </Bullet>
       <Bullet>
         Today: alliances — <B>TRUST 200+ · VerifyVASP 150+ · GTR 116</B>
@@ -621,6 +665,13 @@ const LayerScreening: Page = () => (
         Tomorrow: open standards — <B>TRP + IVMS 101</B>
       </Bullet>
     </div>
+    <PlayerStrip>
+      <Player>Chainalysis</Player>
+      <Player>Elliptic</Player>
+      <Player>TRM Labs</Player>
+      <Player>Notabene</Player>
+      <Player>21 Analytics</Player>
+    </PlayerStrip>
     <Banner>From compliance cliques to a TCP/IP moment. 🌐</Banner>
     <PageRefs>notabene.id · 21analytics.co · globaltravelrule.com</PageRefs>
   </div>
@@ -641,12 +692,19 @@ const LayerFrontend: Page = () => (
         Attestation-gated DeFi: <B>prove compliance, not identity</B>
       </Bullet>
       <Bullet>
-        Institutional access through custody rails (<B>Fireblocks DeFi · Liminal on Safe</B>)
+        Institutional access flows <B>through custody rails</B>
       </Bullet>
       <Bullet>
         Underneath it all, the protocol <B>stays permissionless</B>
       </Bullet>
     </div>
+    <PlayerStrip>
+      <Player>Aave Arc</Player>
+      <Player>Ondo</Player>
+      <Player>Securitize</Player>
+      <Player>Liminal</Player>
+      <Player>Fireblocks DeFi</Player>
+    </PlayerStrip>
     <Banner>Regulate the doorway — not the road. 🚪</Banner>
     <PageRefs>liminalcustody.com · fireblocks.com</PageRefs>
   </div>

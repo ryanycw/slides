@@ -79,9 +79,11 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 ## Page 7 · Layer 1 — Identity & attestation registries
 
 - **KYC once, prove everywhere** — attestations instead of document copies
-- Onchain attestation infra: **EAS · Coinbase Verifications · Gitcoin Passport**
+- Onchain attestation infra: **reusable, revocable, composable**
 - zk-credentials: prove **"KYC'd, not sanctioned, accredited"** — without doxxing
 - **Zero raw PII** ever touches the chain
+
+**Major players**: Sumsub · Persona · EAS · Coinbase Verifications · Gitcoin Passport
 
 （VASP registry 與 IVMS 101 移出此頁 — 那是 Travel Rule 管線，屬於 Layer 4 / Page 10）
 
@@ -98,6 +100,8 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Hardware roots: **TEE** (SGX, Nitro) and **HSM** — mature setups layer both
 - Key refresh & approval quorums make signer rotation an **off-chain event**
 
+**Major players**: Safe · Fireblocks · BitGo · Anchorage · Cobo
+
 > Yellow banner: Qualified custody is the entry ticket for regulated capital. 🎫
 
 > Refs: [Safe](https://safe.global/blog/the-best-crypto-wallets-for-institutions) · [Fireblocks: What is MPC](https://www.fireblocks.com/report/what-is-mpc) · [BitGo](https://www.bitgo.com/resources/blog/institutional-crypto-wallets-how-they-work/)
@@ -108,8 +112,10 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 - Programmable guardrails: **limits, whitelists, approval matrices**
 - Four-eyes and role-based quorums **before any signature happens**
-- Humans set the rules, machines enforce them (**Fireblocks · Narval**)
+- Humans set the rules, **machines enforce them**
 - Agent-ready: the same rails let **AI agents spend safely**
+
+**Major players**: Fireblocks Policy Engine · Narval · Cobo Argus · Safe Modules
 
 > Yellow banner: Paper policy becomes executable policy. 📜→⚙️
 
@@ -119,10 +125,12 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ## Page 10 · Layer 4 — Screening & Travel Rule rails
 
-- Transaction screening & risk scoring: **Chainalysis · Elliptic**
-- Travel Rule messaging between VASPs: **Notabene · Sumsub**
+- Transaction screening & **risk scoring** on every transfer
+- **Travel Rule messaging** between VASPs
 - Today: alliances — **TRUST 200+ · VerifyVASP 150+ · GTR 116**
 - Tomorrow: open standards — **TRP + IVMS 101**
+
+**Major players**: Chainalysis · Elliptic · TRM Labs · Notabene · 21 Analytics
 
 > Yellow banner: From compliance cliques to a TCP/IP moment. 🌐
 
@@ -134,8 +142,10 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 - Geo-fencing, screened wallets and **permissioned pools at the frontend**
 - Attestation-gated DeFi: **prove compliance, not identity**
-- Institutional access through custody rails (**Fireblocks DeFi · Liminal on Safe**)
+- Institutional access flows **through custody rails**
 - Underneath it all, the protocol **stays permissionless**
+
+**Major players**: Aave Arc · Ondo · Securitize · Liminal · Fireblocks DeFi
 
 > Yellow banner: Regulate the doorway — not the road. 🚪
 
