@@ -803,6 +803,64 @@ const EcosystemMap: Page = () => (
   </div>
 );
 
+/* ------------------------------------------------ 14-15 · Open discussion */
+
+const Eyebrow = ({ children }: { children: ReactNode }) => (
+  <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: 5, color: muted, marginBottom: 28 }}>
+    {children}
+  </div>
+);
+
+const OpenDiscussionPerimeter: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <Eyebrow>OPEN DISCUSSION · 1</Eyebrow>
+    <Heading>
+      When money <span style={{ color: yellow }}>leaves your platform</span>, what rules follow it?
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 52 }}>
+      <Bullet>
+        To another VASP — counterparty <B>due diligence + Travel Rule payload</B>
+      </Bullet>
+      <Bullet>
+        The <B>sunrise problem</B>: your counterparty's regulator may not be awake yet
+      </Bullet>
+      <Bullet>
+        To a self-hosted wallet — <B>EU TFR</B> wants ownership proof above €1,000
+      </Bullet>
+      <Bullet>
+        Unlicensed "custodial" providers abroad — <B>whose rules even apply?</B>
+      </Bullet>
+    </div>
+    <Banner>💬 Open floor: whose compliance perimeter is a withdrawal in?</Banner>
+    <PageRefs>bitgo.com (travel rule) · notabene.id · eur-lex.europa.eu (TFR)</PageRefs>
+  </div>
+);
+
+const OpenDiscussionCustody: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <Eyebrow>OPEN DISCUSSION · 2</Eyebrow>
+    <Heading>
+      When is a wallet even <span style={{ color: yellow }}>"custodial"</span>?
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 52 }}>
+      <Bullet>
+        An MPC provider holding <B>2-of-3 shares</B> — custody, or just software?
+      </Bullet>
+      <Bullet>
+        A Safe with <B>3 signers in 3 countries</B> — which jurisdiction owns it?
+      </Bullet>
+      <Bullet>
+        An <B>AI agent</B> holding its own key inside a TEE — who is the custodian?
+      </Bullet>
+      <Bullet>
+        Regulators converge on <B>"control" tests</B> — and thresholds blur them
+      </Bullet>
+    </div>
+    <Banner>💬 Open floor: if control defines custody, who controls a threshold?</Banner>
+    <PageRefs>fatf-gafi.org · fireblocks.com · safe.global</PageRefs>
+  </div>
+);
+
 /* ------------------------------------------------ 12 · Case study: pipeline */
 
 const FlowHeading = ({ children }: { children: ReactNode }) => (
@@ -1131,11 +1189,13 @@ export const notes: (string | undefined)[] = [
   'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol. Unhosted wallets are handled with ownership proofs like the Satoshi Test.', // 11 L5 Travel Rule
   'Permissioned frontends over permissionless protocols: the Uniswap Labs app geo-blocks and screens wallets via TRM while the protocol below stays neutral. Aave Arc pioneered permissioned pools in 2022 but has since wound down — cite it as history, not as a live product. Attestation-gating beats identity-gating for privacy.', // 12 L6 Frontends
   'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 13 Ecosystem map
-  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 14 Case pipeline
-  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 15 Neutrality
-  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 16 Checklist
-  undefined, // 17 Takeaways
-  undefined, // 18 Thanks
+  'No settled answer — that is the point. EU TFR (in force since Dec 2024) requires ownership verification for self-hosted transfers above €1,000; the sunrise problem means many counterparties cannot answer Travel Rule messages yet. Let the audience argue where liability should stop.', // 14 Open discussion 1
+  'Callback to the custody talk: whoever holds enough key shares IS the custodian. FATF leans on control tests, but MPC thresholds, multisig quorums and autonomous agents all blur control. Invite the regulators and builders in the room to disagree.', // 15 Open discussion 2
+  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 16 Case pipeline
+  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 17 Neutrality
+  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 18 Checklist
+  undefined, // 19 Takeaways
+  undefined, // 20 Thanks
 ];
 
 export const meta: SlideMeta = {
@@ -1157,6 +1217,8 @@ export default [
   LayerTravelRule,
   LayerFrontend,
   EcosystemMap,
+  OpenDiscussionPerimeter,
+  OpenDiscussionCustody,
   CasePipeline,
   Neutrality,
   FutureProofing,

@@ -1,6 +1,6 @@
 # Bridging Regulation & Decentralization — content draft
 
-> Maps 1:1 to `slides/compliant-stack/index.tsx` (18 pages, ~15-minute talk, English).
+> Maps 1:1 to `slides/compliant-stack/index.tsx` (20 pages, ~15-minute talk, English).
 > Edit the text here, then ask Claude to sync it back to the slide.
 > Style: formal variant of the house design — deep navy `#0d1b2e` ground, single yellow `#ffcd01` accent, blue `#4190de` as secondary. Refs render bottom-left on slides.
 
@@ -199,7 +199,39 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 14 · Case study: life of a compliant transaction【snake diagram · stepped】
+## Page 14 · Open discussion 1 — When money leaves your platform, what rules follow it?
+
+- Eyebrow: `OPEN DISCUSSION · 1`
+- To another VASP — counterparty **due diligence + Travel Rule payload**
+- The **sunrise problem**: your counterparty's regulator may not be awake yet
+- To a self-hosted wallet — **EU TFR** wants ownership proof above €1,000
+- Unlicensed "custodial" providers abroad — **whose rules even apply?**
+
+> Yellow banner: 💬 Open floor: whose compliance perimeter is a withdrawal in?
+
+**Speaker Notes**: no settled answer — that's the point. EU TFR in force since Dec 2024（self-hosted 轉帳 >€1,000 要驗證所有權）；sunrise problem = 很多對手方所在轄區還沒開始執法，Travel Rule 訊息沒人接。讓現場吵「責任該停在哪」。
+
+> Refs: [BitGo: Travel Rule](https://www.bitgo.com/resource-center/travel-rule/) · [Notabene](https://notabene.id/) · [EU TFR (eur-lex)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R1113)
+
+---
+
+## Page 15 · Open discussion 2 — When is a wallet even "custodial"?
+
+- Eyebrow: `OPEN DISCUSSION · 2`
+- An MPC provider holding **2-of-3 shares** — custody, or just software?
+- A Safe with **3 signers in 3 countries** — which jurisdiction owns it?
+- An **AI agent** holding its own key inside a TEE — who is the custodian?
+- Regulators converge on **"control" tests** — and thresholds blur them
+
+> Yellow banner: 💬 Open floor: if control defines custody, who controls a threshold?
+
+**Speaker Notes**: 呼應錢包 talk 的靈魂拷問 — 誰握有足夠碎片誰就是託管方。FATF 用 "control" 判準，但 MPC 門檻、多簽 quorum、自主 agent 全都把 control 弄糊了。邀請在場的 regulator 和 builder 吵起來。
+
+> Refs: [FATF Guidance](https://www.fatf-gafi.org/) · [Fireblocks](https://www.fireblocks.com/report/what-is-mpc) · [Safe](https://safe.global/)
+
+---
+
+## Page 16 · Case study: life of a compliant transaction【snake diagram · stepped】
 
 ① 🧾 Initiate (user or API requests a withdrawal) → ② 🛡 Policy engine (limits, whitelists, approval matrix) → ③ 🔍 Screening (risk score, sanctions, Travel Rule) → ④ 👀 Manual review (high-risk cases go four-eyes) → ⑤ ✍️ MPC / HSM sign (shares co-sign, key never assembles) → ⑥ ⛓ Settle & report (broadcast, audit trail, SAR filings)
 
@@ -207,7 +239,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 15 · Keep the core credibly neutral
+## Page 17 · Keep the core credibly neutral
 
 - Compliance lives **at the edges**: frontends, custody, identity rails
 - Core contracts: **no allowlists, no admin backdoors**, no special cases
@@ -217,7 +249,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 16 · Future-proofing checklist【✓ rows】
+## Page 18 · Future-proofing checklist【✓ rows】
 
 - ✓ Put compliance in swappable modules — never in the protocol
 - ✓ Prefer open standards (IVMS 101, TRP) over closed alliances
@@ -227,7 +259,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 17 · Three things to take home 🎒
+## Page 19 · Three things to take home 🎒
 
 1. TradFi capital arrives through compliant gateways — someone has to build them
 2. The stack: identity → custody → policy → AML → travel rule → frontend
@@ -235,7 +267,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 18 · Thanks【navy】
+## Page 20 · Thanks【navy】
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉
