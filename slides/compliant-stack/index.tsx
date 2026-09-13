@@ -141,7 +141,7 @@ const Cover: Page = () => (
     }}
   >
     <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: 6, color: muted, marginBottom: 44 }}>
-      @RYANYCW · ETHEREUM × TRADFI · 15 MIN
+      @RYANYCW · ETHEREUM × TRADFI
     </div>
     <h1
       style={{

@@ -12,7 +12,7 @@ Talk metadata
 
 ## Page 1 · Cover【navy】
 
-- Eyebrow: `@RYANYCW · ETHEREUM × TRADFI · 15 MIN`
+- Eyebrow: `@RYANYCW · ETHEREUM × TRADFI`
 - Title: **Bridging Regulation & Decentralization**
 - Yellow rule divider
 - Sub: Tech Stacks for **Compliant Adoption**
