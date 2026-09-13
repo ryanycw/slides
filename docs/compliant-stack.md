@@ -83,7 +83,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - zk-credentials: prove **"KYC'd, not sanctioned, accredited"** — without doxxing
 - **Zero raw PII** ever touches the chain
 
-**Major players**: Sumsub · Persona · EAS · Coinbase Verifications · Gitcoin Passport
+**Major players**: Sumsub · Persona · EAS · Coinbase Verifications · Human Passport (ex-Gitcoin)
 
 （VASP registry 與 IVMS 101 移出此頁 — 那是 Travel Rule 管線，屬於 Layer 4 / Page 10）
 
@@ -145,7 +145,9 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Institutional access flows **through custody rails**
 - Underneath it all, the protocol **stays permissionless**
 
-**Major players**: Aave Arc · Ondo · Securitize · Liminal · Fireblocks DeFi
+**Major players**: Uniswap Labs (screened app) · Ondo · Securitize · Liminal · Fireblocks DeFi
+
+（Aave Arc 已於改版查證中確認停止運作 — 移至 speaker note 當歷史案例；Uniswap Labs 前端以 TRM 篩查錢包＋geo-blocking，是現役的 compliant frontend 經典）
 
 > Yellow banner: Regulate the doorway — not the road. 🚪
 
@@ -158,7 +160,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 | Category | Vendors |
 |----------|---------|
 | 🪪 KYC & identity | Sumsub · Jumio · Onfido · Persona |
-| 📜 Onchain attestations | EAS · Gitcoin Passport · Coinbase Verifications |
+| 📜 Onchain attestations | EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications |
 | 🔐 Custody & policy | Fireblocks · BitGo · Cobo Argus · Narval |
 | 🔍 Analytics & monitoring | Chainalysis · Elliptic · TRM Labs · Crystal |
 | ✉️ Travel Rule messaging | Notabene · Sygna · VerifyVASP · 21 Analytics |

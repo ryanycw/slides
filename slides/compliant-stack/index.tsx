@@ -572,7 +572,7 @@ const LayerIdentity: Page = () => (
       <Player>Persona</Player>
       <Player>EAS</Player>
       <Player>Coinbase Verifications</Player>
-      <Player>Gitcoin Passport</Player>
+      <Player>Human Passport (ex-Gitcoin)</Player>
     </PlayerStrip>
     <Banner>Identity lives beside the chain — never on it. 🪪</Banner>
     <PageRefs>attest.org · sumsub.com</PageRefs>
@@ -699,7 +699,7 @@ const LayerFrontend: Page = () => (
       </Bullet>
     </div>
     <PlayerStrip>
-      <Player>Aave Arc</Player>
+      <Player>Uniswap Labs (screened app)</Player>
       <Player>Ondo</Player>
       <Player>Securitize</Player>
       <Player>Liminal</Player>
@@ -745,7 +745,7 @@ const EcosystemMap: Page = () => (
       }}
     >
       <EcoCard emoji="🪪" title="KYC & identity" names="Sumsub · Jumio · Onfido · Persona" />
-      <EcoCard emoji="📜" title="Onchain attestations" names="EAS · Gitcoin Passport · Coinbase Verifications" />
+      <EcoCard emoji="📜" title="Onchain attestations" names="EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications" />
       <EcoCard emoji="🔐" title="Custody & policy" names="Fireblocks · BitGo · Cobo Argus · Narval" />
       <EcoCard emoji="🔍" title="Analytics & monitoring" names="Chainalysis · Elliptic · TRM Labs · Crystal" />
       <EcoCard emoji="✉️" title="Travel Rule messaging" names="Notabene · Sygna · VerifyVASP · 21 Analytics" />
@@ -1083,7 +1083,7 @@ export const notes: (string | undefined)[] = [
   'One-line recap of the custody talk: Safe = transparent on-chain thresholds; MPC (CMP by Fireblocks, DKLs by BitGo/Silence Labs) = invisible thresholds, standard single sig on-chain; TEE vs HSM both used in layered setups.', // 8 L2 Custody
   'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 9 L3 Policy
   'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 10 L4 Screening
-  'Permissioned frontends over permissionless protocols: Uniswap-style neutrality below, gated doorways above. Attestation-gating beats identity-gating for privacy.', // 11 L5 Frontends
+  'Permissioned frontends over permissionless protocols: the Uniswap Labs app geo-blocks and screens wallets via TRM while the protocol below stays neutral. Aave Arc pioneered permissioned pools in 2022 but has since wound down — cite it as history, not as a live product. Attestation-gating beats identity-gating for privacy.', // 11 L5 Frontends
   'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 12 Ecosystem map
   'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 13 Case pipeline
   'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 14 Neutrality
