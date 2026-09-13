@@ -79,13 +79,15 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 ## Page 7 · Layer 1 — Identity & attestation registries
 
 - **KYC once, prove everywhere** — attestations instead of document copies
-- VASP registries & directories: **TRUST · VerifyVASP · Sumsub**
-- **IVMS 101** as the shared data language between institutions
-- Onchain: screened-address attestations, **zero raw PII** on the chain
+- Onchain attestation infra: **EAS · Coinbase Verifications · Gitcoin Passport**
+- zk-credentials: prove **"KYC'd, not sanctioned, accredited"** — without doxxing
+- **Zero raw PII** ever touches the chain
+
+（VASP registry 與 IVMS 101 移出此頁 — 那是 Travel Rule 管線，屬於 Layer 4 / Page 10）
 
 > Yellow banner: Identity lives beside the chain — never on it. 🪪
 
-> Refs: [21 Analytics: IVMS 101](https://www.21analytics.co/glossary/inter-vasp-messaging-standard-ivms/) · [VerifyVASP](https://www.verifyvasp.com/en/alliance/) · [Sumsub: Travel Rule protocols](https://sumsub.com/blog/crypto-travel-rule-protocols/)
+> Refs: [EAS](https://attest.org/) · [Sumsub](https://sumsub.com/)
 
 ---
 

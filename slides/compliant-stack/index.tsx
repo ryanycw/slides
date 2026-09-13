@@ -534,17 +534,17 @@ const LayerIdentity: Page = () => (
         <B>KYC once, prove everywhere</B> — attestations instead of document copies
       </Bullet>
       <Bullet>
-        VASP registries & directories: <B>TRUST · VerifyVASP · Sumsub</B>
+        Onchain attestation infra: <B>EAS · Coinbase Verifications · Gitcoin Passport</B>
       </Bullet>
       <Bullet>
-        <B>IVMS 101</B> as the shared data language between institutions
+        zk-credentials: prove <B>"KYC'd, not sanctioned, accredited"</B> — without doxxing
       </Bullet>
       <Bullet>
-        Onchain: screened-address attestations, <B>zero raw PII</B> on the chain
+        <B>Zero raw PII</B> ever touches the chain
       </Bullet>
     </div>
     <Banner>Identity lives beside the chain — never on it. 🪪</Banner>
-    <PageRefs>21analytics.co (IVMS 101) · verifyvasp.com · sumsub.com</PageRefs>
+    <PageRefs>attest.org · sumsub.com</PageRefs>
   </div>
 );
 
@@ -1021,7 +1021,7 @@ export const notes: (string | undefined)[] = [
   'Neither column wins by defeating the other — the architecture assigns each requirement a layer where it can live without touching the core.', // 4 Tension
   'The key rhetorical move of the talk: institutions get a NEW door; natives lose nothing. Everything that follows describes only the right-hand door — the left one is untouched.', // 5 Two doors
   'Read bottom-up: the base never changes; every compliance requirement maps to exactly one layer above it.', // 6 Stack overview
-  'IVMS 101 = interVASP Messaging Standard, the shared schema. Attestations mean a venue can verify "this address passed KYC at X" without ever seeing documents.', // 7 L1 Identity
+  'Attestations mean a venue can verify "this address passed KYC at provider X" without ever seeing documents. EAS is the general-purpose attestation rail; zk-credentials go further — prove a property (KYC\'d, accredited, not sanctioned) while revealing nothing else. VASP directories and IVMS belong to Layer 4, not here.', // 7 L1 Identity
   'One-line recap of the custody talk: Safe = transparent on-chain thresholds; MPC (CMP by Fireblocks, DKLs by BitGo/Silence Labs) = invisible thresholds, standard single sig on-chain; TEE vs HSM both used in layered setups.', // 8 L2 Custody
   'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 9 L3 Policy
   'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 10 L4 Screening
