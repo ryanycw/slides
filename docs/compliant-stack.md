@@ -1,6 +1,6 @@
 # Bridging Regulation & Decentralization — content draft
 
-> Maps 1:1 to `slides/compliant-stack/index.tsx` (16 pages, ~15-minute talk, English).
+> Maps 1:1 to `slides/compliant-stack/index.tsx` (17 pages, ~15-minute talk, English).
 > Edit the text here, then ask Claude to sync it back to the slide.
 > Style: formal variant of the house design — deep navy `#0d1b2e` ground, single yellow `#ffcd01` accent, blue `#4190de` as secondary. Refs render bottom-left on slides.
 
@@ -51,7 +51,19 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 5 · The compliant stack, top to bottom【layer diagram · stepped, revealed top-down, read bottom-up】
+## Page 5 · Compliance isn't a compromise — it's a second door【diagram · stepped】
+
+兩條路通往同一個 Ethereum 核心：
+
+- 左路（藍・立即顯示）：🧑‍🚀 **Crypto natives**（self-custody, DeFi, full permissionless access）→ 直達核心，箭頭旁標 `🔓 Nothing changes on this side`
+- 右路（黃・逐步顯示）：🏦 **TradFi institutions**（funds, banks, corporates — new capital）→ 🛂 **Compliant gateway**（identity · custody · policy · screening，黃框）→ 核心，標 `🚪 A new door — not a replacement`
+- 底部藍色橫條：⚖️ **The same neutral Ethereum** — one permissionless core, untouched
+
+**Speaker Notes**: the key rhetorical move — institutions get a NEW door; natives lose nothing. Everything that follows describes only the right-hand door.
+
+---
+
+## Page 6 · The compliant stack, top to bottom【layer diagram · stepped, revealed top-down, read bottom-up】
 
 | # | Layer | One-liner |
 |---|-------|-----------|
@@ -64,7 +76,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 6 · Layer 1 — Identity & attestation registries
+## Page 7 · Layer 1 — Identity & attestation registries
 
 - **KYC once, prove everywhere** — attestations instead of document copies
 - VASP registries & directories: **TRUST · VerifyVASP · Sumsub**
@@ -77,7 +89,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 7 · Layer 2 — Keys & custody
+## Page 8 · Layer 2 — Keys & custody
 
 - **Multisig (Safe)**: thresholds on-chain, transparent by design
 - **MPC (CMP · DKLs)**: chain-agnostic, threshold invisible, the full key never exists
@@ -90,7 +102,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 8 · Layer 3 — Automated policy engines
+## Page 9 · Layer 3 — Automated policy engines
 
 - Programmable guardrails: **limits, whitelists, approval matrices**
 - Four-eyes and role-based quorums **before any signature happens**
@@ -103,7 +115,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 9 · Layer 4 — Screening & Travel Rule rails
+## Page 10 · Layer 4 — Screening & Travel Rule rails
 
 - Transaction screening & risk scoring: **Chainalysis · Elliptic**
 - Travel Rule messaging between VASPs: **Notabene · Sumsub**
@@ -116,7 +128,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 10 · Layer 5 — Compliant DeFi frontends
+## Page 11 · Layer 5 — Compliant DeFi frontends
 
 - Geo-fencing, screened wallets and **permissioned pools at the frontend**
 - Attestation-gated DeFi: **prove compliance, not identity**
@@ -129,7 +141,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 11 · The RegTech ecosystem, at a glance【2×3 grid】
+## Page 12 · The RegTech ecosystem, at a glance【2×3 grid】
 
 | Category | Vendors |
 |----------|---------|
@@ -148,7 +160,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 12 · Case study: life of a compliant transaction【snake diagram · stepped】
+## Page 13 · Case study: life of a compliant transaction【snake diagram · stepped】
 
 ① 🧾 Initiate (user or API requests a withdrawal) → ② 🛡 Policy engine (limits, whitelists, approval matrix) → ③ 🔍 Screening (risk score, sanctions, Travel Rule) → ④ 👀 Manual review (high-risk cases go four-eyes) → ⑤ ✍️ MPC / HSM sign (shares co-sign, key never assembles) → ⑥ ⛓ Settle & report (broadcast, audit trail, SAR filings)
 
@@ -156,7 +168,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 13 · Keep the core credibly neutral
+## Page 14 · Keep the core credibly neutral
 
 - Compliance lives **at the edges**: frontends, custody, identity rails
 - Core contracts: **no allowlists, no admin backdoors**, no special cases
@@ -166,7 +178,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 14 · Future-proofing checklist【✓ rows】
+## Page 15 · Future-proofing checklist【✓ rows】
 
 - ✓ Put compliance in swappable modules — never in the protocol
 - ✓ Prefer open standards (IVMS 101, TRP) over closed alliances
@@ -176,7 +188,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 15 · Three things to take home 🎒
+## Page 16 · Three things to take home 🎒
 
 1. TradFi capital arrives through compliant gateways — someone has to build them
 2. The stack: identity → custody → policy → screening → frontend
@@ -184,7 +196,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 16 · Thanks【navy】
+## Page 17 · Thanks【navy】
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉

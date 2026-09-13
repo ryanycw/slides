@@ -306,7 +306,134 @@ const Tension: Page = () => (
   </div>
 );
 
-/* ------------------------------------------------ 05 · Stack overview */
+/* ------------------------------------------------ 05 · Two doors diagram */
+
+const DoorCard = ({
+  left,
+  top,
+  w,
+  emoji,
+  title,
+  desc,
+  titleColor,
+}: {
+  left: number;
+  top: number;
+  w: number;
+  emoji: string;
+  title: string;
+  desc: string;
+  titleColor: string;
+}) => (
+  <div
+    style={{
+      position: 'absolute',
+      left,
+      top,
+      width: w,
+      background: card,
+      border: `1px solid ${line}`,
+      borderRadius: 'var(--osd-radius)',
+      padding: '28px 36px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 10,
+    }}
+  >
+    <div style={{ fontSize: 40, lineHeight: 1 }}>{emoji}</div>
+    <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 34, fontWeight: 900, color: titleColor }}>
+      {title}
+    </div>
+    <div style={{ fontSize: 24, lineHeight: 1.45, color: muted }}>{desc}</div>
+  </div>
+);
+
+const DoorLabel = ({ left, top, children }: { left: number; top: number; children: ReactNode }) => (
+  <div style={{ position: 'absolute', left, top, fontSize: 25, fontWeight: 700, color: muted }}>
+    {children}
+  </div>
+);
+
+const TwoDoors: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', overflow: 'hidden' }}>
+    <FlowHeading>
+      Compliance isn't a compromise — <span style={{ color: yellow }}>it's a second door</span>
+    </FlowHeading>
+    <Steps>
+      <DoorCard
+        left={220}
+        top={230}
+        w={560}
+        emoji="🧑‍🚀"
+        title="Crypto natives"
+        desc="self-custody, DeFi, full permissionless access"
+        titleColor={blue}
+      />
+      <FlowLink x1={500} y1={430} x2={500} y2={820} dir="down" />
+      <DoorLabel left={560} top={600}>
+        🔓 Nothing changes on this side
+      </DoorLabel>
+      <Step>
+        <div>
+          <DoorCard
+            left={1140}
+            top={230}
+            w={560}
+            emoji="🏦"
+            title="TradFi institutions"
+            desc="funds, banks, corporates — new capital"
+            titleColor={yellow}
+          />
+          <FlowLink x1={1420} y1={430} x2={1420} y2={540} dir="down" />
+          <div
+            style={{
+              position: 'absolute',
+              left: 1140,
+              top: 550,
+              width: 560,
+              background: card,
+              border: `2px solid ${yellow}`,
+              borderRadius: 'var(--osd-radius)',
+              padding: '24px 36px',
+            }}
+          >
+            <div style={{ fontSize: 32, fontWeight: 900, color: yellow }}>🛂 Compliant gateway</div>
+            <div style={{ fontSize: 23, color: muted, marginTop: 8 }}>
+              identity · custody · policy · screening
+            </div>
+          </div>
+          <FlowLink x1={1420} y1={700} x2={1420} y2={820} dir="down" />
+          <DoorLabel left={1470} top={745}>
+            🚪 A new door — not a replacement
+          </DoorLabel>
+        </div>
+      </Step>
+      <div
+        style={{
+          position: 'absolute',
+          left: 100,
+          top: 840,
+          width: 1720,
+          background: blue,
+          borderRadius: 16,
+          padding: '0 44px',
+          height: 120,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 28,
+        }}
+      >
+        <span style={{ fontSize: 40 }}>⚖️</span>
+        <span style={{ fontSize: 36, fontWeight: 900 }}>The same neutral Ethereum</span>
+        <span style={{ fontSize: 26, color: 'rgba(255,255,255,0.9)' }}>
+          one permissionless core — untouched
+        </span>
+      </div>
+    </Steps>
+  </div>
+);
+
+/* ------------------------------------------------ 06 · Stack overview */
 
 const LayerBar = ({
   num,
@@ -892,18 +1019,19 @@ export const notes: (string | undefined)[] = [
   'Frame: this is not a talk about killing DeFi with paperwork — it is about the plumbing that lets regulated money touch neutral protocols.', // 2 Hook
   'MiCA/DORA live in EU; Travel Rule thresholds tightening; Basel gives banks capital treatment for crypto; qualified custody decides who may hold client assets.', // 3 Why now
   'Neither column wins by defeating the other — the architecture assigns each requirement a layer where it can live without touching the core.', // 4 Tension
-  'Read bottom-up: the base never changes; every compliance requirement maps to exactly one layer above it.', // 5 Stack overview
-  'IVMS 101 = interVASP Messaging Standard, the shared schema. Attestations mean a venue can verify "this address passed KYC at X" without ever seeing documents.', // 6 L1 Identity
-  'One-line recap of the custody talk: Safe = transparent on-chain thresholds; MPC (CMP by Fireblocks, DKLs by BitGo/Silence Labs) = invisible thresholds, standard single sig on-chain; TEE vs HSM both used in layered setups.', // 7 L2 Custody
-  'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 8 L3 Policy
-  'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 9 L4 Screening
-  'Permissioned frontends over permissionless protocols: Uniswap-style neutrality below, gated doorways above. Attestation-gating beats identity-gating for privacy.', // 10 L5 Frontends
-  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 11 Ecosystem map
-  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 12 Case pipeline
-  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 13 Neutrality
-  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 14 Checklist
-  undefined, // 15 Takeaways
-  undefined, // 16 Thanks
+  'The key rhetorical move of the talk: institutions get a NEW door; natives lose nothing. Everything that follows describes only the right-hand door — the left one is untouched.', // 5 Two doors
+  'Read bottom-up: the base never changes; every compliance requirement maps to exactly one layer above it.', // 6 Stack overview
+  'IVMS 101 = interVASP Messaging Standard, the shared schema. Attestations mean a venue can verify "this address passed KYC at X" without ever seeing documents.', // 7 L1 Identity
+  'One-line recap of the custody talk: Safe = transparent on-chain thresholds; MPC (CMP by Fireblocks, DKLs by BitGo/Silence Labs) = invisible thresholds, standard single sig on-chain; TEE vs HSM both used in layered setups.', // 8 L2 Custody
+  'Policy engines turn the compliance manual into code that runs before signing. Same guardrails make autonomous AI-agent wallets acceptable to a risk committee.', // 9 L3 Policy
+  'Alliance fragmentation is real — some exchanges sit in two or three networks. TRP + IVMS 101 is the path from cliques to one protocol.', // 10 L4 Screening
+  'Permissioned frontends over permissionless protocols: Uniswap-style neutrality below, gated doorways above. Attestation-gating beats identity-gating for privacy.', // 11 L5 Frontends
+  'Categories are converging: Chainalysis pairs with Notabene, Sumsub does both KYC and Travel Rule, custody vendors ship policy engines. Expect consolidation — pick vendors with open interfaces so you can swap them.', // 12 Ecosystem map
+  'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 13 Case pipeline
+  'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 14 Neutrality
+  'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 15 Checklist
+  undefined, // 16 Takeaways
+  undefined, // 17 Thanks
 ];
 
 export const meta: SlideMeta = {
@@ -916,6 +1044,7 @@ export default [
   Hook,
   WhyNow,
   Tension,
+  TwoDoors,
   StackOverview,
   LayerIdentity,
   LayerCustody,
