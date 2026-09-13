@@ -104,7 +104,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Hardware roots: **TEE** (SGX, Nitro) and **HSM** — mature setups layer both
 - Key refresh & approval quorums make signer rotation an **off-chain event**
 
-**Major players**: Safe · BitGo · Fireblocks · Anchorage · Cobo
+**Major players**: Safe · BitGo · Fireblocks · Anchorage · Cobo · Liminal
 
 > Yellow banner: Qualified custody is the entry ticket for regulated capital. 🎫
 
@@ -168,7 +168,9 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Institutional access flows **through custody rails**
 - Underneath it all, the protocol **stays permissionless**
 
-**Major players**: Uniswap Labs (screened app) · Ondo · Securitize · Liminal · BitGo DeFi · Fireblocks DeFi
+**Major players**: Uniswap Labs (screened app) · Ondo · Securitize · BitGo DeFi · Fireblocks DeFi
+
+（Liminal 移至 Layer 2 — 它的本體是 Safe 上的機構託管，不是 DeFi 前端）
 
 （Aave Arc 已於改版查證中確認停止運作 — 移至 speaker note 當歷史案例；Uniswap Labs 前端以 TRM 篩查錢包＋geo-blocking，是現役的 compliant frontend 經典）
 

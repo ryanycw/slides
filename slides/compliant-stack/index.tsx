@@ -617,6 +617,7 @@ const LayerCustody: Page = () => (
       <Player>Fireblocks</Player>
       <Player>Anchorage</Player>
       <Player>Cobo</Player>
+      <Player>Liminal</Player>
     </PlayerStrip>
     <Banner>Qualified custody is the entry ticket for regulated capital. 🎫</Banner>
     <PageRefs>safe.global · fireblocks.com (What is MPC) · bitgo.com</PageRefs>
@@ -746,12 +747,11 @@ const LayerFrontend: Page = () => (
       <Player>Uniswap Labs (screened app)</Player>
       <Player>Ondo</Player>
       <Player>Securitize</Player>
-      <Player>Liminal</Player>
       <Player>BitGo DeFi</Player>
       <Player>Fireblocks DeFi</Player>
     </PlayerStrip>
     <Banner>Regulate the doorway — not the road. 🚪</Banner>
-    <PageRefs>liminalcustody.com · fireblocks.com</PageRefs>
+    <PageRefs>bitgo.com · fireblocks.com · uniswap.org</PageRefs>
   </div>
 );
 
