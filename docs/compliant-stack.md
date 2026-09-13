@@ -84,7 +84,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - zk-credentials: prove **"KYC'd, not sanctioned, accredited"** — without doxxing
 - **Zero raw PII** ever touches the chain
 
-**KYC verifiers**: Sumsub · Persona · Jumio
+**KYC verifiers**: Sumsub · Persona · Jumio · Regula
 **Attestation rails & issuers**: EAS · Coinbase Verifications · Human Passport (ex-Gitcoin)
 
 （註：EAS 本身不做 KYC — 它是通用 attestation 基礎設施；KYC 供應商驗證後把結果發成 attestation，Coinbase Verifications 就是「Coinbase 當 issuer、EAS 當軌道」）
@@ -182,7 +182,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 | Category | Vendors |
 |----------|---------|
-| 🪪 KYC & identity | Sumsub · Jumio · Onfido · Persona |
+| 🪪 KYC & identity | Sumsub · Jumio · Onfido · Persona · Regula |
 | 📜 Onchain attestations | EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications |
 | 🔐 Custody & policy | Fireblocks · BitGo · Cobo Argus · Narval |
 | 🔍 Analytics & monitoring | Chainalysis · Elliptic · TRM Labs · Crystal |

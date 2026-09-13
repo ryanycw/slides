@@ -576,6 +576,7 @@ const LayerIdentity: Page = () => (
       <Player>Sumsub</Player>
       <Player>Persona</Player>
       <Player>Jumio</Player>
+      <Player>Regula</Player>
     </PlayerStrip>
     <PlayerStrip label="ATTESTATION RAILS & ISSUERS" top={22}>
       <Player>EAS</Player>
@@ -785,7 +786,7 @@ const EcosystemMap: Page = () => (
         marginTop: 48,
       }}
     >
-      <EcoCard emoji="🪪" title="KYC & identity" names="Sumsub · Jumio · Onfido · Persona" />
+      <EcoCard emoji="🪪" title="KYC & identity" names="Sumsub · Jumio · Onfido · Persona · Regula" />
       <EcoCard emoji="📜" title="Onchain attestations" names="EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications" />
       <EcoCard emoji="🔐" title="Custody & policy" names="Fireblocks · BitGo · Cobo Argus · Narval" />
       <EcoCard emoji="🔍" title="Analytics & monitoring" names="Chainalysis · Elliptic · TRM Labs · Crystal" />
