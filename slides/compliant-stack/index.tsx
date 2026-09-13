@@ -577,13 +577,13 @@ const LayerIdentity: Page = () => (
       <Player>Persona</Player>
       <Player>Jumio</Player>
       <Player>Regula</Player>
+      <Player>ZKPassport</Player>
+      <Player>Onflow</Player>
     </PlayerStrip>
-    <PlayerStrip label="ATTESTATIONS & ZK-CREDENTIALS" top={22}>
+    <PlayerStrip label="ATTESTATION RAILS & ISSUERS" top={22}>
       <Player>EAS</Player>
       <Player>Coinbase Verifications</Player>
       <Player>Human Passport (ex-Gitcoin)</Player>
-      <Player>ZKPassport</Player>
-      <Player>Onflow</Player>
     </PlayerStrip>
     <Banner>Identity lives beside the chain — never on it. 🪪</Banner>
     <PageRefs>attest.org · sumsub.com</PageRefs>
