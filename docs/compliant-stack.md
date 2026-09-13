@@ -184,8 +184,8 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 | Category | Vendors |
 |----------|---------|
-| 🪪 KYC & identity | Sumsub · Jumio · Onfido · Persona · Regula |
-| 📜 Onchain attestations | EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications · ZKPassport · Onflow |
+| 🪪 KYC & identity | Sumsub · Jumio · Onfido · Persona · Regula · ZKPassport · Onflow |
+| 📜 Onchain attestations | EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications |
 | 🔐 Custody & policy | Fireblocks · BitGo · Cobo Argus · Narval |
 | 🔍 Analytics & monitoring | Chainalysis · Elliptic · TRM Labs · Crystal |
 | ✉️ Travel Rule messaging | Notabene · Sygna · VerifyVASP · 21 Analytics |

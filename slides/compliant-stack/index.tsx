@@ -789,8 +789,8 @@ const EcosystemMap: Page = () => (
         marginTop: 48,
       }}
     >
-      <EcoCard emoji="🪪" title="KYC & identity" names="Sumsub · Jumio · Onfido · Persona · Regula" />
-      <EcoCard emoji="📜" title="Onchain attestations" names="EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications · ZKPassport · Onflow" />
+      <EcoCard emoji="🪪" title="KYC & identity" names="Sumsub · Jumio · Onfido · Persona · Regula · ZKPassport · Onflow" />
+      <EcoCard emoji="📜" title="Onchain attestations" names="EAS · Human Passport (ex-Gitcoin) · Coinbase Verifications" />
       <EcoCard emoji="🔐" title="Custody & policy" names="Fireblocks · BitGo · Cobo Argus · Narval" />
       <EcoCard emoji="🔍" title="Analytics & monitoring" names="Chainalysis · Elliptic · TRM Labs · Crystal" />
       <EcoCard emoji="✉️" title="Travel Rule messaging" names="Notabene · Sygna · VerifyVASP · 21 Analytics" />
