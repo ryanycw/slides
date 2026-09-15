@@ -1111,7 +1111,7 @@ const Thanks: Page = () => (
     </div>
     <div style={{ width: 220, height: 10, background: yellow, borderRadius: 999, margin: '52px 0' }} />
     <div style={{ fontSize: 34, fontWeight: 700 }}>
-      @ryanycw · full research notes: hackmd.io/@ryanycw
+      @ryanycw
     </div>
   </div>
 );

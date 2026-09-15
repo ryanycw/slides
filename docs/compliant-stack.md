@@ -239,4 +239,4 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉
-- Footer: @ryanycw · full research notes: hackmd.io/@ryanycw
+- Footer: @ryanycw
