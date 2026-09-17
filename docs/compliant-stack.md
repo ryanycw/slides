@@ -247,8 +247,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 - Eyebrow: `FIELD NOTES · 2`
 - KYC flows hoard **ID documents + selfies** — and they leak, constantly
-- Leaked PII fuels **social engineering**: attackers know exactly who you are
-- Leaked faces feed **AI deepfakes** — social engineering now wears your face
+- Leaks fuel **social engineering**: attackers know you — **AI deepfakes become you**
 - The fix is Layer 1: **zk-credentials & selective disclosure** — prove, don't upload
 
 > Yellow banner: Every stored KYC copy is a future attack surface. 🎭

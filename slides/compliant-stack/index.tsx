@@ -1067,10 +1067,7 @@ const TakeawayPrivacy: Page = () => (
         KYC flows hoard <B>ID documents + selfies</B> — and they leak, constantly
       </Bullet>
       <Bullet>
-        Leaked PII fuels <B>social engineering</B>: attackers know exactly who you are
-      </Bullet>
-      <Bullet>
-        Leaked faces feed <B>AI deepfakes</B> — social engineering now wears your face
+        Leaks fuel <B>social engineering</B>: attackers know you — <B>AI deepfakes become you</B>
       </Bullet>
       <Bullet>
         The fix is Layer 1: <B>zk-credentials & selective disclosure</B> — prove, don't upload
