@@ -227,9 +227,9 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 17 · My Takeaway 1 — Building from Taiwan【question page】
+## Page 17 · Field Notes 1 — Building from Taiwan【question page】
 
-- Eyebrow: `MY TAKEAWAY · 1`
+- Eyebrow: `FIELD NOTES · 1`
 - Most global custody providers **aren't registered in Taiwan**
 - New: **Liminal Taiwan** cleared FSC AML registration — first foreign custodian (list now 10)
 - Playbook: partner via a **branch in a licensed jurisdiction**, integrate the stack there first
@@ -243,9 +243,9 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 18 · My Takeaway 2 — Why privacy matters inside KYC
+## Page 18 · Field Notes 2 — Why privacy matters inside KYC
 
-- Eyebrow: `MY TAKEAWAY · 2`
+- Eyebrow: `FIELD NOTES · 2`
 - KYC flows hoard **ID documents + selfies** — and they leak, constantly
 - Leaked PII fuels **social engineering**: attackers know exactly who you are
 - Leaked faces feed **AI deepfakes** — which then defeat the next KYC check

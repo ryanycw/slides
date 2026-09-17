@@ -1033,7 +1033,7 @@ const TakeawayEyebrow = ({ children }: { children: ReactNode }) => (
 
 const TakeawayTaiwan: Page = () => (
   <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
-    <TakeawayEyebrow>MY TAKEAWAY · 1</TakeawayEyebrow>
+    <TakeawayEyebrow>FIELD NOTES · 1</TakeawayEyebrow>
     <Heading>
       Building from Taiwan, <span style={{ color: yellow }}>where most custodians hold no license</span>
     </Heading>
@@ -1058,7 +1058,7 @@ const TakeawayTaiwan: Page = () => (
 
 const TakeawayPrivacy: Page = () => (
   <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
-    <TakeawayEyebrow>MY TAKEAWAY · 2</TakeawayEyebrow>
+    <TakeawayEyebrow>FIELD NOTES · 2</TakeawayEyebrow>
     <Heading>
       Why privacy matters <span style={{ color: yellow }}>inside KYC</span>
     </Heading>
