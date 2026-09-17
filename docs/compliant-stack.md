@@ -232,8 +232,8 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Eyebrow: `FIELD NOTES · 1`
 - Most global custody providers **aren't registered in Taiwan**
 - New: **Liminal Taiwan** cleared FSC AML registration — first foreign custodian (list now 10)
-- Playbook: partner via a **branch in a licensed jurisdiction**, integrate the stack there first
 - The **VASP Act has landed** — but can you rely on foreign-licensed custodians? Still unclear
+- Playbook: partner via a **branch in a licensed jurisdiction**, integrate the stack there first
 
 > Yellow banner: Integrate abroad today — port it home the day the rules turn clear. 🇹🇼
 

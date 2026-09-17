@@ -1045,10 +1045,10 @@ const TakeawayTaiwan: Page = () => (
         New: <B>Liminal Taiwan</B> cleared FSC AML registration — first foreign custodian (list now 10)
       </Bullet>
       <Bullet>
-        Playbook: partner via a <B>branch in a licensed jurisdiction</B>, integrate the stack there first
+        The <B>VASP Act has landed</B> — but can you rely on foreign-licensed custodians? Still unclear
       </Bullet>
       <Bullet>
-        The <B>VASP Act has landed</B> — but can you rely on foreign-licensed custodians? Still unclear
+        Playbook: partner via a <B>branch in a licensed jurisdiction</B>, integrate the stack there first
       </Bullet>
     </div>
     <Banner>Integrate abroad today — port it home the day the rules turn clear. 🇹🇼</Banner>
