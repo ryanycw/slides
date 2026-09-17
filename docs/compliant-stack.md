@@ -248,11 +248,11 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Eyebrow: `FIELD NOTES · 2`
 - KYC flows hoard **ID documents + selfies** — and they leak, constantly
 - Leaks fuel **social engineering**: attackers know you — **AI deepfakes become you**
-- The fix is the identity layer: **zk-credentials & selective disclosure** — prove, don't upload
+- The fix is the identity layer: **ZKP + PQ Tunnel** — prove, don't upload
 
 > Yellow banner: Every stored KYC copy is a future attack surface. 🎭
 
-**Speaker Notes**：KYC 悖論 — 為了降風險的流程本身變成證件與人臉的蜜罐。洩漏的 PII 餵養精準社交工程，人臉資料再升級它：deepfake 視訊與語音克隆，冒充「你本人」去騙你的家人、同事、銀行 — 詐騙不再假裝是陌生人，而是假裝是你。所以身分層（合規棧的 Layer 1，不是公鏈 L1）的 zk-credentials 不是隱私的奢侈品，是安全的必需品。
+**Speaker Notes**：KYC 悖論 — 為了降風險的流程本身變成證件與人臉的蜜罐。洩漏的 PII 餵養精準社交工程，人臉資料再升級它：deepfake 視訊與語音克隆，冒充「你本人」去騙你的家人、同事、銀行 — 詐騙不再假裝是陌生人，而是假裝是你。所以身分層的解方 — ZKP（證明屬性、不上傳證件）＋ PQ Tunnel（後量子加密通道保護傳輸）— 不是隱私的奢侈品，是安全的必需品。（此處 Layer 1 指合規棧身分層，不是公鏈 L1）
 
 > Refs: [隱私與 KYC 投影片（Google Slides）](https://docs.google.com/presentation/d/1avT74zT1lzI-GiflVZBBJwZUeu5JqEBB8tZ0Q2zrKkw/edit)
 
