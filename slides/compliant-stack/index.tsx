@@ -1048,10 +1048,10 @@ const TakeawayTaiwan: Page = () => (
         Playbook: partner via a <B>branch in a licensed jurisdiction</B>, integrate the stack there first
       </Bullet>
       <Bullet>
-        When Taiwan's <B>VASP Act licensing</B> lands, port the proven architecture home
+        The <B>VASP Act has landed</B> — but can you rely on foreign-licensed custodians? Still unclear
       </Bullet>
     </div>
-    <Banner>Integrate abroad today — port it home the day the license clears. 🇹🇼</Banner>
+    <Banner>Integrate abroad today — port it home the day the rules turn clear. 🇹🇼</Banner>
     <PageRefs>fsc.gov.tw · abmedia.io (VASP registry) · liminalcustody.com</PageRefs>
   </div>
 );
@@ -1192,7 +1192,7 @@ export const notes: (string | undefined)[] = [
   'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 14 Case pipeline
   'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 15 Neutrality
   'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 16 Checklist
-  'Verified Sept 2026: FSC AML-registered VASPs went from 8 to 10 — TSG EX and Liminal Taiwan (優答台灣, NT$60.5M capital) cleared together; Liminal is the first foreign custody provider on the list and plans to apply for the full license once the VASP Act takes effect. The branch playbook keeps Taiwanese teams shippable while the local regime matures.', // 17 Takeaway Taiwan
+  'Verified Sept 2026: FSC AML-registered VASPs went from 8 to 10 — TSG EX and Liminal Taiwan (優答台灣, NT$60.5M capital) cleared together; Liminal is the first foreign custody provider on the list and plans to apply for the full license under the VASP Act. The Act itself has passed — the open question is whether integrating a custodian licensed only abroad satisfies Taiwanese requirements; no guidance yet. The branch playbook keeps Taiwanese teams shippable while that ambiguity resolves.', // 17 Takeaway Taiwan
   'The KYC paradox: the process that is supposed to reduce risk creates a honeypot of IDs and faces. Once leaked, PII powers targeted social engineering, and face data trains deepfakes good enough to pass liveness checks — the leak defeats the control. This is why Layer 1 zk-credentials are not a privacy luxury but a security requirement.', // 18 Takeaway Privacy
   undefined, // 19 Takeaways
   undefined, // 20 Thanks

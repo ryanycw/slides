@@ -233,11 +233,11 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Most global custody providers **aren't registered in Taiwan**
 - New: **Liminal Taiwan** cleared FSC AML registration — first foreign custodian (list now 10)
 - Playbook: partner via a **branch in a licensed jurisdiction**, integrate the stack there first
-- When Taiwan's **VASP Act licensing** lands, port the proven architecture home
+- The **VASP Act has landed** — but can you rely on foreign-licensed custodians? Still unclear
 
-> Yellow banner: Integrate abroad today — port it home the day the license clears. 🇹🇼
+> Yellow banner: Integrate abroad today — port it home the day the rules turn clear. 🇹🇼
 
-**Speaker Notes**（查證 2026/9）：金管會洗防登記名單 8 → 10 家，台鋼 TSG EX 與 Liminal 台灣子公司優答台灣（實收資本額 NT$60.5M）同批通過；Liminal 是名單上首家外資託管商，計畫在虛擬資產服務法生效後申請正式牌照。分公司打法讓台灣團隊先出貨，等本地法規成熟再搬回來。
+**Speaker Notes**（查證 2026/9）：金管會洗防登記名單 8 → 10 家，台鋼 TSG EX 與 Liminal 台灣子公司優答台灣（實收資本額 NT$60.5M）同批通過；Liminal 是名單上首家外資託管商，計畫依虛擬資產服務法申請正式牌照。專法已三讀通過 — 懸而未決的是：整合「只在海外持牌」的託管商是否符合台灣要求？目前沒有明確指引。分公司打法讓台灣團隊先出貨，等這個模糊地帶釐清再搬回來。
 
 > Refs: [自由財經：Liminal 完成洗防登記](https://ec.ltn.com.tw/article/breakingnews/5562331) · [鏈新聞：VASP 增為 10 家](https://abmedia.io/taiwan-vasp-registry-10-tsgex-liminal) · [工商時報](https://www.ctee.com.tw/news/20260903702231-430301)
 
