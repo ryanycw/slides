@@ -248,12 +248,12 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 - Eyebrow: `FIELD NOTES · 2`
 - KYC flows hoard **ID documents + selfies** — and they leak, constantly
 - Leaked PII fuels **social engineering**: attackers know exactly who you are
-- Leaked faces feed **AI deepfakes** — which then defeat the next KYC check
+- Leaked faces feed **AI deepfakes** — social engineering now wears your face
 - The fix is Layer 1: **zk-credentials & selective disclosure** — prove, don't upload
 
 > Yellow banner: Every stored KYC copy is a future attack surface. 🎭
 
-**Speaker Notes**：KYC 悖論 — 為了降風險的流程本身變成證件與人臉的蜜罐；洩漏的 PII 餵養精準社交工程，人臉資料訓練出足以騙過活體檢測的 deepfake — 外洩反過來擊敗了管控本身。所以 Layer 1 的 zk-credentials 不是隱私的奢侈品，是安全的必需品。
+**Speaker Notes**：KYC 悖論 — 為了降風險的流程本身變成證件與人臉的蜜罐。洩漏的 PII 餵養精準社交工程，人臉資料再升級它：deepfake 視訊與語音克隆，冒充「你本人」去騙你的家人、同事、銀行 — 詐騙不再假裝是陌生人，而是假裝是你。所以 Layer 1 的 zk-credentials 不是隱私的奢侈品，是安全的必需品。
 
 > Refs: [隱私與 KYC 投影片（Google Slides）](https://docs.google.com/presentation/d/1avT74zT1lzI-GiflVZBBJwZUeu5JqEBB8tZ0Q2zrKkw/edit)
 
