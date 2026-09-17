@@ -1023,7 +1023,65 @@ const FutureProofing: Page = () => (
   </div>
 );
 
-/* ------------------------------------------------ 14 · Takeaways */
+/* ------------------------------------------------ 17-18 · My takeaways */
+
+const TakeawayEyebrow = ({ children }: { children: ReactNode }) => (
+  <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: 5, color: muted, marginBottom: 28 }}>
+    {children}
+  </div>
+);
+
+const TakeawayTaiwan: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <TakeawayEyebrow>MY TAKEAWAY · 1</TakeawayEyebrow>
+    <Heading>
+      Building from Taiwan, <span style={{ color: yellow }}>where most custodians hold no license</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 52 }}>
+      <Bullet>
+        Most global custody providers <B>aren't registered in Taiwan</B>
+      </Bullet>
+      <Bullet>
+        New: <B>Liminal Taiwan</B> cleared FSC AML registration — first foreign custodian (list now 10)
+      </Bullet>
+      <Bullet>
+        Playbook: partner via a <B>branch in a licensed jurisdiction</B>, integrate the stack there first
+      </Bullet>
+      <Bullet>
+        When Taiwan's <B>VASP Act licensing</B> lands, port the proven architecture home
+      </Bullet>
+    </div>
+    <Banner>Integrate abroad today — port it home the day the license clears. 🇹🇼</Banner>
+    <PageRefs>fsc.gov.tw · abmedia.io (VASP registry) · liminalcustody.com</PageRefs>
+  </div>
+);
+
+const TakeawayPrivacy: Page = () => (
+  <div style={{ ...fill, background: 'var(--osd-bg)', color: 'var(--osd-text)', padding: '100px 120px' }}>
+    <TakeawayEyebrow>MY TAKEAWAY · 2</TakeawayEyebrow>
+    <Heading>
+      Why privacy matters <span style={{ color: yellow }}>inside KYC</span>
+    </Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 34, marginTop: 52 }}>
+      <Bullet>
+        KYC flows hoard <B>ID documents + selfies</B> — and they leak, constantly
+      </Bullet>
+      <Bullet>
+        Leaked PII fuels <B>social engineering</B>: attackers know exactly who you are
+      </Bullet>
+      <Bullet>
+        Leaked faces feed <B>AI deepfakes</B> — which then defeat the next KYC check
+      </Bullet>
+      <Bullet>
+        The fix is Layer 1: <B>zk-credentials & selective disclosure</B> — prove, don't upload
+      </Bullet>
+    </div>
+    <Banner>Every stored KYC copy is a future attack surface. 🎭</Banner>
+    <PageRefs>see: 隱私與 KYC slides (docs.google.com)</PageRefs>
+  </div>
+);
+
+/* ------------------------------------------------ Takeaways */
 
 const Takeaway = ({ num, children }: { num: string; children: ReactNode }) => (
   <div style={{ display: 'flex', alignItems: 'flex-start', gap: 32 }}>
@@ -1134,8 +1192,10 @@ export const notes: (string | undefined)[] = [
   'Walk the snake: steps 3 and 4 (screening + manual review) dominate latency — MPC signing is milliseconds-to-seconds. The bottleneck is process, not cryptography.', // 14 Case pipeline
   'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 15 Neutrality
   'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 16 Checklist
-  undefined, // 17 Takeaways
-  undefined, // 18 Thanks
+  'Verified Sept 2026: FSC AML-registered VASPs went from 8 to 10 — TSG EX and Liminal Taiwan (優答台灣, NT$60.5M capital) cleared together; Liminal is the first foreign custody provider on the list and plans to apply for the full license once the VASP Act takes effect. The branch playbook keeps Taiwanese teams shippable while the local regime matures.', // 17 Takeaway Taiwan
+  'The KYC paradox: the process that is supposed to reduce risk creates a honeypot of IDs and faces. Once leaked, PII powers targeted social engineering, and face data trains deepfakes good enough to pass liveness checks — the leak defeats the control. This is why Layer 1 zk-credentials are not a privacy luxury but a security requirement.', // 18 Takeaway Privacy
+  undefined, // 19 Takeaways
+  undefined, // 20 Thanks
 ];
 
 export const meta: SlideMeta = {
@@ -1160,6 +1220,8 @@ export default [
   CasePipeline,
   Neutrality,
   FutureProofing,
+  TakeawayTaiwan,
+  TakeawayPrivacy,
   Takeaways,
   Thanks,
 ] satisfies Page[];

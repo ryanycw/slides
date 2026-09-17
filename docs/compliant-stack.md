@@ -1,6 +1,6 @@
 # Bridging Regulation & Decentralization — content draft
 
-> Maps 1:1 to `slides/compliant-stack/index.tsx` (18 pages, ~15-minute talk, English).
+> Maps 1:1 to `slides/compliant-stack/index.tsx` (20 pages, ~15-minute talk, English).
 > Edit the text here, then ask Claude to sync it back to the slide.
 > Style: formal variant of the house design — deep navy `#0d1b2e` ground, single yellow `#ffcd01` accent, blue `#4190de` as secondary. Refs render bottom-left on slides.
 
@@ -227,7 +227,39 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 17 · Three things to take home 🎒
+## Page 17 · My Takeaway 1 — Building from Taiwan【question page】
+
+- Eyebrow: `MY TAKEAWAY · 1`
+- Most global custody providers **aren't registered in Taiwan**
+- New: **Liminal Taiwan** cleared FSC AML registration — first foreign custodian (list now 10)
+- Playbook: partner via a **branch in a licensed jurisdiction**, integrate the stack there first
+- When Taiwan's **VASP Act licensing** lands, port the proven architecture home
+
+> Yellow banner: Integrate abroad today — port it home the day the license clears. 🇹🇼
+
+**Speaker Notes**（查證 2026/9）：金管會洗防登記名單 8 → 10 家，台鋼 TSG EX 與 Liminal 台灣子公司優答台灣（實收資本額 NT$60.5M）同批通過；Liminal 是名單上首家外資託管商，計畫在虛擬資產服務法生效後申請正式牌照。分公司打法讓台灣團隊先出貨，等本地法規成熟再搬回來。
+
+> Refs: [自由財經：Liminal 完成洗防登記](https://ec.ltn.com.tw/article/breakingnews/5562331) · [鏈新聞：VASP 增為 10 家](https://abmedia.io/taiwan-vasp-registry-10-tsgex-liminal) · [工商時報](https://www.ctee.com.tw/news/20260903702231-430301)
+
+---
+
+## Page 18 · My Takeaway 2 — Why privacy matters inside KYC
+
+- Eyebrow: `MY TAKEAWAY · 2`
+- KYC flows hoard **ID documents + selfies** — and they leak, constantly
+- Leaked PII fuels **social engineering**: attackers know exactly who you are
+- Leaked faces feed **AI deepfakes** — which then defeat the next KYC check
+- The fix is Layer 1: **zk-credentials & selective disclosure** — prove, don't upload
+
+> Yellow banner: Every stored KYC copy is a future attack surface. 🎭
+
+**Speaker Notes**：KYC 悖論 — 為了降風險的流程本身變成證件與人臉的蜜罐；洩漏的 PII 餵養精準社交工程，人臉資料訓練出足以騙過活體檢測的 deepfake — 外洩反過來擊敗了管控本身。所以 Layer 1 的 zk-credentials 不是隱私的奢侈品，是安全的必需品。
+
+> Refs: [隱私與 KYC 投影片（Google Slides）](https://docs.google.com/presentation/d/1avT74zT1lzI-GiflVZBBJwZUeu5JqEBB8tZ0Q2zrKkw/edit)
+
+---
+
+## Page 19 · Three things to take home 🎒
 
 1. TradFi capital arrives through compliant gateways — someone has to build them
 2. The stack: identity → custody → policy → AML → travel rule → frontend
@@ -235,7 +267,7 @@ Speaker note: framing — not about killing DeFi with paperwork; about plumbing 
 
 ---
 
-## Page 18 · Thanks【navy】
+## Page 20 · Thanks【navy】
 
 - Eyebrow: `THANK YOU`
 - Title: Let's build the bridge 🌉
