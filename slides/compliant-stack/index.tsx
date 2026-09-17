@@ -1070,7 +1070,7 @@ const TakeawayPrivacy: Page = () => (
         Leaks fuel <B>social engineering</B>: attackers know you — <B>AI deepfakes become you</B>
       </Bullet>
       <Bullet>
-        The fix is Layer 1: <B>zk-credentials & selective disclosure</B> — prove, don't upload
+        The fix is the identity layer: <B>zk-credentials & selective disclosure</B> — prove, don't upload
       </Bullet>
     </div>
     <Banner>Every stored KYC copy is a future attack surface. 🎭</Banner>
@@ -1190,7 +1190,7 @@ export const notes: (string | undefined)[] = [
   'Vitalik-style argument: neutrality is the product. If the core takes sides, TradFi has no reason to prefer it over their existing databases.', // 15 Neutrality
   'Each check maps to a failure mode seen in the wild: hardcoded compliance (Tornado-style collateral damage), closed alliances, un-exportable audit data.', // 16 Checklist
   'Verified Sept 2026: FSC AML-registered VASPs went from 8 to 10 — TSG EX and Liminal Taiwan (優答台灣, NT$60.5M capital) cleared together; Liminal is the first foreign custody provider on the list and plans to apply for the full license under the VASP Act. The Act itself has passed — the open question is whether integrating a custodian licensed only abroad satisfies Taiwanese requirements; no guidance yet. The branch playbook keeps Taiwanese teams shippable while that ambiguity resolves.', // 17 Takeaway Taiwan
-  'The KYC paradox: the process that is supposed to reduce risk creates a honeypot of IDs and faces. Once leaked, PII powers targeted social engineering — and face data takes it further: deepfaked video calls and voice clones that impersonate you to your family, your colleagues, your bank. The scam no longer pretends to be a stranger; it pretends to be you. This is why Layer 1 zk-credentials are not a privacy luxury but a security requirement.', // 18 Takeaway Privacy
+  'The KYC paradox: the process that is supposed to reduce risk creates a honeypot of IDs and faces. Once leaked, PII powers targeted social engineering — and face data takes it further: deepfaked video calls and voice clones that impersonate you to your family, your colleagues, your bank. The scam no longer pretends to be a stranger; it pretends to be you. This is why zk-credentials at the identity layer (stack Layer 1, not blockchain L1) are not a privacy luxury but a security requirement.', // 18 Takeaway Privacy
   undefined, // 19 Takeaways
   undefined, // 20 Thanks
 ];
