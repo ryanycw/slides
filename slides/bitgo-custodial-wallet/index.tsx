@@ -13,21 +13,21 @@ const sdk = 'https://github.com/BitGo/BitGoJS/blob/master/modules/sdk-core/src/b
 const types = 'https://developers.bitgo.com/docs/wallet-types';
 const C = ({ children }: { children: ReactNode }) => <code style={{ fontFamily: mono, fontSize: 28 }}>{children}</code>;
 const Frame = ({ title, subtitle, children, source = sdk }: { title: string; subtitle: string; children: ReactNode; source?: string }) => (
-  <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: 100, background: 'var(--osd-bg)', color: 'var(--osd-text)', fontFamily: 'var(--osd-font-body)', position: 'relative' }}>
+  <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '100px 100px 70px', display: 'flex', flexDirection: 'column', background: 'var(--osd-bg)', color: 'var(--osd-text)', fontFamily: 'var(--osd-font-body)', position: 'relative' }}>
     <div style={{ fontSize: 23, letterSpacing: 3, color: 'var(--osd-accent)', fontWeight: 700, marginBottom: 16 }}>BITGO · GENERATEWALLET · SDK PARAMETERS</div>
     <h1 style={{ fontSize: 'var(--osd-size-hero)', fontFamily: 'var(--osd-font-display)', lineHeight: 1.15, margin: 0, letterSpacing: -1.5 }}>{title}</h1>
-    <p style={{ fontSize: 30, lineHeight: 1.4, color: muted, margin: '18px 0 36px' }}>{subtitle}</p>
-    <section style={{ fontSize: 'var(--osd-size-body)', lineHeight: 1.5 }}>{children}</section>
-    <footer style={{ position: 'absolute', bottom: 70, left: 100, right: 100, borderTop: '1px solid #cbd8e2', paddingTop: 15, fontSize: 22, color: muted }}>Scope: installed @bitgo/sdk-core 38.17.0 · Asset support and enterprise permissions apply · <a href={source} style={{ color: 'var(--osd-accent)' }}>Source</a></footer>
+    <p style={{ fontSize: 30, lineHeight: 1.4, color: muted, margin: '18px 0 24px' }}>{subtitle}</p>
+    <section style={{ fontSize: 'var(--osd-size-body)', lineHeight: 1.5, flexShrink: 0, paddingBottom: 24 }}>{children}</section>
+    <footer style={{ marginTop: 'auto', flexShrink: 0, borderTop: '1px solid #cbd8e2', paddingTop: 15, fontSize: 22, color: muted }}>Scope: installed @bitgo/sdk-core 38.17.0 · Asset support and enterprise permissions apply · <a href={source} style={{ color: 'var(--osd-accent)' }}>Source</a></footer>
   </main>
 );
-const td: CSSProperties = { padding: '17px 20px 17px 0', borderBottom: '1px solid #cbd8e2', verticalAlign: 'top', fontSize: 30, lineHeight: 1.45 };
+const td: CSSProperties = { padding: '12px 20px 12px 0', borderBottom: '1px solid #cbd8e2', verticalAlign: 'top', fontSize: 30, lineHeight: 1.45 };
 const R = ({ a, b, c }: { a: ReactNode; b: ReactNode; c: ReactNode }) => <tr><th scope="row" style={{ ...td, textAlign: 'left', fontWeight: 700 }}>{a}</th><td style={td}>{b}</td><td style={td}>{c}</td></tr>;
 const Table = ({ first, second, third, children, widths = [390, 450] }: { first: string; second: string; third: string; children: ReactNode; widths?: number[] }) => (
   <table style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}><colgroup><col style={{ width: widths[0] }} /><col style={{ width: widths[1] }} /><col /></colgroup><thead><tr style={{ fontSize: 23, color: muted, textAlign: 'left', letterSpacing: 1 }}><th style={{ paddingBottom: 12 }}>{first}</th><th>{second}</th><th>{third}</th></tr></thead><tbody>{children}</tbody></table>
 );
-const Note = ({ children }: { children: ReactNode }) => <p style={{ fontSize: 28, lineHeight: 1.5, borderLeft: '4px solid var(--osd-accent)', paddingLeft: 24, margin: '28px 0 0' }}>{children}</p>;
-const Block = ({ title, children }: { title: string; children: ReactNode }) => <div style={{ marginBottom: 30 }}><h2 style={{ fontSize: 34, color: 'var(--osd-accent)', margin: '0 0 10px' }}>{title}</h2><div style={{ fontSize: 32, lineHeight: 1.5 }}>{children}</div></div>;
+const Note = ({ children }: { children: ReactNode }) => <p style={{ fontSize: 28, lineHeight: 1.5, borderLeft: '4px solid var(--osd-accent)', paddingLeft: 24, margin: '20px 0 0' }}>{children}</p>;
+const Block = ({ title, children }: { title: string; children: ReactNode }) => <div style={{ marginBottom: 24 }}><h2 style={{ fontSize: 34, lineHeight: 1.2, color: 'var(--osd-accent)', margin: '0 0 10px' }}>{title}</h2><div style={{ fontSize: 32, lineHeight: 1.5 }}>{children}</div></div>;
 
 const WalletMap: Page = () => (
   <Frame title="Parameters → wallet type" subtitle="coin selects asset capabilities; type selects custody/storage; multisigType selects the signing scheme.">
@@ -94,13 +94,13 @@ const ColdPrerequisites: Page = () => (
 const KeyDependencies: Page = () => (
   <Frame title="Key inputs, recovery and exclusive options" subtitle="Most key-import options below belong to the standard on-chain multisignature path.">
     <Table first="INPUT / CONDITION" second="BEHAVIOR" third="DEPENDENCY" widths={[440, 540]}>
-      <R a={<C>userKey</C>} b="Imports the user public key" c="Otherwise local user-key generation needs passphrase." />
-      <R a={<C>backupXpub</C>} b="Imports the backup public key" c="Alternative: supported backupXpubProvider; never both." />
-      <R a="No supplied backup key/provider" b="Generates the backup key locally" c="Requires passphrase." />
+      <R a={<C>userKey</C>} b="Imports the user public key" c="Otherwise: passphrase required." />
+      <R a={<C>backupXpub</C>} b="Imports the backup public key" c="Or backupXpubProvider; never both." />
+      <R a="Generate backup key" b="No supplied backup key/provider" c="Requires passphrase." />
       <R a={<C>passcodeEncryptionCode</C>} b="Optional hot-wallet recovery" c="With passphrase, produces encryptedWalletPassphrase." />
-      <R a={<><C>gasPrice</C> / <C>eip1559</C></>} b="Applicable fee overrides" c="Choose one, not both; not forwarded by the standard TSS branch." />
+      <R a={<><C>gasPrice</C> / <C>eip1559</C></>} b="Applicable fee overrides" c="Choose one; unused by standard TSS generation." />
     </Table>
-    <Note><C>type: 'cold'</C> alone does not keep keys offline. Supply correctly prepared public keys instead of generating private keys in the online process.</Note>
+    <Note><C>type: 'cold'</C> alone does not keep keys offline. Supply offline-generated public keys.</Note>
   </Frame>
 );
 
