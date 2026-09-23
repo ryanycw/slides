@@ -241,7 +241,7 @@ const Heard: Page = () => (
         <div><B>+</B> · Fully legal and compliant in the US</div>
       </Card>
     </Grid>
-    <Note>Goals 1 and 2 usually pull against each other. The rest of this proposal is about getting both.</Note>
+    <Note>Safe storage and fast deployment rarely come together today. Here is where that tension shows up.</Note>
   </Frame>
 );
 
