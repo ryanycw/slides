@@ -222,7 +222,7 @@ const Agenda: Page = () => (
       <AgendaItem n="02" title="Success Criteria" detail="How to judge any setup, ours included" pages="P. 5" />
       <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets, one control plane" pages="P. 6" />
       <AgendaItem n="04" title="Fast and safe, in practice" detail="How capital moves, and who can move it" pages="P. 7–9" />
-      <AgendaItem n="05" title="Outcome and next steps" detail="What changes for you, and how we get there" pages="P. 10–11" />
+      <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and how we get there" pages="P. 10–11" />
     </div>
   </Frame>
 );
@@ -272,7 +272,7 @@ const Problem: Page = () => (
 );
 
 const Criteria: Page = () => (
-  <Frame title="So the right setup has to do four things" subtitle="These are the tests we set ourselves. Every choice that follows answers one of them." caption="Each test maps to a goal you gave us">
+  <Frame title="Four tests for the right setup" subtitle="These are the tests we set ourselves. Every choice that follows answers one of them." caption="Each test maps to a goal you gave us">
     <Grid cols={2}>
       <Card tag="Goal 1 · insured and safe" title="1 · Reserve insured by default">
         <div>Long-term assets with a qualified custodian</div>
@@ -323,7 +323,7 @@ const Who = ({ name, detail }: { name: string; detail: string }) => {
 };
 
 const Rbac: Page = () => (
-  <Frame tone="dark" title="No one person can move your money" subtitle="Roles are set per wallet. No one both initiates and approves, and traders never withdraw." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame tone="dark" title="No single person can move funds" subtitle="Roles are set per wallet. No one both initiates and approves, and traders never withdraw." source={walletUsers} sourceLabel="BitGo wallet users and roles">
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
       <Row cells={[<Who name="COO · CFO · CIO" detail="Enterprise Admins" />, 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
       <Row cells={[<Who name="Treasury operations" detail="2–3 people" />, 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
@@ -358,7 +358,7 @@ const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; ti
 );
 
 const Scorecard: Page = () => (
-  <Frame tone="dark" title="What changes for your fund" subtitle="Back to the four tests: where a typical setup stands, and where this design puts you." caption="Typical today reflects common patterns, not your current setup" illustrative>
+  <Frame tone="dark" title="What changes, test by test" subtitle="Back to the four tests: where a typical setup stands, and where this design lands." caption="Typical today reflects common patterns, not your current setup" illustrative>
     <Grid cols={2}>
       <Panel tag="Typical today" title="A multi-venue setup">
         <CheckRow ok={false}>Reserve spread across venues and wallets</CheckRow>
