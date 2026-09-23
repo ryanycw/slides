@@ -228,10 +228,10 @@ const Heard: Page = () => (
   <Frame title="Safety, speed and control, all at once">
     <Grid cols={2}>
       <Card tag="Where you are today" title="A $300M book, spread out">
-        <div>BTC, ETH and stablecoins</div>
-        <div>Held across several exchanges and wallets</div>
-        <div>Based in New York</div>
-        <div>Moving to custody plus self-custody wallets</div>
+        <div><B>•</B> BTC, ETH and stablecoins</div>
+        <div><B>•</B> Held across several exchanges and wallets</div>
+        <div><B>•</B> Based in New York</div>
+        <div><B>•</B> Moving to custody plus self-custody wallets</div>
       </Card>
       <Card tag="What you want" title="Three goals, plus two must-haves">
         <div><B>1</B> · Long-term assets insured and safe</div>
