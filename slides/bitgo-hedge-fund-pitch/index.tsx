@@ -26,7 +26,7 @@ export const design: DesignSystem = {
 };
 const navy = '#060a1f';
 const cyan = '#3fd0f5';
-const whiteSoft = 'rgba(255,255,255,0.55)';
+const skyBlue = '#7cc4ff';
 const blueSoft = '#e8eeff';
 const muted = '#5b6480';
 const mutedDark = '#a9b3d6';
@@ -52,7 +52,7 @@ const useTone = () => {
     dark,
     text: dark ? '#ffffff' : 'var(--osd-text)',
     sub: dark ? mutedDark : muted,
-    hi: dark ? cyan : 'var(--osd-accent)',
+    hi: dark ? skyBlue : 'var(--osd-accent)',
     line: dark ? ruleDark : rule,
   };
 };
@@ -179,7 +179,7 @@ const CheckRow = ({ ok, children }: { ok: boolean; children: ReactNode }) => (
 const Spectrum = () => (
   <div style={{ marginBottom: 36 }}>
     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 24, fontWeight: 500, marginBottom: 12 }}>
-      <span style={{ color: cyan }}>← Safer, slower to move</span>
+      <span style={{ color: skyBlue }}>← Safer, slower to move</span>
       <span style={{ color: '#ffffff' }}>Faster, more exposed →</span>
     </div>
     <div style={{ height: 8, borderRadius: 4, background: `linear-gradient(90deg, ${cyan}, #2446ff)` }} />
@@ -198,7 +198,7 @@ const Cover: Page = () => (
       <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
         <h1 style={{ fontSize: 124, fontWeight: 300, lineHeight: 1.08, margin: '0 0 40px', letterSpacing: -4, fontFamily: 'var(--osd-font-display)' }}>
           Protect the reserve.<br />
-          <span style={{ color: whiteSoft }}>Move at market speed.</span>
+          <span style={{ color: skyBlue }}>Move at market speed.</span>
         </h1>
         <p style={{ fontSize: 36, lineHeight: 1.45, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for your $300M digital-asset fund.</p>
       </div>
@@ -352,7 +352,7 @@ const Withdrawal: Page = () => (
 
 const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; title: string; children: ReactNode }) => (
   <div style={{ ...(blue ? { background: bgBlue, border: '1px solid rgba(255,255,255,0.25)' } : glass), borderRadius: 'var(--osd-radius)', padding: '32px 36px 36px' }}>
-    <Pill color={blue ? '#ffffff' : cyan}>{tag}</Pill>
+    <Pill color={blue ? '#ffffff' : skyBlue}>{tag}</Pill>
     <h2 style={{ fontSize: 34, fontWeight: 400, margin: '18px 0 6px' }}>{title}</h2>
     {children}
   </div>

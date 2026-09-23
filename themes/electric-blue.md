@@ -19,8 +19,8 @@ It is modelled on the Sinesubs visual identity: electric-blue gradients over nav
 | accent      | `#2446ff`                  | electric blue: eyebrows, pills, key numbers (`design.palette.accent`) |
 | muted       | `#5b6480`                  | subtitles, footers, table heads on light pages           |
 | navy        | `#060a1f`                  | dark page base                                           |
-| cyan        | `#3fd0f5`                  | accent on dark pages (eyebrow, pills, `B`, block titles) |
-| whiteSoft   | `rgba(255,255,255,0.55)`   | second headline line on the gradient cover (no extra blue) |
+| cyan        | `#3fd0f5`                  | **gradient glow only** (cover glow, accent bar, spectrum bar); never text |
+| skyBlue     | `#7cc4ff`                  | the one light-blue text accent on dark and gradient pages: eyebrow, pills, `B`, block titles, cover headline line 2 (from the reference "6M+" stat) |
 | mutedDark   | `#a9b3d6`                  | secondary copy on dark pages                             |
 | blueSoft    | `#e8eeff`                  | card fill on light pages                                 |
 | rule        | `#d9deeb`                  | hairlines on light pages                                 |
@@ -65,7 +65,7 @@ const accentBar = 'linear-gradient(180deg, #2446ff, #3fd0f5)';
 - `Frame` structure: `Eyebrow` → `Title` → subtitle (margin `18px 0 32px`) → content section → `Footer` pinned to the bottom with `marginTop: auto`.
 - **Three tones.**
   - `light`: `bgLight`, dark text, blue accent.
-  - `dark`: `bgDark`, white text, cyan accent.
+  - `dark`: `bgDark`, white text, sky-blue accent.
   - `gradient`: `bgBlue`, white text. Use it only for the cover, dividers and one highlighted panel per page.
 - Primitives read the tone from a React context, so the same markup works in both `light` and `dark`.
 - Page rhythm: start with a gradient cover, keep light pages as the default, and switch to a dark page at each turn of the story (problem, controls, close). Avoid three dark pages in a row. Put diagrams on light pages.
@@ -87,7 +87,7 @@ const useTone = () => {
     dark,
     text: dark ? '#ffffff' : 'var(--osd-text)',
     sub: dark ? mutedDark : muted,
-    hi: dark ? cyan : 'var(--osd-accent)',
+    hi: dark ? skyBlue : 'var(--osd-accent)',
     line: dark ? ruleDark : rule,
   };
 };
@@ -271,6 +271,7 @@ Calm, precise, premium fintech. Think of the Sinesubs identity: a saturated elec
 
 Avoid:
 - warm accent colours (red appears only in the ✕ mark);
+- a second light-blue text colour: sky blue is the only light-blue text accent, and cyan appears only inside gradients;
 - heavy weights (600 or more);
 - all-caps tracked labels;
 - solid-coloured boxes with borders on light pages (use `blueSoft` fills instead);
@@ -291,7 +292,7 @@ const Cover: Page = () => (
       <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
         <h1 style={{ fontSize: 124, fontWeight: 300, lineHeight: 1.08, margin: '0 0 40px', letterSpacing: -4 }}>
           Protect the reserve.<br />
-          <span style={{ color: whiteSoft }}>Move at market speed.</span>
+          <span style={{ color: skyBlue }}>Move at market speed.</span>
         </h1>
         <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for your fund.</p>
       </div>
