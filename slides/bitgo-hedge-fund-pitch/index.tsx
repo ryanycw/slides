@@ -343,7 +343,7 @@ const Rbac: Page = () => (
       <Row cells={[<Who name="Compliance officer" detail="and auditor" />, 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
       <Row cells={[<Who name="Fund administrator" detail="NAV" />, 'Viewer', 'Viewer', 'Viewer']} />
     </Table>
-    <Note>Three Admins, never one: any two can approve, so holidays and time zones do not stall the fund.</Note>
+    <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
 );
 
@@ -385,7 +385,7 @@ const Scorecard: Page = () => (
         <CheckRow ok>~5% in hot wallets, capped daily</CheckRow>
       </Panel>
     </Grid>
-    <Note>Why BitGo: a qualified custodian with SOC audits, $250M insurance and KYT on every deposit.</Note>
+    <Takeaway lead="Why BitGo: a US-regulated qualified custodian." sub="SOC audits, $250M insurance and KYT screening on every deposit." />
   </Frame>
 );
 
