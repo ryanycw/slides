@@ -304,15 +304,27 @@ const Criteria: Page = () => (
   </Frame>
 );
 
+// One P3 need and how the design meets it: tick, need, one-line answer.
+const Need = ({ title, children }: { title: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', gap: 18, marginBottom: 22 }}>
+    <span style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 8, display: 'grid', placeItems: 'center', fontSize: 20, fontWeight: 500, background: 'var(--osd-accent)', color: '#ffffff', marginTop: 2 }}>✓</span>
+    <div>
+      <div style={{ fontSize: 30, fontWeight: 500, lineHeight: 1.2, color: 'var(--osd-accent)' }}>{title}</div>
+      <div style={{ fontSize: 26, lineHeight: 1.4, marginTop: 4 }}>{children}</div>
+    </div>
+  </div>
+);
+
 const Answer: Page = () => (
-  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job with the wallet type that fits it. One set of roles governs all six.">
+  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover every need we heard.">
     <Split>
-      <Diagram src={architectureImg} alt="Six wallets in three tiers, drawn with Archify" width={1080} height={629} />
+      <Diagram src={architectureImg} alt="Six wallets in three tiers, drawn with Archify" width={1000} height={582} />
       <div>
-        <Block title="Reserve · ~85% · 3 wallets">BitGo custody cold: BTC, ETH, stables</Block>
-        <Block title="Trade · ~10% · 1 wallet">Go Account on the Go Network</Block>
-        <Block title="Operate · ~5% · 2 wallets">Self-custody hot: BTC, ETH + ERC-20</Block>
-        <Block title="Over all six">One set of roles and policies</Block>
+        <Need title="Insured and safe">~85% in insured cold custody · 3 vaults</Need>
+        <Need title="Fast to venues">~10% Go Account trades while in custody</Need>
+        <Need title="Role-based control">Per-wallet roles; initiate and approve split</Need>
+        <Need title="On-demand liquidity">Go Network, Prime trading and lending</Need>
+        <Need title="US legal and compliant">OCC-chartered qualified custodian</Need>
       </div>
     </Split>
   </Frame>
@@ -608,7 +620,7 @@ export const notes: (string | undefined)[] = [
   'Play back what they told us before pitching anything. Say it out loud: ask them to correct anything that is off. The design depends on these goals, so get a yes or a correction here.', // 3 What we heard
   'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
   'These four tests are the contract for the rest of the talk. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 5 Criteria
-  'One sentence per tier: the reserve is insured and slow on purpose, the Go Account is where trading happens, hot wallets are small and fast. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 6 Answer
+  'Walk the diagram in one sentence per tier (reserve insured and slow on purpose, Go Account for trading, ~5% hot wallets for speed), then read down the right: each tick answers one need from page 3. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 6 Answer
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
   'Read one row across, e.g. treasury ops can start a transfer but never approve it. Stress three Admins so that any two can approve and no one is a bottleneck or a single point of failure.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
