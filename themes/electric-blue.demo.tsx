@@ -64,11 +64,11 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
 
 type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle: string; children: ReactNode };
 
-const Frame = ({ tone = 'light', eyebrow = 'Proposal for your fund', title, subtitle, children, source, sourceLabel, caption, illustrative }: FrameProps) => (
+const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, caption, illustrative }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       <Font />
-      <Eyebrow>{eyebrow}</Eyebrow>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p>
       <section style={{ flexShrink: 0 }}>{children}</section>
