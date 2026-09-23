@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import type { DesignSystem, Page, SlideMeta } from '@open-slide/core';
 import { useSlidePageNumber } from '@open-slide/core';
 import architectureImg from './assets/wallet-architecture.png';
+import architectureBImg from './assets/wallet-architecture-option-b.png';
 import capitalFlowImg from './assets/capital-flow.png';
 import withdrawalImg from './assets/vault-withdrawal.png';
 
@@ -514,15 +515,17 @@ const A2: Page = () => (
 );
 
 const ArchitectureAlt: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A5 · Six wallets, or five: it depends on ETH" subtitle="A cold vault cannot touch DeFi, so ETH usage decides the vault split and hot-wallet size.">
-    <Table heads={['', 'ETH held as a position', 'ETH deployed to DeFi']} widths={[300, 620]}>
-      <Row cells={['Vault tier', 'Separate ETH and stablecoin vaults: 3 vaults', 'One ETH-chain reserve vault with stables: 2 vaults']} />
-      <Row cells={['Why', 'Different approvers, limits and cadence', 'Both only refill the hot wallet, same approvers']} />
-      <Row cells={['Hot tier', 'Small: ~5% working capital', 'Larger: ETH + stables together for protocols']} />
-      <Row cells={['Extra controls', 'None beyond the standard policy set', 'Whitelist protocol contracts; per-tx thresholds']} />
-      <Row cells={['Total wallets', 'Six', 'Five']} />
-    </Table>
-    <Note>Ask the fund: is ETH held long-term or moved into DeFi? Smart-contract risk sits outside custody cover.</Note>
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A5 · Option B: five wallets, one ETH-chain vault" subtitle="If ETH, like stablecoins, also refills the ETH hot wallet, one vault can do both jobs.">
+    <Split>
+      <Diagram src={architectureBImg} alt="Option B: five wallets with a combined ETH and stablecoin vault, drawn with Archify" width={1000} height={563} />
+      <div>
+        <Block title="Reserve · 2 vaults">BTC; ETH and stablecoins together</Block>
+        <Block title="Why merge">Same chain, approvers and refill path</Block>
+        <Block title="Hot tier">Larger: ETH + stables, e.g. for DeFi</Block>
+        <Block title="Extra controls">Whitelist contracts; per-tx limits</Block>
+        <Block title="Watch out">DeFi risk sits outside custody cover</Block>
+      </div>
+    </Split>
   </Frame>
 );
 
@@ -659,7 +662,7 @@ export const notes: (string | undefined)[] = [
   undefined, // A2 Custody wallets
   undefined, // A3 Self-custody wallets
   undefined, // A4 Multisig vs MPC
-  'Use if they answer "DeFi" to the ETH question on the next-steps slide.', // A5 Six or five
+  'Use if they answer that ETH will also refill the hot wallet (or go to DeFi) on the next-steps slide. Default is Option A on page 6: separate ETH and stablecoin vaults because they need different approvers, limits and cadence.', // A5 Option B
   undefined, // A6 Tier policies
   undefined, // A7 Roles
   undefined, // A8 Policy toolkit

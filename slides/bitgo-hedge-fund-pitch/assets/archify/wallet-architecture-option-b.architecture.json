@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Option B: five wallets, one ETH-chain vault",
+    "locale": "en",
+    "quality_profile": "standard",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "components": [
+    {
+      "id": "vault-btc",
+      "type": "security",
+      "label": "BTC Vault",
+      "sublabel": "custody cold · multisig",
+      "pos": [
+        40,
+        100
+      ],
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "vault-ethchain",
+      "type": "security",
+      "label": "ETH + Stablecoin Vault",
+      "sublabel": "custody cold · MPC · ERC-20",
+      "pos": [
+        340,
+        100
+      ],
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "hot-btc",
+      "type": "backend",
+      "label": "BTC Hot Wallet",
+      "sublabel": "self-custody · multisig",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "go-account",
+      "type": "cloud",
+      "label": "Go Account",
+      "sublabel": "trading · BitGo Prime",
+      "pos": [
+        640,
+        300
+      ],
+      "size": [
+        200,
+        64
+      ],
+      "tag": "1 per enterprise"
+    },
+    {
+      "id": "hot-eth",
+      "type": "backend",
+      "label": "ETH Hot Wallet",
+      "sublabel": "self-custody · MPC · ERC-20",
+      "pos": [
+        340,
+        300
+      ],
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "venues-btc",
+      "type": "external",
+      "label": "Other venues",
+      "sublabel": "BTC deposit addresses",
+      "pos": [
+        40,
+        480
+      ],
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "partner-exchanges",
+      "type": "external",
+      "label": "Partner exchanges",
+      "sublabel": "Go Network OES",
+      "pos": [
+        640,
+        480
+      ],
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "venues-eth",
+      "type": "external",
+      "label": "Other venues",
+      "sublabel": "ETH / stablecoin addresses",
+      "pos": [
+        340,
+        480
+      ],
+      "size": [
+        200,
+        64
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "security-group",
+      "label": "Reserve",
+      "wraps": [
+        "vault-btc",
+        "vault-ethchain"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Operate",
+      "wraps": [
+        "hot-btc",
+        "hot-eth"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Trade",
+      "wraps": [
+        "go-account"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "btc-refill",
+      "from": "vault-btc",
+      "to": "hot-btc",
+      "label": "refill",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        140,
+        252
+      ]
+    },
+    {
+      "id": "btc-fund-trading",
+      "from": "vault-btc",
+      "to": "go-account",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "via": [
+        [
+          140,
+          232
+        ],
+        [
+          740,
+          232
+        ]
+      ]
+    },
+    {
+      "id": "ethchain-fund-trading",
+      "from": "vault-ethchain",
+      "to": "go-account",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "label": "fund trading",
+      "labelAt": [
+        740,
+        264
+      ],
+      "via": [
+        [
+          440,
+          232
+        ],
+        [
+          740,
+          232
+        ]
+      ]
+    },
+    {
+      "id": "ethchain-refill",
+      "from": "vault-ethchain",
+      "to": "hot-eth",
+      "label": "refill",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        440,
+        252
+      ]
+    },
+    {
+      "id": "allocate",
+      "from": "go-account",
+      "to": "partner-exchanges",
+      "label": "allocate off-chain",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        740,
+        422
+      ]
+    },
+    {
+      "id": "btc-deploy",
+      "from": "hot-btc",
+      "to": "venues-btc",
+      "label": "whitelisted send",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        140,
+        422
+      ]
+    },
+    {
+      "id": "eth-deploy",
+      "from": "hot-eth",
+      "to": "venues-eth",
+      "label": "whitelisted send",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        440,
+        422
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "Reserve · ~85%",
+      "items": [
+        "Qualified custody, cold, insured",
+        "Withdrawals: 2 approvals + video ID"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Trade · ~10%",
+      "items": [
+        "Go Account funded from every vault",
+        "Trade on exchanges, assets stay in custody"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Operate · ~5%",
+      "items": [
+        "Fund holds user + backup keys",
+        "API sends in minutes, policy-gated"
+      ]
+    }
+  ]
+}
