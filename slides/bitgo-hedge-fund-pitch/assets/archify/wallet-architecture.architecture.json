@@ -17,7 +17,7 @@
       "sublabel": "custody cold · multisig",
       "pos": [
         40,
-        250
+        100
       ],
       "size": [
         200,
@@ -30,8 +30,8 @@
       "label": "ETH Vault",
       "sublabel": "custody cold · MPC",
       "pos": [
-        290,
-        250
+        640,
+        100
       ],
       "size": [
         200,
@@ -44,8 +44,8 @@
       "label": "Stablecoin Vault",
       "sublabel": "custody cold · MPC · ERC-20",
       "pos": [
-        540,
-        250
+        340,
+        100
       ],
       "size": [
         200,
@@ -59,7 +59,7 @@
       "sublabel": "self-custody · multisig",
       "pos": [
         40,
-        440
+        300
       ],
       "size": [
         200,
@@ -72,8 +72,8 @@
       "label": "Go Account",
       "sublabel": "trading · BitGo Prime",
       "pos": [
-        290,
-        60
+        640,
+        300
       ],
       "size": [
         200,
@@ -87,8 +87,8 @@
       "label": "ETH Hot Wallet",
       "sublabel": "self-custody · MPC · ERC-20",
       "pos": [
-        540,
-        440
+        340,
+        300
       ],
       "size": [
         200,
@@ -102,7 +102,7 @@
       "sublabel": "BTC deposit addresses",
       "pos": [
         40,
-        620
+        480
       ],
       "size": [
         200,
@@ -115,8 +115,8 @@
       "label": "Partner exchanges",
       "sublabel": "Go Network OES",
       "pos": [
-        650,
-        60
+        640,
+        480
       ],
       "size": [
         200,
@@ -129,8 +129,8 @@
       "label": "Other venues",
       "sublabel": "ETH / stablecoin addresses",
       "pos": [
-        540,
-        620
+        340,
+        480
       ],
       "size": [
         200,
@@ -143,16 +143,9 @@
       "kind": "security-group",
       "label": "Reserve",
       "wraps": [
-        "vault-eth",
         "vault-btc",
-        "vault-stable"
-      ]
-    },
-    {
-      "kind": "region",
-      "label": "Trade",
-      "wraps": [
-        "go-account"
+        "vault-stable",
+        "vault-eth"
       ]
     },
     {
@@ -161,6 +154,13 @@
       "wraps": [
         "hot-btc",
         "hot-eth"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "Trade",
+      "wraps": [
+        "go-account"
       ]
     }
   ],
@@ -175,7 +175,7 @@
       "toSide": "top",
       "labelAt": [
         140,
-        377
+        232
       ]
     },
     {
@@ -184,8 +184,12 @@
       "to": "go-account",
       "label": "fund trading",
       "variant": "emphasis",
-      "fromSide": "top",
-      "toSide": "bottom"
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        740,
+        198
+      ]
     },
     {
       "id": "btc-fund-trading",
@@ -193,15 +197,29 @@
       "to": "go-account",
       "variant": "emphasis",
       "fromSide": "top",
-      "toSide": "bottom"
+      "toSide": "right",
+      "via": [
+        [
+          140,
+          40
+        ],
+        [
+          900,
+          40
+        ],
+        [
+          900,
+          332
+        ]
+      ]
     },
     {
       "id": "stable-fund-trading",
       "from": "vault-stable",
       "to": "go-account",
       "variant": "emphasis",
-      "fromSide": "top",
-      "toSide": "bottom"
+      "fromSide": "bottom",
+      "toSide": "top"
     },
     {
       "id": "stable-refill",
@@ -212,8 +230,8 @@
       "fromSide": "bottom",
       "toSide": "top",
       "labelAt": [
-        640,
-        377
+        440,
+        262
       ]
     },
     {
@@ -222,11 +240,11 @@
       "to": "partner-exchanges",
       "label": "allocate off-chain",
       "variant": "emphasis",
-      "fromSide": "right",
-      "toSide": "left",
+      "fromSide": "bottom",
+      "toSide": "top",
       "labelAt": [
-        570,
-        92
+        740,
+        422
       ]
     },
     {
@@ -238,7 +256,7 @@
       "toSide": "top",
       "labelAt": [
         140,
-        562
+        422
       ]
     },
     {
@@ -249,8 +267,8 @@
       "fromSide": "bottom",
       "toSide": "top",
       "labelAt": [
-        640,
-        562
+        440,
+        422
       ]
     }
   ],

@@ -326,7 +326,7 @@ const Tier = ({ title, meets, children }: { title: string; meets: string[]; chil
 const Answer: Page = () => (
   <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover all six checkpoints.">
     <Split>
-      <Diagram src={architectureImg} alt="Six wallets in three tiers (Trade, Reserve, Operate), drawn with Archify" width={841} height={660} />
+      <Diagram src={architectureImg} alt="Six wallets in three tiers (Reserve, Trade, Operate), drawn with Archify" width={1080} height={625} />
       <div>
         <Tier title="Reserve · ~85% · 3 vaults" meets={['1', '6']}>Insured custody cold storage</Tier>
         <Tier title="Trade · ~10% · Go Account" meets={['2', '5']}>Trades and borrows inside custody</Tier>

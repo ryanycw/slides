@@ -373,4 +373,4 @@ svg text { font-family: 'Inter', system-ui, sans-serif !important; }
 .c-region { fill: rgba(36,70,255,0.03) !important; stroke: #6b8cff !important; }
 ```
 
-Reference sources: `slides/bitgo-hedge-fund-pitch/assets/archify/wallet-architecture.architecture.json` (tiers as Trade / Reserve / Operate boundaries) and `slides/bitgo-hedge-fund-proposal/assets/archify/*.json` for the other two. Of these, `capital-flow` is the dataflow that needs lanes hidden.
+Reference sources: `slides/bitgo-hedge-fund-pitch/assets/archify/wallet-architecture.architecture.json` (tiers as Reserve / Operate / Trade boundaries; hot wallets sit left, Go Account right, and the BTC vault funds the Go Account over the top to avoid edge crossings) and `slides/bitgo-hedge-fund-proposal/assets/archify/*.json` for the other two. Of these, `capital-flow` is the dataflow that needs lanes hidden.
