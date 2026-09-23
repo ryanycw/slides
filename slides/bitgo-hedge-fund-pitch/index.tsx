@@ -107,6 +107,27 @@ const Cover: Page = () => (
   </main>
 );
 
+const AgendaItem = ({ n, title, detail, pages }: { n: string; title: string; detail: string; pages: string }) => (
+  <div style={{ display: 'grid', gridTemplateColumns: '110px 560px 1fr 150px', alignItems: 'baseline', padding: '24px 0', borderBottom: `1px solid ${rule}` }}>
+    <span style={{ fontSize: 40, fontWeight: 700, color: 'var(--osd-accent)' }}>{n}</span>
+    <span style={{ fontSize: 40, fontWeight: 700 }}>{title}</span>
+    <span style={{ fontSize: 28, color: muted }}>{detail}</span>
+    <span style={{ fontSize: 24, color: muted, textAlign: 'right', letterSpacing: 1 }}>{pages}</span>
+  </div>
+);
+
+const Agenda: Page = () => (
+  <Frame title="Agenda" subtitle="Your situation first, then our proposal, then what happens next." caption="Detailed reference slides are in the appendix">
+    <div style={{ borderTop: `1px solid ${rule}` }}>
+      <AgendaItem n="01" title="Priorities" detail="Safety, speed, control, and today’s trade-off" pages="P. 3–4" />
+      <AgendaItem n="02" title="Success Criteria" detail="How to judge any setup, ours included" pages="P. 5" />
+      <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets, one control plane" pages="P. 6" />
+      <AgendaItem n="04" title="Fast and safe, in practice" detail="How capital moves, and who can move it" pages="P. 7–9" />
+      <AgendaItem n="05" title="Outcome and next steps" detail="What changes for you, and how we get there" pages="P. 10–11" />
+    </div>
+  </Frame>
+);
+
 const Heard: Page = () => (
   <Frame title="You need safety, speed and control, all at once" subtitle="Here is what we heard from you. Please correct us if anything is off." caption="Based on what you have shared with us">
     <Grid cols={2}>
@@ -413,15 +434,16 @@ export const meta: SlideMeta = {
 
 export const notes: (string | undefined)[] = [
   'Open on the tension, not on BitGo: most funds think they must choose between a safe reserve and a fast desk. Today we show you do not have to.', // 1 Cover
-  'Play back what they told us before pitching anything. Pause on "correct us": the design depends on these goals, so get a yes or a correction here.', // 2 What we heard
-  'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 3 Problem
-  'These four tests are the contract for the rest of the talk. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 4 Criteria
-  'One sentence per tier: the reserve is insured and slow on purpose, the Go Account is where trading happens, hot wallets are small and fast. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 5 Answer
-  'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 6 Capital flow
-  'Read one row across, e.g. treasury ops can start a transfer but never approve it. Stress three Admins so that any two can approve and no one is a bottleneck or a single point of failure.', // 7 RBAC
-  'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 8 Withdrawal
-  'Return to the four tests from earlier and tick them off. Keep "typical today" neutral. Close the loop with why BitGo: qualified custodian, SOC audits, insurance.', // 9 Scorecard
-  'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 10 Next steps
+  'Set expectations: ten minutes, and we start with them, not with BitGo. Invite interruptions; the appendix holds the detail for any deep question.', // 2 Agenda
+  'Play back what they told us before pitching anything. Pause on "correct us": the design depends on these goals, so get a yes or a correction here.', // 3 What we heard
+  'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
+  'These four tests are the contract for the rest of the talk. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 5 Criteria
+  'One sentence per tier: the reserve is insured and slow on purpose, the Go Account is where trading happens, hot wallets are small and fast. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 6 Answer
+  'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
+  'Read one row across, e.g. treasury ops can start a transfer but never approve it. Stress three Admins so that any two can approve and no one is a bottleneck or a single point of failure.', // 8 RBAC
+  'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
+  'Return to the four tests from earlier and tick them off. Keep "typical today" neutral. Close the loop with why BitGo: qualified custodian, SOC audits, insurance.', // 10 Scorecard
+  'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
   undefined, // Appendix divider
   undefined, // A1 Types
   undefined, // A2 Custody wallets
@@ -436,4 +458,4 @@ export const notes: (string | undefined)[] = [
   undefined, // A11 Further needs
 ];
 
-export default [Cover, Heard, Problem, Criteria, Answer, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7] satisfies Page[];
