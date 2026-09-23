@@ -42,6 +42,7 @@ const walletTypes = 'https://developers.bitgo.com/docs/wallet-types';
 const policies = 'https://developers.bitgo.com/docs/policies-overview';
 const goNetwork = 'https://www.bitgo.com/products/go-network-oes/';
 const walletUsers = 'https://developers.bitgo.com/guides/wallets/users/add';
+const licenses = 'https://www.bitgo.com/company/licenses/';
 
 // Every primitive reads the page tone, so the same markup works on light and dark pages.
 type ToneName = 'light' | 'dark';
@@ -385,7 +386,7 @@ const Scorecard: Page = () => (
         <CheckRow ok>~5% in hot wallets, capped daily</CheckRow>
       </Panel>
     </Grid>
-    <Takeaway lead="Why BitGo: a US-regulated qualified custodian." sub="SOC audits, $250M insurance and KYT screening on every deposit." />
+    <Takeaway lead="Why BitGo: a US-regulated qualified custodian." sub="OCC and NYDFS oversight, SOC 1 and SOC 2 Type 2 audits, $250M insurance." />
   </Frame>
 );
 
@@ -417,7 +418,7 @@ const AppendixDivider: Page = () => (
     <main style={{ position: 'relative', width: '100%', height: '100%', boxSizing: 'border-box', padding: '0 140px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: bgBlue, color: '#ffffff', fontFamily: 'var(--osd-font-body)' }}>
       <div><Pill color="#ffffff">Backup material</Pill></div>
       <h1 style={{ fontSize: 140, fontWeight: 300, lineHeight: 1.1, margin: '32px 0', letterSpacing: -4 }}>Appendix</h1>
-      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallet types · multisig vs MPC · ETH options · policies · roles · keys · liquidity</p>
+      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallet types · multisig vs MPC · ETH options · policies · roles · keys · liquidity · licenses</p>
       <div style={{ position: 'absolute', left: 140, bottom: 56, fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
@@ -560,7 +561,22 @@ const A7: Page = () => (
   </Frame>
 );
 
-// BitGo facts checked 2026-09-21 against developers.bitgo.com (wallet types, policies,
+const A12: Page = () => (
+  <Frame eyebrow={A} source={licenses} sourceLabel="BitGo licenses and registrations" title="A12 · Licenses and compliance" subtitle="A US-regulated qualified custodian, licensed in each major market it serves.">
+    <Table heads={['Entity', 'Regulator', 'License']} widths={[520, 420]}>
+      <Row cells={['BitGo Bank & Trust, N.A.', 'OCC (US federal)', 'National trust bank; qualified custodian']} />
+      <Row cells={['BitGo New York Trust Co.', 'NYDFS (New York)', 'Limited-purpose trust; qualified custodian']} />
+      <Row cells={['BitGo Technologies, LLC', 'FinCEN + US states', 'Money services business; money transmitter']} />
+      <Row cells={['BitGo Europe GmbH', 'BaFin (Germany)', 'MiCA licence: custody, transfer, trading']} />
+      <Row cells={['BitGo GmbH', 'FINMA (Switzerland)', 'Crypto-asset custody provider']} />
+      <Row cells={['BitGo Singapore Pte. Ltd.', 'MAS (Singapore)', 'Major Payment Institution']} />
+      <Row cells={['BitGo (Custody) MENA FZE', 'VARA (Dubai)', 'Custody; broker-dealer services']} />
+    </Table>
+    <Note>SOC 1 + SOC 2 Type 2 · $250M Lloyd’s cover where BitGo holds all keys · segregated client assets</Note>
+  </Frame>
+);
+
+// BitGo facts checked 2026-09-21 (licenses 2026-09-24, bitgo.com/company/licenses) against developers.bitgo.com (wallet types, policies,
 // wallet users) and bitgo.com (Go Network OES, Prime). Customer facts come only from the
 // assessment brief; "today" pain points are framed as typical patterns, not claims.
 // Diagrams: Archify sources in ../bitgo-hedge-fund-proposal/assets/archify, recoloured per
@@ -595,6 +611,7 @@ export const notes: (string | undefined)[] = [
   undefined, // A9 Keys
   undefined, // A10 Liquidity
   undefined, // A11 Further needs
+  'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12] satisfies Page[];
