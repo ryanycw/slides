@@ -216,7 +216,7 @@ const AgendaItem = ({ n, title, detail, pages }: { n: string; title: string; det
 );
 
 const Agenda: Page = () => (
-  <Frame title="Agenda" subtitle="Your situation first, then our proposal, then what happens next." caption="Detailed reference slides are in the appendix">
+  <Frame title="Agenda" subtitle="Understand the situation, the need, then our solution." caption="Detailed reference slides are in the appendix">
     <div style={{ borderTop: `1px solid ${rule}` }}>
       <AgendaItem n="01" title="Priorities" detail="Safety, speed, control, and today’s trade-off" pages="P. 3–4" />
       <AgendaItem n="02" title="Success Criteria" detail="How to judge any setup, ours included" pages="P. 5" />
