@@ -235,9 +235,9 @@ const Agenda: Page = () => (
     <div style={{ borderTop: `1px solid ${rule}` }}>
       <AgendaItem n="01" title="Priorities" detail="Safety, speed, control, and today’s trade-off" pages="P. 3–4" />
       <AgendaItem n="02" title="Success Criteria" detail="Checkpoints for any setup, ours included" pages="P. 5" />
-      <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets, one control plane" pages="P. 6" />
-      <AgendaItem n="04" title="Fast and safe, in practice" detail="How capital moves, and who can move it" pages="P. 7–9" />
-      <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and how we get there" pages="P. 10–11" />
+      <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets, one control plane" pages="P. 6–7" />
+      <AgendaItem n="04" title="Fast and safe, in practice" detail="How capital moves, and who can move it" pages="P. 8–10" />
+      <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and how we get there" pages="P. 11–12" />
     </div>
   </Frame>
 );
@@ -333,6 +333,21 @@ const Answer: Page = () => (
         <Tier title="Trade · ~10% · Go Account" meets={['2', '5']}>Trades and borrows inside custody</Tier>
         <Tier title="Operate · ~5% · 2 hot wallets" meets={['4']}>Fast sends, capped daily</Tier>
         <Tier title="Across all six" meets={['3']}>One set of roles and policies</Tier>
+      </div>
+    </Split>
+  </Frame>
+);
+
+const OptionB: Page = () => (
+  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Option B: five wallets, one ETH-chain vault" subtitle="If ETH, like stablecoins, also refills the ETH hot wallet, one vault can do both jobs.">
+    <Split>
+      <Diagram src={architectureBImg} alt="Option B: five wallets with a combined ETH and stablecoin vault, drawn with Archify" width={1000} height={563} />
+      <div>
+        <Block title="Reserve · 2 vaults">BTC; ETH and stablecoins together</Block>
+        <Block title="Why merge">Same chain, approvers and refill path</Block>
+        <Block title="Hot tier">Larger: ETH + stables, e.g. for DeFi</Block>
+        <Block title="Extra controls">Whitelist contracts; per-tx limits</Block>
+        <Block title="Watch out">DeFi risk sits outside custody cover</Block>
       </div>
     </Split>
   </Frame>
@@ -515,17 +530,15 @@ const A2: Page = () => (
 );
 
 const ArchitectureAlt: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A5 · Option B: five wallets, one ETH-chain vault" subtitle="If ETH, like stablecoins, also refills the ETH hot wallet, one vault can do both jobs.">
-    <Split>
-      <Diagram src={architectureBImg} alt="Option B: five wallets with a combined ETH and stablecoin vault, drawn with Archify" width={1000} height={563} />
-      <div>
-        <Block title="Reserve · 2 vaults">BTC; ETH and stablecoins together</Block>
-        <Block title="Why merge">Same chain, approvers and refill path</Block>
-        <Block title="Hot tier">Larger: ETH + stables, e.g. for DeFi</Block>
-        <Block title="Extra controls">Whitelist contracts; per-tx limits</Block>
-        <Block title="Watch out">DeFi risk sits outside custody cover</Block>
-      </div>
-    </Split>
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A5 · Six wallets, or five: it depends on ETH" subtitle="A cold vault cannot touch DeFi, so ETH usage decides the vault split and hot-wallet size.">
+    <Table heads={['', 'ETH held as a position', 'ETH deployed to DeFi']} widths={[300, 620]}>
+      <Row cells={['Vault tier', 'Separate ETH and stablecoin vaults: 3 vaults', 'One ETH-chain reserve vault with stables: 2 vaults']} />
+      <Row cells={['Why', 'Different approvers, limits and cadence', 'Both only refill the hot wallet, same approvers']} />
+      <Row cells={['Hot tier', 'Small: ~5% working capital', 'Larger: ETH + stables together for protocols']} />
+      <Row cells={['Extra controls', 'None beyond the standard policy set', 'Whitelist protocol contracts; per-tx thresholds']} />
+      <Row cells={['Total wallets', 'Six', 'Five']} />
+    </Table>
+    <Note>Ask the fund: is ETH held long-term or moved into DeFi? Smart-contract risk sits outside custody cover.</Note>
   </Frame>
 );
 
@@ -652,6 +665,7 @@ export const notes: (string | undefined)[] = [
   'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
   'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. They are requirements, not our product; ask if they would add or change any.', // 5 Criteria
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
+  'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
   'Start with the three rules, then show the table is just those rules applied. Rule 1 gives Admins and Treasury opposite roles; rule 2 is why PMs trade but never withdraw and the administrator only views; rule 3 is the compliance row. Then land the takeaway: three Admins so any two can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
@@ -662,7 +676,7 @@ export const notes: (string | undefined)[] = [
   undefined, // A2 Custody wallets
   undefined, // A3 Self-custody wallets
   undefined, // A4 Multisig vs MPC
-  'Use if they answer that ETH will also refill the hot wallet (or go to DeFi) on the next-steps slide. Default is Option A on page 6: separate ETH and stablecoin vaults because they need different approvers, limits and cadence.', // A5 Option B
+  'Use if they answer "DeFi" to the ETH question on the next-steps slide.', // A5 Six or five
   undefined, // A6 Tier policies
   undefined, // A7 Roles
   undefined, // A8 Policy toolkit
@@ -673,4 +687,4 @@ export const notes: (string | undefined)[] = [
   'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
