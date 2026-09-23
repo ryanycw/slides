@@ -348,7 +348,8 @@ Archify's built-in presets keep a per-type red/green/amber palette. To make diag
 1. `node ~/.claude/skills/archify/bin/archify.mjs deliver <type> <spec>.json <name>.html --quality showcase --json` must report `ok: true`.
 2. Open the HTML in headless Chrome (CDP) at 2000 × 1500, `deviceScaleFactor: 2`. Set `html[data-theme="light"]`, load Inter, and inject the override below.
 3. Screenshot the `svg[data-quality-profile]` bounding box. Trim the white margin (keeping 32 px of air) and save to `slides/<id>/assets/<name>.png`. Then set the `Diagram` width and height to the PNG's aspect ratio.
-4. Dataflow diagrams have tall, empty stage lanes. For those, also set `--lane-fill` and `--lane-stroke` to `transparent`.
+4. Before the screenshot, fit each edge-label mask (`g[data-edge-label] > rect.c-mask`) to its text's `getBBox()` with 4 px / 2 px padding; Archify's default masks are oversized, which leaves uneven gaps in the lines.
+5. Dataflow diagrams have tall, empty stage lanes. For those, also set `--lane-fill` and `--lane-stroke` to `transparent`.
 
 Colour mapping: security → electric blue, cloud → cyan, backend → indigo, external → slate. Emphasised edges are electric blue; ordinary edges are slate-blue.
 

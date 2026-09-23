@@ -340,7 +340,7 @@ const Answer: Page = () => (
 const CapitalFlow: Page = () => (
   <Frame title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1100} height={529} />
+      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1180} height={568} />
     </div>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 40, marginTop: 32 }}>
       <Block title="Planned">Vault top-ups: scheduled, approved.</Block>
@@ -355,8 +355,24 @@ const Who = ({ name, detail }: { name: string; detail: string }) => {
   return <>{name} <span style={{ fontWeight: 400, color: t.sub }}>· {detail}</span></>;
 };
 
+// A design rule behind the role table: short name plus the one-line rule.
+const Rule = ({ n, title, children }: { n: string; title: string; children: ReactNode }) => {
+  const t = useTone();
+  return (
+    <div style={{ ...(t.dark ? glass : { background: blueSoft }), borderRadius: 'var(--osd-radius)', padding: '18px 24px' }}>
+      <div style={{ fontSize: 26, fontWeight: 500, color: t.hi }}>{n} · {title}</div>
+      <div style={{ fontSize: 24, lineHeight: 1.4, marginTop: 6 }}>{children}</div>
+    </div>
+  );
+};
+
 const Rbac: Page = () => (
-  <Frame tone="dark" title="No single person can move funds" subtitle="Roles are set per wallet. No one both initiates and approves, and traders never withdraw." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 28 }}>
+      <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
+      <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
+      <Rule n="3" title="Always watched">Compliance sees and can freeze all</Rule>
+    </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
       <Row cells={[<Who name="COO · CFO · CIO" detail="Enterprise Admins" />, 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
       <Row cells={[<Who name="Treasury operations" detail="2–3 people" />, 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
@@ -634,7 +650,7 @@ export const notes: (string | undefined)[] = [
   'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. They are requirements, not our product; ask if they would add or change any.', // 5 Criteria
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
-  'Read one row across, e.g. treasury ops can start a transfer but never approve it. Stress three Admins so that any two can approve and no one is a bottleneck or a single point of failure.', // 8 RBAC
+  'Start with the three rules, then show the table is just those rules applied. Rule 1 gives Admins and Treasury opposite roles; rule 2 is why PMs trade but never withdraw and the administrator only views; rule 3 is the compliance row. Then land the takeaway: three Admins so any two can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
