@@ -200,7 +200,7 @@ const Cover: Page = () => (
           Protect the reserve.<br />
           <span style={{ color: skyBlue }}>Move at market speed.</span>
         </h1>
-        <p style={{ fontSize: 36, lineHeight: 1.45, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for your $300M digital-asset fund.</p>
+        <p style={{ fontSize: 36, lineHeight: 1.45, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for the $300M digital-asset fund.</p>
       </div>
       <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
