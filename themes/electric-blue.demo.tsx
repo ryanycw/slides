@@ -43,7 +43,7 @@ const Title = ({ children }: { children: ReactNode }) => (
 
 const Eyebrow = ({ children }: { children: ReactNode }) => {
   const t = useTone();
-  return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 14 }}>{children}</div>;
+  return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 10 }}>{children}</div>;
 };
 
 type FooterProps = { source?: string; sourceLabel?: string };
@@ -63,7 +63,7 @@ type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: stri
 
 const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
   <Tone.Provider value={tone}>
-    <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
+    <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '64px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       <Font />
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>

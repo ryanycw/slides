@@ -75,7 +75,7 @@ const Footer = ({ source, sourceLabel }: FooterProps) => {
 
 const Eyebrow = ({ children }: { children: ReactNode }) => {
   const t = useTone();
-  return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 14 }}>{children}</div>;
+  return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 10 }}>{children}</div>;
 };
 
 const Title = ({ children }: { children: ReactNode }) => (
@@ -86,7 +86,7 @@ type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: stri
 
 const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
   <Tone.Provider value={tone}>
-    <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
+    <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '64px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
@@ -243,7 +243,7 @@ const Agenda: Page = () => (
 );
 
 const Heard: Page = () => (
-  <Frame title="Safety, speed and control, all at once">
+  <Frame eyebrow="01 · Priorities" title="Safety, speed and control, all at once">
     <Grid cols={2}>
       <Card tag="Where you are today" title="A $300M book, spread out">
         <div><B>•</B> BTC, ETH and stablecoins</div>
@@ -264,7 +264,7 @@ const Heard: Page = () => (
 );
 
 const Problem: Page = () => (
-  <Frame tone="dark" title="Today, safety and speed pull against each other" subtitle="What we typically see when a fund's assets sit across several exchanges and wallets.">
+  <Frame eyebrow="01 · Priorities" tone="dark" title="Today, safety and speed pull against each other" subtitle="What we typically see when a fund's assets sit across several exchanges and wallets.">
     <Spectrum />
     <Grid cols={3}>
       <Card tag="Controlled · heavy to run" title="In your own wallets">
@@ -288,7 +288,7 @@ const Problem: Page = () => (
 );
 
 const Criteria: Page = () => (
-  <Frame title="Six checkpoints for the right setup" subtitle="Each one traces back to a need we heard. Every choice that follows answers one of them.">
+  <Frame eyebrow="02 · Success Criteria" title="Six checkpoints for the right setup" subtitle="Each one traces back to a need we heard. Every choice that follows answers one of them.">
     <Grid cols={2}>
       <Card tag="Goal 1 · insured and safe" title="1 · Reserve insured by default">
         <div>Long-term assets in insured, offline storage</div>
@@ -325,7 +325,7 @@ const Tier = ({ title, meets, children }: { title: string; meets: string[]; chil
 );
 
 const Answer: Page = () => (
-  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover all six checkpoints.">
+  <Frame eyebrow="03 · Our proposal" source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover all six checkpoints.">
     <Split>
       <Diagram src={architectureImg} alt="Six wallets in three tiers (Reserve, Trade, Operate), drawn with Archify" width={1080} height={609} />
       <div>
@@ -339,7 +339,7 @@ const Answer: Page = () => (
 );
 
 const OptionB: Page = () => (
-  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Option B: five wallets, one ETH-chain vault" subtitle="If ETH, like stablecoins, also refills the ETH hot wallet, one vault can do both jobs.">
+  <Frame eyebrow="03 · Our proposal" source={walletTypes} sourceLabel="BitGo wallet types" title="Option B: five wallets, one ETH-chain vault" subtitle="If ETH, like stablecoins, also refills the ETH hot wallet, one vault can do both jobs.">
     <Split>
       <Diagram src={architectureBImg} alt="Option B: five wallets with a combined ETH and stablecoin vault, drawn with Archify" width={1000} height={563} />
       <div>
@@ -354,7 +354,7 @@ const OptionB: Page = () => (
 );
 
 const CapitalFlow: Page = () => (
-  <Frame title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
+  <Frame eyebrow="04 · Fast and safe, in practice" title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1180} height={568} />
     </div>
@@ -383,7 +383,7 @@ const Rule = ({ n, title, children }: { n: string; title: string; children: Reac
 };
 
 const Rbac: Page = () => (
-  <Frame tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow="04 · Fast and safe, in practice" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 28 }}>
       <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
       <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
@@ -432,7 +432,7 @@ const Act = ({ kind, children }: { kind?: ActKind; children?: ReactNode }) => (
 );
 
 const WhoActs: Page = () => (
-  <Frame title="Who acts at each step of the money’s journey" subtitle="The same moves as the capital-flow and withdrawal diagrams, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow="04 · Fast and safe, in practice" title="Who acts at each step of the money’s journey" subtitle="The moves from the capital-flow diagram, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
     <div style={{ display: 'grid', gridTemplateColumns: '330px repeat(6, 1fr)', columnGap: 6 }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, paddingBottom: 18, borderBottom: `1px solid ${rule}`, fontSize: 20, color: muted }}>
         <Chip kind="start">Starts</Chip>
@@ -485,12 +485,12 @@ const WhoActs: Page = () => (
       <Act />
       <Act kind="act">Reconcile NAV</Act>
     </div>
-    <Takeaway lead="Moving funds always takes two people." sub="Treasury starts, Admins approve; PMs only trade inside custody." />
+    <Takeaway lead="Every move needs a starter and a separate approver." sub="The role table turns this into per-wallet permissions." />
   </Frame>
 );
 
 const Withdrawal: Page = () => (
-  <Frame title="What it takes to move a dollar out of the vault" subtitle="Four independent checks, all enforced by BitGo before anything is signed." source={policies} sourceLabel="BitGo policies overview">
+  <Frame eyebrow="04 · Fast and safe, in practice" title="What it takes to move a dollar out of the vault" subtitle="Four independent checks, all enforced by BitGo before anything is signed." source={policies} sourceLabel="BitGo policies overview">
     <Split>
       <Diagram src={withdrawalImg} alt="Vault withdrawal approval workflow, drawn with Archify" width={1100} height={623} />
       <div>
@@ -512,7 +512,7 @@ const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; ti
 );
 
 const Scorecard: Page = () => (
-  <Frame tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
+  <Frame eyebrow="05 · Outcome and next steps" tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
     <Grid cols={2}>
       <Panel tag="Typical today">
         <CheckRow compact n={1} ok={false}>Reserve spread across venues and wallets</CheckRow>
@@ -536,7 +536,7 @@ const Scorecard: Page = () => (
 );
 
 const NextSteps: Page = () => (
-  <Frame tone="dark" title="From first call to fully migrated" subtitle="Move in tranches, so no single step puts the whole book at risk.">
+  <Frame eyebrow="05 · Outcome and next steps" tone="dark" title="From first call to fully migrated" subtitle="Move in tranches, so no single step puts the whole book at risk.">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
       <div>
         <Block title="1 · Onboard">KYC, users, roles, 2FA, scoped API tokens.</Block>
@@ -756,8 +756,8 @@ export const notes: (string | undefined)[] = [
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
-  'Start with the three rules, then show the table is just those rules applied. Rule 1 gives Admins and Treasury opposite roles; rule 2 is why PMs trade but never withdraw and the administrator only views; rule 3 is the compliance row. Then land the takeaway: three Admins so any two can approve.', // 8 RBAC
   'Walk left to right in the order money moves: fund trading, trade, refill, pay a venue, sweep back. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Trading is the only one-person action, and it never moves funds out of custody. Oversight runs across all of it.', // 9b Who acts
+  'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the administrator only views, rule 3 is the compliance row. Land the takeaway: three Admins so any two can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
@@ -777,4 +777,4 @@ export const notes: (string | undefined)[] = [
   'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, Rbac, WhoActs, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, WhoActs, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];

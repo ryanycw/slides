@@ -62,7 +62,7 @@ const accentBar = 'linear-gradient(180deg, #2446ff, #3fd0f5)';
 
 ## Layout
 
-- Canvas 1920 × 1080. Content padding is `80px 100px 56px` (top / sides / bottom), which gives a 1720 px content width. The cover and appendix divider use 140 px side padding.
+- Canvas 1920 × 1080. Content padding is `64px 100px 56px` (top / sides / bottom), which gives a 1720 px content width. The cover and appendix divider use 140 px side padding.
 - `Frame` structure: optional `Eyebrow` → `Title` → optional subtitle (margin `18px 0 32px`; without one, a 40 px gap) → content section → `Footer` pinned to the bottom with `marginTop: auto`.
 - **Three tones.**
   - `light`: `bgLight`, dark text, blue accent.
@@ -104,12 +104,12 @@ const Title = ({ children }: { children: ReactNode }) => (
 
 ### Eyebrow
 
-Optional; content pages omit it by default. Use it to mark a section that differs from the main flow, such as "Appendix · pull up if asked". Sentence case, coloured, no tracking.
+Marks where the talk is: main pages carry their Agenda section (e.g. "04 · Fast and safe, in practice"), appendix pages carry "Appendix · pull up if asked". Sentence case, coloured, no tracking.
 
 ```tsx
 const Eyebrow = ({ children }: { children: ReactNode }) => {
   const t = useTone();
-  return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 14 }}>{children}</div>;
+  return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 10 }}>{children}</div>;
 };
 ```
 
@@ -139,7 +139,7 @@ type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: stri
 
 const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
   <Tone.Provider value={tone}>
-    <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
+    <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '64px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
