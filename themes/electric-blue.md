@@ -114,7 +114,7 @@ const Eyebrow = ({ children }: { children: ReactNode }) => {
 
 ### Footer
 
-The left side starts with the domain, then an optional "illustrative" flag, then either a caption or a source link. The page number sits on the right.
+The left side starts with the domain, then an optional "illustrative" flag, then either a caption or a source link. Pass `caption=""` to leave the left side empty. The page number always sits on the right.
 
 ```tsx
 type FooterProps = { source?: string; sourceLabel?: string; caption?: string; illustrative?: boolean };
@@ -124,10 +124,12 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      <span>
-        bitgo.com · {illustrative && 'Allocations are illustrative · '}
-        {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
-      </span>
+      {caption === '' ? <span /> : (
+        <span>
+          bitgo.com · {illustrative && 'Allocations are illustrative · '}
+          {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
+        </span>
+      )}
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );

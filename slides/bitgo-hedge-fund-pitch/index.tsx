@@ -64,10 +64,12 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      <span>
-        bitgo.com · {illustrative && 'Allocations are illustrative · '}
-        {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
-      </span>
+      {caption === '' ? <span /> : (
+        <span>
+          bitgo.com · {illustrative && 'Allocations are illustrative · '}
+          {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
+        </span>
+      )}
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -228,7 +230,7 @@ const Agenda: Page = () => (
 );
 
 const Heard: Page = () => (
-  <Frame title="Safety, speed and control, all at once" caption="Based on what you have shared with us">
+  <Frame title="Safety, speed and control, all at once" caption="">
     <Grid cols={2}>
       <Card tag="Where you are today" title="A $300M book, spread out">
         <div>BTC, ETH and stablecoins</div>
