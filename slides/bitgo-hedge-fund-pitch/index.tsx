@@ -57,19 +57,14 @@ const useTone = () => {
   };
 };
 
-type FooterProps = { source?: string; sourceLabel?: string; caption?: string; illustrative?: boolean };
+type FooterProps = { source?: string; sourceLabel?: string };
 
-const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => {
+const Footer = ({ source, sourceLabel }: FooterProps) => {
   const { current, total } = useSlidePageNumber();
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      {caption === '' ? <span /> : (
-        <span>
-          bitgo.com · {illustrative && 'Allocations are illustrative · '}
-          {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
-        </span>
-      )}
+      <span>{source && <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -86,14 +81,14 @@ const Title = ({ children }: { children: ReactNode }) => (
 
 type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
-const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source = walletTypes, sourceLabel = 'BitGo wallet types', caption, illustrative }: FrameProps) => (
+const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
-      <Footer source={source} sourceLabel={sourceLabel} caption={caption} illustrative={illustrative} />
+      <Footer source={source} sourceLabel={sourceLabel} />
     </main>
   </Tone.Provider>
 );
@@ -203,7 +198,6 @@ const Cover: Page = () => (
         </h1>
         <p style={{ fontSize: 36, lineHeight: 1.45, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for the $300M digital-asset fund.</p>
       </div>
-      <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
 );
@@ -218,7 +212,7 @@ const AgendaItem = ({ n, title, detail, pages }: { n: string; title: string; det
 );
 
 const Agenda: Page = () => (
-  <Frame title="Agenda" subtitle="Understand the situation, the need, then our solution." caption="Detailed reference slides are in the appendix">
+  <Frame title="Agenda" subtitle="Understand the situation, the need, then our solution.">
     <div style={{ borderTop: `1px solid ${rule}` }}>
       <AgendaItem n="01" title="Priorities" detail="Safety, speed, control, and today’s trade-off" pages="P. 3–4" />
       <AgendaItem n="02" title="Success Criteria" detail="How to judge any setup, ours included" pages="P. 5" />
@@ -230,7 +224,7 @@ const Agenda: Page = () => (
 );
 
 const Heard: Page = () => (
-  <Frame title="Safety, speed and control, all at once" caption="">
+  <Frame title="Safety, speed and control, all at once">
     <Grid cols={2}>
       <Card tag="Where you are today" title="A $300M book, spread out">
         <div>BTC, ETH and stablecoins</div>
@@ -250,7 +244,7 @@ const Heard: Page = () => (
 );
 
 const Problem: Page = () => (
-  <Frame tone="dark" title="Today, safety and speed pull against each other" subtitle="What we typically see when a fund's assets sit across several exchanges and wallets." caption="Common patterns, not an assessment of your current setup">
+  <Frame tone="dark" title="Today, safety and speed pull against each other" subtitle="What we typically see when a fund's assets sit across several exchanges and wallets.">
     <Spectrum />
     <Grid cols={3}>
       <Card tag="Controlled · heavy to run" title="In your own wallets">
@@ -274,7 +268,7 @@ const Problem: Page = () => (
 );
 
 const Criteria: Page = () => (
-  <Frame title="Four tests for the right setup" subtitle="These are the tests we set ourselves. Every choice that follows answers one of them." caption="Each test maps to a goal you gave us">
+  <Frame title="Four tests for the right setup" subtitle="These are the tests we set ourselves. Every choice that follows answers one of them.">
     <Grid cols={2}>
       <Card tag="Goal 1 · insured and safe" title="1 · Reserve insured by default">
         <div>Long-term assets with a qualified custodian</div>
@@ -293,7 +287,7 @@ const Criteria: Page = () => (
 );
 
 const Answer: Page = () => (
-  <Frame title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job with the wallet type that fits it. One set of roles governs all six." illustrative>
+  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job with the wallet type that fits it. One set of roles governs all six.">
     <Split>
       <Diagram src={architectureImg} alt="Six wallets in three tiers, drawn with Archify" width={1080} height={629} />
       <div>
@@ -307,7 +301,7 @@ const Answer: Page = () => (
 );
 
 const CapitalFlow: Page = () => (
-  <Frame title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement" illustrative>
+  <Frame title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1100} height={529} />
     </div>
@@ -360,7 +354,7 @@ const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; ti
 );
 
 const Scorecard: Page = () => (
-  <Frame tone="dark" title="What changes, test by test" subtitle="Back to the four tests: where a typical setup stands, and where this design lands." caption="Typical today reflects common patterns, not your current setup" illustrative>
+  <Frame tone="dark" title="What changes, test by test" subtitle="Back to the four tests: where a typical setup stands, and where this design lands.">
     <Grid cols={2}>
       <Panel tag="Typical today" title="A multi-venue setup">
         <CheckRow ok={false}>Reserve spread across venues and wallets</CheckRow>
@@ -380,7 +374,7 @@ const Scorecard: Page = () => (
 );
 
 const NextSteps: Page = () => (
-  <Frame tone="dark" title="From first call to fully migrated" subtitle="Move in tranches, so no single step puts the whole book at risk." caption="Timing depends on your answers on the right">
+  <Frame tone="dark" title="From first call to fully migrated" subtitle="Move in tranches, so no single step puts the whole book at risk.">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
       <div>
         <Block title="1 · Onboard">KYC, users, roles, 2FA, scoped API tokens.</Block>
@@ -415,7 +409,7 @@ const AppendixDivider: Page = () => (
 const A = 'Appendix · pull up if asked';
 
 const Types: Page = () => (
-  <Frame eyebrow={A} title="A1 · The three wallet types at a glance" subtitle="Each type trades speed for protection differently, so each tier gets the type that matches its job." illustrative>
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A1 · The three wallet types at a glance" subtitle="Each type trades speed for protection differently, so each tier gets the type that matches its job.">
     <Table heads={['Type', 'Who holds the keys', 'Speed out', 'Job in this design']} widths={[290, 500, 460]}>
       <Row cells={['Custody cold', 'BitGo holds all three, offline', 'Within 24h SLA, after video ID', 'Stores ~85%; slow on purpose']} />
       <Row cells={['Go Account', 'BitGo custody, off-chain ledger', 'Instant in-network', 'Trading float ~10%; holds USD too']} />
@@ -426,7 +420,7 @@ const Types: Page = () => (
 );
 
 const A1Custody: Page = () => (
-  <Frame eyebrow={A} title="A2 · Wallets where BitGo holds the keys" subtitle="Custody products: the fund initiates, BitGo Bank & Trust signs.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A2 · Wallets where BitGo holds the keys" subtitle="Custody products: the fund initiates, BitGo Bank & Trust signs.">
     <Table heads={['Wallet', 'Keys and signing', 'Speed', 'Best for']} widths={[330, 640, 310]}>
       <Row cells={['Custody multisig cold', 'All 3 keys in BitGo vaults; signed offline', 'Within 24h SLA', 'BTC, UTXO long-term holdings']} />
       <Row cells={['Custody MPC cold', 'Key shares in BitGo vaults; no full key', 'Within 24h SLA', 'ETH, account-based holdings']} />
@@ -438,7 +432,7 @@ const A1Custody: Page = () => (
 );
 
 const A1Self: Page = () => (
-  <Frame eyebrow={A} title="A3 · Wallets where the fund holds the keys" subtitle="Self-custody: fund holds user + backup keys, BitGo holds the third and enforces policy.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A3 · Wallets where the fund holds the keys" subtitle="Self-custody: fund holds user + backup keys, BitGo holds the third and enforces policy.">
     <Table heads={['Wallet', 'How it signs', 'Speed', 'Best for']} widths={[330, 640, 310]}>
       <Row cells={['Multisig hot', 'SDK signs with user key, BitGo co-signs', 'Minutes', 'BTC working capital']} />
       <Row cells={['MPC hot', 'SDK share ceremony; one on-chain signature', 'Minutes', 'ETH, ERC-20 working capital']} />
@@ -450,7 +444,7 @@ const A1Self: Page = () => (
 );
 
 const A2: Page = () => (
-  <Frame eyebrow={A} title="A4 · Multisig vs MPC" subtitle="Both are 2-of-3. The difference is where the threshold is enforced.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A4 · Multisig vs MPC" subtitle="Both are 2-of-3. The difference is where the threshold is enforced.">
     <Table heads={['', 'Multisig', 'MPC (TSS)']} widths={[360, 640]}>
       <Row cells={['Key material', 'Three independent private keys', 'Encrypted shares; a full key never exists']} />
       <Row cells={['Signing', 'On-chain, cosigners sign asynchronously', 'Off-chain, synchronous; one combined signature']} />
@@ -462,7 +456,7 @@ const A2: Page = () => (
 );
 
 const ArchitectureAlt: Page = () => (
-  <Frame eyebrow={A} title="A5 · Six wallets, or five: it depends on ETH" subtitle="A cold vault cannot touch DeFi, so ETH usage decides the vault split and hot-wallet size.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A5 · Six wallets, or five: it depends on ETH" subtitle="A cold vault cannot touch DeFi, so ETH usage decides the vault split and hot-wallet size.">
     <Table heads={['', 'ETH held as a position', 'ETH deployed to DeFi']} widths={[300, 620]}>
       <Row cells={['Vault tier', 'Separate ETH and stablecoin vaults: 3 vaults', 'One ETH-chain reserve vault with stables: 2 vaults']} />
       <Row cells={['Why', 'Different approvers, limits and cadence', 'Both only refill the hot wallet, same approvers']} />
@@ -514,7 +508,7 @@ const A4: Page = () => (
 );
 
 const A5: Page = () => (
-  <Frame eyebrow={A} title="A9 · Keys and recovery for the hot wallets" subtitle="Self-custody moves key responsibility to the fund. This is how to carry it.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A9 · Keys and recovery for the hot wallets" subtitle="Self-custody moves key responsibility to the fund. This is how to carry it.">
     <Table heads={['Key', 'Held by', 'Stored', 'Used for']} widths={[220, 200, 780]}>
       <Row cells={['User key', 'Fund', 'Encrypted by passphrase; passphrase in KMS or HSM', 'Daily signing through the SDK']} />
       <Row cells={['Backup key', 'Fund', 'Offline, split between two officers, separate site', 'Recovery only']} />
@@ -537,7 +531,7 @@ const A6: Page = () => (
 );
 
 const A7: Page = () => (
-  <Frame eyebrow={A} title="A11 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A11 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
     <Table heads={['Further need', 'Answer', 'Impact on the design']} widths={[430, 640]}>
       <Row cells={['Yield on idle ETH', 'Staking from custody wallets', 'None: stake from the ETH vault']} />
       <Row cells={['More assets or chains', 'Add a wallet per new chain in each tier', 'Same roles and policy templates']} />

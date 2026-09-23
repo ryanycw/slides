@@ -114,22 +114,17 @@ const Eyebrow = ({ children }: { children: ReactNode }) => {
 
 ### Footer
 
-The left side starts with the domain, then an optional "illustrative" flag, then either a caption or a source link. Pass `caption=""` to leave the left side empty. The page number always sits on the right.
+Only the source reference and link on the left (empty when the page has no source), page number on the right. No captions, domain or disclaimers: keep that in speaker notes.
 
 ```tsx
-type FooterProps = { source?: string; sourceLabel?: string; caption?: string; illustrative?: boolean };
+type FooterProps = { source?: string; sourceLabel?: string };
 
-const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => {
+const Footer = ({ source, sourceLabel }: FooterProps) => {
   const { current, total } = useSlidePageNumber();
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      {caption === '' ? <span /> : (
-        <span>
-          bitgo.com · {illustrative && 'Allocations are illustrative · '}
-          {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
-        </span>
-      )}
+      <span>{source && <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -141,14 +136,14 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
 ```tsx
 type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
-const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, caption, illustrative }: FrameProps) => (
+const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
-      <Footer source={source} sourceLabel={sourceLabel} caption={caption} illustrative={illustrative} />
+      <Footer source={source} sourceLabel={sourceLabel} />
     </main>
   </Tone.Provider>
 );
@@ -297,13 +292,12 @@ const Cover: Page = () => (
         </h1>
         <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for your fund.</p>
       </div>
-      <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
 );
 
 const Problem: Page = () => (
-  <Frame tone="dark" title="Today, safety and speed pull against each other" subtitle="What we typically see across several venues." caption="Common patterns">
+  <Frame tone="dark" title="Today, safety and speed pull against each other" subtitle="What we typically see across several venues.">
     <Grid cols={3}>
       <Card tag="Fast · exposed" title="On exchanges"><div>Exposed if a venue fails</div></Card>
       {/* … */}

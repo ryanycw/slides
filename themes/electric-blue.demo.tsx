@@ -46,19 +46,14 @@ const Eyebrow = ({ children }: { children: ReactNode }) => {
   return <div style={{ fontSize: 24, fontWeight: 500, color: t.hi, marginBottom: 14 }}>{children}</div>;
 };
 
-type FooterProps = { source?: string; sourceLabel?: string; caption?: string; illustrative?: boolean };
+type FooterProps = { source?: string; sourceLabel?: string };
 
-const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => {
+const Footer = ({ source, sourceLabel }: FooterProps) => {
   const { current, total } = useSlidePageNumber();
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      {caption === '' ? <span /> : (
-        <span>
-          bitgo.com · {illustrative && 'Allocations are illustrative · '}
-          {caption ?? <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}
-        </span>
-      )}
+      <span>{source && <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -66,7 +61,7 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
 
 type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
-const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, caption, illustrative }: FrameProps) => (
+const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       <Font />
@@ -74,7 +69,7 @@ const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sou
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
-      <Footer source={source} sourceLabel={sourceLabel} caption={caption} illustrative={illustrative} />
+      <Footer source={source} sourceLabel={sourceLabel} />
     </main>
   </Tone.Provider>
 );
@@ -132,13 +127,12 @@ const Cover: Page = () => (
         </h1>
         <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>Gradient cover: wordmark, pill, thin two-tone headline.</p>
       </div>
-      <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
 );
 
 const Content: Page = () => (
-  <Frame title="So the right setup has to do four things" subtitle="Light page: pale-blue cards with pill tags, thin title, gradient-bar note." caption="Light tone">
+  <Frame title="So the right setup has to do four things" subtitle="Light page: pale-blue cards with pill tags, thin title, gradient-bar note.">
     <Grid cols={2}>
       <Card tag="Goal 1 · insured and safe" title="1 · Reserve insured by default">
         <div>Long-term assets with a qualified custodian</div>
@@ -152,7 +146,7 @@ const Content: Page = () => (
 );
 
 const Closer: Page = () => (
-  <Frame tone="dark" title="What changes for your fund" subtitle="Dark page: glass panel of crosses against a gradient panel of ticks." caption="Dark tone">
+  <Frame tone="dark" title="What changes for your fund" subtitle="Dark page: glass panel of crosses against a gradient panel of ticks.">
     <Grid cols={2}>
       <div style={{ ...glass, borderRadius: 'var(--osd-radius)', padding: '32px 36px 36px' }}>
         <Pill>Typical today</Pill>
