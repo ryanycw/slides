@@ -53,7 +53,7 @@ const Footer = ({ source, sourceLabel }: FooterProps) => {
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      <span>{source && <>Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
+      <span>bitgo.com{source && <> · Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -127,6 +127,7 @@ const Cover: Page = () => (
         </h1>
         <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>Gradient cover: wordmark, pill, thin two-tone headline.</p>
       </div>
+      <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
 );
