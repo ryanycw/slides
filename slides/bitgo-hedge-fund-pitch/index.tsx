@@ -232,7 +232,7 @@ const Agenda: Page = () => (
   <Frame title="Agenda" subtitle="Understand the situation, the need, then our solution.">
     <div style={{ borderTop: `1px solid ${rule}` }}>
       <AgendaItem n="01" title="Priorities" detail="Safety, speed, control, and today’s trade-off" pages="P. 3–4" />
-      <AgendaItem n="02" title="Success Criteria" detail="How to judge any setup, ours included" pages="P. 5" />
+      <AgendaItem n="02" title="Success Criteria" detail="Checkpoints for any setup, ours included" pages="P. 5" />
       <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets, one control plane" pages="P. 6" />
       <AgendaItem n="04" title="Fast and safe, in practice" detail="How capital moves, and who can move it" pages="P. 7–9" />
       <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and how we get there" pages="P. 10–11" />
@@ -286,7 +286,7 @@ const Problem: Page = () => (
 );
 
 const Criteria: Page = () => (
-  <Frame title="Four tests for the right setup" subtitle="These are the tests we set ourselves. Every choice that follows answers one of them.">
+  <Frame title="Six checkpoints for the right setup" subtitle="Each one traces back to a need we heard. Every choice that follows answers one of them.">
     <Grid cols={2}>
       <Card tag="Goal 1 · insured and safe" title="1 · Reserve insured by default">
         <div>Long-term assets with a qualified custodian</div>
@@ -299,6 +299,12 @@ const Criteria: Page = () => (
       </Card>
       <Card tag="Goals 1 + 2" title="4 · Speed never risks the whole book">
         <div>Hot wallets carry only a small, capped share</div>
+      </Card>
+      <Card tag="Must-have · liquidity" title="5 · Liquidity on demand">
+        <div>Trade, settle or borrow without leaving custody</div>
+      </Card>
+      <Card tag="Must-have · US compliance" title="6 · Legal and compliant in the US">
+        <div>A regulated qualified custodian under US law</div>
       </Card>
     </Grid>
   </Frame>
@@ -384,7 +390,7 @@ const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; ti
 );
 
 const Scorecard: Page = () => (
-  <Frame tone="dark" title="What changes, test by test" subtitle="Back to the four tests: where a typical setup stands, and where this design lands.">
+  <Frame tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Back to the checkpoints: where a typical setup stands, and where this design lands.">
     <Grid cols={2}>
       <Panel tag="Typical today" title="A multi-venue setup">
         <CheckRow ok={false}>Reserve spread across venues and wallets</CheckRow>
@@ -619,12 +625,12 @@ export const notes: (string | undefined)[] = [
   'Set expectations: ten minutes, and we start with them, not with BitGo. Invite interruptions; the appendix holds the detail for any deep question.', // 2 Agenda
   'Play back what they told us before pitching anything. Say it out loud: ask them to correct anything that is off. The design depends on these goals, so get a yes or a correction here.', // 3 What we heard
   'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
-  'These four tests are the contract for the rest of the talk. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 5 Criteria
+  'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 5 Criteria
   'Walk the diagram in one sentence per tier (reserve insured and slow on purpose, Go Account for trading, ~5% hot wallets for speed), then read down the right: each tick answers one need from page 3. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 6 Answer
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
   'Read one row across, e.g. treasury ops can start a transfer but never approve it. Stress three Admins so that any two can approve and no one is a bottleneck or a single point of failure.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
-  'Read across row by row: each cross on the left becomes a tick on the right, one per test from earlier. Keep "typical today" neutral. Close the loop with why BitGo: qualified custodian, SOC audits, insurance.', // 10 Scorecard
+  'Read across row by row: each cross on the left becomes a tick on the right, one per checkpoint from earlier; the closing line covers compliance. Keep "typical today" neutral. Close the loop with why BitGo: qualified custodian, SOC audits, insurance.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
   undefined, // Appendix divider
   undefined, // A1 Types
