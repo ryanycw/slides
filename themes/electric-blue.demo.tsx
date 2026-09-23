@@ -10,7 +10,7 @@ export const design: DesignSystem = {
 };
 const navy = '#060a1f';
 const cyan = '#3fd0f5';
-const cyanSoft = '#8be9ff';
+const whiteSoft = 'rgba(255,255,255,0.55)';
 const blueSoft = '#e8eeff';
 const muted = '#5b6480';
 const mutedDark = '#a9b3d6';
@@ -127,7 +127,7 @@ const Cover: Page = () => (
       <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
         <h1 style={{ fontSize: 124, fontWeight: 300, lineHeight: 1.08, margin: '0 0 40px', letterSpacing: -4 }}>
           Protect the reserve.<br />
-          <span style={{ color: cyanSoft }}>Move at market speed.</span>
+          <span style={{ color: whiteSoft }}>Move at market speed.</span>
         </h1>
         <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>Gradient cover: wordmark, pill, thin two-tone headline.</p>
       </div>

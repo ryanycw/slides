@@ -20,7 +20,7 @@ It is modelled on the Sinesubs visual identity: electric-blue gradients over nav
 | muted       | `#5b6480`                  | subtitles, footers, table heads on light pages           |
 | navy        | `#060a1f`                  | dark page base                                           |
 | cyan        | `#3fd0f5`                  | accent on dark pages (eyebrow, pills, `B`, block titles) |
-| cyanSoft    | `#8be9ff`                  | second headline line on the gradient cover               |
+| whiteSoft   | `rgba(255,255,255,0.55)`   | second headline line on the gradient cover (no extra blue) |
 | mutedDark   | `#a9b3d6`                  | secondary copy on dark pages                             |
 | blueSoft    | `#e8eeff`                  | card fill on light pages                                 |
 | rule        | `#d9deeb`                  | hairlines on light pages                                 |
@@ -291,7 +291,7 @@ const Cover: Page = () => (
       <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
         <h1 style={{ fontSize: 124, fontWeight: 300, lineHeight: 1.08, margin: '0 0 40px', letterSpacing: -4 }}>
           Protect the reserve.<br />
-          <span style={{ color: cyanSoft }}>Move at market speed.</span>
+          <span style={{ color: whiteSoft }}>Move at market speed.</span>
         </h1>
         <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>A custody and liquidity plan for your fund.</p>
       </div>
