@@ -4,7 +4,7 @@
   "meta": {
     "title": "Six wallets, three tiers",
     "locale": "en",
-    "quality_profile": "showcase",
+    "quality_profile": "standard",
     "legend": {
       "mode": "hidden"
     }
@@ -175,7 +175,7 @@
       "toSide": "top",
       "labelAt": [
         140,
-        232
+        262
       ]
     },
     {
@@ -196,22 +196,8 @@
       "from": "vault-btc",
       "to": "go-account",
       "variant": "emphasis",
-      "fromSide": "top",
-      "toSide": "right",
-      "via": [
-        [
-          140,
-          40
-        ],
-        [
-          900,
-          40
-        ],
-        [
-          900,
-          332
-        ]
-      ]
+      "fromSide": "bottom",
+      "toSide": "top"
     },
     {
       "id": "stable-fund-trading",
