@@ -52,6 +52,7 @@ const accentBar = 'linear-gradient(180deg, #2446ff, #3fd0f5)';
   - Subtitle: 30 px, muted
   - Card title: 34 px / 400
   - Block title: 30 px / 500
+  - Takeaway lead: 44 px / 400 (sub 28 px, muted)
   - Body, cards, notes: 28 px
   - Table body: 26 px (row head 500)
   - Eyebrow: 24 px / 500
@@ -185,6 +186,25 @@ const Note = ({ children }: { children: ReactNode }) => (
     <p style={{ fontSize: 28, lineHeight: 1.45, margin: 0 }}>{children}</p>
   </div>
 );
+```
+
+### Takeaway (closing line)
+
+Use it as the last element on a page whose final line is its conclusion. Keep `Note` for supporting remarks. The lead must fit one line at 44 px, which is about 21 px per character, so roughly 80 characters.
+
+```tsx
+const Takeaway = ({ lead, sub }: { lead: string; sub?: string }) => {
+  const t = useTone();
+  return (
+    <div style={{ display: 'flex', gap: 28, marginTop: 56 }}>
+      <span style={{ width: 6, flexShrink: 0, borderRadius: 3, background: accentBar }} />
+      <div>
+        <p style={{ fontSize: 44, fontWeight: 400, lineHeight: 1.2, letterSpacing: -1, margin: 0 }}>{lead}</p>
+        {sub && <p style={{ fontSize: 28, lineHeight: 1.4, color: t.sub, margin: '12px 0 0' }}>{sub}</p>}
+      </div>
+    </div>
+  );
+};
 ```
 
 ### Block (small titled paragraph)

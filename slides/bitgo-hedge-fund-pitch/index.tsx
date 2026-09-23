@@ -127,6 +127,20 @@ const Note = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
+// Closing line of a page: a large one-line claim plus an optional muted follow-on.
+const Takeaway = ({ lead, sub }: { lead: string; sub?: string }) => {
+  const t = useTone();
+  return (
+    <div style={{ display: 'flex', gap: 28, marginTop: 56 }}>
+      <span style={{ width: 6, flexShrink: 0, borderRadius: 3, background: accentBar }} />
+      <div>
+        <p style={{ fontSize: 44, fontWeight: 400, lineHeight: 1.2, letterSpacing: -1, margin: 0 }}>{lead}</p>
+        {sub && <p style={{ fontSize: 28, lineHeight: 1.4, color: t.sub, margin: '12px 0 0' }}>{sub}</p>}
+      </div>
+    </div>
+  );
+};
+
 const Block = ({ title, children }: { title: string; children: ReactNode }) => {
   const t = useTone();
   return (
@@ -241,7 +255,7 @@ const Heard: Page = () => (
         <div><B>+</B> · Fully legal and compliant in the US</div>
       </Card>
     </Grid>
-    <Note>Safe storage and fast deployment rarely come together today. Here is where that tension shows up.</Note>
+    <Takeaway lead="Safe storage and fast deployment rarely come together." sub="Here is where that tension shows up today." />
   </Frame>
 );
 
@@ -265,7 +279,7 @@ const Problem: Page = () => (
         <div>Not insured as custody</div>
       </Card>
     </Grid>
-    <Note>What is missing: one setup where the reserve stays safe and trading capital still moves fast.</Note>
+    <Takeaway lead="What is missing is one setup that does both." sub="The reserve stays safe, and trading capital still moves fast." />
   </Frame>
 );
 
