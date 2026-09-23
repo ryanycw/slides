@@ -235,9 +235,11 @@ const Grid = ({ cols, children }: { cols: number; children: ReactNode }) => (
 const Mark = ({ ok }: { ok: boolean }) => (
   <span style={{ width: 36, height: 36, flexShrink: 0, borderRadius: 8, display: 'grid', placeItems: 'center', fontSize: 22, fontWeight: 500, background: '#ffffff', color: ok ? '#2446ff' : '#e5484d' }}>{ok ? '✓' : '✕'}</span>
 );
-const CheckRow = ({ ok, children }: { ok: boolean; children: ReactNode }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.30)', fontSize: 28, marginTop: 14 }}>
+// n: optional item number (aligns rows with a numbered list elsewhere); compact: for 5+ rows.
+const CheckRow = ({ ok, n, compact, children }: { ok: boolean; n?: number; compact?: boolean; children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: compact ? 14 : 18, padding: compact ? '10px 18px' : '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.30)', fontSize: compact ? 26 : 28, marginTop: compact ? 10 : 14 }}>
     <Mark ok={ok} />
+    {n !== undefined && <span style={{ width: 18, flexShrink: 0, color: 'rgba(255,255,255,0.6)' }}>{n}</span>}
     <span>{children}</span>
   </div>
 );

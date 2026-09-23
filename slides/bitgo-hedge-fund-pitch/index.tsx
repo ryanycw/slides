@@ -181,9 +181,10 @@ const Grid = ({ cols, children }: { cols: number; children: ReactNode }) => (
 const Mark = ({ ok }: { ok: boolean }) => (
   <span style={{ width: 36, height: 36, flexShrink: 0, borderRadius: 8, display: 'grid', placeItems: 'center', fontSize: 22, fontWeight: 500, background: '#ffffff', color: ok ? '#2446ff' : '#e5484d' }}>{ok ? '✓' : '✕'}</span>
 );
-const CheckRow = ({ ok, children }: { ok: boolean; children: ReactNode }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 18, padding: '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.30)', fontSize: 28, marginTop: 14 }}>
+const CheckRow = ({ ok, n, compact, children }: { ok: boolean; n?: number; compact?: boolean; children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: compact ? 14 : 18, padding: compact ? '10px 18px' : '14px 20px', borderRadius: 12, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.30)', fontSize: compact ? 26 : 28, marginTop: compact ? 10 : 14 }}>
     <Mark ok={ok} />
+    {n !== undefined && <span style={{ width: 18, flexShrink: 0, color: 'rgba(255,255,255,0.6)' }}>{n}</span>}
     <span>{children}</span>
   </div>
 );
@@ -289,48 +290,48 @@ const Criteria: Page = () => (
   <Frame title="Six checkpoints for the right setup" subtitle="Each one traces back to a need we heard. Every choice that follows answers one of them.">
     <Grid cols={2}>
       <Card tag="Goal 1 · insured and safe" title="1 · Reserve insured by default">
-        <div>Long-term assets with a qualified custodian</div>
+        <div>Long-term assets in insured, offline storage</div>
       </Card>
       <Card tag="Goal 2 · fast deployment" title="2 · Capital moves, custody stays">
         <div>Trade on venues without pre-funding them</div>
       </Card>
-      <Card tag="Goal 3 · role-based control" title="3 · No one person can move funds">
-        <div>Per-wallet roles; initiate and approve split</div>
+      <Card tag="Goal 3 · role-based control" title="3 · No single person can move funds">
+        <div>Every move needs a second, separate approver</div>
       </Card>
       <Card tag="Goals 1 + 2" title="4 · Speed never risks the whole book">
-        <div>Hot wallets carry only a small, capped share</div>
+        <div>Only a small, capped share is ever exposed</div>
       </Card>
       <Card tag="Must-have · liquidity" title="5 · Liquidity on demand">
         <div>Trade, settle or borrow without leaving custody</div>
       </Card>
       <Card tag="Must-have · US compliance" title="6 · Legal and compliant in the US">
-        <div>A regulated qualified custodian under US law</div>
+        <div>Custody that meets US rules for fund assets</div>
       </Card>
     </Grid>
   </Frame>
 );
 
-// One P3 need and how the design meets it: tick, need, one-line answer.
-const Need = ({ title, children }: { title: string; children: ReactNode }) => (
-  <div style={{ display: 'flex', gap: 18, marginBottom: 22 }}>
-    <span style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 8, display: 'grid', placeItems: 'center', fontSize: 20, fontWeight: 500, background: 'var(--osd-accent)', color: '#ffffff', marginTop: 2 }}>✓</span>
-    <div>
-      <div style={{ fontSize: 30, fontWeight: 500, lineHeight: 1.2, color: 'var(--osd-accent)' }}>{title}</div>
-      <div style={{ fontSize: 26, lineHeight: 1.4, marginTop: 4 }}>{children}</div>
+// A tier of the design, plus the P5 checkpoints it carries.
+const Tier = ({ title, meets, children }: { title: string; meets: string[]; children: ReactNode }) => (
+  <div style={{ marginBottom: 30 }}>
+    <h2 style={{ fontSize: 30, fontWeight: 500, lineHeight: 1.2, color: 'var(--osd-accent)', margin: '0 0 6px' }}>{title}</h2>
+    <div style={{ fontSize: 26, lineHeight: 1.4 }}>{children}</div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 10, fontSize: 20, color: muted }}>
+      Checkpoint{meets.length > 1 ? 's' : ''}
+      {meets.map((m) => <Pill key={m}>{m}</Pill>)}
     </div>
   </div>
 );
 
 const Answer: Page = () => (
-  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover every need we heard.">
+  <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover all six checkpoints.">
     <Split>
       <Diagram src={architectureImg} alt="Six wallets in three tiers, drawn with Archify" width={1000} height={582} />
       <div>
-        <Need title="Insured and safe">~85% in insured cold custody · 3 vaults</Need>
-        <Need title="Fast to venues">~10% Go Account trades while in custody</Need>
-        <Need title="Role-based control">Per-wallet roles; initiate and approve split</Need>
-        <Need title="On-demand liquidity">Go Network, Prime trading and lending</Need>
-        <Need title="US legal and compliant">OCC-chartered qualified custodian</Need>
+        <Tier title="Reserve · ~85% · 3 vaults" meets={['1', '6']}>Insured custody cold storage</Tier>
+        <Tier title="Trade · ~10% · Go Account" meets={['2', '5']}>Trades and borrows inside custody</Tier>
+        <Tier title="Operate · ~5% · 2 hot wallets" meets={['4']}>Fast sends, capped daily</Tier>
+        <Tier title="Across all six" meets={['3']}>One set of roles and policies</Tier>
       </div>
     </Split>
   </Frame>
@@ -381,31 +382,35 @@ const Withdrawal: Page = () => (
   </Frame>
 );
 
-const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; title: string; children: ReactNode }) => (
+const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; title?: string; children: ReactNode }) => (
   <div style={{ ...(blue ? { background: bgBlue, border: '1px solid rgba(255,255,255,0.25)' } : glass), borderRadius: 'var(--osd-radius)', padding: '32px 36px 36px' }}>
     <Pill color={blue ? '#ffffff' : skyBlue}>{tag}</Pill>
-    <h2 style={{ fontSize: 34, fontWeight: 400, margin: '18px 0 6px' }}>{title}</h2>
+    {title ? <h2 style={{ fontSize: 34, fontWeight: 400, margin: '18px 0 6px' }}>{title}</h2> : <div style={{ height: 8 }} />}
     {children}
   </div>
 );
 
 const Scorecard: Page = () => (
-  <Frame tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Back to the checkpoints: where a typical setup stands, and where this design lands.">
+  <Frame tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
     <Grid cols={2}>
-      <Panel tag="Typical today" title="A multi-venue setup">
-        <CheckRow ok={false}>Reserve spread across venues and wallets</CheckRow>
-        <CheckRow ok={false}>Pre-fund each venue on-chain to trade</CheckRow>
-        <CheckRow ok={false}>Controls depend on each venue</CheckRow>
-        <CheckRow ok={false}>Exposure sits wherever funds sit</CheckRow>
+      <Panel tag="Typical today">
+        <CheckRow compact n={1} ok={false}>Reserve spread across venues and wallets</CheckRow>
+        <CheckRow compact n={2} ok={false}>Pre-fund each venue on-chain to trade</CheckRow>
+        <CheckRow compact n={3} ok={false}>Controls depend on each venue</CheckRow>
+        <CheckRow compact n={4} ok={false}>Exposure sits wherever funds sit</CheckRow>
+        <CheckRow compact n={5} ok={false}>Liquidity tied to each venue’s balance</CheckRow>
+        <CheckRow compact n={6} ok={false}>Compliance varies venue by venue</CheckRow>
       </Panel>
-      <Panel blue tag="With BitGo" title="This design">
-        <CheckRow ok>Qualified custodian, keys offline, insured</CheckRow>
-        <CheckRow ok>Trade on Go Network while in custody</CheckRow>
-        <CheckRow ok>Per-wallet roles and two approvals</CheckRow>
-        <CheckRow ok>~5% in hot wallets, capped daily</CheckRow>
+      <Panel blue tag="With BitGo">
+        <CheckRow compact n={1} ok>Qualified custodian, keys offline, insured</CheckRow>
+        <CheckRow compact n={2} ok>Trade on Go Network while in custody</CheckRow>
+        <CheckRow compact n={3} ok>Per-wallet roles and two approvals</CheckRow>
+        <CheckRow compact n={4} ok>~5% in hot wallets, capped daily</CheckRow>
+        <CheckRow compact n={5} ok>Go Network, Prime trading and lending</CheckRow>
+        <CheckRow compact n={6} ok>OCC- and NYDFS-regulated custodian</CheckRow>
       </Panel>
     </Grid>
-    <Takeaway lead="Why BitGo: a US-regulated qualified custodian." sub="OCC and NYDFS oversight, SOC 1 and SOC 2 Type 2 audits, $250M insurance." />
+    <Takeaway lead="All six checkpoints, in one setup." sub="Safety and speed stop being a trade-off." />
   </Frame>
 );
 
@@ -625,12 +630,12 @@ export const notes: (string | undefined)[] = [
   'Set expectations: ten minutes, and we start with them, not with BitGo. Invite interruptions; the appendix holds the detail for any deep question.', // 2 Agenda
   'Play back what they told us before pitching anything. Say it out loud: ask them to correct anything that is off. The design depends on these goals, so get a yes or a correction here.', // 3 What we heard
   'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
-  'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 5 Criteria
-  'Walk the diagram in one sentence per tier (reserve insured and slow on purpose, Go Account for trading, ~5% hot wallets for speed), then read down the right: each tick answers one need from page 3. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 6 Answer
+  'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. They are requirements, not our product; ask if they would add or change any.', // 5 Criteria
+  'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
   'Read one row across, e.g. treasury ops can start a transfer but never approve it. Stress three Admins so that any two can approve and no one is a bottleneck or a single point of failure.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
-  'Read across row by row: each cross on the left becomes a tick on the right, one per checkpoint from earlier; the closing line covers compliance. Keep "typical today" neutral. Close the loop with why BitGo: qualified custodian, SOC audits, insurance.', // 10 Scorecard
+  'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
   undefined, // Appendix divider
   undefined, // A1 Types
