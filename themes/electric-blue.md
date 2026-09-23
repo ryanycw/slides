@@ -369,6 +369,8 @@ html[data-theme] {
 body { background:#ffffff !important; }
 .header, .header-row, .toolbar, .cards, footer { display:none !important; }
 svg text { font-family: 'Inter', system-ui, sans-serif !important; }
+.semantic-sigil { display:none !important; }   /* type icons carry no meaning for clients */
+.c-region { fill: rgba(36,70,255,0.03) !important; stroke: #6b8cff !important; }
 ```
 
-Reference sources for the pitch deck's three diagrams: `slides/bitgo-hedge-fund-proposal/assets/archify/*.json`. Of these, `capital-flow` is the dataflow that needs lanes hidden.
+Reference sources: `slides/bitgo-hedge-fund-pitch/assets/archify/wallet-architecture.architecture.json` (tiers as Trade / Reserve / Operate boundaries) and `slides/bitgo-hedge-fund-proposal/assets/archify/*.json` for the other two. Of these, `capital-flow` is the dataflow that needs lanes hidden.

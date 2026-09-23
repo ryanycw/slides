@@ -326,7 +326,7 @@ const Tier = ({ title, meets, children }: { title: string; meets: string[]; chil
 const Answer: Page = () => (
   <Frame source={walletTypes} sourceLabel="BitGo wallet types" title="Three tiers, six wallets, one control plane" subtitle="Each tier does one job. Together they cover all six checkpoints.">
     <Split>
-      <Diagram src={architectureImg} alt="Six wallets in three tiers, drawn with Archify" width={1000} height={582} />
+      <Diagram src={architectureImg} alt="Six wallets in three tiers (Trade, Reserve, Operate), drawn with Archify" width={841} height={660} />
       <div>
         <Tier title="Reserve · ~85% · 3 vaults" meets={['1', '6']}>Insured custody cold storage</Tier>
         <Tier title="Trade · ~10% · Go Account" meets={['2', '5']}>Trades and borrows inside custody</Tier>
@@ -617,7 +617,8 @@ const A13: Page = () => (
 // BitGo facts checked 2026-09-21 (licenses 2026-09-24, bitgo.com/company/licenses) against developers.bitgo.com (wallet types, policies,
 // wallet users) and bitgo.com (Go Network OES, Prime). Customer facts come only from the
 // assessment brief; "today" pain points are framed as typical patterns, not claims.
-// Diagrams: Archify sources in ../bitgo-hedge-fund-proposal/assets/archify, recoloured per
+// Diagrams: Archify sources in ./assets/archify (wallet architecture) and
+// ../bitgo-hedge-fund-proposal/assets/archify (capital flow, withdrawal), recoloured per
 // the "Diagrams" section of themes/electric-blue.md.
 export const meta: SlideMeta = {
   title: 'BitGo pitch: custody and liquidity for your fund',
