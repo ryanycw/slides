@@ -231,13 +231,14 @@ const Heard: Page = () => (
         <div>BTC, ETH and stablecoins</div>
         <div>Held across several exchanges and wallets</div>
         <div>Based in New York</div>
-        <div>Moving to custody plus self-custody on BitGo</div>
+        <div>Moving to custody plus self-custody wallets</div>
       </Card>
-      <Card tag="What you want" title="Three goals, plus liquidity">
+      <Card tag="What you want" title="Three goals, plus two must-haves">
         <div><B>1</B> · Long-term assets insured and safe</div>
         <div><B>2</B> · Capital deployed to venues quickly</div>
         <div><B>3</B> · Role-based control on every wallet</div>
-        <div><B>+</B> · Access to liquidity through BitGo</div>
+        <div><B>+</B> · Access to deep, on-demand liquidity</div>
+        <div><B>+</B> · Fully legal and compliant in the US</div>
       </Card>
     </Grid>
     <Note>Goals 1 and 2 usually pull against each other. The rest of this proposal is about getting both.</Note>
