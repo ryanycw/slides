@@ -82,14 +82,14 @@ const Title = ({ children }: { children: ReactNode }) => (
   <h1 style={{ fontSize: 'var(--osd-size-hero)', fontFamily: 'var(--osd-font-display)', fontWeight: 300, lineHeight: 1.12, letterSpacing: -2, margin: 0 }}>{children}</h1>
 );
 
-type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle: string; children: ReactNode };
+type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
 const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source = walletTypes, sourceLabel = 'BitGo wallet types', caption, illustrative }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
-      <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p>
+      {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
       <Footer source={source} sourceLabel={sourceLabel} caption={caption} illustrative={illustrative} />
     </main>
@@ -228,7 +228,7 @@ const Agenda: Page = () => (
 );
 
 const Heard: Page = () => (
-  <Frame title="Safety, speed and control, all at once" subtitle="Here is what we heard from you. Please correct us if anything is off." caption="Based on what you have shared with us">
+  <Frame title="Safety, speed and control, all at once" caption="Based on what you have shared with us">
     <Grid cols={2}>
       <Card tag="Where you are today" title="A $300M book, spread out">
         <div>BTC, ETH and stablecoins</div>
@@ -561,7 +561,7 @@ export const meta: SlideMeta = {
 export const notes: (string | undefined)[] = [
   'Open on the tension, not on BitGo: most funds think they must choose between a safe reserve and a fast desk. Today we show you do not have to.', // 1 Cover
   'Set expectations: ten minutes, and we start with them, not with BitGo. Invite interruptions; the appendix holds the detail for any deep question.', // 2 Agenda
-  'Play back what they told us before pitching anything. Pause on "correct us": the design depends on these goals, so get a yes or a correction here.', // 3 What we heard
+  'Play back what they told us before pitching anything. Say it out loud: ask them to correct anything that is off. The design depends on these goals, so get a yes or a correction here.', // 3 What we heard
   'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
   'These four tests are the contract for the rest of the talk. Ask: would you add or change any? Whatever they say here becomes the scorecard at the end.', // 5 Criteria
   'One sentence per tier: the reserve is insured and slow on purpose, the Go Account is where trading happens, hot wallets are small and fast. Six wallets because BitGo wallets are per chain. Percentages are a starting point to tune.', // 6 Answer

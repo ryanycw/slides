@@ -62,7 +62,7 @@ const accentBar = 'linear-gradient(180deg, #2446ff, #3fd0f5)';
 ## Layout
 
 - Canvas 1920 × 1080. Content padding is `80px 100px 56px` (top / sides / bottom), which gives a 1720 px content width. The cover and appendix divider use 140 px side padding.
-- `Frame` structure: optional `Eyebrow` → `Title` → subtitle (margin `18px 0 32px`) → content section → `Footer` pinned to the bottom with `marginTop: auto`.
+- `Frame` structure: optional `Eyebrow` → `Title` → optional subtitle (margin `18px 0 32px`; without one, a 40 px gap) → content section → `Footer` pinned to the bottom with `marginTop: auto`.
 - **Three tones.**
   - `light`: `bgLight`, dark text, blue accent.
   - `dark`: `bgDark`, white text, sky-blue accent.
@@ -137,14 +137,14 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
 ### Frame (standard content page)
 
 ```tsx
-type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle: string; children: ReactNode };
+type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
 const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, caption, illustrative }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '80px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
-      <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p>
+      {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
       <Footer source={source} sourceLabel={sourceLabel} caption={caption} illustrative={illustrative} />
     </main>

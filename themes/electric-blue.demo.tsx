@@ -62,7 +62,7 @@ const Footer = ({ source, sourceLabel, caption, illustrative }: FooterProps) => 
   );
 };
 
-type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle: string; children: ReactNode };
+type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
 const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, caption, illustrative }: FrameProps) => (
   <Tone.Provider value={tone}>
@@ -70,7 +70,7 @@ const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sou
       <Font />
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
-      <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p>
+      {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
       <Footer source={source} sourceLabel={sourceLabel} caption={caption} illustrative={illustrative} />
     </main>
