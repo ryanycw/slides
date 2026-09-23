@@ -228,7 +228,7 @@ const Agenda: Page = () => (
 );
 
 const Heard: Page = () => (
-  <Frame title="You need safety, speed and control, all at once" subtitle="Here is what we heard from you. Please correct us if anything is off." caption="Based on what you have shared with us">
+  <Frame title="Safety, speed and control, all at once" subtitle="Here is what we heard from you. Please correct us if anything is off." caption="Based on what you have shared with us">
     <Grid cols={2}>
       <Card tag="Where you are today" title="A $300M book, spread out">
         <div>BTC, ETH and stablecoins</div>
