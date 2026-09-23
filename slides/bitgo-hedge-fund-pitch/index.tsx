@@ -233,11 +233,11 @@ const AgendaItem = ({ n, title, detail, pages }: { n: string; title: string; det
 const Agenda: Page = () => (
   <Frame title="Agenda" subtitle="Understand the situation, the need, then our solution.">
     <div style={{ borderTop: `1px solid ${rule}` }}>
-      <AgendaItem n="01" title="Priorities" detail="Safety, speed, control, and today’s trade-off" pages="P. 3–4" />
-      <AgendaItem n="02" title="Success Criteria" detail="Checkpoints for any setup, ours included" pages="P. 5" />
-      <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets, one control plane" pages="P. 6–7" />
-      <AgendaItem n="04" title="Fast and safe, in practice" detail="How capital moves, and who can move it" pages="P. 8–10" />
-      <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and how we get there" pages="P. 11–12" />
+      <AgendaItem n="01" title="Priorities" detail="Safety, speed and control, and today’s trade-off" pages="P. 3–4" />
+      <AgendaItem n="02" title="Success Criteria" detail="Six checkpoints for the right setup" pages="P. 5" />
+      <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets; Option B with five" pages="P. 6–7" />
+      <AgendaItem n="04" title="Fast and safe, in practice" detail="Capital flow, roles, and the withdrawal path" pages="P. 8–11" />
+      <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and the path to full migration" pages="P. 12–13" />
     </div>
   </Frame>
 );
@@ -397,6 +397,95 @@ const Rbac: Page = () => (
       <Row cells={[<Who name="Fund administrator" detail="NAV" />, 'Viewer', 'Viewer', 'Viewer']} />
     </Table>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
+  </Frame>
+);
+
+// Scenario map: one column per money movement, one row per person.
+const Scenario = ({ n, title, route }: { n: string; title: string; route: string }) => (
+  <div style={{ padding: '0 8px 14px', borderBottom: `1px solid ${rule}` }}>
+    <div style={{ fontSize: 20, color: muted }}>{n}</div>
+    <div style={{ fontSize: 26, fontWeight: 500, color: 'var(--osd-accent)', marginTop: 2 }}>{title}</div>
+    <div style={{ fontSize: 20, color: muted, marginTop: 2 }}>{route}</div>
+  </div>
+);
+const Person = ({ name, role }: { name: string; role: string }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: 76, borderBottom: `1px solid ${rule}` }}>
+    <div style={{ fontSize: 26, fontWeight: 500 }}>{name}</div>
+    <div style={{ fontSize: 20, color: muted }}>{role}</div>
+  </div>
+);
+// kind: start (outline), approve (solid), act (soft fill).
+type ActKind = 'start' | 'approve' | 'act';
+const Chip = ({ kind, children }: { kind: ActKind; children: ReactNode }) => {
+  const look: CSSProperties = kind === 'approve'
+    ? { background: 'var(--osd-accent)', color: '#ffffff', border: '1.5px solid var(--osd-accent)' }
+    : kind === 'start'
+      ? { background: '#ffffff', color: 'var(--osd-accent)', border: '1.5px solid var(--osd-accent)' }
+      : { background: blueSoft, color: 'var(--osd-text)', border: `1.5px solid ${blueSoft}` };
+  return <span style={{ ...look, fontSize: 20, fontWeight: 500, borderRadius: 999, padding: '7px 14px', whiteSpace: 'nowrap' }}>{children}</span>;
+};
+// One grid cell; empty when no kind.
+const Act = ({ kind, children }: { kind?: ActKind; children?: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 76, borderBottom: `1px solid ${rule}`, padding: '0 8px' }}>
+    {kind && <Chip kind={kind}>{children}</Chip>}
+  </div>
+);
+
+const WhoActs: Page = () => (
+  <Frame title="Who acts at each step of the money’s journey" subtitle="The same moves as the capital-flow and withdrawal diagrams, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+    <div style={{ display: 'grid', gridTemplateColumns: '330px repeat(6, 1fr)', columnGap: 6 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, paddingBottom: 18, borderBottom: `1px solid ${rule}`, fontSize: 20, color: muted }}>
+        <Chip kind="start">Starts</Chip>
+        <Chip kind="approve">Approves</Chip>
+      </div>
+      <Scenario n="1" title="Fund trading" route="Vault → Go Account" />
+      <Scenario n="2" title="Trade" route="On Go Network" />
+      <Scenario n="3" title="Refill" route="Vault → hot wallet" />
+      <Scenario n="4" title="Pay a venue" route="Hot wallet → venue" />
+      <Scenario n="5" title="Sweep back" route="Venue → vault" />
+      <Scenario n="6" title="Oversight" route="Any time" />
+
+      <Person name="Treasury operations" role="Spender" />
+      <Act kind="start">Initiate</Act>
+      <Act />
+      <Act kind="start">Initiate</Act>
+      <Act kind="start">API send</Act>
+      <Act kind="start">Initiate</Act>
+      <Act />
+
+      <Person name="COO · CFO · CIO" role="Admins" />
+      <Act kind="approve">Any 2 approve</Act>
+      <Act />
+      <Act kind="approve">Any 2 approve</Act>
+      <Act kind="approve">If large</Act>
+      <Act kind="approve">Approve</Act>
+      <Act kind="act">Set policy</Act>
+
+      <Person name="Portfolio managers" role="Trader" />
+      <Act />
+      <Act kind="act">Place orders</Act>
+      <Act />
+      <Act />
+      <Act />
+      <Act />
+
+      <Person name="Compliance officer" role="Auditor + Freeze" />
+      <Act />
+      <Act />
+      <Act />
+      <Act />
+      <Act />
+      <Act kind="act">Monitor · freeze</Act>
+
+      <Person name="Fund administrator" role="Viewer" />
+      <Act />
+      <Act />
+      <Act />
+      <Act />
+      <Act />
+      <Act kind="act">Reconcile NAV</Act>
+    </div>
+    <Takeaway lead="Moving funds always takes two people." sub="Treasury starts, Admins approve; PMs only trade inside custody." />
   </Frame>
 );
 
@@ -668,6 +757,7 @@ export const notes: (string | undefined)[] = [
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
   'Start with the three rules, then show the table is just those rules applied. Rule 1 gives Admins and Treasury opposite roles; rule 2 is why PMs trade but never withdraw and the administrator only views; rule 3 is the compliance row. Then land the takeaway: three Admins so any two can approve.', // 8 RBAC
+  'Walk left to right in the order money moves: fund trading, trade, refill, pay a venue, sweep back. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Trading is the only one-person action, and it never moves funds out of custody. Oversight runs across all of it.', // 9b Who acts
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
@@ -687,4 +777,4 @@ export const notes: (string | undefined)[] = [
   'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, Rbac, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, Rbac, WhoActs, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
