@@ -441,7 +441,7 @@ const WhoActs: Page = () => (
       <Scenario n="1" title="Fund trading" route="Vault → Go Account" />
       <Scenario n="2" title="Trade" route="On Go Network" />
       <Scenario n="3" title="Refill" route="Vault → Hot Wallet" />
-      <Scenario n="4" title="Pay a venue" route="Hot Wallet → Venue" />
+      <Scenario n="4" title="Deploy to venue" route="Hot Wallet → Venue" />
       <Scenario n="5" title="Sweep back" route="Go Account → Vault" />
       <Scenario n="6" title="Oversight" route="Any time" />
       <Scenario n="7" title="On-chain" route="Hot Wallet → Dapp" opt />
