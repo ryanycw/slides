@@ -380,8 +380,8 @@ const Rbac: Page = () => (
       <Rule n="3" title="Always watched">Compliance audits all; Admins freeze</Rule>
     </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
-      <Row cells={['CEO · COO · CRO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: approve large']} />
       <Row cells={['Treasury operations', 'Wallet Spend: initiate', 'Wallet Spend: initiate', 'Wallet Spend + API token']} />
+      <Row cells={['CEO · COO · CRO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: approve large']} />
       <Row cells={['CIO · PMs', 'Wallet View', 'Trader: buy and sell', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
       <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
       <Row cells={['CTO · Fund admin · Quants · Analysts', 'Wallet View', 'Wallet View', 'Wallet View']} />
@@ -435,7 +435,7 @@ const WhoActs: Page = () => (
       <Scenario n="2" title="Trade" route="On Go Network" />
       <Scenario n="3" title="Refill" route="Vault → Hot Wallet" />
       <Scenario n="4" title="Pay a venue" route="Hot Wallet → Venue" />
-      <Scenario n="5" title="Sweep back" route="Venue → Vault" />
+      <Scenario n="5" title="Sweep back" route="Go Account → Vault" />
       <Scenario n="6" title="Oversight" route="Any time" />
       <Scenario n="7" title="On-chain" route="Hot Wallet → Dapp" opt />
 
@@ -459,7 +459,7 @@ const WhoActs: Page = () => (
 
       <Person name="CIO · PMs" role="Trader" />
       <Act />
-      <Act kind="act">Place orders</Act>
+      <Act kind="act">Buy and sell</Act>
       <Act />
       <Act />
       <Act />
@@ -767,7 +767,7 @@ export const notes: (string | undefined)[] = [
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
-  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Oversight: Admins set policy and can freeze a wallet (freeze sits inside Wallet Admin); Compliance holds Auditor and reads every log. Column 7 is optional, only if the fund trades on-chain (see Option B). For DeFi apps BitGo integrates, give PMs the DeFi role. For any other Dapp the trade is a transaction from the wallet, so it needs Wallet Spend and a whitelisted contract address. Either way, cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so they are not two-person; exposure stays bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
+  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Sweep back here is Go Account to vault, a withdrawal that needs approval; funds coming back from other venues are withdrawn on the exchange, and deposits into a vault need no approval. Oversight: Admins set policy and can freeze a wallet (freeze sits inside Wallet Admin); Compliance holds Auditor and reads every log. Column 7 is optional, only if the fund trades on-chain (see Option B). For DeFi apps BitGo integrates, give PMs the DeFi role. For any other Dapp the trade is a transaction from the wallet, so it needs Wallet Spend and a whitelisted contract address. Either way, cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so they are not two-person; exposure stays bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
   'This turns the previous page into configuration, using the role names from BitGo’s user settings. Rule 1: Treasury holds Wallet Spend and the approvers hold Wallet Admin, so the one who starts never approves. Rule 2: the investment side (CIO and PMs) is Trader on the Go Account and view-only elsewhere; the CTO, quants, analysts and the fund administrator only view (quants read positions for their models). Rule 3: Compliance holds Auditor; freezing is part of Wallet Admin, so the approvers freeze on Compliance’s call. Approvers are the CEO, COO and CRO: none of them runs money, which keeps investment and control apart. They also hold Enterprise Admin and Video ID (needed for withdrawals above $250k a day); the CEO and COO hold Organization Admin. Treasury operations is 2 to 3 people so leave never blocks a transfer. If they use the optional on-chain column, the CIO and PMs add DeFi for BitGo-integrated apps, or Wallet Spend on the ETH Hot Wallet for other Dapps. Land the takeaway: any two of the three Admins can approve. If quants run automated strategies, the strategy’s API token sits under the CIO and PMs’ permissions (Trader on the Go Account; DeFi or Wallet Spend on-chain, capped); the quant personally holds nothing that moves funds.', // 8 RBAC
   'Make it concrete: even an executive with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
