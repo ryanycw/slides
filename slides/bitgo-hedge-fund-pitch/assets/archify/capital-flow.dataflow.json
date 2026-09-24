@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "How capital moves, and how fast",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "stages": [
+    {
+      "label": "Store"
+    },
+    {
+      "label": "Stage liquidity"
+    },
+    {
+      "label": "Trade"
+    },
+    {
+      "label": "Sweep back"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "vaults",
+      "type": "security",
+      "label": "Vaults",
+      "sublabel": "BTC · ETH · stables",
+      "stage": 0,
+      "row": 1,
+      "tag": "insured cold"
+    },
+    {
+      "id": "go",
+      "type": "cloud",
+      "label": "Go Account",
+      "sublabel": "off-chain ledger",
+      "stage": 1,
+      "row": 0,
+      "tag": "in custody"
+    },
+    {
+      "id": "hot",
+      "type": "backend",
+      "label": "Hot Wallets",
+      "sublabel": "BTC · ETH self-custody",
+      "stage": 1,
+      "row": 2,
+      "tag": "API signing"
+    },
+    {
+      "id": "partners",
+      "type": "external",
+      "label": "Partner venues",
+      "sublabel": "Go Network OES",
+      "stage": 2,
+      "row": 0
+    },
+    {
+      "id": "others",
+      "type": "external",
+      "label": "Other venues",
+      "sublabel": "whitelisted addresses",
+      "stage": 2,
+      "row": 2
+    },
+    {
+      "id": "sweep",
+      "type": "security",
+      "label": "Vaults",
+      "sublabel": "idle capital returns",
+      "stage": 3,
+      "row": 1
+    }
+  ],
+  "flows": [
+    {
+      "from": "vaults",
+      "to": "go",
+      "label": "Planned top-up · scheduled, approved",
+      "classification": "within 24h SLA",
+      "variant": "emphasis"
+    },
+    {
+      "from": "vaults",
+      "to": "hot",
+      "label": "Planned refill · scheduled, approved",
+      "classification": "within 24h SLA",
+      "variant": "dashed"
+    },
+    {
+      "from": "go",
+      "to": "partners",
+      "label": "Instant · nothing moves on-chain",
+      "classification": "instant",
+      "variant": "emphasis",
+      "route": "straight",
+      "labelAt": [
+        423,
+        112
+      ]
+    },
+    {
+      "from": "hot",
+      "to": "others",
+      "label": "Minutes · sent to venues by API",
+      "classification": "minutes",
+      "route": "straight",
+      "labelAt": [
+        423,
+        432
+      ]
+    },
+    {
+      "from": "partners",
+      "to": "sweep",
+      "label": "net settlement",
+      "classification": "automated",
+      "variant": "emphasis"
+    },
+    {
+      "from": "others",
+      "to": "sweep",
+      "label": "withdraw",
+      "classification": "on-chain",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "Slow on purpose",
+      "items": [
+        "Leaving the vault takes approvals + video ID",
+        "Top-ups are scheduled, not reactive"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Fast where it matters",
+      "items": [
+        "Go Network allocation needs no on-chain move",
+        "Hot wallets sign by API in minutes"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Small exposure",
+      "items": [
+        "Only ~15% of AUM sits outside the vaults",
+        "Exchange counterparty risk removed for partners"
+      ]
+    }
+  ]
+}

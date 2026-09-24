@@ -356,12 +356,7 @@ const OptionB: Page = () => (
 const CapitalFlow: Page = () => (
   <Frame eyebrow="04 · How it works" title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1180} height={568} />
-    </div>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 40, marginTop: 32 }}>
-      <Block title="Planned">Vault top-ups: scheduled, approved.</Block>
-      <Block title="Instant">Go Network: nothing moves on-chain.</Block>
-      <Block title="Minutes">Hot wallets send to venues by API.</Block>
+      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1260} height={637} />
     </div>
   </Frame>
 );
@@ -739,7 +734,7 @@ const A13: Page = () => (
 // wallet users) and bitgo.com (Go Network OES, Prime). Customer facts come only from the
 // assessment brief; "today" pain points are framed as typical patterns, not claims.
 // Diagrams: Archify sources in ./assets/archify (wallet architecture) and
-// ../bitgo-hedge-fund-proposal/assets/archify (capital flow, withdrawal), recoloured per
+// ./assets/archify (capital flow) and ../bitgo-hedge-fund-proposal/assets/archify (withdrawal), recoloured per
 // the "Diagrams" section of themes/electric-blue.md.
 export const meta: SlideMeta = {
   title: 'BitGo pitch: custody and liquidity for your fund',
