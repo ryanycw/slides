@@ -28,7 +28,7 @@
       "id": "vaults",
       "type": "security",
       "label": "Vaults",
-      "sublabel": "BTC \u00b7 ETH \u00b7 stables",
+      "sublabel": "video ID over $250k/day",
       "stage": 0,
       "row": 1,
       "tag": "insured cold"
@@ -37,7 +37,7 @@
       "id": "go",
       "type": "cloud",
       "label": "Go Account",
-      "sublabel": "off-chain ledger",
+      "sublabel": "assets stay in custody",
       "stage": 1,
       "row": 0,
       "tag": "in custody"
@@ -46,7 +46,7 @@
       "id": "hot",
       "type": "backend",
       "label": "Hot Wallets",
-      "sublabel": "BTC \u00b7 ETH self-custody",
+      "sublabel": "BTC · ETH self-custody",
       "stage": 1,
       "row": 2,
       "tag": "API signing"
@@ -80,31 +80,39 @@
     {
       "from": "vaults",
       "to": "go",
-      "label": "planned top-up",
+      "label": "Planned top-up · 2 approvals, 24h SLA",
       "classification": "within 24h SLA",
       "variant": "emphasis"
     },
     {
       "from": "vaults",
       "to": "hot",
-      "label": "planned refill",
+      "label": "Planned refill · 2 approvals, 24h SLA",
       "classification": "within 24h SLA",
       "variant": "dashed"
     },
     {
       "from": "go",
       "to": "partners",
-      "label": "allocate",
+      "label": "Instant · nothing moves on-chain",
       "classification": "instant",
       "variant": "emphasis",
-      "route": "straight"
+      "route": "straight",
+      "labelAt": [
+        423,
+        112
+      ]
     },
     {
       "from": "hot",
       "to": "others",
-      "label": "send",
+      "label": "Minutes · sent to venues by API",
       "classification": "minutes",
-      "route": "straight"
+      "route": "straight",
+      "labelAt": [
+        423,
+        432
+      ]
     },
     {
       "from": "partners",

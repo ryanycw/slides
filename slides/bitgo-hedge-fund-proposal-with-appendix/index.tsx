@@ -10,7 +10,7 @@ import withdrawalImg from './assets/vault-withdrawal.png';
 // Visual system: themes/electric-blue.md. Keep the components below in lockstep with it.
 
 const FONT_HREF = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap';
-const FONT_LINK_ID = 'osd-webfont-bitgo-hedge-fund-pitch';
+const FONT_LINK_ID = 'osd-webfont-bitgo-hedge-fund-proposal-with-appendix';
 if (typeof document !== 'undefined' && !document.getElementById(FONT_LINK_ID)) {
   const link = document.createElement('link');
   link.id = FONT_LINK_ID;
@@ -760,7 +760,7 @@ const A13: Page = () => (
 // ./assets/archify (all three diagrams), recoloured per
 // the "Diagrams" section of themes/electric-blue.md.
 export const meta: SlideMeta = {
-  title: 'BitGo pitch: custody and liquidity for your fund',
+  title: 'BitGo proposal: custody and liquidity for your fund (with appendix)',
   theme: 'electric-blue',
   createdAt: '2026-09-23T08:32:45.980Z',
 };

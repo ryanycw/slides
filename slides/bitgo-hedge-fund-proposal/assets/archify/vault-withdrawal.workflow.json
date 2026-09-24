@@ -42,7 +42,7 @@
       "lane": "fund",
       "col": 0,
       "type": "frontend",
-      "label": "Spender",
+      "label": "Wallet Spend",
       "sublabel": "initiates withdrawal",
       "width": 140
     },
@@ -140,7 +140,7 @@
       "dot": "cyan",
       "title": "Separation of duties",
       "items": [
-        "Spenders start, Admins approve",
+        "Wallet Spend starts, Wallet Admins approve",
         "Traders and Viewers cannot withdraw"
       ]
     },

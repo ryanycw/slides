@@ -6,7 +6,7 @@ mode: light
 
 # Electric Blue
 
-Built for the BitGo hedge-fund pitch (`slides/bitgo-hedge-fund-pitch`), which is the reference implementation.
+Built for the BitGo hedge-fund pitch (`slides/bitgo-hedge-fund-proposal-with-appendix`), which is the reference implementation.
 It is modelled on the Sinesubs visual identity: electric-blue gradients over navy, alternating with light pages.
 **The deck and this file must stay in lockstep.** If you change a component here, change it in the deck, and the reverse.
 
@@ -374,4 +374,4 @@ svg text { font-family: 'Inter', system-ui, sans-serif !important; }
 .c-region { fill: rgba(36,70,255,0.03) !important; stroke: #6b8cff !important; }
 ```
 
-Reference sources: `slides/bitgo-hedge-fund-pitch/assets/archify/wallet-architecture.architecture.json` (tiers as Reserve / Operate / Trade boundaries; hot wallets sit left, Go Account right; one accepted crossing, so it is delivered at `--quality standard`) and `slides/bitgo-hedge-fund-proposal/assets/archify/*.json` for the other two. Of these, `capital-flow` is the dataflow that needs lanes hidden.
+Reference sources: `slides/bitgo-hedge-fund-proposal-with-appendix/assets/archify/wallet-architecture.architecture.json` (tiers as Reserve / Operate / Trade boundaries; hot wallets sit left, Go Account right; one accepted crossing, so it is delivered at `--quality standard`) and `slides/bitgo-hedge-fund-proposal/assets/archify/*.json` for the other two. Of these, `capital-flow` is the dataflow that needs lanes hidden.

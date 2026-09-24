@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Six wallets, three tiers",
+    "title": "Option B: five wallets, one ETH-chain vault",
     "locale": "en",
     "quality_profile": "standard",
     "legend": {
@@ -25,23 +25,9 @@
       ]
     },
     {
-      "id": "vault-eth",
+      "id": "vault-ethchain",
       "type": "security",
-      "label": "ETH Vault",
-      "sublabel": "custody cold · MPC",
-      "pos": [
-        640,
-        100
-      ],
-      "size": [
-        200,
-        64
-      ]
-    },
-    {
-      "id": "vault-stable",
-      "type": "security",
-      "label": "Stablecoin Vault",
+      "label": "ETH + Stablecoin Vault",
       "sublabel": "custody cold · MPC · ERC-20",
       "pos": [
         340,
@@ -144,8 +130,7 @@
       "label": "Reserve",
       "wraps": [
         "vault-btc",
-        "vault-stable",
-        "vault-eth"
+        "vault-ethchain"
       ]
     },
     {
@@ -179,19 +164,6 @@
       ]
     },
     {
-      "id": "eth-fund-trading",
-      "from": "vault-eth",
-      "to": "go-account",
-      "label": "fund trading",
-      "variant": "emphasis",
-      "fromSide": "bottom",
-      "toSide": "top",
-      "labelAt": [
-        740,
-        198
-      ]
-    },
-    {
       "id": "btc-fund-trading",
       "from": "vault-btc",
       "to": "go-account",
@@ -210,12 +182,17 @@
       ]
     },
     {
-      "id": "stable-fund-trading",
-      "from": "vault-stable",
+      "id": "ethchain-fund-trading",
+      "from": "vault-ethchain",
       "to": "go-account",
       "variant": "emphasis",
       "fromSide": "bottom",
       "toSide": "top",
+      "label": "fund trading",
+      "labelAt": [
+        740,
+        264
+      ],
       "via": [
         [
           440,
@@ -228,8 +205,8 @@
       ]
     },
     {
-      "id": "stable-refill",
-      "from": "vault-stable",
+      "id": "ethchain-refill",
+      "from": "vault-ethchain",
       "to": "hot-eth",
       "label": "refill",
       "variant": "dashed",
