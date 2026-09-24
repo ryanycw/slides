@@ -375,7 +375,7 @@ const Rule = ({ n, title, children }: { n: string; title: string; children: Reac
 
 const Rbac: Page = () => (
   <Frame eyebrow="04 · How it works" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 28 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 12 }}>
       <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
       <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
       <Rule n="3" title="Always watched">Compliance audits all; Admins freeze</Rule>
@@ -387,6 +387,12 @@ const Rbac: Page = () => (
       <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
       <Row cells={['CTO · Fund admin · Quants · Analysts', 'Wallet View', 'Wallet View', 'Wallet View']} />
     </Table>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 16, fontSize: 22, color: mutedDark }}>
+      Enterprise-wide
+      <Pill>CEO · COO · CRO: Enterprise Admin · Video ID</Pill>
+      <Pill>CEO · COO: Organization Admin</Pill>
+      <Pill>Compliance: Organization View</Pill>
+    </div>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
 );
