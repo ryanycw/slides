@@ -80,14 +80,14 @@
     {
       "from": "vaults",
       "to": "go",
-      "label": "Planned top-up · scheduled, approved",
+      "label": "Planned top-up · 2 approvals, within 24h",
       "classification": "within 24h SLA",
       "variant": "emphasis"
     },
     {
       "from": "vaults",
       "to": "hot",
-      "label": "Planned refill · scheduled, approved",
+      "label": "Planned refill · 2 approvals, within 24h",
       "classification": "within 24h SLA",
       "variant": "dashed"
     },
