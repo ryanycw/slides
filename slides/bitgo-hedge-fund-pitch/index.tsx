@@ -356,12 +356,7 @@ const OptionB: Page = () => (
 const CapitalFlow: Page = () => (
   <Frame eyebrow="04 · How it works" title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1052} height={532} />
-    </div>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 40, marginTop: 28 }}>
-      <Block title="Withdrawal SLA">Signed within 24h of approval</Block>
-      <Block title="Video ID">Also required above $250k a day</Block>
-      <Block title="Go Network">Assets stay in custody while you trade</Block>
+      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1260} height={637} />
     </div>
   </Frame>
 );
