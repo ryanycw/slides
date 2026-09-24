@@ -377,14 +377,14 @@ const Rbac: Page = () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 28 }}>
       <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
       <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
-      <Rule n="3" title="Always watched">Compliance sees and can freeze all</Rule>
+      <Rule n="3" title="Always watched">Compliance audits all; Admins freeze</Rule>
     </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
-      <Row cells={['COO · CFO · CIO', 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
-      <Row cells={['Treasury operations', 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
-      <Row cells={['Portfolio managers', 'Viewer', 'Trader: orders, allocations', <>Viewer <span style={{ color: mutedDark }}>· opt. Spender</span></>]} />
-      <Row cells={['Compliance · Auditor', 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
-      <Row cells={['Fund administrator', 'Viewer', 'Viewer', 'Viewer']} />
+      <Row cells={['COO · CFO · CIO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: approve large']} />
+      <Row cells={['Treasury operations', 'Wallet Spend: initiate', 'Wallet Spend: initiate', 'Wallet Spend + API token']} />
+      <Row cells={['Portfolio managers', 'Wallet View', 'Trader: buy and sell', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
+      <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
+      <Row cells={['Fund administrator', 'Wallet View', 'Wallet View', 'Wallet View']} />
     </Table>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
@@ -438,7 +438,7 @@ const WhoActs: Page = () => (
       <Scenario n="6" title="Oversight" route="Any time" />
       <Scenario n="7" title="On-chain" route="Hot Wallet → Dapp" opt />
 
-      <Person name="Treasury operations" role="Spender" />
+      <Person name="Treasury operations" role="Wallet Spend" />
       <Act kind="start">Initiate</Act>
       <Act />
       <Act kind="start">Initiate</Act>
@@ -447,13 +447,13 @@ const WhoActs: Page = () => (
       <Act />
       <Act opt />
 
-      <Person name="COO · CFO · CIO" role="Admins" />
+      <Person name="COO · CFO · CIO" role="Wallet Admin · Video ID" />
       <Act kind="approve">Any 2 approve</Act>
       <Act />
       <Act kind="approve">Any 2 approve</Act>
       <Act kind="approve">If large</Act>
       <Act kind="approve">Approve</Act>
-      <Act kind="act">Set policy</Act>
+      <Act kind="act">Policy · freeze</Act>
       <Act opt kind="approve">Over cap</Act>
 
       <Person name="Portfolio managers" role="Trader" />
@@ -465,16 +465,16 @@ const WhoActs: Page = () => (
       <Act />
       <Act opt kind="start">Sign trade</Act>
 
-      <Person name="Compliance · Auditor" role="Auditor + Freeze" />
+      <Person name="Compliance · Auditor" role="Auditor" />
       <Act />
       <Act />
       <Act />
       <Act />
       <Act />
-      <Act kind="act">Watch · freeze</Act>
+      <Act kind="act">Audit logs</Act>
       <Act opt />
 
-      <Person name="Fund administrator" role="Viewer" />
+      <Person name="Fund administrator" role="Wallet View" />
       <Act />
       <Act />
       <Act />
@@ -492,7 +492,7 @@ const Withdrawal: Page = () => (
     <Split>
       <Diagram src={withdrawalImg} alt="Vault withdrawal approval workflow, drawn with Archify" width={1100} height={623} />
       <div>
-        <Block title="1 · Role">Only a Spender can start it.</Block>
+        <Block title="1 · Role">Only Wallet Spend can start it.</Block>
         <Block title="2 · Policy">Whitelist and daily cap, or denied.</Block>
         <Block title="3 · People">Two other Admins must approve.</Block>
         <Block title="4 · BitGo">Video ID, offline signing, webhook.</Block>
@@ -649,16 +649,19 @@ const TierPolicies: Page = () => (
 );
 
 const A3: Page = () => (
-  <Frame eyebrow={A} title="A7 · Roles and permissions compared" subtitle="Default roles cover most funds; custom roles combine permissions when they do not." source={walletUsers} sourceLabel="BitGo wallet users and roles">
-    <Table heads={['Role / permission', 'Scope', 'Can', 'Cannot']} widths={[300, 220, 760]}>
-      <Row cells={['Enterprise Admin', 'Enterprise', 'Create wallets, manage users, enterprise policy', 'Skip approval rules']} />
-      <Row cells={['Wallet Admin', 'Wallet', 'Set wallet policy, users, whitelists; approve', 'Approve own requests']} />
-      <Row cells={['Spender', 'Wallet', 'Initiate withdrawals, create addresses', 'Change policy']} />
-      <Row cells={['Trader', 'Go Account', 'Place orders; view enterprise wallets', 'Withdraw']} />
-      <Row cells={['Viewer', 'Wallet', 'See balances, transactions, users', 'Move funds']} />
-      <Row cells={['Auditor', 'Enterprise', 'Read activity logs for every user', 'Move funds']} />
-      <Row cells={['Freeze', 'Wallet', 'Halt all withdrawals on a wallet', 'Unfreeze alone']} />
+  <Frame eyebrow={A} title="A7 · Roles and permissions compared" subtitle="The roles in BitGo’s user settings, and who holds each in this design." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+    <Table heads={['Role', 'Can', 'Held by']} widths={[330, 760]}>
+      <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'COO · CFO · CIO']} />
+      <Row cells={['Enterprise Admin', 'Create wallets, enterprise policies, bank accounts', 'COO · CFO · CIO']} />
+      <Row cells={['Video ID', 'Video ID for withdrawals and policy unlocks', 'COO · CFO · CIO']} />
+      <Row cells={['Wallet Admin', 'Whitelists, wallet policies, approvals, freeze', 'COO · CFO · CIO']} />
+      <Row cells={['Wallet Spend', 'Withdraw from wallets; new receive addresses', 'Treasury operations']} />
+      <Row cells={['Trader', 'Buy and sell on the Go Account', 'Portfolio managers']} />
+      <Row cells={['DeFi', 'Connect BitGo-integrated DeFi apps to wallets', 'Optional: PMs']} />
+      <Row cells={['Auditor', 'Audit logs across enterprises, wallets, users', 'Compliance · Auditor']} />
+      <Row cells={['Wallet View', 'View balances and transactions', 'PMs · fund administrator']} />
     </Table>
+    <Note>Freeze sits inside Wallet Admin. Also available: Organization View and Billing (BitGo invoices).</Note>
   </Frame>
 );
 
@@ -706,7 +709,7 @@ const A7: Page = () => (
       <Row cells={['Yield on idle ETH', 'Staking from custody wallets', 'None: stake from the ETH vault']} />
       <Row cells={['More assets or chains', 'Add a wallet per new chain in each tier', 'Same roles and policy templates']} />
       <Row cells={['Second custodian model', 'Self-custody cold wallet (an optional 7th)', 'Adds offline key ceremony']} />
-      <Row cells={['Audit and NAV reporting', 'Viewer and Auditor roles, reports, webhooks', 'None: already provisioned']} />
+      <Row cells={['Audit and NAV reporting', 'Wallet View and Auditor roles, webhooks', 'None: already provisioned']} />
       <Row cells={['Cover above $250M', 'Additional insurance arranged through BitGo', 'Commercial, not technical']} />
       <Row cells={['Automated treasury', 'BitGo SDK + transfer webhooks', 'Extends hot-wallet tooling']} />
     </Table>
@@ -746,7 +749,7 @@ const A13: Page = () => (
 // wallet users) and bitgo.com (Go Network OES, Prime). Customer facts come only from the
 // assessment brief; "today" pain points are framed as typical patterns, not claims.
 // Diagrams: Archify sources in ./assets/archify (wallet architecture) and
-// ./assets/archify (capital flow) and ../bitgo-hedge-fund-proposal/assets/archify (withdrawal), recoloured per
+// ./assets/archify (all three diagrams), recoloured per
 // the "Diagrams" section of themes/electric-blue.md.
 export const meta: SlideMeta = {
   title: 'BitGo pitch: custody and liquidity for your fund',
@@ -763,8 +766,8 @@ export const notes: (string | undefined)[] = [
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
-  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Column 7 is optional, only if the fund trades on-chain through Dapps (DEX, DeFi; see Option B): give PMs the Spender role on the ETH Hot Wallet only (they can sign by hand, or issue an API token to an automated strategy), whitelist the contracts it may call, and cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so it is not two-person; the exposure is bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
-  'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the fund administrator (who calculates NAV) only views, rule 3 is the compliance row, which covers the compliance officer and the auditor. Sizing: COO, CFO and CIO are the three Enterprise Admins; Treasury operations is 2 to 3 people so leave never blocks a transfer. Land the takeaway: any two of the three Admins can approve. If they use the optional on-chain column from the previous page, the one extra grant is Spender for PMs on the ETH Hot Wallet only, signed by hand or by an automated strategy’s API token; still rule 2.', // 8 RBAC
+  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Oversight: Admins set policy and can freeze a wallet (freeze sits inside Wallet Admin); Compliance holds Auditor and reads every log. Column 7 is optional, only if the fund trades on-chain (see Option B). For DeFi apps BitGo integrates, give PMs the DeFi role. For any other Dapp the trade is a transaction from the wallet, so it needs Wallet Spend and a whitelisted contract address. Either way, cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so they are not two-person; exposure stays bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
+  'This turns the previous page into configuration, using the role names from BitGo’s user settings. Rule 1: Treasury holds Wallet Spend and Admins hold Wallet Admin, so the one who starts never approves. Rule 2: PMs are Trader on the Go Account and view-only elsewhere; the fund administrator (who calculates NAV) only views. Rule 3: Compliance holds Auditor; freezing is part of Wallet Admin, so the Admins freeze on Compliance’s call. COO, CFO and CIO also hold Organization Admin (users and roles), Enterprise Admin (wallets, enterprise policy) and Video ID, which withdrawals above $250k a day need. Treasury operations is 2 to 3 people so leave never blocks a transfer. If they use the optional on-chain column, PMs add DeFi for BitGo-integrated apps, or Wallet Spend on the ETH Hot Wallet for other Dapps. Land the takeaway: any two of the three Admins can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, test before moving size. Why reserve first: it is about 85% of assets and today sits on venues with counterparty risk and no custody cover, so moving it first takes the biggest risk off the table early; trading capital stays on its venues until the Go Account and hot wallets are proven, so the desk is not disrupted; and deposits into a vault need no approvals or video ID, only withdrawals do. Why decide approvers now: the any-two-of-three rule needs named Admins, and policies lock 48 hours after Build, after which only BitGo support can change them; approvals gate the 24h withdrawal SLA, so approvers spread across time zones keep withdrawals moving around the clock; each approver needs KYC, 2FA and video ID set up during Onboard; and approvers must be different people from Treasury, who initiate. Close by proposing a working session with ops and compliance to settle the three decisions this week.', // 11 Next steps

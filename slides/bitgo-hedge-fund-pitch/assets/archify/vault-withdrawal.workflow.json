@@ -1,0 +1,164 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Vault withdrawal: who can do what",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "lanes": [
+    {
+      "id": "fund",
+      "label": "Hedge fund users"
+    },
+    {
+      "id": "policy",
+      "label": "BitGo policy engine"
+    },
+    {
+      "id": "trust",
+      "label": "BitGo Bank & Trust"
+    },
+    {
+      "id": "stop",
+      "label": "Stopped",
+      "variant": "exception"
+    }
+  ],
+  "mainPath": [
+    "initiate",
+    "rules",
+    "approve",
+    "video",
+    "sign",
+    "broadcast"
+  ],
+  "nodes": [
+    {
+      "id": "initiate",
+      "lane": "fund",
+      "col": 0,
+      "type": "frontend",
+      "label": "Wallet Spend",
+      "sublabel": "initiates withdrawal",
+      "width": 140
+    },
+    {
+      "id": "rules",
+      "lane": "policy",
+      "col": 1,
+      "type": "security",
+      "label": "Policy rules",
+      "sublabel": "whitelist \u00b7 limits",
+      "tag": "locked after 48h",
+      "width": 140
+    },
+    {
+      "id": "approve",
+      "lane": "fund",
+      "col": 2,
+      "type": "frontend",
+      "label": "Wallet Admins",
+      "sublabel": "2 approve",
+      "tag": "not the initiator",
+      "width": 140
+    },
+    {
+      "id": "video",
+      "lane": "trust",
+      "col": 3,
+      "type": "security",
+      "label": "Video ID",
+      "sublabel": "over $250k / day",
+      "width": 140
+    },
+    {
+      "id": "sign",
+      "lane": "trust",
+      "col": 4,
+      "type": "backend",
+      "label": "Vault signing",
+      "sublabel": "offline operators",
+      "width": 140
+    },
+    {
+      "id": "broadcast",
+      "lane": "trust",
+      "col": 5,
+      "type": "cloud",
+      "label": "Broadcast",
+      "sublabel": "webhook to fund",
+      "width": 140
+    },
+    {
+      "id": "denied",
+      "lane": "stop",
+      "col": 1,
+      "type": "security",
+      "label": "Denied",
+      "sublabel": "unknown address",
+      "width": 140
+    }
+  ],
+  "edges": [
+    {
+      "from": "initiate",
+      "to": "rules"
+    },
+    {
+      "from": "rules",
+      "to": "approve",
+      "label": "needs approval",
+      "variant": "emphasis"
+    },
+    {
+      "from": "approve",
+      "to": "video",
+      "variant": "emphasis"
+    },
+    {
+      "from": "video",
+      "to": "sign"
+    },
+    {
+      "from": "sign",
+      "to": "broadcast"
+    },
+    {
+      "from": "rules",
+      "to": "denied",
+      "label": "deny",
+      "variant": "security",
+      "role": "error"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Separation of duties",
+      "items": [
+        "Wallet Spend starts, Wallet Admins approve",
+        "Traders and Viewers cannot withdraw"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Rules the fund cannot bypass",
+      "items": [
+        "Whitelist: Go Account + own hot wallets",
+        "Policies lock 48h after creation"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "BitGo-side checks",
+      "items": [
+        "Live video ID on large withdrawals",
+        "Keys never leave offline vaults"
+      ]
+    }
+  ]
+}
