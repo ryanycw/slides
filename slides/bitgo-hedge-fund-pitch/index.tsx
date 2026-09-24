@@ -391,11 +391,13 @@ const Rbac: Page = () => (
 );
 
 // Scenario map: one column per money movement, one row per person.
-const Scenario = ({ n, title, route }: { n: string; title: string; route: string }) => (
-  <div style={{ padding: '0 8px 14px', borderBottom: `1px solid ${rule}` }}>
-    <div style={{ fontSize: 20, color: muted }}>{n}</div>
-    <div style={{ fontSize: 26, fontWeight: 500, color: 'var(--osd-accent)', marginTop: 2 }}>{title}</div>
-    <div style={{ fontSize: 20, color: muted, marginTop: 2 }}>{route}</div>
+// opt marks an optional scenario: dashed, lightly tinted column.
+const optCol: CSSProperties = { background: 'rgba(36,70,255,0.04)', borderLeft: '1.5px dashed #9db0ff', borderRight: '1.5px dashed #9db0ff' };
+const Scenario = ({ n, title, route, opt }: { n: string; title: string; route: string; opt?: boolean }) => (
+  <div style={{ padding: opt ? '0 10px 14px' : '0 8px 14px', borderBottom: `1px solid ${rule}`, ...(opt ? { ...optCol, borderTop: '1.5px dashed #9db0ff', borderRadius: '12px 12px 0 0', paddingTop: 8 } : {}) }}>
+    <div style={{ fontSize: 20, color: muted }}>{n}{opt && <span style={{ marginLeft: 10, fontSize: 18, fontWeight: 500, color: 'var(--osd-accent)', border: '1.5px dashed var(--osd-accent)', borderRadius: 999, padding: '2px 10px' }}>Optional</span>}</div>
+    <div style={{ fontSize: 26, fontWeight: 500, color: 'var(--osd-accent)', marginTop: 2, whiteSpace: 'nowrap' }}>{title}</div>
+    <div style={{ fontSize: 18, color: muted, marginTop: 2, whiteSpace: 'nowrap' }}>{route}</div>
   </div>
 );
 const Person = ({ name, role }: { name: string; role: string }) => (
@@ -415,15 +417,15 @@ const Chip = ({ kind, children }: { kind: ActKind; children: ReactNode }) => {
   return <span style={{ ...look, fontSize: 20, fontWeight: 500, borderRadius: 999, padding: '7px 14px', whiteSpace: 'nowrap' }}>{children}</span>;
 };
 // One grid cell; empty when no kind.
-const Act = ({ kind, children }: { kind?: ActKind; children?: ReactNode }) => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 76, borderBottom: `1px solid ${rule}`, padding: '0 8px' }}>
+const Act = ({ kind, opt, last, children }: { kind?: ActKind; opt?: boolean; last?: boolean; children?: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 76, borderBottom: last && opt ? '1.5px dashed #9db0ff' : `1px solid ${rule}`, padding: '0 6px', ...(opt ? optCol : {}), ...(last && opt ? { borderRadius: '0 0 12px 12px' } : {}) }}>
     {kind && <Chip kind={kind}>{children}</Chip>}
   </div>
 );
 
 const WhoActs: Page = () => (
   <Frame eyebrow="04 · How it works" title="Who acts at each step of the money’s journey" subtitle="The moves from the capital-flow diagram, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
-    <div style={{ display: 'grid', gridTemplateColumns: '330px repeat(6, 1fr)', columnGap: 6 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '270px repeat(7, 1fr)', columnGap: 6 }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, paddingBottom: 18, borderBottom: `1px solid ${rule}`, fontSize: 20, color: muted }}>
         <Chip kind="start">Starts</Chip>
         <Chip kind="approve">Approves</Chip>
@@ -434,6 +436,7 @@ const WhoActs: Page = () => (
       <Scenario n="4" title="Pay a venue" route="Hot Wallet → Venue" />
       <Scenario n="5" title="Sweep back" route="Venue → Vault" />
       <Scenario n="6" title="Oversight" route="Any time" />
+      <Scenario n="7" title="On-chain" route="Hot Wallet → DEX" opt />
 
       <Person name="Treasury operations" role="Spender" />
       <Act kind="start">Initiate</Act>
@@ -442,6 +445,7 @@ const WhoActs: Page = () => (
       <Act kind="start">API send</Act>
       <Act kind="start">Initiate</Act>
       <Act />
+      <Act opt />
 
       <Person name="COO · CFO · CIO" role="Admins" />
       <Act kind="approve">Any 2 approve</Act>
@@ -450,6 +454,7 @@ const WhoActs: Page = () => (
       <Act kind="approve">If large</Act>
       <Act kind="approve">Approve</Act>
       <Act kind="act">Set policy</Act>
+      <Act opt kind="approve">Over cap</Act>
 
       <Person name="Portfolio managers" role="Trader" />
       <Act />
@@ -458,6 +463,7 @@ const WhoActs: Page = () => (
       <Act />
       <Act />
       <Act />
+      <Act opt kind="start">Bot · API</Act>
 
       <Person name="Compliance · Auditor" role="Auditor + Freeze" />
       <Act />
@@ -465,7 +471,8 @@ const WhoActs: Page = () => (
       <Act />
       <Act />
       <Act />
-      <Act kind="act">Monitor · freeze</Act>
+      <Act kind="act">Watch · freeze</Act>
+      <Act opt />
 
       <Person name="Fund administrator" role="Viewer" />
       <Act />
@@ -474,8 +481,9 @@ const WhoActs: Page = () => (
       <Act />
       <Act />
       <Act kind="act">Reconcile NAV</Act>
+      <Act opt last />
     </div>
-    <Takeaway lead="Every move needs a starter and a separate approver." sub="The role table turns this into per-wallet permissions." />
+    <Takeaway lead="Every move needs a starter and a separate approver." sub="Optional bot: ETH Hot Wallet only, whitelisted contracts, capped; an Admin approves above the cap." />
   </Frame>
 );
 
@@ -746,7 +754,7 @@ export const notes: (string | undefined)[] = [
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
-  'Walk left to right in the order money moves: fund trading, trade, refill, pay a venue, sweep back. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Trading is the only one-person action, and it never moves funds out of custody. Oversight runs across all of it.', // 9b Who acts
+  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Column 7 is optional, only if the fund trades on-chain (DEX or DeFi, see Option B): give the trading bot an API token as Spender on the ETH Hot Wallet only, whitelist the contracts it may call, and cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so it is not two-person; the exposure is bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
   'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the fund administrator (who calculates NAV) only views, rule 3 is the compliance row, which covers the compliance officer and the auditor. Sizing: COO, CFO and CIO are the three Enterprise Admins; Treasury operations is 2 to 3 people so leave never blocks a transfer. Land the takeaway: any two of the three Admins can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
