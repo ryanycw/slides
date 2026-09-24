@@ -513,19 +513,19 @@ const Scorecard: Page = () => (
   <Frame eyebrow="05 · Next steps" tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
     <Grid cols={2}>
       <Panel tag="Typical today">
-        <CheckRow compact n={1} ok={false}>Reserve spread across venues and wallets</CheckRow>
+        <CheckRow compact n={1} ok={false}>Reserve sits on venues, not insured as custody</CheckRow>
         <CheckRow compact n={2} ok={false}>Pre-fund each venue on-chain to trade</CheckRow>
-        <CheckRow compact n={3} ok={false}>Controls depend on each venue</CheckRow>
-        <CheckRow compact n={4} ok={false}>Exposure sits wherever funds sit</CheckRow>
-        <CheckRow compact n={5} ok={false}>Liquidity tied to each venue’s balance</CheckRow>
-        <CheckRow compact n={6} ok={false}>Compliance varies venue by venue</CheckRow>
+        <CheckRow compact n={3} ok={false}>One person or one key can move funds</CheckRow>
+        <CheckRow compact n={4} ok={false}>No cap on how much is exposed</CheckRow>
+        <CheckRow compact n={5} ok={false}>Liquidity locked up in each venue</CheckRow>
+        <CheckRow compact n={6} ok={false}>No qualified custodian for fund assets</CheckRow>
       </Panel>
       <Panel blue tag="With BitGo">
         <CheckRow compact n={1} ok>Qualified custodian, keys offline, insured</CheckRow>
         <CheckRow compact n={2} ok>Trade on Go Network while in custody</CheckRow>
         <CheckRow compact n={3} ok>Per-wallet roles and two approvals</CheckRow>
         <CheckRow compact n={4} ok>~5% in hot wallets, capped daily</CheckRow>
-        <CheckRow compact n={5} ok>Go Network, Prime trading and lending</CheckRow>
+        <CheckRow compact n={5} ok>Prime trading and lending, in custody</CheckRow>
         <CheckRow compact n={6} ok>OCC- and NYDFS-regulated custodian</CheckRow>
       </Panel>
     </Grid>
