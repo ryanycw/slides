@@ -356,7 +356,12 @@ const OptionB: Page = () => (
 const CapitalFlow: Page = () => (
   <Frame eyebrow="04 · How it works" title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1260} height={637} />
+      <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1052} height={532} />
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 40, marginTop: 28 }}>
+      <Block title="Withdrawal SLA">Signed within 24h of approval</Block>
+      <Block title="Video ID">Also required above $250k a day</Block>
+      <Block title="Go Network">Assets stay in custody while you trade</Block>
     </div>
   </Frame>
 );
@@ -750,7 +755,7 @@ export const notes: (string | undefined)[] = [
   'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. They are requirements, not our product; ask if they would add or change any.', // 5 Criteria
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
-  'Walk the diagram left to right. The key point: most of the speed comes from Go Network, where the fund trades against partner venues while assets stay in custody. Only a small float ever goes on-chain to a venue.', // 7 Capital flow
+  'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
   'Walk left to right in the order money moves: fund trading, trade, refill, pay a venue, sweep back. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Trading is the only one-person action, and it never moves funds out of custody. Oversight runs across all of it.', // 9b Who acts
   'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the administrator only views, rule 3 is the compliance row. Land the takeaway: three Admins so any two can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
