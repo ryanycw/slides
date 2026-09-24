@@ -380,11 +380,11 @@ const Rbac: Page = () => (
       <Rule n="3" title="Always watched">Compliance audits all; Admins freeze</Rule>
     </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
-      <Row cells={['COO · CFO · CIO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: approve large']} />
+      <Row cells={['CEO · COO · CRO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: approve large']} />
       <Row cells={['Treasury operations', 'Wallet Spend: initiate', 'Wallet Spend: initiate', 'Wallet Spend + API token']} />
-      <Row cells={['Portfolio managers', 'Wallet View', 'Trader: buy and sell', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
+      <Row cells={['CIO · PMs', 'Wallet View', 'Trader: buy and sell', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
       <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
-      <Row cells={['Fund administrator', 'Wallet View', 'Wallet View', 'Wallet View']} />
+      <Row cells={['CTO · Fund admin', 'Wallet View', 'Wallet View', 'Wallet View']} />
     </Table>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
@@ -447,7 +447,7 @@ const WhoActs: Page = () => (
       <Act />
       <Act opt />
 
-      <Person name="COO · CFO · CIO" role="Wallet Admin · Video ID" />
+      <Person name="CEO · COO · CRO" role="Wallet Admin · Video ID" />
       <Act kind="approve">Any 2 approve</Act>
       <Act />
       <Act kind="approve">Any 2 approve</Act>
@@ -456,7 +456,7 @@ const WhoActs: Page = () => (
       <Act kind="act">Policy · freeze</Act>
       <Act opt kind="approve">Over cap</Act>
 
-      <Person name="Portfolio managers" role="Trader" />
+      <Person name="CIO · PMs" role="Trader" />
       <Act />
       <Act kind="act">Place orders</Act>
       <Act />
@@ -474,13 +474,13 @@ const WhoActs: Page = () => (
       <Act kind="act">Audit logs</Act>
       <Act opt />
 
-      <Person name="Fund administrator" role="Wallet View" />
+      <Person name="CTO · Fund admin" role="Wallet View" />
       <Act />
       <Act />
       <Act />
       <Act />
       <Act />
-      <Act kind="act">Reconcile NAV</Act>
+      <Act kind="act">Systems · NAV</Act>
       <Act opt last />
     </div>
     <Takeaway lead="Every move needs a starter and a separate approver." sub="Optional PM trading: ETH Hot Wallet only, whitelisted contracts, capped; Admin above cap." />
@@ -651,17 +651,17 @@ const TierPolicies: Page = () => (
 const A3: Page = () => (
   <Frame eyebrow={A} title="A7 · Roles and permissions compared" subtitle="The roles in BitGo’s user settings, and who holds each in this design." source={walletUsers} sourceLabel="BitGo wallet users and roles">
     <Table heads={['Role', 'Can', 'Held by']} widths={[330, 760]}>
-      <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'COO · CFO · CIO']} />
-      <Row cells={['Enterprise Admin', 'Create wallets, enterprise policies, bank accounts', 'COO · CFO · CIO']} />
-      <Row cells={['Video ID', 'Video ID for withdrawals and policy unlocks', 'COO · CFO · CIO']} />
-      <Row cells={['Wallet Admin', 'Whitelists, wallet policies, approvals, freeze', 'COO · CFO · CIO']} />
+      <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'CEO · COO']} />
+      <Row cells={['Organization View', 'View users, roles and user changes', 'Compliance · Auditor']} />
+      <Row cells={['Enterprise Admin', 'Create wallets, enterprise policies, bank accounts', 'CEO · COO · CRO']} />
+      <Row cells={['Video ID', 'Video ID for withdrawals and policy unlocks', 'CEO · COO · CRO']} />
+      <Row cells={['Wallet Admin', 'Whitelists, wallet policies, approvals, freeze', 'CEO · COO · CRO']} />
       <Row cells={['Wallet Spend', 'Withdraw from wallets; new receive addresses', 'Treasury operations']} />
-      <Row cells={['Trader', 'Buy and sell on the Go Account', 'Portfolio managers']} />
-      <Row cells={['DeFi', 'Connect BitGo-integrated DeFi apps to wallets', 'Optional: PMs']} />
+      <Row cells={['Trader', 'Buy and sell on the Go Account', 'CIO · PMs']} />
+      <Row cells={['DeFi', 'Connect BitGo-integrated DeFi apps to wallets', 'Optional: CIO · PMs']} />
       <Row cells={['Auditor', 'Audit logs across enterprises, wallets, users', 'Compliance · Auditor']} />
-      <Row cells={['Wallet View', 'View balances and transactions', 'PMs · fund administrator']} />
+      <Row cells={['Wallet View', 'View balances and transactions', 'CIO · PMs · CTO · Fund admin']} />
     </Table>
-    <Note>Freeze sits inside Wallet Admin. Also available: Organization View and Billing (BitGo invoices).</Note>
   </Frame>
 );
 
@@ -767,8 +767,8 @@ export const notes: (string | undefined)[] = [
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
   'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Oversight: Admins set policy and can freeze a wallet (freeze sits inside Wallet Admin); Compliance holds Auditor and reads every log. Column 7 is optional, only if the fund trades on-chain (see Option B). For DeFi apps BitGo integrates, give PMs the DeFi role. For any other Dapp the trade is a transaction from the wallet, so it needs Wallet Spend and a whitelisted contract address. Either way, cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so they are not two-person; exposure stays bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
-  'This turns the previous page into configuration, using the role names from BitGo’s user settings. Rule 1: Treasury holds Wallet Spend and Admins hold Wallet Admin, so the one who starts never approves. Rule 2: PMs are Trader on the Go Account and view-only elsewhere; the fund administrator (who calculates NAV) only views. Rule 3: Compliance holds Auditor; freezing is part of Wallet Admin, so the Admins freeze on Compliance’s call. COO, CFO and CIO also hold Organization Admin (users and roles), Enterprise Admin (wallets, enterprise policy) and Video ID, which withdrawals above $250k a day need. Treasury operations is 2 to 3 people so leave never blocks a transfer. If they use the optional on-chain column, PMs add DeFi for BitGo-integrated apps, or Wallet Spend on the ETH Hot Wallet for other Dapps. Land the takeaway: any two of the three Admins can approve.', // 8 RBAC
-  'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
+  'This turns the previous page into configuration, using the role names from BitGo’s user settings. Rule 1: Treasury holds Wallet Spend and the approvers hold Wallet Admin, so the one who starts never approves. Rule 2: the investment side (CIO and PMs) is Trader on the Go Account and view-only elsewhere; the CTO and fund administrator only view. Rule 3: Compliance holds Auditor; freezing is part of Wallet Admin, so the approvers freeze on Compliance’s call. Approvers are the CEO, COO and CRO: none of them runs money, which keeps investment and control apart. They also hold Enterprise Admin and Video ID (needed for withdrawals above $250k a day); the CEO and COO hold Organization Admin. Treasury operations is 2 to 3 people so leave never blocks a transfer. If they use the optional on-chain column, the CIO and PMs add DeFi for BitGo-integrated apps, or Wallet Spend on the ETH Hot Wallet for other Dapps. Land the takeaway: any two of the three Admins can approve.', // 8 RBAC
+  'Make it concrete: even an executive with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, test before moving size. Why reserve first: it is about 85% of assets and today sits on venues with counterparty risk and no custody cover, so moving it first takes the biggest risk off the table early; trading capital stays on its venues until the Go Account and hot wallets are proven, so the desk is not disrupted; and deposits into a vault need no approvals or video ID, only withdrawals do. Why decide approvers now: the any-two-of-three rule needs named Admins, and policies lock 48 hours after Build, after which only BitGo support can change them; approvals gate the 24h withdrawal SLA, so approvers spread across time zones keep withdrawals moving around the clock; each approver needs KYC, 2FA and video ID set up during Onboard; and approvers must be different people from Treasury, who initiate. Close by proposing a working session with ops and compliance to settle the three decisions this week.', // 11 Next steps
   undefined, // Appendix divider
@@ -778,7 +778,7 @@ export const notes: (string | undefined)[] = [
   undefined, // A4 Multisig vs MPC
   'Use if they answer "DeFi" to the ETH question on the next-steps slide.', // A5 Six or five
   undefined, // A6 Tier policies
-  undefined, // A7 Roles
+  'Freeze sits inside Wallet Admin, so the approvers can freeze on Compliance’s call. Billing (view and pay BitGo invoices) goes to the COO, since there is no CFO. Control roles sit with CEO, COO and CRO; the investment side (CIO, PMs) only trades; the CTO builds the integration with view access and never holds a token that can move funds.', // A7 Roles
   'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A8 Policy toolkit
   undefined, // A9 Keys
   undefined, // A10 Liquidity
