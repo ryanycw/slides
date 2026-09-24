@@ -361,11 +361,6 @@ const CapitalFlow: Page = () => (
   </Frame>
 );
 
-const Who = ({ name, detail }: { name: string; detail: string }) => {
-  const t = useTone();
-  return <>{name} <span style={{ fontWeight: 400, color: t.sub }}>· {detail}</span></>;
-};
-
 // A design rule behind the role table: short name plus the one-line rule.
 const Rule = ({ n, title, children }: { n: string; title: string; children: ReactNode }) => {
   const t = useTone();
@@ -385,11 +380,11 @@ const Rbac: Page = () => (
       <Rule n="3" title="Always watched">Compliance sees and can freeze all</Rule>
     </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
-      <Row cells={[<Who name="COO · CFO · CIO" detail="Enterprise Admins" />, 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
-      <Row cells={[<Who name="Treasury operations" detail="2–3 people" />, 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
-      <Row cells={[<Who name="Portfolio managers" detail="trading desk" />, 'Viewer', 'Trader: orders, allocations', 'Viewer']} />
-      <Row cells={[<Who name="Compliance officer" detail="and auditor" />, 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
-      <Row cells={[<Who name="Fund administrator" detail="NAV" />, 'Viewer', 'Viewer', 'Viewer']} />
+      <Row cells={['COO · CFO · CIO', 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
+      <Row cells={['Treasury operations', 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
+      <Row cells={['Portfolio managers', 'Viewer', 'Trader: orders, allocations', 'Viewer']} />
+      <Row cells={['Compliance · auditor', 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
+      <Row cells={['Fund administrator', 'Viewer', 'Viewer', 'Viewer']} />
     </Table>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
@@ -464,7 +459,7 @@ const WhoActs: Page = () => (
       <Act />
       <Act />
 
-      <Person name="Compliance officer" role="Auditor + Freeze" />
+      <Person name="Compliance · auditor" role="Auditor + Freeze" />
       <Act />
       <Act />
       <Act />
@@ -752,7 +747,7 @@ export const notes: (string | undefined)[] = [
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
   'Walk left to right in the order money moves: fund trading, trade, refill, pay a venue, sweep back. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Trading is the only one-person action, and it never moves funds out of custody. Oversight runs across all of it.', // 9b Who acts
-  'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the administrator only views, rule 3 is the compliance row. Land the takeaway: three Admins so any two can approve.', // 8 RBAC
+  'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the fund administrator (who calculates NAV) only views, rule 3 is the compliance row, which covers the compliance officer and the auditor. Sizing: COO, CFO and CIO are the three Enterprise Admins; Treasury operations is 2 to 3 people so leave never blocks a transfer. Land the takeaway: any two of the three Admins can approve.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
