@@ -461,7 +461,7 @@ const WhoActs: Page = () => (
       <Act kind="approve">Any 2</Act>
       <Act kind="approve">Over cap</Act>
       <Act kind="approve">Any 2</Act>
-      <Act kind="act">Policy · freeze</Act>
+      <Act kind="act">Set rules · Freeze</Act>
       <Act opt kind="approve">Over cap</Act>
 
       <Person name="CIO · PMs" role="Trader" />
