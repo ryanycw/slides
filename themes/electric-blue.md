@@ -104,7 +104,7 @@ const Title = ({ children }: { children: ReactNode }) => (
 
 ### Eyebrow
 
-Marks where the talk is: main pages carry their Agenda section (e.g. "04 · Fast and safe, in practice"), appendix pages carry "Appendix · pull up if asked". Sentence case, coloured, no tracking.
+Marks where the talk is: main pages carry their Agenda section (e.g. "04 · How it works"), appendix pages carry "Appendix · pull up if asked". Sentence case, coloured, no tracking.
 
 ```tsx
 const Eyebrow = ({ children }: { children: ReactNode }) => {

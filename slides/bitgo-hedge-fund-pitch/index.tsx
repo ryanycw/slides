@@ -236,8 +236,8 @@ const Agenda: Page = () => (
       <AgendaItem n="01" title="Priorities" detail="Safety, speed and control, and today’s trade-off" pages="P. 3–4" />
       <AgendaItem n="02" title="Success Criteria" detail="Six checkpoints for the right setup" pages="P. 5" />
       <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets; Option B with five" pages="P. 6–7" />
-      <AgendaItem n="04" title="Fast and safe, in practice" detail="Capital flow, roles, and the withdrawal path" pages="P. 8–11" />
-      <AgendaItem n="05" title="Outcome and next steps" detail="What changes, and the path to full migration" pages="P. 12–13" />
+      <AgendaItem n="04" title="How it works" detail="Capital flow, roles, and the withdrawal path" pages="P. 8–11" />
+      <AgendaItem n="05" title="Next steps" detail="What changes, and the path to full migration" pages="P. 12–13" />
     </div>
   </Frame>
 );
@@ -354,7 +354,7 @@ const OptionB: Page = () => (
 );
 
 const CapitalFlow: Page = () => (
-  <Frame eyebrow="04 · Fast and safe, in practice" title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
+  <Frame eyebrow="04 · How it works" title="The reserve stays put; trading capital moves fast" subtitle="Leaving the vault is slow by design. Everything after it is fast." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Diagram src={capitalFlowImg} alt="Capital flow from vaults to venues and back, drawn with Archify" width={1180} height={568} />
     </div>
@@ -383,7 +383,7 @@ const Rule = ({ n, title, children }: { n: string; title: string; children: Reac
 };
 
 const Rbac: Page = () => (
-  <Frame eyebrow="04 · Fast and safe, in practice" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow="04 · How it works" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 28 }}>
       <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
       <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
@@ -432,7 +432,7 @@ const Act = ({ kind, children }: { kind?: ActKind; children?: ReactNode }) => (
 );
 
 const WhoActs: Page = () => (
-  <Frame eyebrow="04 · Fast and safe, in practice" title="Who acts at each step of the money’s journey" subtitle="The moves from the capital-flow diagram, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow="04 · How it works" title="Who acts at each step of the money’s journey" subtitle="The moves from the capital-flow diagram, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
     <div style={{ display: 'grid', gridTemplateColumns: '330px repeat(6, 1fr)', columnGap: 6 }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, paddingBottom: 18, borderBottom: `1px solid ${rule}`, fontSize: 20, color: muted }}>
         <Chip kind="start">Starts</Chip>
@@ -490,7 +490,7 @@ const WhoActs: Page = () => (
 );
 
 const Withdrawal: Page = () => (
-  <Frame eyebrow="04 · Fast and safe, in practice" title="What it takes to move a dollar out of the vault" subtitle="Four independent checks, all enforced by BitGo before anything is signed." source={policies} sourceLabel="BitGo policies overview">
+  <Frame eyebrow="04 · How it works" title="What it takes to move a dollar out of the vault" subtitle="Four independent checks, all enforced by BitGo before anything is signed." source={policies} sourceLabel="BitGo policies overview">
     <Split>
       <Diagram src={withdrawalImg} alt="Vault withdrawal approval workflow, drawn with Archify" width={1100} height={623} />
       <div>
@@ -512,7 +512,7 @@ const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; ti
 );
 
 const Scorecard: Page = () => (
-  <Frame eyebrow="05 · Outcome and next steps" tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
+  <Frame eyebrow="05 · Next steps" tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
     <Grid cols={2}>
       <Panel tag="Typical today">
         <CheckRow compact n={1} ok={false}>Reserve spread across venues and wallets</CheckRow>
@@ -536,7 +536,7 @@ const Scorecard: Page = () => (
 );
 
 const NextSteps: Page = () => (
-  <Frame eyebrow="05 · Outcome and next steps" tone="dark" title="From first call to fully migrated" subtitle="Move in tranches, so no single step puts the whole book at risk.">
+  <Frame eyebrow="05 · Next steps" tone="dark" title="From first call to fully migrated" subtitle="Move in tranches, so no single step puts the whole book at risk.">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
       <div>
         <Block title="1 · Onboard">KYC, users, roles, 2FA, scoped API tokens.</Block>
