@@ -509,26 +509,34 @@ const Panel = ({ blue, tag, title, children }: { blue?: boolean; tag: string; ti
   </div>
 );
 
+// Before/after table: one row per checkpoint, the BitGo column tinted.
+const Cmp = ({ n, title, today, bitgo }: { n: number; title: string; today: string; bitgo: string }) => (
+  <>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 14, height: 72, borderBottom: `1px solid ${ruleDark}`, fontSize: 28, fontWeight: 500 }}>
+      <span style={{ color: mutedDark, width: 22 }}>{n}</span>{title}
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 72, borderBottom: `1px solid ${ruleDark}`, padding: '0 24px', fontSize: 26, color: '#dbe1f5' }}>
+      <span style={{ color: '#ff8a8e', fontWeight: 500 }}>✕</span>{today}
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16, height: 72, borderBottom: '1px solid rgba(255,255,255,0.22)', padding: '0 24px', fontSize: 26, background: 'rgba(36,70,255,0.28)' }}>
+      <span style={{ color: skyBlue, fontWeight: 500 }}>✓</span>{bitgo}
+    </div>
+  </>
+);
+
 const Scorecard: Page = () => (
-  <Frame eyebrow="05 · Next steps" tone="dark" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
-    <Grid cols={2}>
-      <Panel tag="Typical today">
-        <CheckRow compact n={1} ok={false}>Reserve sits on venues, not insured as custody</CheckRow>
-        <CheckRow compact n={2} ok={false}>Pre-fund each venue on-chain to trade</CheckRow>
-        <CheckRow compact n={3} ok={false}>One person or one key can move funds</CheckRow>
-        <CheckRow compact n={4} ok={false}>No cap on how much is exposed</CheckRow>
-        <CheckRow compact n={5} ok={false}>Liquidity locked up in each venue</CheckRow>
-        <CheckRow compact n={6} ok={false}>No qualified custodian for fund assets</CheckRow>
-      </Panel>
-      <Panel blue tag="With BitGo">
-        <CheckRow compact n={1} ok>Qualified custodian, keys offline, insured</CheckRow>
-        <CheckRow compact n={2} ok>Trade on Go Network while in custody</CheckRow>
-        <CheckRow compact n={3} ok>Per-wallet roles and two approvals</CheckRow>
-        <CheckRow compact n={4} ok>~5% in hot wallets, capped daily</CheckRow>
-        <CheckRow compact n={5} ok>Prime trading and lending, in custody</CheckRow>
-        <CheckRow compact n={6} ok>OCC- and NYDFS-regulated custodian</CheckRow>
-      </Panel>
-    </Grid>
+  <Frame tone="dark" eyebrow="05 · Next steps" title="What changes, checkpoint by checkpoint" subtitle="Each checkpoint, before and after.">
+    <div style={{ display: 'grid', gridTemplateColumns: '330px 1fr 1fr' }}>
+      <div style={{ fontSize: 20, fontWeight: 500, color: mutedDark, padding: '14px 0 12px', borderBottom: `1px solid ${ruleDark}` }}>Checkpoint</div>
+      <div style={{ fontSize: 20, fontWeight: 500, color: mutedDark, padding: '14px 24px 12px', borderBottom: `1px solid ${ruleDark}` }}>Typical today</div>
+      <div style={{ fontSize: 20, fontWeight: 500, color: '#ffffff', padding: '14px 24px 12px', borderBottom: '1px solid rgba(255,255,255,0.22)', background: 'rgba(36,70,255,0.45)', borderRadius: '12px 12px 0 0' }}>With BitGo</div>
+      <Cmp n={1} title="Insured reserve" today="Reserve on venues, not insured as custody" bitgo="Qualified custodian, keys offline, insured" />
+      <Cmp n={2} title="Fast deployment" today="Pre-fund each venue on-chain to trade" bitgo="Trade on Go Network while in custody" />
+      <Cmp n={3} title="Split control" today="One person or one key can move funds" bitgo="Per-wallet roles and two approvals" />
+      <Cmp n={4} title="Capped exposure" today="No cap on how much is exposed" bitgo="~5% in hot wallets, capped daily" />
+      <Cmp n={5} title="Liquidity" today="Liquidity locked up in each venue" bitgo="Prime trading and lending, in custody" />
+      <Cmp n={6} title="US compliance" today="No qualified custodian for fund assets" bitgo="OCC- and NYDFS-regulated custodian" />
+    </div>
     <Takeaway lead="All six checkpoints, in one setup." sub="Safety and speed stop being a trade-off." />
   </Frame>
 );
