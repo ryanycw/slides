@@ -384,7 +384,7 @@ const Rbac: Page = () => (
       <Row cells={['Treasury operations', 'Wallet Spend: initiate', 'Wallet Spend: initiate', 'Wallet Spend + API token']} />
       <Row cells={['CIO · PMs', 'Wallet View', 'Trader: buy and sell', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
       <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
-      <Row cells={['CTO · Quants · Analysts · Fund admin', 'Wallet View', 'Wallet View', 'Wallet View']} />
+      <Row cells={['CTO · Fund admin · Quants · Analysts', 'Wallet View', 'Wallet View', 'Wallet View']} />
     </Table>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
@@ -400,9 +400,10 @@ const Scenario = ({ n, title, route, opt }: { n: string; title: string; route: s
     <div style={{ fontSize: 18, color: muted, marginTop: 2, whiteSpace: 'nowrap' }}>{route}</div>
   </div>
 );
-const Person = ({ name, role }: { name: string; role: string }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: 76, borderBottom: `1px solid ${rule}` }}>
-    <div style={{ fontSize: 26, fontWeight: 500 }}>{name}</div>
+// tall: two-line name (several people sharing one role).
+const Person = ({ name, role, tall }: { name: ReactNode; role: string; tall?: boolean }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: tall ? 100 : 76, borderBottom: `1px solid ${rule}` }}>
+    <div style={{ fontSize: 26, fontWeight: 500, lineHeight: 1.25 }}>{name}</div>
     <div style={{ fontSize: 20, color: muted }}>{role}</div>
   </div>
 );
@@ -417,8 +418,8 @@ const Chip = ({ kind, children }: { kind: ActKind; children: ReactNode }) => {
   return <span style={{ ...look, fontSize: 20, fontWeight: 500, borderRadius: 999, padding: '7px 14px', whiteSpace: 'nowrap' }}>{children}</span>;
 };
 // One grid cell; empty when no kind.
-const Act = ({ kind, opt, last, children }: { kind?: ActKind; opt?: boolean; last?: boolean; children?: ReactNode }) => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 76, borderBottom: last && opt ? '1.5px dashed #9db0ff' : `1px solid ${rule}`, padding: '0 6px', ...(opt ? optCol : {}), ...(last && opt ? { borderRadius: '0 0 12px 12px' } : {}) }}>
+const Act = ({ kind, opt, last, tall, children }: { kind?: ActKind; opt?: boolean; last?: boolean; tall?: boolean; children?: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: tall ? 100 : 76, borderBottom: last && opt ? '1.5px dashed #9db0ff' : `1px solid ${rule}`, padding: '0 6px', ...(opt ? optCol : {}), ...(last && opt ? { borderRadius: '0 0 12px 12px' } : {}) }}>
     {kind && <Chip kind={kind}>{children}</Chip>}
   </div>
 );
@@ -474,14 +475,14 @@ const WhoActs: Page = () => (
       <Act kind="act">Audit logs</Act>
       <Act opt />
 
-      <Person name="CTO · Quant · Analyst" role="Wallet View" />
-      <Act />
-      <Act />
-      <Act />
-      <Act />
-      <Act />
-      <Act kind="act">Models · NAV</Act>
-      <Act opt last />
+      <Person tall name={<>CTO · Fund admin<br />Quants · Analysts</>} role="Wallet View" />
+      <Act tall />
+      <Act tall />
+      <Act tall />
+      <Act tall />
+      <Act tall />
+      <Act tall kind="act">Models · NAV</Act>
+      <Act tall opt last />
     </div>
     <Takeaway lead="Every move needs a starter and a separate approver." sub="Optional PM trading: ETH Hot Wallet only, whitelisted contracts, capped; Admin above cap." />
   </Frame>
