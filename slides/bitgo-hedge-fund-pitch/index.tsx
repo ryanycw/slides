@@ -430,9 +430,9 @@ const WhoActs: Page = () => (
       </div>
       <Scenario n="1" title="Fund trading" route="Vault → Go Account" />
       <Scenario n="2" title="Trade" route="On Go Network" />
-      <Scenario n="3" title="Refill" route="Vault → hot wallet" />
-      <Scenario n="4" title="Pay a venue" route="Hot wallet → venue" />
-      <Scenario n="5" title="Sweep back" route="Venue → vault" />
+      <Scenario n="3" title="Refill" route="Vault → Hot Wallet" />
+      <Scenario n="4" title="Pay a venue" route="Hot Wallet → Venue" />
+      <Scenario n="5" title="Sweep back" route="Venue → Vault" />
       <Scenario n="6" title="Oversight" route="Any time" />
 
       <Person name="Treasury operations" role="Spender" />
