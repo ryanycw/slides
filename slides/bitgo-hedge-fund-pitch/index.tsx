@@ -383,7 +383,7 @@ const Rbac: Page = () => (
       <Row cells={['COO · CFO · CIO', 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
       <Row cells={['Treasury operations', 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
       <Row cells={['Portfolio managers', 'Viewer', 'Trader: orders, allocations', 'Viewer']} />
-      <Row cells={['Compliance · auditor', 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
+      <Row cells={['Compliance · Auditor', 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
       <Row cells={['Fund administrator', 'Viewer', 'Viewer', 'Viewer']} />
     </Table>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
@@ -459,7 +459,7 @@ const WhoActs: Page = () => (
       <Act />
       <Act />
 
-      <Person name="Compliance · auditor" role="Auditor + Freeze" />
+      <Person name="Compliance · Auditor" role="Auditor + Freeze" />
       <Act />
       <Act />
       <Act />
