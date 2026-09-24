@@ -118,14 +118,14 @@ const Eyebrow = ({ children }: { children: ReactNode }) => {
 Left: `bitgo.com` on every page (ownership mark), followed by ` · Source: <link>` when the page cites one. Right: page number. No captions or disclaimers: keep those in speaker notes. The cover carries `bitgo.com` at the bottom.
 
 ```tsx
-type FooterProps = { source?: string; sourceLabel?: string };
+type FooterProps = { source?: string; sourceLabel?: string; source2?: string; sourceLabel2?: string };
 
-const Footer = ({ source, sourceLabel }: FooterProps) => {
+const Footer = ({ source, sourceLabel, source2, sourceLabel2 }: FooterProps) => {
   const { current, total } = useSlidePageNumber();
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      <span>bitgo.com{source && <> · Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
+      <span>bitgo.com{source && <> · Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}{source2 && <> · <a href={source2} style={{ color: t.hi }}>{sourceLabel2}</a></>}</span>
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -137,14 +137,14 @@ const Footer = ({ source, sourceLabel }: FooterProps) => {
 ```tsx
 type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
-const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
+const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, source2, sourceLabel2 }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '64px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
-      <Footer source={source} sourceLabel={sourceLabel} />
+      <Footer source={source} sourceLabel={sourceLabel} source2={source2} sourceLabel2={sourceLabel2} />
     </main>
   </Tone.Provider>
 );

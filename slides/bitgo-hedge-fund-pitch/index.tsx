@@ -44,6 +44,7 @@ const policies = 'https://developers.bitgo.com/docs/policies-overview';
 const goNetwork = 'https://www.bitgo.com/products/go-network-oes/';
 const walletUsers = 'https://developers.bitgo.com/guides/wallets/users/add';
 const licenses = 'https://www.bitgo.com/company/licenses/';
+const hedgeFundRoles = 'https://financeunlocked.com/videos/who-works-in-a-hedge-fund';
 const trustCenter = 'https://trustcenter.bitgo.com/';
 
 // Every primitive reads the page tone, so the same markup works on light and dark pages.
@@ -60,14 +61,14 @@ const useTone = () => {
   };
 };
 
-type FooterProps = { source?: string; sourceLabel?: string };
+type FooterProps = { source?: string; sourceLabel?: string; source2?: string; sourceLabel2?: string };
 
-const Footer = ({ source, sourceLabel }: FooterProps) => {
+const Footer = ({ source, sourceLabel, source2, sourceLabel2 }: FooterProps) => {
   const { current, total } = useSlidePageNumber();
   const t = useTone();
   return (
     <footer style={{ marginTop: 'auto', flexShrink: 0, paddingTop: 14, fontSize: 22, color: t.sub, display: 'flex', justifyContent: 'space-between' }}>
-      <span>bitgo.com{source && <> · Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}</span>
+      <span>bitgo.com{source && <> · Source: <a href={source} style={{ color: t.hi }}>{sourceLabel}</a></>}{source2 && <> · <a href={source2} style={{ color: t.hi }}>{sourceLabel2}</a></>}</span>
       <span>{String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </footer>
   );
@@ -84,14 +85,14 @@ const Title = ({ children }: { children: ReactNode }) => (
 
 type FrameProps = FooterProps & { tone?: ToneName; eyebrow?: string; title: string; subtitle?: string; children: ReactNode };
 
-const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel }: FrameProps) => (
+const Frame = ({ tone = 'light', eyebrow, title, subtitle, children, source, sourceLabel, source2, sourceLabel2 }: FrameProps) => (
   <Tone.Provider value={tone}>
     <main style={{ width: '100%', height: '100%', boxSizing: 'border-box', padding: '64px 100px 56px', display: 'flex', flexDirection: 'column', background: tone === 'dark' ? bgDark : bgLight, color: tone === 'dark' ? '#ffffff' : 'var(--osd-text)', fontFamily: 'var(--osd-font-body)' }}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <Title>{title}</Title>
       {subtitle ? <p style={{ fontSize: 30, lineHeight: 1.4, color: tone === 'dark' ? mutedDark : muted, margin: '18px 0 32px' }}>{subtitle}</p> : <div style={{ height: 40 }} />}
       <section style={{ flexShrink: 0 }}>{children}</section>
-      <Footer source={source} sourceLabel={sourceLabel} />
+      <Footer source={source} sourceLabel={sourceLabel} source2={source2} sourceLabel2={sourceLabel2} />
     </main>
   </Tone.Provider>
 );
@@ -373,7 +374,7 @@ const Rule = ({ n, title, children }: { n: string; title: string; children: Reac
 };
 
 const Rbac: Page = () => (
-  <Frame eyebrow="04 · How it works" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow="04 · How it works" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 28 }}>
       <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
       <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
@@ -425,7 +426,7 @@ const Act = ({ kind, opt, last, tall, children }: { kind?: ActKind; opt?: boolea
 );
 
 const WhoActs: Page = () => (
-  <Frame eyebrow="04 · How it works" title="Who acts at each step of the money’s journey" subtitle="The moves from the capital-flow diagram, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow="04 · How it works" title="Who acts at each step of the money’s journey" subtitle="The moves from the capital-flow diagram, seen person by person." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
     <div style={{ display: 'grid', gridTemplateColumns: '270px repeat(7, 1fr)', columnGap: 6 }}>
       <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10, paddingBottom: 18, borderBottom: `1px solid ${rule}`, fontSize: 20, color: muted }}>
         <Chip kind="start">Starts</Chip>
@@ -650,7 +651,7 @@ const TierPolicies: Page = () => (
 );
 
 const A3: Page = () => (
-  <Frame eyebrow={A} title="A7 · Roles and permissions compared" subtitle="The roles in BitGo’s user settings, and who holds each in this design." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+  <Frame eyebrow={A} title="A7 · Roles and permissions compared" subtitle="The roles in BitGo’s user settings, and who holds each in this design." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
     <Table heads={['Role', 'Can', 'Held by']} widths={[330, 760]}>
       <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'CEO · COO']} />
       <Row cells={['Organization View', 'View users, roles and user changes', 'Compliance · Auditor']} />
