@@ -382,7 +382,7 @@ const Rbac: Page = () => (
     </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
       <Row cells={['Treasury operations', 'Wallet Spend: initiate', 'Wallet Spend: initiate', 'Wallet Spend + API token']} />
-      <Row cells={['CEO · COO · CRO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: approve large']} />
+      <Row cells={['CEO · COO · CRO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: over cap']} />
       <Row cells={['CIO · PMs', 'Wallet View', 'Trader: buy and sell', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
       <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
       <Row cells={['CTO · Fund admin · Quants · Analysts', 'Wallet View', 'Wallet View', 'Wallet View']} />
@@ -456,11 +456,11 @@ const WhoActs: Page = () => (
       <Act opt />
 
       <Person name="CEO · COO · CRO" role="Wallet Admin · Video ID" />
-      <Act kind="approve">Any 2 approve</Act>
+      <Act kind="approve">Any 2</Act>
       <Act />
-      <Act kind="approve">Any 2 approve</Act>
-      <Act kind="approve">If large</Act>
-      <Act kind="approve">Approve</Act>
+      <Act kind="approve">Any 2</Act>
+      <Act kind="approve">Over cap</Act>
+      <Act kind="approve">Any 2</Act>
       <Act kind="act">Policy · freeze</Act>
       <Act opt kind="approve">Over cap</Act>
 
