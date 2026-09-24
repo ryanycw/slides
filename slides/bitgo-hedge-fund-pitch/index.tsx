@@ -474,7 +474,7 @@ const WhoActs: Page = () => (
       <Act kind="act">Audit logs</Act>
       <Act opt />
 
-      <Person name="View only" role="CTO · Quant · Analyst" />
+      <Person name="CTO · Quant · Analyst" role="Wallet View" />
       <Act />
       <Act />
       <Act />
