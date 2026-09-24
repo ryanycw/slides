@@ -381,8 +381,8 @@ const Rbac: Page = () => (
       <Rule n="3" title="Always watched">Compliance audits all; Admins freeze</Rule>
     </div>
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
-      <Row cells={['Treasury operations', 'Wallet Spend: initiate', 'Wallet Spend: initiate', 'Wallet Spend + API token']} />
-      <Row cells={['CEO · COO · CRO', 'Wallet Admin: approve, policy', 'Wallet Admin: approve', 'Wallet Admin: over cap']} />
+      <Row cells={['Treasury operations', 'Wallet Spend', 'Wallet Spend', 'Wallet Spend + API token']} />
+      <Row cells={['CEO · COO · CRO', 'Wallet Admin', 'Wallet Admin', 'Wallet Admin']} />
       <Row cells={['CIO · PMs', 'Wallet View', 'Trader', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
       <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
       <Row cells={['CTO · Fund admin · Quants · Analysts', 'Wallet View', 'Wallet View', 'Wallet View']} />
