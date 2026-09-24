@@ -382,7 +382,7 @@ const Rbac: Page = () => (
     <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
       <Row cells={['COO · CFO · CIO', 'Admin: approve, set policy', 'Admin: approve withdrawals', 'Admin: approve big sends']} />
       <Row cells={['Treasury operations', 'Spender: initiate only', 'Spender: initiate only', 'Spender + API token']} />
-      <Row cells={['Portfolio managers', 'Viewer', 'Trader: orders, allocations', <>Viewer <span style={{ color: mutedDark }}>· opt. bot Spender</span></>]} />
+      <Row cells={['Portfolio managers', 'Viewer', 'Trader: orders, allocations', <>Viewer <span style={{ color: mutedDark }}>· opt. Spender</span></>]} />
       <Row cells={['Compliance · Auditor', 'Auditor + Freeze', 'Auditor + Freeze', 'Auditor + Freeze']} />
       <Row cells={['Fund administrator', 'Viewer', 'Viewer', 'Viewer']} />
     </Table>
@@ -463,7 +463,7 @@ const WhoActs: Page = () => (
       <Act />
       <Act />
       <Act />
-      <Act opt kind="start">Bot · API</Act>
+      <Act opt kind="start">Sign trade</Act>
 
       <Person name="Compliance · Auditor" role="Auditor + Freeze" />
       <Act />
@@ -483,7 +483,7 @@ const WhoActs: Page = () => (
       <Act kind="act">Reconcile NAV</Act>
       <Act opt last />
     </div>
-    <Takeaway lead="Every move needs a starter and a separate approver." sub="Optional bot: ETH Hot Wallet only, whitelisted contracts, capped; an Admin approves above the cap." />
+    <Takeaway lead="Every move needs a starter and a separate approver." sub="Optional PM trading: ETH Hot Wallet only, whitelisted contracts, capped; Admin above cap." />
   </Frame>
 );
 
@@ -754,8 +754,8 @@ export const notes: (string | undefined)[] = [
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
-  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Column 7 is optional, only if the fund trades on-chain through Dapps (DEX, DeFi; see Option B): give the trading bot an API token as Spender on the ETH Hot Wallet only, whitelist the contracts it may call, and cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so it is not two-person; the exposure is bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
-  'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the fund administrator (who calculates NAV) only views, rule 3 is the compliance row, which covers the compliance officer and the auditor. Sizing: COO, CFO and CIO are the three Enterprise Admins; Treasury operations is 2 to 3 people so leave never blocks a transfer. Land the takeaway: any two of the three Admins can approve. If they use the optional on-chain column from the previous page, the PM trading bot is the one extra grant: an API Spender token on the ETH Hot Wallet only, still under rule 2.', // 8 RBAC
+  'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Column 7 is optional, only if the fund trades on-chain through Dapps (DEX, DeFi; see Option B): give PMs the Spender role on the ETH Hot Wallet only (they can sign by hand, or issue an API token to an automated strategy), whitelist the contracts it may call, and cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so it is not two-person; the exposure is bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
+  'This turns the previous page into configuration. Name the three rules first: rule 1 is why Treasury and Admins hold opposite roles, rule 2 is why PMs trade but never withdraw and the fund administrator (who calculates NAV) only views, rule 3 is the compliance row, which covers the compliance officer and the auditor. Sizing: COO, CFO and CIO are the three Enterprise Admins; Treasury operations is 2 to 3 people so leave never blocks a transfer. Land the takeaway: any two of the three Admins can approve. If they use the optional on-chain column from the previous page, the one extra grant is Spender for PMs on the ETH Hot Wallet only, signed by hand or by an automated strategy’s API token; still rule 2.', // 8 RBAC
   'Make it concrete: even a CFO with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, reserve first, test before moving size. Three decisions shape the final design; propose a working session with ops and compliance to settle them this week.', // 11 Next steps
