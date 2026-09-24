@@ -656,15 +656,16 @@ const A3: Page = () => (
 
 const A4: Page = () => (
   <Frame eyebrow={A} title="A8 · The policy toolkit" subtitle="A rule is a condition plus an action, scoped to one wallet or the whole enterprise." source={policies} sourceLabel="BitGo policies overview">
-    <Table heads={['Rule type', 'Triggers on', 'Used here for']} widths={[400, 600]}>
-      <Row cells={['Destination (whitelist)', 'Address not on the approved list', 'Every tier: deny unknown addresses']} />
-      <Row cells={['Threshold', 'Size of a single withdrawal', 'Hot wallets: large sends need an Admin']} />
+    <Table heads={['Condition', 'Triggers on', 'Used in this proposal']} widths={[400, 560]}>
+      <Row cells={['Destination (whitelist)', 'Address not on the approved list', 'Vaults to own wallets; hot wallets to venues']} />
+      <Row cells={['Threshold', 'Size of a single withdrawal', 'Large hot-wallet sends and on-chain trades']} />
       <Row cells={['Velocity limit', 'Total withdrawn in a time window', 'Daily caps on vaults and hot wallets']} />
-      <Row cells={['% of wallet balance', 'Share of the balance leaving', 'Stops a hot wallet being drained']} />
-      <Row cells={['Initiator', 'Who started the withdrawal', 'Tighter rules for API tokens']} />
-      <Row cells={['Webhook', 'Response from the fund’s own system', 'Optional check with a risk engine']} />
+      <Row cells={['% of wallet balance', 'Share of the balance leaving', 'Stops a hot wallet being drained at once']} />
+      <Row cells={['Initiator', 'Who or which API token started it', 'Stricter limits for API tokens than people']} />
+      <Row cells={['Webhook', 'Response from the fund’s own system', 'Optional: the fund’s risk engine decides']} />
     </Table>
-    <Note>Actions: deny, require N approvals, or video ID. Rules lock after 48h; custody adds BitGo’s own rules.</Note>
+    <Note>Actions: deny, require N approvals, or video ID above $250k a day. Rules lock 48h after creation.</Note>
+    <Note>Custody adds BitGo’s own rules. User + backup key recovery bypasses all policy: guard the backup key.</Note>
   </Frame>
 );
 
@@ -767,7 +768,7 @@ export const notes: (string | undefined)[] = [
   'Use if they answer "DeFi" to the ETH question on the next-steps slide.', // A5 Six or five
   undefined, // A6 Tier policies
   undefined, // A7 Roles
-  undefined, // A8 Policy toolkit
+  'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A8 Policy toolkit
   undefined, // A9 Keys
   undefined, // A10 Liquidity
   undefined, // A11 Further needs
