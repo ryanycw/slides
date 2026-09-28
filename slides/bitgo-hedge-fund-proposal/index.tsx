@@ -44,6 +44,7 @@ const policies = 'https://developers.bitgo.com/docs/policies-overview';
 const goNetwork = 'https://www.bitgo.com/products/go-network-oes/';
 const walletUsers = 'https://developers.bitgo.com/guides/wallets/users/add';
 const hedgeFundRoles = 'https://financeunlocked.com/videos/who-works-in-a-hedge-fund';
+const fundOffices = 'https://www.akj.com/blog/hedge-fund-roles-explained';
 
 // Every primitive reads the page tone, so the same markup works on light and dark pages.
 type ToneName = 'light' | 'dark';
@@ -106,7 +107,7 @@ const Row = ({ cells }: { cells: ReactNode[] }) => {
   const td: CSSProperties = { padding: '13px 24px 13px 0', borderBottom: `1px solid ${t.line}`, verticalAlign: 'top', fontSize: 26, lineHeight: 1.35 };
   return (
     <tr>
-      <th scope="row" style={{ ...td, textAlign: 'left', fontWeight: 500 }}>{cells[0]}</th>
+      <th style={{ ...td, textAlign: 'left', fontWeight: 500 }}>{cells[0]}</th>
       {cells.slice(1).map((c, i) => <td key={i} style={td}>{c}</td>)}
     </tr>
   );
@@ -235,8 +236,8 @@ const Agenda: Page = () => (
       <AgendaItem n="01" title="Priorities" detail="Safety, speed and control, and today’s trade-off" pages="P. 3–4" />
       <AgendaItem n="02" title="Success Criteria" detail="Six checkpoints for the right setup" pages="P. 5" />
       <AgendaItem n="03" title="Our proposal" detail="Three tiers, six wallets; Option B with five" pages="P. 6–7" />
-      <AgendaItem n="04" title="How it works" detail="Capital flow, roles, and the withdrawal path" pages="P. 8–11" />
-      <AgendaItem n="05" title="Next steps" detail="What changes, and the path to full migration" pages="P. 12–13" />
+      <AgendaItem n="04" title="How it works" detail="Capital flow, people, roles, policies, withdrawal" pages="P. 8–13" />
+      <AgendaItem n="05" title="Next steps" detail="What changes, and the path to full migration" pages="P. 14–15" />
     </div>
   </Frame>
 );
@@ -371,30 +372,6 @@ const Rule = ({ n, title, children }: { n: string; title: string; children: Reac
   );
 };
 
-const Rbac: Page = () => (
-  <Frame eyebrow="04 · How it works" tone="dark" title="No single person can move funds" subtitle="Three rules decide who gets which role, set wallet by wallet." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 12 }}>
-      <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
-      <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
-      <Rule n="3" title="Always watched">Compliance audits all; Admins freeze</Rule>
-    </div>
-    <Table heads={['People', 'Vaults (3)', 'Go Account', 'Hot wallets (2)']} widths={[560, 390, 390]}>
-      <Row cells={['Treasury operations', 'Wallet Spend', 'Wallet Spend', 'Wallet Spend + API token']} />
-      <Row cells={['CEO · COO · CRO', 'Wallet Admin', 'Wallet Admin', 'Wallet Admin']} />
-      <Row cells={['CIO · PMs', <>Wallet View <span style={{ color: mutedDark }}>(opt. for PMs)</span></>, 'Trader', <>Wallet View <span style={{ color: mutedDark }}>· opt. DeFi</span></>]} />
-      <Row cells={['Compliance · Auditor', 'Auditor', 'Auditor', 'Auditor']} />
-      <Row cells={['CTO · Fund admin · Quants · Analysts', 'Wallet View', 'Wallet View', 'Wallet View']} />
-    </Table>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 16, fontSize: 22, color: mutedDark }}>
-      Enterprise-wide
-      <Pill>CEO · COO · CRO: Enterprise Admin · Video ID</Pill>
-      <Pill>CEO · COO · CTO: Organization Admin</Pill>
-      <Pill>Compliance: Organization View</Pill>
-    </div>
-    <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
-  </Frame>
-);
-
 // Scenario map: one column per money movement, one row per person.
 // opt marks an optional scenario: dashed, lightly tinted column.
 const optCol: CSSProperties = { background: 'rgba(36,70,255,0.04)', borderLeft: '1.5px dashed #9db0ff', borderRight: '1.5px dashed #9db0ff' };
@@ -427,6 +404,57 @@ const Act = ({ kind, opt, last, tall, children }: { kind?: ActKind; opt?: boolea
   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: tall ? 100 : 76, borderBottom: last && opt ? '1.5px dashed #9db0ff' : `1px solid ${rule}`, padding: '0 6px', ...(opt ? optCol : {}), ...(last && opt ? { borderRadius: '0 0 12px 12px' } : {}) }}>
     {kind && <Chip kind={kind}>{children}</Chip>}
   </div>
+);
+
+// Org chart: CEO over four executives, each with the teams they lead.
+const OrgBox = ({ title, sub, top, ext }: { title: string; sub: string; top?: boolean; ext?: boolean }) => (
+  <div style={{ ...(top ? { background: bgBlue, border: '1px solid rgba(255,255,255,0.25)' } : glass), ...(ext ? { border: '1.5px dashed rgba(255,255,255,0.35)', background: 'transparent' } : {}), borderRadius: 12, padding: '14px 20px' }}>
+    <div style={{ fontSize: 28, fontWeight: 500, lineHeight: 1.2 }}>{title}</div>
+    <div style={{ fontSize: 20, color: top ? 'rgba(255,255,255,0.85)' : mutedDark, marginTop: 4 }}>{sub}</div>
+  </div>
+);
+// via: a team this proposal leaves out of BitGo; its executive acts for it.
+const Team = ({ title, sub, ext, via }: { title: string; sub: string; ext?: boolean; via?: string }) => (
+  <div style={{ padding: '10px 0', borderBottom: `1px ${via ? 'dashed' : 'solid'} ${ruleDark}`, opacity: via ? 0.55 : 1 }}>
+    <div style={{ fontSize: 24, fontWeight: 500 }}>{title}{ext && <span style={{ fontWeight: 400, color: mutedDark }}> · external</span>}{via && <span style={{ marginLeft: 10, fontSize: 16, fontWeight: 500, color: skyBlue, border: `1.5px dashed ${skyBlue}`, borderRadius: 999, padding: '1px 8px', verticalAlign: 'middle' }}>{via}</span>}</div>
+    <div style={{ fontSize: 20, color: mutedDark }}>{sub}</div>
+  </div>
+);
+const Branch = ({ office, head, children }: { office: string; head: ReactNode; children: ReactNode }) => (
+  <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: 2, height: 24, background: ruleDark, alignSelf: 'center' }} />
+    {head}
+    <div style={{ marginTop: 16, marginBottom: 4 }}><Pill>{office}</Pill></div>
+    {children}
+  </div>
+);
+
+const OrgChart: Page = () => (
+  <Frame tone="dark" eyebrow="04 · How it works" title="Who works in the fund, and who they report to" subtitle="The people behind every move. Faded teams are represented by their executive here." source={hedgeFundRoles} sourceLabel="Who works in a hedge fund" source2={fundOffices} sourceLabel2="Front, middle and back office">
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ width: 620 }}><OrgBox top title="CEO" sub="Runs the firm; oversees investment and operations" /></div>
+    </div>
+    <div style={{ width: 2, height: 24, background: ruleDark, margin: '0 auto' }} />
+    <div style={{ height: 2, background: ruleDark, margin: '0 12.5%' }} />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
+      <Branch office="Front office" head={<OrgBox title="CIO" sub="Sets strategy; picks investments" />}>
+        <Team title="Portfolio managers" sub="Run capital and place trades" />
+        <Team title="Analysts" sub="Research ideas; take no direct risk" />
+        <Team title="Quants" sub="Build models and trading signals" />
+      </Branch>
+      <Branch office="Middle office" head={<OrgBox title="CRO" sub="Sets risk limits; one of three approvers" />}>
+        <Team via="Via CRO" title="Risk team" sub="Limits, exposure and margin" />
+      </Branch>
+      <Branch office="Back office" head={<OrgBox title="COO" sub="Operations, compliance and legal" />}>
+        <Team title="Treasury operations" sub="Move cash, settle, reconcile" />
+        <Team title="Compliance · Auditor" sub="Rules, monitoring, audit" />
+        <Team ext title="Fund admin" sub="Independent NAV and reporting" />
+      </Branch>
+      <Branch office="Back office" head={<OrgBox title="CTO" sub="Runs systems; manages user access" />}>
+        <Team via="Via CTO" title="IT team" sub="Access, integrations, security" />
+      </Branch>
+    </div>
+  </Frame>
 );
 
 const WhoActs: Page = () => (
@@ -490,6 +518,76 @@ const WhoActs: Page = () => (
       <Act tall opt last />
     </div>
     <Takeaway lead="Every move needs a starter and a separate approver." sub="Optional PM trading: ETH Hot Wallet only, whitelisted contracts, capped; Admin above cap." />
+  </Frame>
+);
+
+// Role design: roles to create (with the permissions they bundle) and who holds each.
+const roleGrid = '300px 560px repeat(8, 1fr)';
+const PersonHead = ({ children }: { children: ReactNode }) => (
+  <div style={{ fontSize: 19, fontWeight: 500, color: mutedDark, textAlign: 'center', lineHeight: 1.25, whiteSpace: 'nowrap', padding: '0 0 12px', borderBottom: `1px solid ${ruleDark}`, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>{children}</div>
+);
+// y = holds the role, o = optional, '' = no.
+const Dot = ({ v }: { v: '' | 'y' | 'o' }) => (
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: `1px solid ${ruleDark}` }}>
+    {v === 'y' && <span style={{ width: 18, height: 18, borderRadius: 9, background: skyBlue }} />}
+    {v === 'o' && <span style={{ width: 18, height: 18, borderRadius: 9, border: `2px dashed ${skyBlue}` }} />}
+  </div>
+);
+const RoleRow = ({ name, bundle, opt, who }: { name: string; bundle: string; opt?: boolean; who: ('' | 'y' | 'o')[] }) => (
+  <>
+    <div style={{ display: 'flex', alignItems: 'center', height: 58, fontSize: 26, fontWeight: 500, borderBottom: `1px solid ${ruleDark}` }}>
+      {name}{opt && <span style={{ marginLeft: 8, fontWeight: 400, color: mutedDark }}>(opt.)</span>}
+    </div>
+    <div style={{ display: 'flex', alignItems: 'center', fontSize: 24, color: '#dbe1f5', borderBottom: `1px solid ${ruleDark}`, paddingRight: 16 }}>{bundle}</div>
+    {who.map((v, i) => <Dot key={i} v={v} />)}
+  </>
+);
+
+const RoleDesign: Page = () => (
+  <Frame tone="dark" eyebrow="04 · How it works" title="No single person can move funds" subtitle="Three rules shape the roles; create them once, then assign people." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginBottom: 24 }}>
+      <Rule n="1" title="Split duties">Whoever starts a transfer never approves it</Rule>
+      <Rule n="2" title="Least privilege">Each person gets only what the job needs</Rule>
+      <Rule n="3" title="Always watched">Compliance audits all; approvers freeze</Rule>
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: roleGrid }}>
+      <div style={{ fontSize: 20, fontWeight: 500, color: mutedDark, padding: '0 0 12px', borderBottom: `1px solid ${ruleDark}`, display: 'flex', alignItems: 'flex-end' }}>Role to create</div>
+      <div style={{ fontSize: 20, fontWeight: 500, color: mutedDark, padding: '0 0 12px', borderBottom: `1px solid ${ruleDark}`, display: 'flex', alignItems: 'flex-end', gap: 24 }}>Bundles these permissions<span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontWeight: 400 }}><span style={{ width: 14, height: 14, borderRadius: 7, background: skyBlue }} />holds<span style={{ width: 14, height: 14, borderRadius: 7, border: `2px dashed ${skyBlue}`, marginLeft: 10 }} />optional</span></div>
+      <PersonHead>CEO</PersonHead>
+      <PersonHead>COO</PersonHead>
+      <PersonHead>CRO</PersonHead>
+      <PersonHead>CTO</PersonHead>
+      <PersonHead>CIO<br />PMs</PersonHead>
+      <PersonHead>Treasury<br />operations</PersonHead>
+      <PersonHead>Compliance<br />Auditor</PersonHead>
+      <PersonHead>Fund admin<br />Quants<br />Analysts</PersonHead>
+      <RoleRow name="Fund Approver" bundle="Enterprise Admin · Wallet Admin · Video ID" who={['y', 'y', 'y', '', '', '', '', '']} />
+      <RoleRow name="Access Manager" bundle="Organization Admin" who={['y', 'y', '', 'y', '', '', '', '']} />
+      <RoleRow name="Treasury Operator" bundle="Wallet Spend · Wallet View" who={['', '', '', '', '', 'y', '', '']} />
+      <RoleRow name="Trader" bundle="Trader · Wallet View" who={['', '', '', '', 'y', '', '', '']} />
+      <RoleRow name="On-chain Trader" opt bundle="DeFi · Wallet Spend" who={['', '', '', '', 'o', '', '', '']} />
+      <RoleRow name="Compliance Monitor" bundle="Auditor · Organization View" who={['', '', '', '', '', '', 'y', '']} />
+      <RoleRow name="Read Only" bundle="Wallet View" who={['', '', '', 'y', '', '', '', 'y']} />
+      <RoleRow name="Billing" bundle="Billing" who={['', 'y', '', '', '', '', '', '']} />
+    </div>
+  </Frame>
+);
+
+const Fast = ({ children }: { children: ReactNode }) => <span style={{ color: muted }}>{children}</span>;
+
+const PolicySet: Page = () => (
+  <Frame eyebrow="04 · How it works" title="Then write the policies" subtitle="Approvals select the Wallet Admin permission, which only Fund Approvers hold." source={policies} sourceLabel="BitGo policies overview">
+    <Table heads={['Scope', 'Condition', 'Triggers when', 'Action']} widths={[290, 250, 470]}>
+      <Row cells={['All wallets', 'Destination', 'Address not on the whitelist', 'Deny']} />
+      <Row cells={['Vaults', 'Any withdrawal', 'Every send out of a vault', 'Any 2 Wallet Admins; not the initiator']} />
+      <Row cells={['Vaults', 'Velocity', 'Over $250k in a day', 'Video ID with BitGo']} />
+      <Row cells={['Go Account', 'Any withdrawal', 'Settlement or withdrawal', 'Any 2 Wallet Admins; not the initiator']} />
+      <Row cells={['Hot wallets', 'Threshold', 'Single send over the cap', <>1 Wallet Admin <Fast>· for speed</Fast></>]} />
+      <Row cells={['Vaults · hot wallets', 'Velocity · %', 'Over the daily or balance cap', 'Deny']} />
+      <Row cells={['Hot wallets', 'Initiator', 'Sent by an API token', 'Tighter caps than people']} />
+      <Row cells={[<>ETH Hot Wallet <Fast>(opt.)</Fast></>, 'Destination', 'Contract not on the whitelist', <>Deny; over cap, 1 Wallet Admin <Fast>· for speed</Fast></>]} />
+    </Table>
+    <Takeaway lead="Rules lock 48 hours after creation." sub="Only BitGo support can loosen them, so no admin can quietly open a wallet." />
   </Frame>
 );
 
@@ -591,11 +689,13 @@ export const notes: (string | undefined)[] = [
   'Walk the tiers top to bottom and read each one\'s checkpoint pills: reserve covers 1 and 6, the Go Account 2 and 5, hot wallets 4, and the shared roles 3. Every checkpoint lands on exactly one tier. Percentages are a starting point to tune.', // 6 Answer
   'Option B, only if it fits how they use ETH: if ETH, like stablecoins, will also refill the ETH hot wallet (or go to DeFi), one ETH-chain vault replaces two. Same tiers, five wallets. Default stays Option A: separate vaults for different approvers, limits and cadence.', // 6b Option B
   'Walk the diagram left to right; each line says how fast it is. Leaving a vault is the slow step on purpose: two Admin approvals, BitGo signs within its 24h SLA, and video ID above $250k a day. After that it is fast: on Go Network the fund trades against partner venues while assets stay in BitGo custody and settle net, so nothing moves on-chain; hot wallets reach other venues by API in minutes.', // 7 Capital flow
+  'Before assigning anyone permissions, meet the people. The CEO runs the firm and oversees both sides. Front office is the CIO’s team: portfolio managers run capital, analysts research without taking risk, quants build models. Middle office is the CRO, who sets risk limits and is one of the three approvers. Back office is the COO’s team, which runs day-to-day operations: treasury operations move cash and settle, compliance watches the rules, and an independent fund administrator calculates NAV. The CTO runs the systems and manages user access. The risk and IT teams are real, but in this proposal they get no BitGo access of their own: the CRO and CTO act for them, which keeps the role design small. Keep this split in mind: the front office decides and trades, the middle office limits, the back office moves and records. The next pages turn exactly that separation into BitGo permissions.', // 8a Org chart
   'Walk left to right in the order money moves. In every movement column there is an outline chip (who starts) and a solid chip (who approves), never the same person. Sweep back here is Go Account to vault, a withdrawal that needs approval; funds coming back from other venues are withdrawn on the exchange, and deposits into a vault need no approval. Oversight: Admins set policy and can freeze a wallet (freeze sits inside Wallet Admin); Compliance holds Auditor and reads every log. Column 7 is optional, only if the fund trades on-chain (see Option B). For DeFi apps BitGo integrates, give PMs the DeFi role. For any other Dapp the trade is a transaction from the wallet, so it needs Wallet Spend and a whitelisted contract address. Either way, cap it per trade, per day and as a share of the wallet. Be upfront: under the cap those trades run on policy alone, so they are not two-person; exposure stays bounded because hot wallets hold about 5% and the caps hold. Over the cap an Admin approves.', // 9b Who acts
-  'This turns the previous page into configuration, using the role names from BitGo’s user settings. Rule 1: Treasury holds Wallet Spend and the approvers hold Wallet Admin, so the one who starts never approves. Rule 2: the investment side (CIO and PMs) is Trader on the Go Account and view-only elsewhere; the CTO, quants, analysts and the fund administrator only view (quants read positions for their models). Rule 3: Compliance holds Auditor; freezing is part of Wallet Admin, so the approvers freeze on Compliance’s call. Approvers are the CEO, COO and CRO: none of them runs money, which keeps investment and control apart. They also hold Enterprise Admin and Video ID (needed for withdrawals above $250k a day); the CEO, COO and CTO hold Organization Admin: the CTO’s team handles day-to-day onboarding and offboarding, and every user or role change is approved by another Organization Admin. The CTO holds no role that moves or approves funds, and Compliance sees every role change through Organization View. Treasury operations is 2 to 3 people so leave never blocks a transfer. If they use the optional on-chain column, the CIO and PMs add DeFi for BitGo-integrated apps, or Wallet Spend on the ETH Hot Wallet for other Dapps. Land the takeaway: any two of the three Admins can approve. If quants run automated strategies, the strategy’s API token sits under the CIO and PMs’ permissions (Trader on the Go Account; DeFi or Wallet Spend on-chain, capped); the quant personally holds nothing that moves funds. Vault view is optional for PMs: the CIO sees the whole book, but PMs may only need the Go Account and hot wallets, so let the fund decide per its internal controls.', // 8 RBAC
+  'Turn the previous page into what the fund actually configures in BitGo. Start with the three rules, then show that the roles simply apply them. Rule 1: Treasury Operator starts, Fund Approver approves, never the same person. Rule 2: each role bundles only what the job needs; the investment side trades but never withdraws, and the CTO, fund admin, quants and analysts only view. Rule 3: Compliance Monitor audits every log and every role change; freezing sits inside Wallet Admin, so the approvers freeze on Compliance’s call. Why roles: onboarding and offboarding become one step, every holder changes together when a role changes, and audit shows role membership. People can hold several roles: the COO is Fund Approver, Access Manager and Billing; the CTO is Access Manager and Read Only. Details: Treasury’s API token carries Treasury Operator and is used on hot wallets; vault view is optional for PMs; On-chain Trader is optional, DeFi for BitGo-integrated apps and Wallet Spend on the ETH Hot Wallet for others. Treasury operations is 2 to 3 people so leave never blocks a transfer. Policies select a permission, not a custom role: vault withdrawals need any two Wallet Admins, and only Fund Approver bundles Wallet Admin, so that means two of CEO, COO and CRO. Never add Wallet Admin to another role.', // 9 Roles (merged)
+  'With roles in place, these are the rules. Approval steps select the Wallet Admin permission, and only the Fund Approver role holds it, so approvers are always CEO, COO or CRO. Vaults and the Go Account need any two approvers, and the initiator can never approve their own request. Hot wallets need just one Wallet Admin over the cap. That is a deliberate choice for speed: they hold about 5% of assets, sends are capped per trade, per day and as a share of the balance, and they only go to whitelisted addresses. API tokens get tighter caps than people. The last row applies only if the fund trades on-chain. Optional extra: a webhook rule can ask the fund’s own risk engine to approve or reject each send. Close on the lock: once created, rules lock after 48 hours and only BitGo support can loosen them.', // 8c Policies
   'Make it concrete: even an executive with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, test before moving size. Why reserve first: it is about 85% of assets and today sits on venues with counterparty risk and no custody cover, so moving it first takes the biggest risk off the table early; trading capital stays on its venues until the Go Account and hot wallets are proven, so the desk is not disrupted; and deposits into a vault need no approvals or video ID, only withdrawals do. Why decide approvers now: the any-two-of-three rule needs named Admins, and policies lock 48 hours after Build, after which only BitGo support can change them; approvals gate the 24h withdrawal SLA, so approvers spread across time zones keep withdrawals moving around the clock; each approver needs KYC, 2FA and video ID set up during Onboard; and approvers must be different people from Treasury, who initiate. Close by proposing a working session with ops and compliance to settle the three decisions this week.', // 11 Next steps
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, WhoActs, Rbac, Withdrawal, Scorecard, NextSteps] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps] satisfies Page[];
