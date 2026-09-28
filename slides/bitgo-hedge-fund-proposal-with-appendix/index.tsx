@@ -392,7 +392,8 @@ const Rbac: Page = () => (
       Enterprise-wide
       <Pill>CEO · COO · CRO: Enterprise Admin · Video ID</Pill>
       <Pill>CEO · COO · CTO: Organization Admin</Pill>
-      <Pill>Compliance: Organization View</Pill>
+      <Pill>Compliance · Auditor: Organization View</Pill>
+      <Pill>COO: Billing</Pill>
     </div>
     <Takeaway lead="Any two of three Admins can approve." sub="No single point of failure, and holidays or time zones never stall the fund." />
   </Frame>
@@ -455,7 +456,7 @@ const Branch = ({ office, head, children }: { office: string; head: ReactNode; c
 );
 
 const OrgChart: Page = () => (
-  <Frame tone="dark" eyebrow="04 · How it works" title="Who works in the fund, and who they report to" subtitle="The people behind every move: one CEO, four executives, and the teams they lead." source={hedgeFundRoles} sourceLabel="Who works in a hedge fund" source2={fundOffices} sourceLabel2="Front, middle and back office">
+  <Frame tone="dark" eyebrow="04 · How it works" title="Who works in the fund, and who they report to" subtitle="The people behind every move: one CEO, four executives, their teams and what they own." source={hedgeFundRoles} sourceLabel="Who works in a hedge fund" source2={fundOffices} sourceLabel2="Front, middle and back office">
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: 620 }}><OrgBox top title="CEO" sub="Runs the firm; oversees investment and operations" /></div>
     </div>
@@ -468,15 +469,17 @@ const OrgChart: Page = () => (
         <Team title="Quants" sub="Build models and trading signals" />
       </Branch>
       <Branch office="Middle office" head={<OrgBox title="CRO" sub="Measures and limits risk" />}>
-        <Team title="Risk team" sub="Limits, exposure and margin" />
+        <Team title="Risk limits" sub="Sets the caps in wallet policies" />
+        <Team title="Approvals" sub="One of the three approvers" />
       </Branch>
       <Branch office="Back office" head={<OrgBox title="COO" sub="Operations, compliance and legal" />}>
         <Team title="Treasury operations" sub="Move cash, settle, reconcile" />
-        <Team title="Compliance" sub="Rules, monitoring, audit liaison" />
+        <Team title="Compliance · Auditor" sub="Rules, monitoring, audit" />
         <Team ext title="Fund admin" sub="Independent NAV and reporting" />
       </Branch>
       <Branch office="Back office" head={<OrgBox title="CTO" sub="Systems, execution, monitoring" />}>
-        <Team title="IT team" sub="Access, integrations, security" />
+        <Team title="User access" sub="Onboards and offboards users" />
+        <Team title="Integrations" sub="SDK, API tokens, webhooks" />
       </Branch>
     </div>
   </Frame>
@@ -549,7 +552,7 @@ const WhoActs: Page = () => (
 // Role design: roles to create (with the permissions they bundle) and who holds each.
 const roleGrid = '300px 560px repeat(8, 1fr)';
 const PersonHead = ({ children }: { children: ReactNode }) => (
-  <div style={{ fontSize: 20, fontWeight: 500, color: mutedDark, textAlign: 'center', lineHeight: 1.25, padding: '0 4px 12px', borderBottom: `1px solid ${ruleDark}`, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>{children}</div>
+  <div style={{ fontSize: 19, fontWeight: 500, color: mutedDark, textAlign: 'center', lineHeight: 1.25, whiteSpace: 'nowrap', padding: '0 0 12px', borderBottom: `1px solid ${ruleDark}`, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>{children}</div>
 );
 // y = holds the role, o = optional, '' = no.
 const Dot = ({ v }: { v: '' | 'y' | 'o' }) => (
@@ -578,9 +581,9 @@ const RoleDesign: Page = () => (
       <PersonHead>CRO</PersonHead>
       <PersonHead>CTO</PersonHead>
       <PersonHead>CIO<br />PMs</PersonHead>
-      <PersonHead>Treasury<br />ops</PersonHead>
+      <PersonHead>Treasury<br />operations</PersonHead>
       <PersonHead>Compliance<br />Auditor</PersonHead>
-      <PersonHead>Admin<br />Quants</PersonHead>
+      <PersonHead>Fund admin<br />Quants<br />Analysts</PersonHead>
       <RoleRow name="Fund Approver" bundle="Enterprise Admin · Wallet Admin · Video ID" who={['y', 'y', 'y', '', '', '', '', '']} />
       <RoleRow name="Access Manager" bundle="Organization Admin" who={['y', 'y', '', 'y', '', '', '', '']} />
       <RoleRow name="Treasury Operator" bundle="Wallet Spend · Wallet View" who={['', '', '', '', '', 'y', '', '']} />
