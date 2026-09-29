@@ -17,10 +17,7 @@ if (typeof document !== 'undefined' && !document.getElementById(FONT_LINK_ID)) {
 
 export const design: DesignSystem = {
   palette: { bg: '#f4f6fb', text: '#0b1026', accent: '#2446ff' },
-  fonts: {
-    display: "'Inter', 'PingFang TC', 'Noto Sans TC', system-ui, sans-serif",
-    body: "'Inter', 'PingFang TC', 'Noto Sans TC', system-ui, sans-serif",
-  },
+  fonts: { display: "'Inter', system-ui, sans-serif", body: "'Inter', system-ui, sans-serif" },
   typeScale: { hero: 64, body: 30 },
   radius: 14,
 };
@@ -117,7 +114,7 @@ const Table = ({ heads, widths, children }: { heads: string[]; widths: number[];
 };
 
 // Every Q&A page uses the same two columns: likely question, one-line answer.
-const QA = ({ children }: { children: ReactNode }) => <Table heads={['可能被問', '回答重點']} widths={[760]}>{children}</Table>;
+const QA = ({ children }: { children: ReactNode }) => <Table heads={['Likely question', 'Answer']} widths={[760]}>{children}</Table>;
 
 const Note = ({ children }: { children: ReactNode }) => (
   <div style={{ display: 'flex', gap: 24, marginTop: 36 }}>
@@ -160,9 +157,9 @@ const Cover: Page = () => (
       <div style={{ marginTop: 'auto', marginBottom: 'auto' }}>
         <h1 style={{ fontSize: 124, fontWeight: 300, lineHeight: 1.08, margin: '0 0 40px', letterSpacing: -4, fontFamily: 'var(--osd-font-display)' }}>
           Gist walkthrough<br />
-          <span style={{ color: skyBlue }}>可能被問的問題</span>
+          <span style={{ color: skyBlue }}>Likely questions</span>
         </h1>
-        <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>依 Gist 檔案 01–07 整理，每題一句回答重點。</p>
+        <p style={{ fontSize: 36, color: 'rgba(255,255,255,0.82)', margin: 0 }}>One page per Gist file, 01–07, with a one-line answer each.</p>
       </div>
       <div style={{ fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>Interview prep</div>
     </main>
@@ -170,97 +167,97 @@ const Cover: Page = () => (
 );
 
 const CreateWallet: Page = () => (
-  <Frame eyebrow="01 · create-wallet.mjs" title="建立錢包：為什麼這樣設計" subtitle="錢包類型、兩組密碼，以及 access token 的角色。">
+  <Frame eyebrow="01 · create-wallet.mjs" title="Creating the wallet: why this design" subtitle="Wallet type, the two secrets, and what the access token does.">
     <QA>
-      <Row cells={['為什麼選 MPC（TSS），不用 multisig？', '鏈上是普通 EOA：gas 低、不需合約、看不出多簽']} />
-      <Row cells={['passphrase 和 passcodeEncryptionCode？', '前者加密 User Key；後者加密密碼備份，用來復原']} />
-      <Row cells={['self-custody 是什麼意思？', 'User Key 在我手上，BitGo 單方面動不了資金']} />
-      <Row cells={['hot 和 cold wallet 差在哪？', 'hot 由程式線上簽名；cold 金鑰離線、人工簽名']} />
-      <Row cells={['access token 能做什麼？', '只認證身分、不能簽名；可限權限、限額、IP']} />
+      <Row cells={['Why MPC (TSS) instead of multisig?', 'A plain EOA on-chain: less gas, no contract, looks single-sig']} />
+      <Row cells={['passphrase vs passcodeEncryptionCode?', 'First encrypts the User Key; second backs up the passphrase']} />
+      <Row cells={['What does self-custody mean here?', 'I hold the User Key; BitGo alone can’t move funds']} />
+      <Row cells={['Hot vs cold wallet?', 'Hot: code signs online. Cold: keys offline, manual signing']} />
+      <Row cells={['What can the access token do?', 'Authenticates only, can’t sign; limit scope, amount and IP']} />
     </QA>
   </Frame>
 );
 
 const WalletResponse: Page = () => (
-  <Frame eyebrow="02 · 錢包建立回應" title="回應裡有什麼，為什麼要 redact" subtitle="哪些欄位是秘密，哪些可以公開。">
+  <Frame eyebrow="02 · Wallet creation response" title="What’s in the response, and why redact" subtitle="Which fields are secret and which are safe to share.">
     <QA>
-      <Row cells={['為什麼 redact 部分欄位？', 'encryptedPrv 外洩後，只剩密碼強度在保護']} />
-      <Row cells={['commonKeychain 為什麼保留？', '它是公鑰資訊，公開沒有風險']} />
-      <Row cells={['m: 2, n: 3 代表什麼？', '3 把 key 分片，任 2 把就能簽名']} />
-      <Row cells={['baseAddress 和其他地址欄位？', 'baseAddress 是錢包主地址；其餘面試前先查']} />
-      <Row cells={['MPCv2 是什麼？', 'BitGo 第二代 ECDSA MPC，簽名回合更少']} />
+      <Row cells={['Why redact some fields?', 'If encryptedPrv leaks, only the passphrase protects it']} />
+      <Row cells={['Why keep commonKeychain?', 'It’s public-key data, so sharing it carries no risk']} />
+      <Row cells={['What do m: 2, n: 3 mean?', 'Three key shares; any two can sign']} />
+      <Row cells={['baseAddress and the other addresses?', 'baseAddress is the main address; check the rest first']} />
+      <Row cells={['What is MPCv2?', 'BitGo’s second-gen ECDSA MPC, with fewer signing rounds']} />
     </QA>
   </Frame>
 );
 
 const WebhookConfig: Page = () => (
-  <Frame tone="dark" eyebrow="03 · webhook 設定" title="Webhook：可靠性與安全" subtitle="numConfirmations 那題要老實講實際結果。" source={addWebhookRef} sourceLabel="Add wallet webhook">
+  <Frame tone="dark" eyebrow="03 · Webhook configuration" title="Webhooks: reliability and security" subtitle="Be honest about what numConfirmations actually did." source={addWebhookRef} sourceLabel="Add wallet webhook">
     <QA>
-      <Row cells={['webhook 和 polling 比起來？', '即時、省 API 呼叫；但可能延遲、重送、亂序']} />
-      <Row cells={['numConfirmations: 0 是什麼意思？', '首次看到通知一次，確認後再通知一次']} />
-      <Row cells={['你有收到 unconfirmed 嗎？', '沒有，兩筆都只有 confirmed；Hoodi 出塊太快']} />
-      <Row cells={['正式環境怎麼保護 endpoint？', 'HTTPS、回查 API、transfer ID 去重、限 IP']} />
-      <Row cells={['為什麼註冊了好幾個 webhook？', 'ngrok 網址換過；舊的設定應該刪掉']} />
+      <Row cells={['Webhooks vs polling?', 'Real-time, fewer calls; but can be late, repeated, out of order']} />
+      <Row cells={['What does numConfirmations: 0 mean?', 'Notify when first seen, then again once confirmed']} />
+      <Row cells={['Did you get an unconfirmed one?', 'No, only confirmed; Hoodi blocks came too fast']} />
+      <Row cells={['How to secure the endpoint in prod?', 'HTTPS, re-check via API, dedupe by transfer ID, IP allowlist']} />
+      <Row cells={['Why several webhooks registered?', 'The ngrok URL changed; old configs should be removed']} />
     </QA>
   </Frame>
 );
 
 const InboundWebhook: Page = () => (
-  <Frame eyebrow="04–05 · 入帳 webhook" title="讀懂一筆入帳通知" subtitle="1.89375 ETH 從 faucet 進到 Part 1 的錢包。" source={webhooksDoc} sourceLabel="Wallet webhooks">
+  <Frame eyebrow="04–05 · Incoming transfer webhook" title="Reading a deposit notification" subtitle="1.89375 ETH from the faucet into the Part 1 wallet." source={webhooksDoc} sourceLabel="Wallet webhooks">
     <QA>
-      <Row cells={['value 和 baseValue 差在哪？', '這筆兩者相同，gas 由寄件方付；定義先查']} />
-      <Row cells={['為什麼另外有 valueString？', 'wei 超過 JS number 的安全範圍，字串不失精度']} />
-      <Row cells={['initiator: external 代表什麼？', '不是 BitGo 帳號內發起，是 faucet 打進來的']} />
-      <Row cells={['收到 webhook 就馬上入帳嗎？', '不會，先用 transfer ID 呼叫 API 查證']} />
+      <Row cells={['value vs baseValue?', 'Equal here, the sender paid gas; check the definitions']} />
+      <Row cells={['Why a separate valueString?', 'Wei exceeds JS number precision; a string keeps it exact']} />
+      <Row cells={['What does initiator: external mean?', 'Not started from my BitGo account; the faucet sent it']} />
+      <Row cells={['Credit funds as soon as it arrives?', 'No, look up the transfer ID through the API first']} />
     </QA>
-    <Note>systemNotes 本身就警告：不要只靠 webhook 判斷最終狀態。</Note>
+    <Note>systemNotes says it too: don’t rely on the webhook alone for final state.</Note>
   </Frame>
 );
 
 const TransferOutput: Page = () => (
-  <Frame eyebrow="06 · 轉帳輸出" title="轉帳輸出裡的狀態與欄位" subtitle="這份 JSON 是在簽名完成、剛廣播時存下來的。">
+  <Frame eyebrow="06 · Transfer output" title="States and fields in the transfer output" subtitle="This JSON was saved right after signing and broadcast.">
     <QA>
-      <Row cells={['為什麼只轉 0.01 ETH？', 'MPC 錢包自付 gas，金額要低於 spendable']} />
-      <Row cells={['transfer signed、txRequest delivered？', '簽完剛廣播就存檔；上鏈後才是 confirmed']} />
-      <Row cells={['height: 999999999 是什麼？', '佔位值，代表這時還沒上鏈']} />
-      <Row cells={['feeString 是 0，但 feeInfo 有值？', '還沒上鏈，實際手續費未知；feeInfo 是預估']} />
-      <Row cells={['policiesChecked: true 是什麼？', '送出前已檢查白名單、限額、審批等政策']} />
-      <Row cells={['signatureShares 為什麼是空的？', 'MPC 中間資料不保留，只留下 signedTx']} />
+      <Row cells={['Why only 0.01 ETH?', 'MPC wallets pay their own gas, so stay under spendable']} />
+      <Row cells={['transfer signed, txRequest delivered?', 'Saved right after broadcast; confirmed comes later']} />
+      <Row cells={['What is height: 999999999?', 'A placeholder: not on-chain yet']} />
+      <Row cells={['feeString is 0 but feeInfo has a value?', 'Real fee unknown until mined; feeInfo is an estimate']} />
+      <Row cells={['What does policiesChecked: true mean?', 'Whitelist, limit and approval policies ran before sending']} />
+      <Row cells={['Why is signatureShares empty?', 'MPC intermediate data isn’t kept; only signedTx is']} />
     </QA>
   </Frame>
 );
 
 const Signing: Page = () => (
-  <Frame tone="dark" eyebrow="07 · 簽名流程" title="簽名與金鑰：最可能被深挖" subtitle="User Key + BitGo Key 共簽，Backup Key 只用來復原。">
+  <Frame tone="dark" eyebrow="07 · Signing" title="Signing and keys: expect deep dives" subtitle="User Key and BitGo Key co-sign; the Backup Key is for recovery.">
     <QA>
-      <Row cells={['私鑰有被完整組出來過嗎？', '沒有，這是 TSS 和切開保存私鑰的差別']} />
-      <Row cells={['BitGo 倒了，資金怎麼拿回？', 'User Key + Backup Key，用 recovery tool']} />
-      <Row cells={['User Key 外洩怎麼辦？', '仍需 BitGo 共簽和政策檢查；盡快轉新錢包']} />
-      <Row cells={['access token 外洩怎麼辦？', '沒 passphrase 不能簽，但能讀取、改設定']} />
-      <Row cells={['OTP / unlock 是做什麼的？', '敏感操作前解鎖 session；測試環境用 000000']} />
+      <Row cells={['Is the full private key ever assembled?', 'No. That’s the difference between TSS and a split key']} />
+      <Row cells={['If BitGo disappears, how do you recover?', 'User Key + Backup Key with BitGo’s recovery tool']} />
+      <Row cells={['What if the User Key leaks?', 'BitGo co-signing and policies still apply; move funds']} />
+      <Row cells={['What if the access token leaks?', 'No signing without the passphrase, but it can read and edit']} />
+      <Row cells={['What are OTP and unlock for?', 'Unlock the session for sensitive actions; 000000 in test']} />
     </QA>
   </Frame>
 );
 
 const Extensions: Page = () => (
-  <Frame eyebrow="延伸題" title="從測試網延伸到正式環境" subtitle="通常會接到第 3 頁的對沖基金提案。">
+  <Frame eyebrow="Follow-ups" title="From testnet to production" subtitle="These usually lead into the hedge-fund proposal.">
     <QA>
-      <Row cells={['正式環境怎麼加強安全？', '地址白名單、單筆與每日限額、多人審批']} />
-      <Row cells={['資產怎麼分層放？', '長期資產放 custodial cold，營運資金用 hot']} />
-      <Row cells={['要支援 USDC 要改什麼？', '改 token 名稱和收款設定；參數先查文件']} />
+      <Row cells={['How would you harden this for prod?', 'Address whitelist, per-tx and daily limits, multi-approval']} />
+      <Row cells={['How would you tier the assets?', 'Long-term in custodial cold; operating funds in hot']} />
+      <Row cells={['What changes to support USDC?', 'Token name and receive setup; check exact parameters']} />
     </QA>
-    <Takeaway lead="把答案接回提案：安全、速度、權限控管" sub="測試網的每個設定，都能對應到對沖基金的需求。" />
+    <Takeaway lead="Tie it back: safety, speed and access control" sub="Every testnet setting maps to a need in the hedge-fund case." />
   </Frame>
 );
 
 const ToVerify: Page = () => (
-  <Frame tone="dark" eyebrow="面試前" title="這三題先查文件再回答" subtitle="目前的答案還沒有文件依據。">
+  <Frame tone="dark" eyebrow="Before the interview" title="Check these three in the docs" subtitle="These answers aren’t backed by documentation yet.">
     <Grid cols={3}>
-      <Card tag="04–05" title="value vs baseValue"><div>兩個欄位的正式定義</div></Card>
-      <Card tag="03" title="Webhook 簽章"><div>BitGo 有沒有簽章驗證</div></Card>
-      <Card tag="延伸題" title="ERC-20 轉帳"><div>USDC 轉帳的具體參數</div></Card>
+      <Card tag="04–05" title="value vs baseValue"><div>The official definitions</div></Card>
+      <Card tag="03" title="Webhook signatures"><div>Does BitGo sign webhooks?</div></Card>
+      <Card tag="Follow-ups" title="ERC-20 transfers"><div>Exact USDC parameters</div></Card>
     </Grid>
-    <Takeaway lead="不確定就直說，並說明會怎麼查證" />
+    <Takeaway lead="If unsure, say so, and explain how you’d check" />
   </Frame>
 );
 
