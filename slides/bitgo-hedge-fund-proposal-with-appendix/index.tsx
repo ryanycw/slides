@@ -739,7 +739,6 @@ const ArchitectureAlt: Page = () => (
       <Row cells={['Extra controls', 'None beyond the standard policy set', 'Whitelist protocol contracts; per-tx thresholds']} />
       <Row cells={['Total wallets', 'Six', 'Five']} />
     </Table>
-    <Note>Ask the fund: is ETH held long-term or moved into DeFi? Smart-contract risk sits outside custody cover.</Note>
   </Frame>
 );
 
