@@ -615,7 +615,7 @@ const Interests: Page = () => (
       <Hobby emoji="🎾" title="Tennis" line="Always up for a rally" bg={green} rotate={-2} />
       <Hobby emoji="🏊" title="Triathlon" line="Swim, bike, run, repeat" bg={blue} rotate={1.5} />
       <Hobby emoji="🍜" title="Foodie" line="Ask me where to eat in Taipei" bg={orange} rotate={-1} />
-      <Hobby emoji="🐶" title="Corgi parent" line="Proud owner of a very short dog" bg={pink} rotate={2} />
+      <Hobby emoji="🐶" title="Corgi dad" line="Proud owner of a very short dog" bg={pink} rotate={2} />
     </div>
   </Shell>
 );
