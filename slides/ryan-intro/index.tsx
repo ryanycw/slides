@@ -39,9 +39,6 @@ const mono = "'Space Mono', ui-monospace, monospace";
 const border = `5px solid ${ink}`;
 const shadow = `10px 10px 0 ${ink}`;
 
-// Personality & interests pages are drafts — flip to false once the copy is final.
-const SHOW_DRAFT_TAGS = true;
-
 const fill: CSSProperties = {
   width: '100%',
   height: '100%',
@@ -158,27 +155,6 @@ const Footer = () => {
     </div>
   );
 };
-
-const DraftTag = () =>
-  SHOW_DRAFT_TAGS ? (
-    <div
-      style={{
-        position: 'absolute',
-        top: 60,
-        right: 100,
-        border: `4px dashed ${ink}`,
-        borderRadius: 12,
-        padding: '8px 18px',
-        fontFamily: mono,
-        fontSize: 22,
-        fontWeight: 700,
-        background: paper,
-        transform: 'rotate(3deg)',
-      }}
-    >
-      DRAFT · replace with your own
-    </div>
-  ) : null;
 
 const Header = ({ eyebrow, title, chipBg }: { eyebrow: string; title: string; chipBg?: string }) => (
   <div>
@@ -600,7 +576,7 @@ const Network: Page = () => (
   </Shell>
 );
 
-// ── 09 Personality (draft) ────────────────────────────────────────────
+// ── 09 Personality ────────────────────────────────────────────
 const Trait = ({ emoji, title, line, bg, rotate }: { emoji: string; title: string; line: string; bg: string; rotate: number }) => (
   <Sticker bg={bg} rotate={rotate} style={{ padding: '36px 40px', display: 'flex', gap: 32, alignItems: 'center', height: 220, boxSizing: 'border-box' }}>
     <div style={{ fontSize: 96, lineHeight: 1 }}>{emoji}</div>
@@ -613,13 +589,12 @@ const Trait = ({ emoji, title, line, bg, rotate }: { emoji: string; title: strin
 
 const Personality: Page = () => (
   <Shell>
-    <DraftTag />
     <Header eyebrow="04 · BEYOND THE CODE" title="What I'm like to work with" chipBg={blue} />
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, marginTop: 80 }}>
-      <Trait emoji="🧩" title="End-to-end owner" line="From crypto design to the demo app" bg="var(--osd-accent)" rotate={-1.5} />
-      <Trait emoji="🔐" title="Privacy by default" line="Design so no one needs to be trusted" bg={pink} rotate={1.5} />
-      <Trait emoji="🤝" title="Community connector" line="Host, teach, bring builders together" bg={green} rotate={1} />
-      <Trait emoji="🌱" title="Forever a student" line="Always in a cohort or hackathon" bg={blue} rotate={-1} />
+      <Trait emoji="⚡" title="Fast execution" line="Hackathon pace: new stack to shipped" bg="var(--osd-accent)" rotate={-1.5} />
+      <Trait emoji="🌊" title="High adaptability" line="Thrive where priorities shift fast" bg={pink} rotate={1.5} />
+      <Trait emoji="🌏" title="Global collaborator" line="Bridging APAC and EMEA time zones" bg={green} rotate={1} />
+      <Trait emoji="🎤" title="Client-facing presence" line="Complex tech into clear workshops" bg={blue} rotate={-1} />
     </div>
   </Shell>
 );
