@@ -743,36 +743,26 @@ const ArchitectureAlt: Page = () => (
   </Frame>
 );
 
-const TierPolicies: Page = () => (
-  <Frame eyebrow={A} title="A6 · Policy rules lock each tier down" subtitle="Roles say who may act. Policies say what an action may do; BitGo enforces them before signing." source={policies} sourceLabel="BitGo policies overview">
-    <Table heads={['Tier', 'Where funds may go', 'Approvals and limits']} widths={[230, 700]}>
-      <Row cells={['Vaults', 'Only own Go Account and own hot wallets', '2 Admin approvals · video ID over $250k/day · daily cap']} />
-      <Row cells={['Go Account', 'Partner venues; out only to own wallets and bank', 'Traders trade freely · Admin approves withdrawals']} />
-      <Row cells={['Hot wallets', 'Only whitelisted venue deposit addresses', 'Small sends auto · large need Admin · daily and % caps']} />
-    </Table>
-    <Note>Policies lock after 48h and only BitGo support can loosen them, so no admin can quietly open a wallet.</Note>
-  </Frame>
-);
-
 const A3: Page = () => (
-  <Frame eyebrow={A} title="A7 · Roles and permissions compared" subtitle="The roles in BitGo’s user settings, and who holds each in this design." source={walletUsers} sourceLabel="BitGo wallet users and roles" source2={hedgeFundRoles} sourceLabel2="Who works in a hedge fund">
-    <Table heads={['Role', 'Can', 'Held by']} widths={[330, 760]}>
-      <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'CEO · COO · CTO']} />
-      <Row cells={['Organization View', 'View users, roles and user changes', 'Compliance · Auditor']} />
-      <Row cells={['Enterprise Admin', 'Create wallets, enterprise policies, bank accounts', 'CEO · COO · CRO']} />
-      <Row cells={['Video ID', 'Video ID for withdrawals and policy unlocks', 'CEO · COO · CRO']} />
-      <Row cells={['Wallet Admin', 'Whitelists, wallet policies, approvals, freeze', 'CEO · COO · CRO']} />
-      <Row cells={['Wallet Spend', 'Withdraw from wallets; new receive addresses', 'Treasury operations']} />
-      <Row cells={['Trader', 'Buy and sell on the Go Account', 'CIO · PMs']} />
-      <Row cells={['DeFi', 'Connect BitGo-integrated DeFi apps to wallets', 'Optional: CIO · PMs']} />
-      <Row cells={['Auditor', 'Audit logs across enterprises, wallets, users', 'Compliance · Auditor']} />
-      <Row cells={['Wallet View', 'View balances and transactions', 'CIO · PMs · all view-only staff']} />
+  <Frame eyebrow={A} title="A6 · BitGo permissions behind each role" subtitle="What each built-in permission allows, and which role on page 11 bundles it." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+    <Table heads={['Permission', 'Allows', 'Bundled into']} widths={[330, 760]}>
+      <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'Access Manager']} />
+      <Row cells={['Organization View', 'View users, roles and user changes', 'Compliance Monitor']} />
+      <Row cells={['Enterprise Admin', 'Create wallets, enterprise policies, bank accounts', 'Fund Approver']} />
+      <Row cells={['Video ID', 'Video ID for withdrawals and policy unlocks', 'Fund Approver']} />
+      <Row cells={['Wallet Admin', 'Whitelists, wallet policies, approvals, freeze', 'Fund Approver']} />
+      <Row cells={['Wallet Spend', 'Withdraw from wallets; new receive addresses', 'Treasury Operator · On-chain Trader']} />
+      <Row cells={['Trader', 'Buy and sell on the Go Account', 'Trader']} />
+      <Row cells={['DeFi', 'Connect BitGo-integrated DeFi apps to wallets', 'On-chain Trader (opt.)']} />
+      <Row cells={['Auditor', 'Audit logs across enterprises, wallets, users', 'Compliance Monitor']} />
+      <Row cells={['Wallet View', 'View balances and transactions', 'Treasury Operator · Trader · Read Only']} />
+      <Row cells={['Billing', 'View and pay BitGo invoices', 'Billing']} />
     </Table>
   </Frame>
 );
 
 const A4: Page = () => (
-  <Frame eyebrow={A} title="A8 · The policy toolkit" subtitle="A rule is a condition plus an action, scoped to one wallet or the whole enterprise." source={policies} sourceLabel="BitGo policies overview">
+  <Frame eyebrow={A} title="A7 · The policy toolkit" subtitle="A rule is a condition plus an action, scoped to one wallet or the whole enterprise." source={policies} sourceLabel="BitGo policies overview">
     <Table heads={['Condition', 'Triggers on', 'Used in this proposal']} widths={[400, 560]}>
       <Row cells={['Destination (whitelist)', 'Address not on the approved list', 'Vaults to own wallets; hot wallets to venues']} />
       <Row cells={['Threshold', 'Size of a single withdrawal', 'Large hot-wallet sends and on-chain trades']} />
@@ -787,7 +777,7 @@ const A4: Page = () => (
 );
 
 const A5: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A9 · Keys and recovery for the hot wallets" subtitle="Self-custody moves key responsibility to the fund. This is how to carry it.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A8 · Keys and recovery for the hot wallets" subtitle="Self-custody moves key responsibility to the fund. This is how to carry it.">
     <Table heads={['Key', 'Held by', 'Stored', 'Used for']} widths={[220, 200, 780]}>
       <Row cells={['User key', 'Fund', 'Encrypted by passphrase; passphrase in KMS or HSM', 'Daily signing through the SDK']} />
       <Row cells={['Backup key', 'Fund', 'Offline, split between two officers, separate site', 'Recovery only']} />
@@ -799,7 +789,7 @@ const A5: Page = () => (
 );
 
 const A6: Page = () => (
-  <Frame eyebrow={A} title="A10 · Liquidity options from the Go Account" subtitle="All three settle through Go Network without assets leaving regulated custody." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
+  <Frame eyebrow={A} title="A9 · Liquidity options from the Go Account" subtitle="All three settle through Go Network without assets leaving regulated custody." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <Table heads={['Option', 'What it is', 'Use when']} widths={[380, 800]}>
       <Row cells={['Off-exchange settlement', 'Balance mirrored to a partner venue; settles off-chain', 'Keep venues, skip pre-funding']} />
       <Row cells={['BitGo Prime trading', 'One API to exchanges, market makers and OTC desks', 'Best execution over a set venue']} />
@@ -810,7 +800,7 @@ const A6: Page = () => (
 );
 
 const A7: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A11 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A10 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
     <Table heads={['Further need', 'Answer', 'Impact on the design']} widths={[430, 640]}>
       <Row cells={['Yield on idle ETH', 'Staking from custody wallets', 'None: stake from the ETH vault']} />
       <Row cells={['More assets or chains', 'Add a wallet per new chain in each tier', 'Same roles and policy templates']} />
@@ -823,7 +813,7 @@ const A7: Page = () => (
 );
 
 const A12: Page = () => (
-  <Frame eyebrow={A} source={licenses} sourceLabel="BitGo licenses and registrations" title="A12 · Licenses and compliance" subtitle="A US-regulated qualified custodian, licensed in each major market it serves.">
+  <Frame eyebrow={A} source={licenses} sourceLabel="BitGo licenses and registrations" title="A11 · Licenses and compliance" subtitle="A US-regulated qualified custodian, licensed in each major market it serves.">
     <Table heads={['Entity', 'Regulator', 'License']} widths={[520, 420]}>
       <Row cells={['BitGo Bank & Trust, N.A.', 'OCC (US federal)', 'National trust bank; qualified custodian']} />
       <Row cells={['BitGo New York Trust Co.', 'NYDFS (New York)', 'Limited-purpose trust; qualified custodian']} />
@@ -838,7 +828,7 @@ const A12: Page = () => (
 );
 
 const A13: Page = () => (
-  <Frame eyebrow={A} source={trustCenter} sourceLabel="BitGo Trust Center" title="A13 · Security and compliance controls" subtitle="What sits behind the licenses: audited controls, insured custody, segregated assets.">
+  <Frame eyebrow={A} source={trustCenter} sourceLabel="BitGo Trust Center" title="A12 · Security and compliance controls" subtitle="What sits behind the licenses: audited controls, insured custody, segregated assets.">
     <Table heads={['Measure', 'What BitGo does', 'Why it matters']} widths={[360, 820]}>
       <Row cells={['Independent audits', 'SOC 1 Type 2 and SOC 2 Type 2 reports', 'Controls tested by an outside auditor']} />
       <Row cells={['Custody insurance', '$250M, Lloyd’s syndicate; BitGo pays deductibles', 'Covers loss, theft and misuse']} />
@@ -885,14 +875,13 @@ export const notes: (string | undefined)[] = [
   undefined, // A3 Self-custody wallets
   undefined, // A4 Multisig vs MPC
   'Use if they answer "DeFi" to the ETH question on the next-steps slide.', // A5 Six or five
-  undefined, // A6 Tier policies
-  'Freeze sits inside Wallet Admin, so the approvers can freeze on Compliance’s call. Billing (view and pay BitGo invoices) goes to the COO, since there is no CFO. Control roles sit with CEO, COO and CRO; the investment side (CIO, PMs) only trades; the CTO builds the integration with view access, manages user access as an Organization Admin, and never holds a token that can move funds. View-only staff: CTO, quants, analysts and the fund administrator.', // A7 Roles
-  'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A8 Policy toolkit
-  undefined, // A9 Keys
-  undefined, // A10 Liquidity
-  undefined, // A11 Further needs
-  'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
-  'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
+  'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
+  'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
+  undefined, // A8 Keys
+  undefined, // A9 Liquidity
+  undefined, // A10 Further needs
+  'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A11 Licenses
+  'Pair with A11. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A12 Security and compliance
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, TierPolicies, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
