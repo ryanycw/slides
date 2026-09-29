@@ -43,8 +43,11 @@ const walletTypes = 'https://developers.bitgo.com/docs/wallet-types';
 const policies = 'https://developers.bitgo.com/docs/policies-overview';
 const goNetwork = 'https://www.bitgo.com/products/go-network-oes/';
 const walletUsers = 'https://developers.bitgo.com/guides/wallets/users/add';
+const licenses = 'https://www.bitgo.com/company/licenses/';
 const hedgeFundRoles = 'https://financeunlocked.com/videos/who-works-in-a-hedge-fund';
 const fundOffices = 'https://www.akj.com/blog/hedge-fund-roles-explained';
+const trustCenter = 'https://trustcenter.bitgo.com/';
+const insurance = 'https://www.bitgo.com/solutions/insurance/';
 
 // Every primitive reads the page tone, so the same markup works on light and dark pages.
 type ToneName = 'light' | 'dark';
@@ -668,6 +671,176 @@ const NextSteps: Page = () => (
   </Frame>
 );
 
+const AppendixDivider: Page = () => (
+  <Tone.Provider value="dark">
+    <main style={{ position: 'relative', width: '100%', height: '100%', boxSizing: 'border-box', padding: '0 140px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: bgBlue, color: '#ffffff', fontFamily: 'var(--osd-font-body)' }}>
+      <div><Pill color="#ffffff">Backup material</Pill></div>
+      <h1 style={{ fontSize: 140, fontWeight: 300, lineHeight: 1.1, margin: '32px 0', letterSpacing: -4 }}>Appendix</h1>
+      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallet types · multisig vs MPC · ETH options · policies · roles · keys · liquidity · licenses · security</p>
+      <div style={{ position: 'absolute', left: 140, bottom: 56, fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
+    </main>
+  </Tone.Provider>
+);
+
+const A = 'Appendix';
+
+const Types: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A1 · The three wallet types at a glance" subtitle="Each type trades speed for protection differently, so each tier gets the type that matches its job.">
+    <Table heads={['Type', 'Who holds the keys', 'Speed out', 'Job in this design']} widths={[290, 500, 460]}>
+      <Row cells={['Custody cold', 'BitGo holds all three, offline', 'Within 24h SLA, after video ID', 'Stores ~85%; slow on purpose']} />
+      <Row cells={['Go Account', 'BitGo custody, off-chain ledger', 'Instant in-network', 'Trading float ~10%; holds USD too']} />
+      <Row cells={['Self-custody hot', 'Fund holds 2 keys, BitGo holds 1', 'Minutes, signed by API', 'Working capital ~5%, any venue']} />
+    </Table>
+    <Note>BTC wallets use multisig; ETH wallets use MPC (one signature, lower gas).</Note>
+  </Frame>
+);
+
+const A1Custody: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A2 · Wallets where BitGo holds the keys" subtitle="Custody products: the fund initiates, BitGo Bank & Trust signs.">
+    <Table heads={['Wallet', 'Keys and signing', 'Speed', 'Best for']} widths={[330, 640, 310]}>
+      <Row cells={['Custody multisig cold', 'All 3 keys in BitGo vaults; signed offline', 'Within 24h SLA', 'BTC, UTXO long-term holdings']} />
+      <Row cells={['Custody MPC cold', 'Key shares in BitGo vaults; no full key', 'Within 24h SLA', 'ETH, account-based holdings']} />
+      <Row cells={['Go Account', 'Omnibus custody, off-chain ledger, USD', 'Instant in-network', 'Trading and settlement']} />
+      <Row cells={['Lightning', 'Single-sig hot, custody or self-custody', 'Seconds', 'BTC payments; not needed here']} />
+    </Table>
+    <Note>Custody wallets sign only in production; on testnet, test integrations on self-custody wallets.</Note>
+  </Frame>
+);
+
+const A1Self: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A3 · Wallets where the fund holds the keys" subtitle="Self-custody: fund holds user + backup keys, BitGo holds the third and enforces policy.">
+    <Table heads={['Wallet', 'How it signs', 'Speed', 'Best for']} widths={[330, 640, 310]}>
+      <Row cells={['Multisig hot', 'SDK signs with user key, BitGo co-signs', 'Minutes', 'BTC working capital']} />
+      <Row cells={['MPC hot', 'SDK share ceremony; one on-chain signature', 'Minutes', 'ETH, ERC-20 working capital']} />
+      <Row cells={['Multisig cold', 'Sign offline in the OVC, BitGo co-signs', 'Hours, manual', 'Self-held reserves']} />
+      <Row cells={['MPC cold', 'Offline signing with MPC key shares', 'Hours, manual', 'Self-held ETH-style reserves']} />
+    </Table>
+    <Note>Trade-off: control and speed, but no BitGo custody insurance, and key storage becomes the fund’s job.</Note>
+  </Frame>
+);
+
+const A2: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A4 · Multisig vs MPC" subtitle="Both are 2-of-3. The difference is where the threshold is enforced.">
+    <Table heads={['', 'Multisig', 'MPC (TSS)']} widths={[360, 640]}>
+      <Row cells={['Key material', 'Three independent private keys', 'Encrypted shares; a full key never exists']} />
+      <Row cells={['Signing', 'On-chain, cosigners sign asynchronously', 'Off-chain, synchronous; one combined signature']} />
+      <Row cells={['Transaction cost', 'Higher: several signatures', 'Lower: a single signature']} />
+      <Row cells={['During signing', 'Fees and nonces can still change', 'Nothing in the transaction can change']} />
+      <Row cells={['Natural fit', 'Bitcoin and UTXO chains', 'Ethereum and account-based chains']} />
+    </Table>
+  </Frame>
+);
+
+const ArchitectureAlt: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A5 · Six wallets, or five: it depends on ETH" subtitle="A cold vault cannot touch DeFi, so ETH usage decides the vault split and hot-wallet size.">
+    <Table heads={['', 'ETH held as a position', 'ETH deployed to DeFi']} widths={[300, 620]}>
+      <Row cells={['Vault tier', 'Separate ETH and stablecoin vaults: 3 vaults', 'One ETH-chain reserve vault with stables: 2 vaults']} />
+      <Row cells={['Why', 'Different approvers, limits and cadence', 'Both only refill the hot wallet, same approvers']} />
+      <Row cells={['Hot tier', 'Small: ~5% working capital', 'Larger: ETH + stables together for protocols']} />
+      <Row cells={['Extra controls', 'None beyond the standard policy set', 'Whitelist protocol contracts; per-tx thresholds']} />
+      <Row cells={['Total wallets', 'Six', 'Five']} />
+    </Table>
+  </Frame>
+);
+
+const A3: Page = () => (
+  <Frame eyebrow={A} title="A6 · BitGo permissions behind each role" subtitle="What each built-in permission allows, and which role on page 11 bundles it." source={walletUsers} sourceLabel="BitGo wallet users and roles">
+    <Table heads={['Permission', 'Allows', 'Bundled into']} widths={[330, 760]}>
+      <Row cells={['Organization Admin', 'Manage users and roles; approve user changes', 'Access Manager']} />
+      <Row cells={['Organization View', 'View users, roles and user changes', 'Compliance Monitor']} />
+      <Row cells={['Enterprise Admin', 'Create wallets, enterprise policies, bank accounts', 'Fund Approver']} />
+      <Row cells={['Video ID', 'Video ID for withdrawals and policy unlocks', 'Fund Approver']} />
+      <Row cells={['Wallet Admin', 'Whitelists, wallet policies, approvals, freeze', 'Fund Approver']} />
+      <Row cells={['Wallet Spend', 'Withdraw from wallets; new receive addresses', 'Treasury Operator · On-chain Trader']} />
+      <Row cells={['Trader', 'Buy and sell on the Go Account', 'Trader']} />
+      <Row cells={['DeFi', 'Connect BitGo-integrated DeFi apps to wallets', 'On-chain Trader (opt.)']} />
+      <Row cells={['Auditor', 'Audit logs across enterprises, wallets, users', 'Compliance Monitor']} />
+      <Row cells={['Wallet View', 'View balances and transactions', 'Treasury Operator · Trader · Read Only']} />
+      <Row cells={['Billing', 'View and pay BitGo invoices', 'Billing']} />
+    </Table>
+  </Frame>
+);
+
+const A4: Page = () => (
+  <Frame eyebrow={A} title="A7 · The policy toolkit" subtitle="A rule is a condition plus an action, scoped to one wallet or the whole enterprise." source={policies} sourceLabel="BitGo policies overview">
+    <Table heads={['Condition', 'Triggers on', 'Used in this proposal']} widths={[400, 560]}>
+      <Row cells={['Destination (whitelist)', 'Address not on the approved list', 'Vaults to own wallets; hot wallets to venues']} />
+      <Row cells={['Threshold', 'Size of a single withdrawal', 'Large hot-wallet sends and on-chain trades']} />
+      <Row cells={['Velocity limit', 'Total withdrawn in a time window', 'Daily caps on vaults and hot wallets']} />
+      <Row cells={['% of wallet balance', 'Share of the balance leaving', 'Stops a hot wallet being drained at once']} />
+      <Row cells={['Initiator', 'Who or which API token started it', 'Stricter limits for API tokens than people']} />
+      <Row cells={['Webhook', 'Response from the fund’s own system', 'Optional: the fund’s risk engine decides']} />
+    </Table>
+    <Note>Actions: deny, require N approvals, or video ID above $250k a day. Rules lock 48h after creation.</Note>
+    <Note>Custody adds BitGo’s own rules. User + backup key recovery bypasses all policy: guard the backup key.</Note>
+  </Frame>
+);
+
+const A5: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A8 · Keys and recovery for the hot wallets" subtitle="Self-custody moves key responsibility to the fund. This is how to carry it.">
+    <Table heads={['Key', 'Held by', 'Stored', 'Used for']} widths={[220, 200, 780]}>
+      <Row cells={['User key', 'Fund', 'Encrypted by passphrase; passphrase in KMS or HSM', 'Daily signing through the SDK']} />
+      <Row cells={['Backup key', 'Fund', 'Offline, split between two officers, separate site', 'Recovery only']} />
+      <Row cells={['BitGo key', 'BitGo', 'BitGo HSMs', 'Co-signs after policy passes']} />
+    </Table>
+    <Note>User + backup keys recover funds without BitGo and bypass its policy: guard the backup key like a vault.</Note>
+    <Note>API access tokens: spending limits, IP allowlist, short lifetimes, one token per service.</Note>
+  </Frame>
+);
+
+const A6: Page = () => (
+  <Frame eyebrow={A} title="A9 · Liquidity options from the Go Account" subtitle="All three settle through Go Network without assets leaving regulated custody." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
+    <Table heads={['Option', 'What it is', 'Use when']} widths={[380, 800]}>
+      <Row cells={['Off-exchange settlement', 'Balance mirrored to a partner venue; settles off-chain', 'Keep venues, skip pre-funding']} />
+      <Row cells={['BitGo Prime trading', 'One API to exchanges, market makers and OTC desks', 'Best execution over a set venue']} />
+      <Row cells={['Financing and lending', 'Borrow against BTC, ETH or stablecoins in custody', 'Leverage or cash without selling']} />
+    </Table>
+    <Note>Partner coverage changes: check the fund’s venues against the Go Network list before sizing tiers 2–3.</Note>
+  </Frame>
+);
+
+const A7: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={insurance} sourceLabel2="BitGo insurance" title="A10 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
+    <Table heads={['Further need', 'Answer', 'Impact on the design']} widths={[430, 640]}>
+      <Row cells={['Yield on idle ETH', 'Staking from custody wallets', 'None: stake from the ETH vault']} />
+      <Row cells={['More assets or chains', 'Add a wallet per new chain in each tier', 'Same roles and policy templates']} />
+      <Row cells={['Second custodian model', 'Self-custody cold wallet (an optional 7th)', 'Adds offline key ceremony']} />
+      <Row cells={['Audit and NAV reporting', 'Wallet View and Auditor roles, webhooks', 'None: already provisioned']} />
+      <Row cells={['Cover above $250M', 'Excess specie cover via BitGo’s broker', 'Commercial, not technical']} />
+      <Row cells={['Automated treasury', 'BitGo SDK + transfer webhooks', 'Extends hot-wallet tooling']} />
+    </Table>
+  </Frame>
+);
+
+const A12: Page = () => (
+  <Frame eyebrow={A} source={licenses} sourceLabel="BitGo licenses and registrations" title="A11 · Licenses and compliance" subtitle="A US-regulated qualified custodian, licensed in each major market it serves.">
+    <Table heads={['Entity', 'Regulator', 'License']} widths={[520, 420]}>
+      <Row cells={['BitGo Bank & Trust, N.A.', 'OCC (US federal)', 'National trust bank; qualified custodian']} />
+      <Row cells={['BitGo New York Trust Co.', 'NYDFS (New York)', 'Limited-purpose trust; qualified custodian']} />
+      <Row cells={['BitGo Technologies, LLC', 'FinCEN + US states', 'Money services business; money transmitter']} />
+      <Row cells={['BitGo Europe GmbH', 'BaFin (Germany)', 'MiCA licence: custody, transfer, trading']} />
+      <Row cells={['BitGo GmbH', 'FINMA (Switzerland)', 'Crypto-asset custody provider']} />
+      <Row cells={['BitGo Singapore Pte. Ltd.', 'MAS (Singapore)', 'Major Payment Institution']} />
+      <Row cells={['BitGo (Custody) MENA FZE', 'VARA (Dubai)', 'Custody; broker-dealer services']} />
+    </Table>
+    <Note>SOC 1 + SOC 2 Type 2 · $250M Lloyd’s cover where BitGo holds all keys · segregated client assets</Note>
+  </Frame>
+);
+
+const A13: Page = () => (
+  <Frame eyebrow={A} source={trustCenter} sourceLabel="BitGo Trust Center" title="A12 · Security and compliance controls" subtitle="What sits behind the licenses: audited controls, insured custody, segregated assets.">
+    <Table heads={['Measure', 'What BitGo does', 'Why it matters']} widths={[360, 820]}>
+      <Row cells={['Independent audits', 'SOC 1 Type 2 and SOC 2 Type 2 reports', 'Controls tested by an outside auditor']} />
+      <Row cells={['Custody insurance', '$250M, Lloyd’s syndicate; BitGo pays deductibles', 'Covers loss, theft and misuse']} />
+      <Row cells={['Segregated assets', 'Client accounts held apart, never commingled', 'Bankruptcy remote by design']} />
+      <Row cells={['Key security', 'Multisig and MPC, cold storage, offline signing', 'No single key can move funds']} />
+      <Row cells={['Transaction monitoring', 'KYT screening and policy controls in custody', 'Blocks risky or unknown flows']} />
+      <Row cells={['Travel Rule', 'Co-developed the Travel Rule Protocol (TRP)', 'Sender data travels with transfers']} />
+    </Table>
+    <Note>The $250M policy covers only keys BitGo holds; hot wallets are outside it. Excess cover is available.</Note>
+  </Frame>
+);
+
 // BitGo facts checked 2026-09-21 (licenses 2026-09-24, bitgo.com/company/licenses) against developers.bitgo.com (wallet types, policies,
 // wallet users) and bitgo.com (Go Network OES, Prime). Customer facts come only from the
 // assessment brief; "today" pain points are framed as typical patterns, not claims.
@@ -682,7 +855,7 @@ export const meta: SlideMeta = {
 
 export const notes: (string | undefined)[] = [
   'Open on the tension, not on BitGo: most funds think they must choose between a safe reserve and a fast desk. Today we show you do not have to.', // 1 Cover
-  'Set expectations: ten minutes, and we start with them, not with BitGo. Invite interruptions; deeper detail is available on request.', // 2 Agenda
+  'Set expectations: ten minutes, and we start with them, not with BitGo. Invite interruptions; the appendix holds the detail for any deep question.', // 2 Agenda
   'Play back what they told us before pitching anything. Say it out loud: ask them to correct anything that is off. The design depends on these goals, so get a yes or a correction here.', // 3 What we heard
   'Frame as patterns we see, not a critique of their setup. Each place their assets sit today gives up something: exchanges give up safety, own wallets give up ease, and the spread gives up control. Land the last line as the bridge.', // 4 Problem
   'These six checkpoints are the contract for the rest of the talk: 1 to 4 come from the three goals, 5 and 6 from the two must-haves. They are requirements, not our product; ask if they would add or change any.', // 5 Criteria
@@ -696,6 +869,19 @@ export const notes: (string | undefined)[] = [
   'Make it concrete: even an executive with a stolen laptop cannot empty a vault. Each of the four checks is independent, and policies lock after 48 hours so an insider cannot quietly loosen them.', // 9 Withdrawal
   'Read across each numbered row: the cross on the left becomes the tick on the right. Keep "typical today" neutral. Land the takeaway, then move straight to next steps.', // 10 Scorecard
   'Make the ask. Four steps, test before moving size. Why reserve first: it is about 85% of assets and today sits on venues with counterparty risk and no custody cover, so moving it first takes the biggest risk off the table early; trading capital stays on its venues until the Go Account and hot wallets are proven, so the desk is not disrupted; and deposits into a vault need no approvals or video ID, only withdrawals do. Why decide approvers now: the any-two-of-three rule needs named Admins, and policies lock 48 hours after Build, after which only BitGo support can change them; approvals gate the 24h withdrawal SLA, so approvers spread across time zones keep withdrawals moving around the clock; each approver needs KYC, 2FA and video ID set up during Onboard; and approvers must be different people from Treasury, who initiate. Close by proposing a working session with ops and compliance to settle the three decisions this week.', // 11 Next steps
+  undefined, // Appendix divider
+  undefined, // A1 Types
+  undefined, // A2 Custody wallets
+  undefined, // A3 Self-custody wallets
+  undefined, // A4 Multisig vs MPC
+  'Use if they answer "DeFi" to the ETH question on the next-steps slide.', // A5 Six or five
+  'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
+  'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
+  undefined, // A8 Keys
+  undefined, // A9 Liquidity
+  undefined, // A10 Further needs
+  'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A11 Licenses
+  'Pair with A11. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A12 Security and compliance
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
