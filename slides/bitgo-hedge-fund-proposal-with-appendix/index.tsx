@@ -681,7 +681,7 @@ const AppendixDivider: Page = () => (
   </Tone.Provider>
 );
 
-const A = 'Appendix · pull up if asked';
+const A = 'Appendix';
 
 const Types: Page = () => (
   <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A1 · The three wallet types at a glance" subtitle="Each type trades speed for protection differently, so each tier gets the type that matches its job.">
