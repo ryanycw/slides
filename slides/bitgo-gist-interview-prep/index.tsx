@@ -36,6 +36,7 @@ const accentBar = 'linear-gradient(180deg, #2446ff, #3fd0f5)';
 
 const addWebhookRef = 'https://developers.bitgo.com/reference/v2walletaddwebhook';
 const webhooksDoc = 'https://developers.bitgo.com/docs/webhooks-wallet';
+const createWalletsDoc = 'https://developers.bitgo.com/docs/wallets-create-wallets';
 
 type ToneName = 'light' | 'dark';
 const Tone = createContext<ToneName>('light');
@@ -240,10 +241,12 @@ const Signing: Page = () => (
 );
 
 const Extensions: Page = () => (
-  <Frame eyebrow="Follow-ups" title="From testnet to production" subtitle="These usually lead into the hedge-fund proposal.">
+  <Frame eyebrow="Follow-ups" title="From testnet to production" subtitle="These usually lead into the hedge-fund proposal." source={createWalletsDoc} sourceLabel="Create wallets">
     <QA>
       <Row cells={['How would you harden this for prod?', 'Address whitelist, per-tx and daily limits, multi-approval']} />
       <Row cells={['How would you tier the assets?', 'Long-term in custodial cold; operating funds in hot']} />
+      <Row cells={['Can you create a self-custody cold wallet by API?', 'Yes: make keys offline, upload public keys, then Add Wallet']} />
+      <Row cells={['How is a self-custody cold wallet signed?', 'Offline Vault Console on an air-gapped machine; BitGo co-signs']} />
       <Row cells={['What changes to support USDC?', 'Token name and receive setup; check exact parameters']} />
     </QA>
     <Takeaway lead="Tie it back: safety, speed and access control" sub="Every testnet setting maps to a need in the hedge-fund case." />
