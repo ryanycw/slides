@@ -37,6 +37,7 @@ const accentBar = 'linear-gradient(180deg, #2446ff, #3fd0f5)';
 const addWebhookRef = 'https://developers.bitgo.com/reference/v2walletaddwebhook';
 const webhooksDoc = 'https://developers.bitgo.com/docs/webhooks-wallet';
 const createWalletsDoc = 'https://developers.bitgo.com/docs/wallets-create-wallets';
+const withdrawalFeesDoc = 'https://developers.bitgo.com/docs/withdrawal-fees';
 
 type ToneName = 'light' | 'dark';
 const Tone = createContext<ToneName>('light');
@@ -193,7 +194,7 @@ const WalletResponse: Page = () => (
 );
 
 const WalletFields: Page = () => (
-  <Frame eyebrow="02 · Wallet creation response, field by field" title="Walking through the wallet JSON" subtitle="The fields worth explaining in the redacted Gist file, top to bottom.">
+  <Frame eyebrow="02 · Wallet creation response, field by field" title="Walking through the wallet JSON" source={withdrawalFeesDoc} sourceLabel="Withdrawal fee sources">
     <Table heads={['Field', 'Value', 'What it tells you']} widths={[520, 400]}>
       <Row dense cells={['type · isCold', 'hot · false', 'Self-custody hot wallet; code signs online']} />
       <Row dense cells={['multisigType · walletVersion', 'tss · 5', 'MPCv2 wallet; version 5 is required for ECDSA TSS']} />
@@ -204,6 +205,7 @@ const WalletFields: Page = () => (
       <Row dense cells={['encryptedWalletPassphrase', 'Redacted', 'Passphrase backup, encrypted with passcodeEncryptionCode']} />
       <Row dense cells={['bitgoKeychain', 'isBitGo: true', 'BitGo’s share stays with BitGo; no private data returned']} />
       <Row dense cells={['baseAddress · receiveAddress', '0x0217…e248', 'Same EOA; the faucet sent ETH here']} />
+      <Row dense cells={['feeAddress', '0x2a64…11ed', 'Enterprise gas tank; not used for MPC sends']} />
       <Row dense cells={['policy.rules · approvalsRequired', '[] · 1', 'No policies yet; prod adds whitelist and limits']} />
       <Row dense cells={['*BalanceString', '"0"', 'Brand new; funded from the faucet afterwards']} />
     </Table>
