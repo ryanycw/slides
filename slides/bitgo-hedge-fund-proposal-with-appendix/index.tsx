@@ -47,6 +47,7 @@ const licenses = 'https://www.bitgo.com/company/licenses/';
 const hedgeFundRoles = 'https://financeunlocked.com/videos/who-works-in-a-hedge-fund';
 const fundOffices = 'https://www.akj.com/blog/hedge-fund-roles-explained';
 const trustCenter = 'https://trustcenter.bitgo.com/';
+const insurance = 'https://www.bitgo.com/solutions/insurance/';
 
 // Every primitive reads the page tone, so the same markup works on light and dark pages.
 type ToneName = 'light' | 'dark';
@@ -799,13 +800,13 @@ const A6: Page = () => (
 );
 
 const A7: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" title="A10 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={insurance} sourceLabel2="BitGo insurance" title="A10 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
     <Table heads={['Further need', 'Answer', 'Impact on the design']} widths={[430, 640]}>
       <Row cells={['Yield on idle ETH', 'Staking from custody wallets', 'None: stake from the ETH vault']} />
       <Row cells={['More assets or chains', 'Add a wallet per new chain in each tier', 'Same roles and policy templates']} />
       <Row cells={['Second custodian model', 'Self-custody cold wallet (an optional 7th)', 'Adds offline key ceremony']} />
       <Row cells={['Audit and NAV reporting', 'Wallet View and Auditor roles, webhooks', 'None: already provisioned']} />
-      <Row cells={['Cover above $250M', 'Additional insurance arranged through BitGo', 'Commercial, not technical']} />
+      <Row cells={['Cover above $250M', 'Excess specie cover via BitGo’s broker', 'Commercial, not technical']} />
       <Row cells={['Automated treasury', 'BitGo SDK + transfer webhooks', 'Extends hot-wallet tooling']} />
     </Table>
   </Frame>
