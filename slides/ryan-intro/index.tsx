@@ -611,10 +611,11 @@ const Hobby = ({ emoji, title, line, bg, rotate }: { emoji: string; title: strin
 const Interests: Page = () => (
   <Shell>
     <Header eyebrow="05 · OFF THE KEYBOARD" title="When I'm not shipping" chipBg={green} />
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56, marginTop: 80 }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 44, marginTop: 80 }}>
       <Hobby emoji="🎾" title="Tennis" line="Always up for a rally" bg={green} rotate={-2} />
       <Hobby emoji="🏊" title="Triathlon" line="Swim, bike, run, repeat" bg={blue} rotate={1.5} />
       <Hobby emoji="🍜" title="Foodie" line="Ask me where to eat in Taipei" bg={orange} rotate={-1} />
+      <Hobby emoji="🐶" title="Corgi parent" line="Proud owner of a very short dog" bg={pink} rotate={2} />
     </div>
   </Shell>
 );
