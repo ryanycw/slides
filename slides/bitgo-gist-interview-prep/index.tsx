@@ -93,9 +93,10 @@ const Pill = ({ children }: { children: ReactNode }) => {
   return <span style={{ display: 'inline-block', fontSize: 20, fontWeight: 500, lineHeight: 1.2, color: t.hi, border: `1.5px solid ${t.hi}`, borderRadius: 999, padding: '6px 16px' }}>{children}</span>;
 };
 
-const Row = ({ cells }: { cells: ReactNode[] }) => {
+// dense: tighter rows for the 11-row field walkthrough.
+const Row = ({ cells, dense }: { cells: ReactNode[]; dense?: boolean }) => {
   const t = useTone();
-  const td: CSSProperties = { padding: '13px 24px 13px 0', borderBottom: `1px solid ${t.line}`, verticalAlign: 'top', fontSize: 26, lineHeight: 1.35 };
+  const td: CSSProperties = { padding: dense ? '10px 24px 10px 0' : '13px 24px 13px 0', borderBottom: `1px solid ${t.line}`, verticalAlign: 'top', fontSize: 26, lineHeight: 1.35 };
   return (
     <tr>
       <th scope="row" style={{ ...td, textAlign: 'left', fontWeight: 500 }}>{cells[0]}</th>
@@ -191,6 +192,24 @@ const WalletResponse: Page = () => (
   </Frame>
 );
 
+const WalletFields: Page = () => (
+  <Frame eyebrow="02 · Wallet creation response, field by field" title="Walking through the wallet JSON" subtitle="The fields worth explaining in the redacted Gist file, top to bottom.">
+    <Table heads={['Field', 'Value', 'What it tells you']} widths={[520, 400]}>
+      <Row dense cells={['type · isCold', 'hot · false', 'Self-custody hot wallet; code signs online']} />
+      <Row dense cells={['multisigType · walletVersion', 'tss · 5', 'MPCv2 wallet; version 5 is required for ECDSA TSS']} />
+      <Row dense cells={['m · n', '2 · 3', 'Three key shares; any two can sign']} />
+      <Row dense cells={['keys', '3 keychain IDs', 'User, backup and BitGo keychains, in that order']} />
+      <Row dense cells={['commonKeychain', 'Same in all three', 'One shared public key; no full private key exists']} />
+      <Row dense cells={['encryptedPrv', 'Redacted', 'User and backup shares, encrypted with the passphrase']} />
+      <Row dense cells={['encryptedWalletPassphrase', 'Redacted', 'Passphrase backup, encrypted with passcodeEncryptionCode']} />
+      <Row dense cells={['bitgoKeychain', 'isBitGo: true', 'BitGo’s share stays with BitGo; no private data returned']} />
+      <Row dense cells={['baseAddress · receiveAddress', '0x0217…e248', 'Same EOA; the faucet sent ETH here']} />
+      <Row dense cells={['policy.rules · approvalsRequired', '[] · 1', 'No policies yet; prod adds whitelist and limits']} />
+      <Row dense cells={['*BalanceString', '"0"', 'Brand new; funded from the faucet afterwards']} />
+    </Table>
+  </Frame>
+);
+
 const WebhookConfig: Page = () => (
   <Frame tone="dark" eyebrow="03 · Webhook configuration" title="Webhooks: reliability and security" subtitle="Be honest about what numConfirmations actually did." source={addWebhookRef} sourceLabel="Add wallet webhook">
     <QA>
@@ -269,4 +288,4 @@ export const meta: SlideMeta = {
   createdAt: '2026-09-29T09:06:58.812Z',
   theme: 'electric-blue',
 };
-export default [Cover, CreateWallet, WalletResponse, WebhookConfig, InboundWebhook, TransferOutput, Signing, Extensions, ToVerify] satisfies Page[];
+export default [Cover, CreateWallet, WalletResponse, WalletFields, WebhookConfig, InboundWebhook, TransferOutput, Signing, Extensions, ToVerify] satisfies Page[];
