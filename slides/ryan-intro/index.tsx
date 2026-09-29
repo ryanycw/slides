@@ -528,7 +528,79 @@ const Community: Page = () => (
   </Shell>
 );
 
-// ── 08 Personality (draft) ────────────────────────────────────────────
+// ── 08 Network ────────────────────────────────────────────────────────
+const NetworkCard = ({ tag, orgs, line, bg, rotate }: { tag: string; orgs: string; line: string; bg: string; rotate: number }) => (
+  <Sticker bg={bg} rotate={rotate} style={{ height: 176, boxSizing: 'border-box', padding: '0 40px', display: 'flex', alignItems: 'center', gap: 40 }}>
+    <div style={{ width: 460, flex: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Chip bg={paper} size={22}>
+        {tag}
+      </Chip>
+      <div style={{ fontSize: 40, fontWeight: 700, lineHeight: 1.15 }}>{orgs}</div>
+    </div>
+    <div style={{ fontSize: 30, lineHeight: 1.35 }}>{line}</div>
+  </Sticker>
+);
+
+const Network: Page = () => (
+  <Shell>
+    <Header eyebrow="03 · NETWORK" title="Community built my network" chipBg={orange} />
+    <div style={{ position: 'relative', height: 592, marginTop: 56 }}>
+      {/* Connectors: avatar edge → middle of each card */}
+      <svg width={560} height={592} style={{ position: 'absolute', left: 0, top: 0 }}>
+        <line x1={420} y1={296} x2={560} y2={88} stroke={ink} strokeWidth={6} strokeLinecap="round" />
+        <line x1={420} y1={296} x2={560} y2={296} stroke={ink} strokeWidth={6} strokeLinecap="round" />
+        <line x1={420} y1={296} x2={560} y2={504} stroke={ink} strokeWidth={6} strokeLinecap="round" />
+      </svg>
+      <div
+        style={{
+          position: 'absolute',
+          left: 40,
+          top: 106,
+          width: 380,
+          height: 380,
+          boxSizing: 'border-box',
+          borderRadius: '50%',
+          border: `8px solid ${ink}`,
+          boxShadow: `12px 12px 0 ${ink}`,
+          overflow: 'hidden',
+          background: paper,
+        }}
+      >
+        <img src={avatar} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      </div>
+      <div style={{ position: 'absolute', left: 60, top: 510 }}>
+        <Chip bg="var(--osd-accent)" rotate={-4} size={24}>
+          Taipei hub
+        </Chip>
+      </div>
+      <div style={{ position: 'absolute', left: 540, right: 0, top: 0, display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <NetworkCard
+          tag="PROTOCOLS"
+          orgs="Morpho · Canton"
+          line="Close friends with their solution engineers and ecosystem managers"
+          bg={blue}
+          rotate={-1}
+        />
+        <NetworkCard
+          tag="BANKING"
+          orgs="BSOS · Taiwan banks"
+          line="Friends with the blockchain advisors at BSOS and Taiwan's leading banks"
+          bg={green}
+          rotate={0.8}
+        />
+        <NetworkCard
+          tag="ASIA COMMUNITIES"
+          orgs="ETHTokyo · ETH Korea"
+          line="Collaborating with fellow cohosts across the region"
+          bg={pink}
+          rotate={-0.8}
+        />
+      </div>
+    </div>
+  </Shell>
+);
+
+// ── 09 Personality (draft) ────────────────────────────────────────────
 const Trait = ({ emoji, title, line, bg, rotate }: { emoji: string; title: string; line: string; bg: string; rotate: number }) => (
   <Sticker bg={bg} rotate={rotate} style={{ padding: '36px 40px', display: 'flex', gap: 32, alignItems: 'center', height: 220, boxSizing: 'border-box' }}>
     <div style={{ fontSize: 96, lineHeight: 1 }}>{emoji}</div>
@@ -552,7 +624,7 @@ const Personality: Page = () => (
   </Shell>
 );
 
-// ── 09 Interests (draft) ──────────────────────────────────────────────
+// ── 10 Interests (draft) ──────────────────────────────────────────────
 const Hobby = ({ emoji, title, line, bg, rotate }: { emoji: string; title: string; line: string; bg: string; rotate: number }) => (
   <Sticker bg={bg} rotate={rotate} style={{ padding: '44px 36px', height: 440, boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
     <div style={{ fontSize: 130, lineHeight: 1 }}>{emoji}</div>
@@ -563,18 +635,16 @@ const Hobby = ({ emoji, title, line, bg, rotate }: { emoji: string; title: strin
 
 const Interests: Page = () => (
   <Shell>
-    <DraftTag />
     <Header eyebrow="05 · OFF THE KEYBOARD" title="When I'm not shipping" chipBg={green} />
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 44, marginTop: 80 }}>
-      <Hobby emoji="🦖" title="Dinosaurs" line="Yes, the hoodie is real" bg={green} rotate={-2} />
-      <Hobby emoji="⛰️" title="Hiking" line="Taiwan's trails on weekends" bg={blue} rotate={1.5} />
-      <Hobby emoji="☕" title="Coffee" line="Hunting good pour-overs" bg={orange} rotate={-1} />
-      <Hobby emoji="🎧" title="Music" line="Playlists for deep work" bg={pink} rotate={2} />
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56, marginTop: 80 }}>
+      <Hobby emoji="🎾" title="Tennis" line="Always up for a rally" bg={green} rotate={-2} />
+      <Hobby emoji="🏊" title="Triathlon" line="Swim, bike, run, repeat" bg={blue} rotate={1.5} />
+      <Hobby emoji="🍜" title="Foodie" line="Ask me where to eat in Taipei" bg={orange} rotate={-1} />
     </div>
   </Shell>
 );
 
-// ── 10 Closing ────────────────────────────────────────────────────────
+// ── 11 Closing ────────────────────────────────────────────────────────
 const Contact = ({ label, value }: { label: string; value: string }) => (
   <div style={{ display: 'flex', alignItems: 'baseline', gap: 28 }}>
     <span style={{ width: 170, fontFamily: mono, fontSize: 24, fontWeight: 700 }}>{label}</span>
@@ -645,6 +715,7 @@ export default [
   Privacy,
   OpenSource,
   Community,
+  Network,
   Personality,
   Interests,
   Closing,
