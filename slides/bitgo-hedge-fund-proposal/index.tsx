@@ -792,18 +792,18 @@ const A5: Page = () => (
 );
 
 const GoAccount: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={goAccount} sourceLabel2="BitGo Go Account" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: a custody account on BitGo’s ledger, shared on-chain, separate on the books.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={goAccount} sourceLabel2="BitGo Go Account" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: one custody account for every asset, run on BitGo’s off-chain ledger.">
     <Table heads={['Aspect', 'What it means']} widths={[300]}>
-      <Row cells={['Omnibus', 'Many clients’ assets sit together in BitGo-controlled wallets']} />
-      <Row cells={['Your share', 'Tracked on BitGo’s books, not by on-chain address']} />
-      <Row cells={['Ledger', 'Off-chain ledger at BitGo; one Go Account per enterprise']} />
-      <Row cells={['Keys', 'One key held by BitGo, not three']} />
-      <Row cells={['Assets', 'Crypto, stablecoins and USD; 40+ chains']} />
-      <Row cells={['Moves', 'Deposits in minutes; Go Account to Go Account instant, off-chain']} />
+      <Row cells={['Omnibus', 'One custody account holds many assets, including USD']} />
+      <Row cells={['Coverage', 'Crypto and stablecoins on 40+ chains, plus fiat']} />
+      <Row cells={['Ledger', 'Off-chain ledger; Go Account to Go Account moves are instant']} />
+      <Row cells={['Keys', 'A single key, not the usual three']} />
+      <Row cells={['Setup', 'One per enterprise; has a wallet ID like any wallet']} />
+      <Row cells={['Deposits', 'Available within minutes; many receive addresses']} />
       <Row cells={['Withdrawals', 'On-chain usually within hours; 24h custody SLA']} />
       <Row cells={['Trading', 'OTC desk, electronic platform, APIs, Go Network settlement']} />
     </Table>
-    <Note>Why omnibus: transfers between Go Accounts settle on the ledger, so trades need no gas or blocks.</Note>
+    <Note>Why it matters: one account funds every venue and asset, and ledger moves need no gas or blocks.</Note>
   </Frame>
 );
 
@@ -911,7 +911,7 @@ export const notes: (string | undefined)[] = [
   'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
   'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
   undefined, // A8 Keys
-  'Use when they ask how the Go Account holds their assets. Omnibus means many clients’ assets sit together in BitGo-controlled wallets; what the fund owns is an entitlement to a type and quantity of assets on BitGo’s books, not specific on-chain coins. What protects it: BitGo Bank & Trust is a qualified custodian, client accounts are segregated on its books and never mixed with BitGo’s own assets, SOC audits, insurance. The trade-off is speed for reliance on the custodian’s ledger, which is exactly why the Trade tier holds only about 10%.', // A9 Go Account
+  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including USD, instead of one wallet per coin. It runs on BitGo’s off-chain ledger, which is why moves between Go Accounts, and settlement on Go Network, are instant and need no gas. It uses a single key held in custody rather than three, there is one per enterprise, and through the API it behaves like any other wallet with its own wallet ID. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside BitGo’s 24-hour custody SLA. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
   undefined, // A10 Liquidity
   undefined, // A11 Further needs
   'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
