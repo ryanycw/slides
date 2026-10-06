@@ -883,14 +883,14 @@ const A13: Page = () => (
 const Pricing: Page = () => (
   <Frame eyebrow={A} source={billing} sourceLabel="BitGo billing methodology" source2={custodyAgreement} sourceLabel2="Custodial services agreement" title="A14 · How BitGo charges" subtitle="Fees are negotiated per client; this is how the bill is built.">
     <Table heads={['Fee', 'How it is calculated', 'Notes']} widths={[300, 720]}>
-      <Row cells={['Custody (AUC)', 'bps on the monthly average USD balance', 'Hourly snapshots; billed per asset']} />
-      <Row cells={['Transactions', 'bps on outgoing volume, tiered by monthly volume', 'Moves between own wallets are free']} />
-      <Row cells={['Network fees', 'Gas and miner fees passed through', 'Paid in the asset moved']} />
-      <Row cells={['Settlement', 'Go Network settlement fees, per contract', 'Off-chain moves need no gas']} />
-      <Row cells={['Self-custody', 'No AUC fee under BitGo’s published method', 'May change; contract governs']} />
-      <Row cells={['Minimum', 'Monthly minimum across all fees', 'Set per contract']} />
+      <Row cells={['Custody (AUC)', 'bps on the monthly average USD balance', 'Hourly snapshots; per asset, incl. Go Account']} />
+      <Row cells={['Transactions', 'bps on outgoing sends, tiered per asset per month', 'Transfers inside your enterprise are free']} />
+      <Row cells={['Overage', 'bps above the storage or volume included', 'Only if the contract sets allowances']} />
+      <Row cells={['Network fees', 'Miner and gas fees may be passed through', 'Estimate shown before you authorize']} />
+      <Row cells={['Self-custody', 'Free on self-service accounts', 'May change; custody contract governs']} />
+      <Row cells={['Minimum', 'Bill compared to a monthly minimum', 'Only if the contract sets one']} />
     </Table>
-    <Note>For a $300M book expect custom tiered bps; the Billing role views and pays invoices.</Note>
+    <Note>Rates or tiered rates come from the client agreement; the Billing role views and pays invoices.</Note>
   </Frame>
 );
 
@@ -936,7 +936,7 @@ export const notes: (string | undefined)[] = [
   undefined, // A11 Further needs
   'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
   'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
-  'Use when they ask about cost. Pricing is quoted after discovery, per client. The custody (AUC) fee usually dominates, so the vault share drives cost, and the bill moves with prices because AUC is measured in USD. Internal moves such as vault refills and sweeps are not charged transaction fees. BitGo custody accounts typically start from $1M, well below this fund. Do not quote basis points without the deal desk.', // A14 Pricing
+  'Use when they ask about cost. Rates are set in the client agreement, flat or tiered, and quoted after discovery; do not quote basis points without the deal desk. The custody (AUC) fee is usually the largest line: BitGo values each asset’s balance every hour, averages it over the month in USD, and applies the rate, per asset and including the Go Account. So the vault share drives cost, and the bill moves with prices even when holdings do not. Transaction fees apply only to outgoing sends to addresses outside the fund’s BitGo enterprise, tiered per asset per month; vault refills, sweeps and Go Account transfers inside the enterprise are free. Overage fees apply only if the contract includes allowances. Network fees may be passed through, with an estimate shown before the transfer is authorized. Self-custody wallets are free on self-service accounts today, but BitGo can change that; under a custody contract, the contract governs. The total is compared with a monthly minimum if the contract sets one.', // A14 Pricing
 ];
 
 export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, A3, A4, A5, GoAccount, A6, A7, A12, A13, Pricing] satisfies Page[];
