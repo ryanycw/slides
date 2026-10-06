@@ -794,8 +794,8 @@ const A5: Page = () => (
 const GoAccount: Page = () => (
   <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={goAccount} sourceLabel2="BitGo Go Account" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: one custody account for every asset, including fiat, on BitGo’s off-chain ledger.">
     <Table heads={['Aspect', 'What it means']} widths={[300]}>
-      <Row cells={['Omnibus', 'One custody account holds many assets, including USD']} />
-      <Row cells={['Coverage', 'Crypto and stablecoins on 40+ chains, plus fiat']} />
+      <Row cells={['Omnibus', 'One custody account holds many assets, including fiat']} />
+      <Row cells={['Coverage', 'Crypto and stablecoins on 40+ chains; deposit or withdraw USD']} />
       <Row cells={['Ledger', 'Off-chain ledger; Go Account to Go Account moves are instant']} />
       <Row cells={['Keys', 'A single key, not the usual three']} />
       <Row cells={['Setup', 'One per enterprise; has a wallet ID like any wallet']} />
