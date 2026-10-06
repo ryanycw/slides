@@ -51,6 +51,8 @@ const insurance = 'https://www.bitgo.com/solutions/insurance/';
 const goAccount = 'https://www.bitgo.com/products/go-account/';
 const protocols = 'https://assets.bitgo.com/protocols';
 const goNetworkDocs = 'https://developers.bitgo.com/docs/go-network-overview';
+const prime = 'https://www.bitgo.com/products/prime/';
+const primeTrading = 'https://www.bitgo.com/services/prime/prime-trading/';
 const billing = 'https://bitgo.com/resources/billing-methodology/';
 const custodyAgreement = 'https://www.bitgo.com/legal/bitgo-custodial-services-agreement/';
 
@@ -681,7 +683,7 @@ const AppendixDivider: Page = () => (
     <main style={{ position: 'relative', width: '100%', height: '100%', boxSizing: 'border-box', padding: '0 140px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: bgBlue, color: '#ffffff', fontFamily: 'var(--osd-font-body)' }}>
       <div><Pill color="#ffffff">Backup material</Pill></div>
       <h1 style={{ fontSize: 140, fontWeight: 300, lineHeight: 1.1, margin: '32px 0', letterSpacing: -4 }}>Appendix</h1>
-      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallets · roles · policies · keys · Go Account · liquidity · compliance · pricing</p>
+      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallets · roles · policies · keys · Go Account · Prime · compliance · pricing</p>
       <div style={{ position: 'absolute', left: 140, bottom: 56, fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
@@ -794,7 +796,7 @@ const A5: Page = () => (
 );
 
 const GoAccount: Page = () => (
-  <Frame eyebrow={A} source={protocols} sourceLabel="BitGo supported assets" source2={goNetworkDocs} sourceLabel2="Go Network overview" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: one custody account for every BitGo asset, plus Go Network and trading.">
+  <Frame eyebrow={A} source={protocols} sourceLabel="BitGo supported assets" source2={goNetworkDocs} sourceLabel2="Go Network overview" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: one custody account for every BitGo asset, plus Go Network and Prime.">
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64 }}>
       <div>
         <div style={{ fontSize: 22, fontWeight: 500, color: muted, marginBottom: 8 }}>The account</div>
@@ -814,20 +816,25 @@ const GoAccount: Page = () => (
         <Block title="Off-exchange settlement">Go Network · allocate to venues, stay in custody</Block>
         <Block title="Settlements">Go Network · multi-asset, off-chain</Block>
         <Block title="Counterparties">Go Network · directory of partners to settle with</Block>
-        <Block title="Funded trading">BitGo Trade · orders paid from the account</Block>
+        <Block title="BitGo Prime">Trade, borrow and lend from the account · A10</Block>
       </div>
     </div>
   </Frame>
 );
 
 const A6: Page = () => (
-  <Frame eyebrow={A} title="A10 · Liquidity options from the Go Account" subtitle="All three settle through Go Network without assets leaving regulated custody." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
-    <Table heads={['Option', 'What it is', 'Use when']} widths={[380, 800]}>
-      <Row cells={['Off-exchange settlement', 'Balance mirrored to a partner venue; settles off-chain', 'Keep venues, skip pre-funding']} />
-      <Row cells={['BitGo Prime trading', 'One API to exchanges, market makers and OTC desks', 'Best execution over a set venue']} />
-      <Row cells={['Financing and lending', 'Borrow against BTC, ETH or stablecoins in custody', 'Leverage or cash without selling']} />
+  <Frame eyebrow={A} source={prime} sourceLabel="BitGo Prime" source2={primeTrading} sourceLabel2="BitGo Prime trading" title="A10 · BitGo Prime: trade, finance and settle" subtitle="Run from the Go Account, without assets leaving regulated custody.">
+    <Table heads={['', 'Product', 'What it does']} widths={[180, 420]}>
+      <Row cells={['Trade', 'Electronic execution', 'Web platform, REST, FIX and WebSocket APIs']} />
+      <Row cells={['', 'OTC desk', 'Block trades and bespoke strategies']} />
+      <Row cells={['', 'OTC derivatives', 'Hedge, express views, generate income']} />
+      <Row cells={['', 'Advanced tools', 'TWAP and stop orders, cost analysis, reporting']} />
+      <Row cells={['Finance', 'Borrowing and lending', 'Borrow without selling, or lend for income']} />
+      <Row cells={['', 'Collateral management', 'One collateral pool across trading and financing']} />
+      <Row cells={['Settle', 'Delivery-vs-payment', 'Assets and fiat settle together in custody']} />
+      <Row cells={['', 'Off-exchange settlement', 'Trade on venues while assets stay in custody']} />
     </Table>
-    <Note>Partner coverage changes: check the fund’s venues against the Go Network list before sizing tiers 2–3.</Note>
+    <Note>One connection to exchanges, market makers and OTC liquidity; USD, EUR and GBP supported.</Note>
   </Frame>
 );
 
@@ -924,8 +931,8 @@ export const notes: (string | undefined)[] = [
   'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
   'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
   undefined, // A8 Keys
-  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including fiat, instead of one wallet per coin. It covers every asset BitGo supports: 97 chains and 2,831 tokens on BitGo’s protocol list (the token count changes as BitGo adds assets), and USD can be deposited or withdrawn directly. It runs on BitGo’s off-chain ledger with a single key held in custody, one per enterprise, and behaves like any other wallet in the API. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside the 24-hour custody SLA. The right side is why it sits in the Trade tier. It is the entry point to Go Network: off-exchange settlement (allocate assets to a partner venue, trade on that venue while the assets stay in custody, then settle), multi-asset off-chain settlements between Go Accounts, and a directory of counterparties. Separately, BitGo’s own funded trading draws on the Go Account balance; that is BitGo Trade, not part of Go Network. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
-  undefined, // A10 Liquidity
+  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including fiat, instead of one wallet per coin. It covers every asset BitGo supports: 97 chains and 2,831 tokens on BitGo’s protocol list (the token count changes as BitGo adds assets), and USD can be deposited or withdrawn directly. It runs on BitGo’s off-chain ledger with a single key held in custody, one per enterprise, and behaves like any other wallet in the API. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside the 24-hour custody SLA. The right side is why it sits in the Trade tier. It is the entry point to Go Network: off-exchange settlement (allocate assets to a partner venue, trade on that venue while the assets stay in custody, then settle), multi-asset off-chain settlements between Go Accounts, and a directory of counterparties. Separately, the Go Account is the entry point to BitGo Prime: trading, borrowing and lending run from its balance. That is BitGo Prime, not Go Network; A10 has the detail. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
+  'This is the answer to the liquidity must-have and checkpoint 5. BitGo Prime is BitGo’s prime brokerage, run from the Go Account: trade electronically or through the OTC desk, use OTC derivatives to hedge, borrow against the portfolio instead of selling, and settle by delivery-vs-payment or off-exchange settlement, all while assets stay in regulated custody. Its Global Liquidity Layer is one connection to exchanges, market makers and OTC counterparties. Before sizing the Trade and Operate tiers, check the fund’s venues against the current Go Network partner list.', // A10 BitGo Prime
   undefined, // A11 Further needs
   'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
   'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
