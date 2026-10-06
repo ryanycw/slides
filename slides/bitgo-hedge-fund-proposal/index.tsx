@@ -49,6 +49,8 @@ const fundOffices = 'https://www.akj.com/blog/hedge-fund-roles-explained';
 const trustCenter = 'https://trustcenter.bitgo.com/';
 const insurance = 'https://www.bitgo.com/solutions/insurance/';
 const goAccount = 'https://www.bitgo.com/products/go-account/';
+const protocols = 'https://assets.bitgo.com/protocols';
+const goNetworkDocs = 'https://developers.bitgo.com/docs/go-network-overview';
 const billing = 'https://bitgo.com/resources/billing-methodology/';
 const custodyAgreement = 'https://www.bitgo.com/legal/bitgo-custodial-services-agreement/';
 
@@ -792,18 +794,30 @@ const A5: Page = () => (
 );
 
 const GoAccount: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={goAccount} sourceLabel2="BitGo Go Account" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: one custody account for every asset, including fiat, on BitGo’s off-chain ledger.">
-    <Table heads={['Aspect', 'What it means']} widths={[300]}>
-      <Row cells={['Omnibus', 'One custody account holds many assets, including fiat']} />
-      <Row cells={['Coverage', 'Crypto and stablecoins on 40+ chains; deposit or withdraw USD']} />
-      <Row cells={['Ledger', 'Off-chain ledger; Go Account to Go Account moves are instant']} />
-      <Row cells={['Keys', 'A single key, not the usual three']} />
-      <Row cells={['Setup', 'One per enterprise; has a wallet ID like any wallet']} />
-      <Row cells={['Deposits', 'Available within minutes; many receive addresses']} />
-      <Row cells={['Withdrawals', 'On-chain usually within hours; 24h custody SLA']} />
-      <Row cells={['Trading', 'OTC desk, electronic platform, APIs, Go Network settlement']} />
-    </Table>
-    <Note>Why it matters: one account funds every venue and asset, and ledger moves need no gas or blocks.</Note>
+  <Frame eyebrow={A} source={protocols} sourceLabel="BitGo supported assets" source2={goNetworkDocs} sourceLabel2="Go Network overview" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: one custody account for every asset BitGo supports, plus the Go Network.">
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64 }}>
+      <div>
+        <div style={{ fontSize: 22, fontWeight: 500, color: muted, marginBottom: 8 }}>The account</div>
+        <Table heads={[]} widths={[230]}>
+          <Row cells={['Omnibus', 'Many assets in one account, incl. fiat']} />
+          <Row cells={['Coverage', '97 chains and 2,831 tokens']} />
+          <Row cells={['Fiat', 'Deposit or withdraw USD directly']} />
+          <Row cells={['Ledger', 'Off-chain; Go Account moves are instant']} />
+          <Row cells={['Keys', 'One key held by BitGo, not three']} />
+          <Row cells={['Setup', 'One per enterprise, with a wallet ID']} />
+          <Row cells={['Deposits', 'Available within minutes']} />
+          <Row cells={['Withdrawals', 'On-chain within hours; 24h SLA']} />
+        </Table>
+      </div>
+      <div>
+        <div style={{ fontSize: 22, fontWeight: 500, color: muted, marginBottom: 20 }}>Go Network services it unlocks</div>
+        <Block title="Allocations">Allocate custody assets to partner platforms</Block>
+        <Block title="Off-exchange settlement">Trade on venues; assets stay in custody</Block>
+        <Block title="Trades">Trade with connected parties and platforms</Block>
+        <Block title="Settlements">Multi-asset, off-chain, between Go Accounts</Block>
+        <Block title="Counterparty directory">Find Go Accounts and add partners</Block>
+      </div>
+    </div>
   </Frame>
 );
 
@@ -911,7 +925,7 @@ export const notes: (string | undefined)[] = [
   'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
   'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
   undefined, // A8 Keys
-  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including USD, instead of one wallet per coin. It runs on BitGo’s off-chain ledger, which is why moves between Go Accounts, and settlement on Go Network, are instant and need no gas. It uses a single key held in custody rather than three, there is one per enterprise, and through the API it behaves like any other wallet with its own wallet ID. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside BitGo’s 24-hour custody SLA. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
+  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including fiat, instead of one wallet per coin. It covers every asset BitGo supports: 97 chains and 2,831 tokens on BitGo’s protocol list (the token count changes as BitGo adds assets), and USD can be deposited or withdrawn directly. It runs on BitGo’s off-chain ledger with a single key held in custody, one per enterprise, and behaves like any other wallet in the API. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside the 24-hour custody SLA. The right side is why it sits in the Trade tier: it is the entry point to Go Network, with allocations and off-exchange settlement to partner venues, trades, multi-asset off-chain settlements between Go Accounts, and a directory of counterparties. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
   undefined, // A10 Liquidity
   undefined, // A11 Further needs
   'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
