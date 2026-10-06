@@ -811,11 +811,10 @@ const GoAccount: Page = () => (
       </div>
       <div>
         <div style={{ fontSize: 22, fontWeight: 500, color: muted, marginBottom: 20 }}>Go Network services it unlocks</div>
-        <Block title="Allocations">Allocate custody assets to partner platforms</Block>
-        <Block title="Off-exchange settlement">Trade on venues; assets stay in custody</Block>
-        <Block title="Trades">Trade with connected parties and platforms</Block>
+        <Block title="Off-exchange settlement">Allocate to partner venues; assets stay in custody</Block>
         <Block title="Settlements">Multi-asset, off-chain, between Go Accounts</Block>
-        <Block title="Counterparty directory">Find Go Accounts and add partners</Block>
+        <Block title="Counterparties">Directory of Go Accounts; add your partners</Block>
+        <Block title="Trades">Place and cancel trade orders from the account</Block>
       </div>
     </div>
   </Frame>
@@ -925,7 +924,7 @@ export const notes: (string | undefined)[] = [
   'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
   'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
   undefined, // A8 Keys
-  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including fiat, instead of one wallet per coin. It covers every asset BitGo supports: 97 chains and 2,831 tokens on BitGo’s protocol list (the token count changes as BitGo adds assets), and USD can be deposited or withdrawn directly. It runs on BitGo’s off-chain ledger with a single key held in custody, one per enterprise, and behaves like any other wallet in the API. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside the 24-hour custody SLA. The right side is why it sits in the Trade tier: it is the entry point to Go Network, with allocations and off-exchange settlement to partner venues, trades, multi-asset off-chain settlements between Go Accounts, and a directory of counterparties. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
+  'Use when they ask what the Go Account is. Omnibus here means one custody account that holds many assets, including fiat, instead of one wallet per coin. It covers every asset BitGo supports: 97 chains and 2,831 tokens on BitGo’s protocol list (the token count changes as BitGo adds assets), and USD can be deposited or withdrawn directly. It runs on BitGo’s off-chain ledger with a single key held in custody, one per enterprise, and behaves like any other wallet in the API. Deposits land within minutes; on-chain withdrawals usually finish within hours, inside the 24-hour custody SLA. The right side is why it sits in the Trade tier: it is the entry point to Go Network, with off-exchange settlement (allocate assets to partner venues and trade there while they stay in custody), multi-asset off-chain settlements between Go Accounts, a directory of counterparties, and trade orders. If engineers mention trading wallets or trading accounts in the API or SDK, those are the old names for the Go Account.', // A9 Go Account
   undefined, // A10 Liquidity
   undefined, // A11 Further needs
   'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
