@@ -48,6 +48,9 @@ const hedgeFundRoles = 'https://financeunlocked.com/videos/who-works-in-a-hedge-
 const fundOffices = 'https://www.akj.com/blog/hedge-fund-roles-explained';
 const trustCenter = 'https://trustcenter.bitgo.com/';
 const insurance = 'https://www.bitgo.com/solutions/insurance/';
+const goAccount = 'https://www.bitgo.com/products/go-account/';
+const billing = 'https://bitgo.com/resources/billing-methodology/';
+const custodyAgreement = 'https://www.bitgo.com/legal/bitgo-custodial-services-agreement/';
 
 // Every primitive reads the page tone, so the same markup works on light and dark pages.
 type ToneName = 'light' | 'dark';
@@ -676,7 +679,7 @@ const AppendixDivider: Page = () => (
     <main style={{ position: 'relative', width: '100%', height: '100%', boxSizing: 'border-box', padding: '0 140px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: bgBlue, color: '#ffffff', fontFamily: 'var(--osd-font-body)' }}>
       <div><Pill color="#ffffff">Backup material</Pill></div>
       <h1 style={{ fontSize: 140, fontWeight: 300, lineHeight: 1.1, margin: '32px 0', letterSpacing: -4 }}>Appendix</h1>
-      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallet types · multisig vs MPC · ETH options · policies · roles · keys · liquidity · licenses · security</p>
+      <p style={{ fontSize: 36, lineHeight: 1.5, margin: 0, color: 'rgba(255,255,255,0.82)' }}>Wallets · roles · policies · keys · Go Account · liquidity · compliance · pricing</p>
       <div style={{ position: 'absolute', left: 140, bottom: 56, fontSize: 22, color: 'rgba(255,255,255,0.7)' }}>bitgo.com</div>
     </main>
   </Tone.Provider>
@@ -788,8 +791,24 @@ const A5: Page = () => (
   </Frame>
 );
 
+const GoAccount: Page = () => (
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={goAccount} sourceLabel2="BitGo Go Account" title="A9 · The Go Account: one omnibus account for trading" subtitle="The Trade tier: a custody account on BitGo’s ledger, shared on-chain, separate on the books.">
+    <Table heads={['Aspect', 'What it means']} widths={[300]}>
+      <Row cells={['Omnibus', 'Many clients’ assets sit together in BitGo-controlled wallets']} />
+      <Row cells={['Your share', 'Tracked on BitGo’s books, not by on-chain address']} />
+      <Row cells={['Ledger', 'Off-chain ledger at BitGo; one Go Account per enterprise']} />
+      <Row cells={['Keys', 'One key held by BitGo, not three']} />
+      <Row cells={['Assets', 'Crypto, stablecoins and USD; 40+ chains']} />
+      <Row cells={['Moves', 'Deposits in minutes; Go Account to Go Account instant, off-chain']} />
+      <Row cells={['Withdrawals', 'On-chain usually within hours; 24h custody SLA']} />
+      <Row cells={['Trading', 'OTC desk, electronic platform, APIs, Go Network settlement']} />
+    </Table>
+    <Note>Why omnibus: transfers between Go Accounts settle on the ledger, so trades need no gas or blocks.</Note>
+  </Frame>
+);
+
 const A6: Page = () => (
-  <Frame eyebrow={A} title="A9 · Liquidity options from the Go Account" subtitle="All three settle through Go Network without assets leaving regulated custody." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
+  <Frame eyebrow={A} title="A10 · Liquidity options from the Go Account" subtitle="All three settle through Go Network without assets leaving regulated custody." source={goNetwork} sourceLabel="Go Network off-exchange settlement">
     <Table heads={['Option', 'What it is', 'Use when']} widths={[380, 800]}>
       <Row cells={['Off-exchange settlement', 'Balance mirrored to a partner venue; settles off-chain', 'Keep venues, skip pre-funding']} />
       <Row cells={['BitGo Prime trading', 'One API to exchanges, market makers and OTC desks', 'Best execution over a set venue']} />
@@ -800,7 +819,7 @@ const A6: Page = () => (
 );
 
 const A7: Page = () => (
-  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={insurance} sourceLabel2="BitGo insurance" title="A10 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
+  <Frame eyebrow={A} source={walletTypes} sourceLabel="BitGo wallet types" source2={insurance} sourceLabel2="BitGo insurance" title="A11 · If the fund asks for more" subtitle="Each need maps to an existing BitGo capability, so the design grows without a rebuild.">
     <Table heads={['Further need', 'Answer', 'Impact on the design']} widths={[430, 640]}>
       <Row cells={['Yield on idle ETH', 'Staking from custody wallets', 'None: stake from the ETH vault']} />
       <Row cells={['More assets or chains', 'Add a wallet per new chain in each tier', 'Same roles and policy templates']} />
@@ -813,7 +832,7 @@ const A7: Page = () => (
 );
 
 const A12: Page = () => (
-  <Frame eyebrow={A} source={licenses} sourceLabel="BitGo licenses and registrations" title="A11 · Licenses and compliance" subtitle="A US-regulated qualified custodian, licensed in each major market it serves.">
+  <Frame eyebrow={A} source={licenses} sourceLabel="BitGo licenses and registrations" title="A12 · Licenses and compliance" subtitle="A US-regulated qualified custodian, licensed in each major market it serves.">
     <Table heads={['Entity', 'Regulator', 'License']} widths={[520, 420]}>
       <Row cells={['BitGo Bank & Trust, N.A.', 'OCC (US federal)', 'National trust bank; qualified custodian']} />
       <Row cells={['BitGo New York Trust Co.', 'NYDFS (New York)', 'Limited-purpose trust; qualified custodian']} />
@@ -828,7 +847,7 @@ const A12: Page = () => (
 );
 
 const A13: Page = () => (
-  <Frame eyebrow={A} source={trustCenter} sourceLabel="BitGo Trust Center" title="A12 · Security and compliance controls" subtitle="What sits behind the licenses: audited controls, insured custody, segregated assets.">
+  <Frame eyebrow={A} source={trustCenter} sourceLabel="BitGo Trust Center" title="A13 · Security and compliance controls" subtitle="What sits behind the licenses: audited controls, insured custody, segregated assets.">
     <Table heads={['Measure', 'What BitGo does', 'Why it matters']} widths={[360, 820]}>
       <Row cells={['Independent audits', 'SOC 1 Type 2 and SOC 2 Type 2 reports', 'Controls tested by an outside auditor']} />
       <Row cells={['Custody insurance', '$250M, Lloyd’s syndicate; BitGo pays deductibles', 'Covers loss, theft and misuse']} />
@@ -838,6 +857,20 @@ const A13: Page = () => (
       <Row cells={['Travel Rule', 'Co-developed the Travel Rule Protocol (TRP)', 'Sender data travels with transfers']} />
     </Table>
     <Note>The $250M policy covers only keys BitGo holds; hot wallets are outside it. Excess cover is available.</Note>
+  </Frame>
+);
+
+const Pricing: Page = () => (
+  <Frame eyebrow={A} source={billing} sourceLabel="BitGo billing methodology" source2={custodyAgreement} sourceLabel2="Custodial services agreement" title="A14 · How BitGo charges" subtitle="Fees are negotiated per client; this is how the bill is built.">
+    <Table heads={['Fee', 'How it is calculated', 'Notes']} widths={[300, 720]}>
+      <Row cells={['Custody (AUC)', 'bps on the monthly average USD balance', 'Hourly snapshots; billed per asset']} />
+      <Row cells={['Transactions', 'bps on outgoing volume, tiered by monthly volume', 'Moves between own wallets are free']} />
+      <Row cells={['Network fees', 'Gas and miner fees passed through', 'Paid in the asset moved']} />
+      <Row cells={['Settlement', 'Go Network settlement fees, per contract', 'Off-chain moves need no gas']} />
+      <Row cells={['Self-custody', 'No AUC fee under BitGo’s published method', 'May change; contract governs']} />
+      <Row cells={['Minimum', 'Monthly minimum across all fees', 'Set per contract']} />
+    </Table>
+    <Note>For a $300M book expect custom tiered bps; the Billing role views and pays invoices.</Note>
   </Frame>
 );
 
@@ -878,10 +911,12 @@ export const notes: (string | undefined)[] = [
   'Reference for page 11. Use it when someone asks what a role can actually do. Two design rules to repeat: Wallet Admin sits only in Fund Approver, because approval steps select that permission; and freezing is part of Wallet Admin, so Compliance audits and the approvers freeze.', // A6 Permissions
   'Map each condition to where it bites in this design: whitelists on every tier (hot wallets also to whitelisted contracts if they trade on-chain), thresholds behind the Over cap step on page 9, daily velocity caps, a percent-of-balance cap on hot wallets, stricter rules for API tokens. Locked rules can only be loosened through BitGo support, so a compromised admin cannot open a wallet.', // A7 Policy toolkit
   undefined, // A8 Keys
-  undefined, // A9 Liquidity
-  undefined, // A10 Further needs
-  'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A11 Licenses
-  'Pair with A11. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A12 Security and compliance
+  'Use when they ask how the Go Account holds their assets. Omnibus means many clients’ assets sit together in BitGo-controlled wallets; what the fund owns is an entitlement to a type and quantity of assets on BitGo’s books, not specific on-chain coins. What protects it: BitGo Bank & Trust is a qualified custodian, client accounts are segregated on its books and never mixed with BitGo’s own assets, SOC audits, insurance. The trade-off is speed for reliance on the custodian’s ledger, which is exactly why the Trade tier holds only about 10%.', // A9 Go Account
+  undefined, // A10 Liquidity
+  undefined, // A11 Further needs
+  'Use when compliance comes up (their US must-have on page 3). OCC charter: conversion from the South Dakota trust approved Dec 2025. Insurance covers only assets where BitGo holds all keys, not the self-custody hot wallets.', // A12 Licenses
+  'Pair with A12. TRP was co-developed with ING and Standard Chartered. BitGo reports zero internal asset losses in over a decade; say it as their claim, not ours.', // A13 Security and compliance
+  'Use when they ask about cost. Pricing is quoted after discovery, per client. The custody (AUC) fee usually dominates, so the vault share drives cost, and the bill moves with prices because AUC is measured in USD. Internal moves such as vault refills and sweeps are not charged transaction fees. BitGo custody accounts typically start from $1M, well below this fund. Do not quote basis points without the deal desk.', // A14 Pricing
 ];
 
-export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, A3, A4, A5, A6, A7, A12, A13] satisfies Page[];
+export default [Cover, Agenda, Heard, Problem, Criteria, Answer, OptionB, CapitalFlow, OrgChart, WhoActs, RoleDesign, PolicySet, Withdrawal, Scorecard, NextSteps, AppendixDivider, Types, A1Custody, A1Self, A2, ArchitectureAlt, A3, A4, A5, GoAccount, A6, A7, A12, A13, Pricing] satisfies Page[];
