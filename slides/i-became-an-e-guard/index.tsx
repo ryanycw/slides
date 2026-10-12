@@ -815,7 +815,7 @@ const Cover: Page = () => (
           <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900 }}>
             Ryan<span style={{ color: pencil, fontWeight: 700 }}>（ryanycw）</span>
           </div>
-          <Hand size={32}>DeFi 與隱私工程師 · 台北以太坊社群 host</Hand>
+          <Hand size={32}>當不了王以太可以來當以太王</Hand>
         </Rise>
       </div>
     }
