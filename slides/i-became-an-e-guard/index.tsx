@@ -777,14 +777,12 @@ const BigNumber = ({
   to,
   unit,
   caption,
-  source,
 }: {
   chapter: string;
   label: string;
   to: number;
   unit: string;
   caption: string;
-  source: string;
 }) => (
   <Paper chapter={chapter} center>
     <Rise>
@@ -810,9 +808,6 @@ const BigNumber = ({
     <Rise delay={1.2}>
       <div style={{ fontSize: 44, lineHeight: 1.5, marginTop: 32 }}>{caption}</div>
     </Rise>
-    <div style={{ marginTop: 40 }}>
-      <Hand size={24}>{source}</Hand>
-    </div>
   </Paper>
 );
 
@@ -1213,7 +1208,6 @@ const LunaNumber: Page = () => (
     to={400}
     unit="億美元"
     caption="演算法穩定幣 UST 脫鉤，一週之內，整個生態系幾乎歸零。"
-    source="數字為各大媒體報導之估計值，演講前請再核對"
   />
 );
 
@@ -1224,7 +1218,6 @@ const FtxNumber: Page = () => (
     to={80}
     unit="億美元"
     caption="全球前幾大的交易所，挪用客戶資金後留下的缺口。"
-    source="數字為破產程序初期之估計值，演講前請再核對"
   />
 );
 
