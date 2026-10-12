@@ -38,6 +38,7 @@ import imgAltman from './assets/ch1-altman.jpg';
 import imgOrb from './assets/ch1-orb.jpg';
 import imgBarry from './assets/barry-whitehat.jpg';
 import imgVitalik from './assets/vitalik.jpg';
+import imgTelegram from '@assets/Telegram.jpeg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -2267,7 +2268,40 @@ const KeepTheGood: Page = () => (
 );
 
 const Closing: Page = () => (
-  <Paper chapter="終章" overlay={<ChapterTrack current={10} />}>
+  <Paper
+    chapter="終章"
+    overlay={
+      <>
+        <div style={{ position: 'absolute', right: 180, top: 120, width: 340 }}>
+          <Rise delay={0.6}>
+            <div
+              style={{
+                position: 'relative',
+                background: '#ffffff',
+                padding: 14,
+                transform: 'rotate(2deg)',
+                boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+              }}
+            >
+              <img src={imgTelegram} style={{ display: 'block', width: '100%' }} />
+              <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+            </div>
+            <div style={{ marginTop: 20, textAlign: 'center' }}>
+              <a
+                href="https://t.me/ryanycweth"
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontFamily: hand, fontSize: 34, fontWeight: 700, color: 'var(--osd-accent)', textDecoration: 'none' }}
+              >
+                t.me/ryanycweth
+              </a>
+            </div>
+          </Rise>
+        </div>
+        <ChapterTrack current={10} />
+      </>
+    }
+  >
     <div style={{ marginTop: 60 }}>
       <Rise delay={0.2}>
         <div
