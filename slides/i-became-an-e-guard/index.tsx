@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 import {
+  ImagePlaceholder,
   MorphElement,
   Step,
   Steps,
@@ -36,6 +37,7 @@ import imgDixon from './assets/ch1-dixon.jpg';
 import imgAltman from './assets/ch1-altman.jpg';
 import imgOrb from './assets/ch1-orb.jpg';
 import imgBarry from './assets/barry-whitehat.jpg';
+import imgVitalik from './assets/vitalik.jpg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -489,7 +491,7 @@ const Sticky = ({
 
 /* ------------------------------------------------ Chapter track (the thread through the talk) */
 
-const STATION_GAP = 180;
+const STATION_GAP = 160;
 
 const Station = ({ i, label, state }: { i: number; label: string; state: 'past' | 'now' | 'future' }) => {
   const active = useActive();
@@ -566,7 +568,8 @@ const ChapterTrack = ({ current }: { current: number }) => {
       <Station i={5} label="AA" state={st(5)} />
       <Station i={6} label="Lean" state={st(6)} />
       <Station i={7} label="Privacy" state={st(7)} />
-      <Station i={8} label="初心" state={st(8)} />
+      <Station i={8} label="Institution" state={st(8)} />
+      <Station i={9} label="初心" state={st(9)} />
     </div>
   );
 };
@@ -851,9 +854,9 @@ const Stop = ({ n, title, sub, delay }: { n: string; title: string; sub: string;
   <Rise delay={delay}>
     <div
       style={{
-        height: 170,
+        height: 230,
         borderLeft: '4px solid var(--osd-accent)',
-        paddingLeft: 32,
+        paddingLeft: 24,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -861,8 +864,8 @@ const Stop = ({ n, title, sub, delay }: { n: string; title: string; sub: string;
       }}
     >
       <div style={{ fontFamily: hand, fontSize: 30, color: 'var(--osd-accent)', fontWeight: 700 }}>{n}</div>
-      <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900, lineHeight: 1.25 }}>{title}</div>
-      <div style={{ fontFamily: hand, fontSize: 28, color: pencil }}>{sub}</div>
+      <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 36, fontWeight: 900, lineHeight: 1.25 }}>{title}</div>
+      <div style={{ fontFamily: hand, fontSize: 26, color: pencil }}>{sub}</div>
     </div>
   </Rise>
 );
@@ -873,9 +876,9 @@ const Roadmap: Page = () => (
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        columnGap: 56,
-        rowGap: 40,
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        columnGap: 32,
+        rowGap: 48,
         marginTop: 56,
       }}
     >
@@ -887,7 +890,8 @@ const Roadmap: Page = () => (
       <Stop n="第六章" title="帳戶抽象 AA" sub="給一般人用的以太坊" delay={0.5} />
       <Stop n="第七章" title="Lean Ethereum" sub="簡單才能長久" delay={0.58} />
       <Stop n="第八章" title="Privacy · PSE" sub="另一群人的路" delay={0.66} />
-      <Stop n="終章" title="找到自己的理由" sub="核心價值" delay={0.74} />
+      <Stop n="第九章" title="Institution" sub="機構會是關鍵嗎？" delay={0.74} />
+      <Stop n="終章" title="找到自己的理由" sub="核心價值" delay={0.82} />
     </div>
   </Paper>
 );
@@ -2053,10 +2057,166 @@ const ProtocolNoUs: Page = () => (
   </Statement>
 );
 
+/* ================================================ 第九章 · Institution */
+
+const ChInstitution: Page = () => (
+  <ChapterDivider n={9} label="第九章" title="Institution" sub="Onboard 機構，會是 Mass Adoption 的關鍵嗎？" year="2025" />
+);
+ChInstitution.transition = breath;
+
+const InstitutionBet: Page = () => (
+  <Statement chapter="第九章 · Institution">
+    Onboard 機構，
+    <br />
+    才是 Mass Adoption 的
+    <br />
+    <Hl delay={0.9}>關鍵</Hl>？
+  </Statement>
+);
+
+const Person = ({
+  img,
+  hint,
+  name,
+  rotate,
+  delay,
+}: {
+  img?: string;
+  hint?: string;
+  name: string;
+  rotate: number;
+  delay: number;
+}) => (
+  <Rise delay={delay}>
+    <div
+      style={{
+        position: 'relative',
+        width: 432,
+        background: '#ffffff',
+        padding: '16px 16px 20px',
+        transform: `rotate(${rotate}deg)`,
+        boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+      }}
+    >
+      {img ? (
+        <img src={img} style={{ display: 'block', width: 400, height: 460, objectFit: 'cover', objectPosition: 'center top' }} />
+      ) : (
+        <ImagePlaceholder hint={hint ?? name} width={400} height={460} />
+      )}
+      <div style={{ fontFamily: hand, fontSize: 32, fontWeight: 700, marginTop: 12 }}>{name}</div>
+      <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+    </div>
+  </Rise>
+);
+
+const BoardMove: Page = () => (
+  <Paper chapter="第九章 · Institution">
+    <Heading>Aya、Vitalik 轉到 Board</Heading>
+    <div style={{ display: 'flex', gap: 72, marginTop: 56, alignItems: 'flex-start' }}>
+      <Person hint="Aya Miyaguchi 的照片" name="Aya Miyaguchi" rotate={-2} delay={0.2} />
+      <Person img={imgVitalik} name="Vitalik Buterin" rotate={2} delay={0.35} />
+    </div>
+    <div style={{ position: 'absolute', right: 160, bottom: 100 }}>
+      <Hand size={20}>Vitalik photo: John Phillips / Wikimedia Commons · CC BY 2.0</Hand>
+    </div>
+  </Paper>
+);
+
+const CoEd: Page = () => (
+  <Paper chapter="第九章 · Institution">
+    <Heading>HWW 與 Tomasz 成為 Co-ED</Heading>
+    <div style={{ display: 'flex', gap: 72, marginTop: 56, alignItems: 'flex-start' }}>
+      <Person hint="Hsiao-Wei Wang 的照片" name="Hsiao-Wei Wang" rotate={-2} delay={0.2} />
+      <Person hint="Tomasz Stańczak 的照片" name="Tomasz Stańczak" rotate={2} delay={0.35} />
+    </div>
+  </Paper>
+);
+
+const Reorgs: Page = () => (
+  <Paper chapter="第九章 · Institution" center>
+    <div style={{ display: 'flex', alignItems: 'baseline', gap: 32 }}>
+      <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 320, fontWeight: 900, lineHeight: 1, color: 'var(--osd-accent)' }}>
+        <CountUp to={4} duration={900} />
+      </span>
+      <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 110, fontWeight: 900 }}>次 Re-org</span>
+    </div>
+    <Rise delay={1}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 56 }}>
+        <Fact>Tomasz 離開</Fact>
+        <Fact>HWW 休假中</Fact>
+      </div>
+    </Rise>
+  </Paper>
+);
+
+const ExodusLine = ({ n, children }: { n: string; children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'baseline', gap: 36 }}>
+    <span style={{ fontFamily: hand, fontSize: 56, fontWeight: 700, color: 'var(--osd-accent)', width: 60 }}>{n}</span>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 72, fontWeight: 900, lineHeight: 1.3 }}>{children}</span>
+  </div>
+);
+
+const Exodus: Page = () => (
+  <Paper chapter="第九章 · Institution">
+    <Heading>然後⋯⋯</Heading>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 64, marginTop: 88 }}>
+      <Steps>
+        <Step>
+          <ExodusLine n="①">一些明星球員出走</ExodusLine>
+        </Step>
+        <Step>
+          <ExodusLine n="②">
+            <Accent>EF Mandate</Accent>
+          </ExodusLine>
+        </Step>
+        <Step>
+          <ExodusLine n="③">更多明星球員出走</ExodusLine>
+        </Step>
+      </Steps>
+    </div>
+  </Paper>
+);
+
+const SpinCard = ({ name, delay, rotate }: { name: string; delay: number; rotate: number }) => (
+  <Rise delay={delay} style={{ flex: 1 }}>
+    <div
+      style={{
+        height: 300,
+        background: 'rgba(255,255,255,0.6)',
+        borderTop: '6px solid var(--osd-accent)',
+        boxShadow: '0 18px 30px -22px rgba(60,40,10,0.4)',
+        transform: `rotate(${rotate}deg)`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0 32px',
+        textAlign: 'center',
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 56,
+        fontWeight: 900,
+        lineHeight: 1.25,
+      }}
+    >
+      {name}
+    </div>
+  </Rise>
+);
+
+const Spinoffs: Page = () => (
+  <Paper chapter="第九章 · Institution">
+    <Heading>孵化出</Heading>
+    <div style={{ display: 'flex', gap: 48, marginTop: 96 }}>
+      <SpinCard name="Etherealize" delay={0.2} rotate={-1.5} />
+      <SpinCard name="Ethereum Institutional" delay={0.35} rotate={1} />
+      <SpinCard name="ETH Labs" delay={0.5} rotate={-1} />
+    </div>
+  </Paper>
+);
+
 /* ================================================ 終章 · 找到自己的理由 */
 
 const Ch9: Page = () => (
-  <ChapterDivider n={9} label="終章" title="找到自己的理由" sub="做這件事的理由" year="2026" />
+  <ChapterDivider n={10} label="終章" title="找到自己的理由" sub="做這件事的理由" year="2026" />
 );
 Ch9.transition = breath;
 
@@ -2106,7 +2266,7 @@ const KeepTheGood: Page = () => (
 );
 
 const Closing: Page = () => (
-  <Paper chapter="終章" overlay={<ChapterTrack current={9} />}>
+  <Paper chapter="終章" overlay={<ChapterTrack current={10} />}>
     <div style={{ marginTop: 60 }}>
       <Rise delay={0.2}>
         <div
@@ -2201,6 +2361,14 @@ export default [
   MyPrivacy,
   BarryWhitehat,
   PrivacyFreedom,
+  // 第九章 · Institution
+  ChInstitution,
+  InstitutionBet,
+  BoardMove,
+  CoEd,
+  Reorgs,
+  Exodus,
+  Spinoffs,
   // 終章
   Ch9,
   SolidCore,
