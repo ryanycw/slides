@@ -2019,9 +2019,9 @@ const Closing: Page = () => (
             marginTop: 24,
           }}
         >
-          你的那一站，
+          所以你
           <br />
-          會是<Underline delay={1}>什麼</Underline>？
+          為什麼<Underline delay={1}>在這</Underline>？
         </div>
       </Rise>
     </div>
