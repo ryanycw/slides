@@ -563,9 +563,9 @@ const ChapterTrack = ({ current }: { current: number }) => {
       <Station i={2} label="Luna · FTX" state={st(2)} />
       <Station i={3} label="DeFi" state={st(3)} />
       <Station i={4} label="L2" state={st(4)} />
-      <Station i={5} label="Privacy" state={st(5)} />
-      <Station i={6} label="AA" state={st(6)} />
-      <Station i={7} label="Lean" state={st(7)} />
+      <Station i={5} label="AA" state={st(5)} />
+      <Station i={6} label="Lean" state={st(6)} />
+      <Station i={7} label="Privacy" state={st(7)} />
       <Station i={8} label="初心" state={st(8)} />
     </div>
   );
@@ -884,9 +884,9 @@ const Roadmap: Page = () => (
       <Stop n="第三章" title="Luna、FTX" sub="信仰被測試的一年" delay={0.26} />
       <Stop n="第四章" title="走入 DeFi" sub="從旁觀到寫合約" delay={0.34} />
       <Stop n="第五章" title="L2 Scaling" sub="未來在誰手中？" delay={0.42} />
-      <Stop n="第六章" title="Privacy · PSE" sub="另一群人的路" delay={0.5} />
-      <Stop n="第七章" title="帳戶抽象 AA" sub="給一般人用的以太坊" delay={0.58} />
-      <Stop n="第八章" title="Lean Ethereum" sub="簡單才能長久" delay={0.66} />
+      <Stop n="第六章" title="帳戶抽象 AA" sub="給一般人用的以太坊" delay={0.5} />
+      <Stop n="第七章" title="Lean Ethereum" sub="簡單才能長久" delay={0.58} />
+      <Stop n="第八章" title="Privacy · PSE" sub="另一群人的路" delay={0.66} />
       <Stop n="終章" title="找到自己的理由" sub="核心價值" delay={0.74} />
     </div>
   </Paper>
@@ -1661,14 +1661,14 @@ const InfiniteGarden: Page = () => (
 
 /* ================================================ 第六章 · Privacy / PSE */
 
-const Ch6: Page = () => (
-  <ChapterDivider n={6} label="第六章 · Privacy" title="一群人，在研究隱私" sub="順著 Scaling 的路，PSE 走向另一個方向" year="2023" />
+const ChPrivacy: Page = () => (
+  <ChapterDivider n={8} label="第八章 · Privacy" title="一群人，在研究隱私" sub="順著 Scaling 的路，PSE 走向另一個方向" year="2025" />
 );
-Ch6.transition = breath;
+ChPrivacy.transition = breath;
 
 const PublicDiary: Page = () => (
   <Statement
-    chapter="第六章 · Privacy"
+    chapter="第八章 · Privacy"
   >
     你的錢包地址，
     <br />
@@ -1677,7 +1677,7 @@ const PublicDiary: Page = () => (
 );
 
 const ZkOneLine: Page = () => (
-  <Statement chapter="第六章 · Privacy" kicker="零知識證明 ZK">
+  <Statement chapter="第八章 · Privacy" kicker="零知識證明 ZK">
     證明一件事是真的，
     <br />
     卻不透露
@@ -1694,7 +1694,7 @@ const PseLine = ({ children }: { children: ReactNode }) => (
 );
 
 const WhoIsPse: Page = () => (
-  <Paper chapter="第六章 · Privacy">
+  <Paper chapter="第八章 · Privacy">
     <Heading>PSE 是誰？</Heading>
     <div style={{ marginTop: 16 }}>
       <Hand size={34}>以太坊基金會旗下的團隊 · 原名 Privacy &amp; Scaling Explorations</Hand>
@@ -1716,7 +1716,7 @@ const WhoIsPse: Page = () => (
 );
 
 const MyPrivacy: Page = () => (
-  <Paper chapter="第六章 · Privacy">
+  <Paper chapter="第八章 · Privacy">
     <Heading>Unirep Social TW 與 PSE</Heading>
     <div style={{ display: 'flex', gap: 32, marginTop: 52, flexWrap: 'wrap', maxWidth: 1400 }}>
       <Rise delay={0.2}>
@@ -1736,7 +1736,7 @@ const MyPrivacy: Page = () => (
 );
 
 const BarryWhitehat: Page = () => (
-  <Paper chapter="第六章 · Privacy">
+  <Paper chapter="第八章 · Privacy">
     <div style={{ display: 'flex', alignItems: 'center', gap: 80, flex: 1 }}>
       <div style={{ flex: 1 }}>
         <Rise>
@@ -1777,7 +1777,7 @@ const BarryWhitehat: Page = () => (
 );
 
 const PrivacyFreedom: Page = () => (
-  <Statement chapter="第六章 · Privacy">
+  <Statement chapter="第八章 · Privacy">
     隱私，不是因為
     <br />
     有東西要藏，
@@ -1788,10 +1788,10 @@ const PrivacyFreedom: Page = () => (
 
 /* ================================================ 第七章 · Account Abstraction */
 
-const Ch7: Page = () => (
-  <ChapterDivider n={7} label="第七章" title="Account Abstraction" sub="讓以太坊，終於能給一般人用" year="2024" />
+const ChAA: Page = () => (
+  <ChapterDivider n={6} label="第六章" title="Account Abstraction" sub="讓以太坊，終於能給一般人用" year="2024" />
 );
-Ch7.transition = breath;
+ChAA.transition = breath;
 
 const PainLine = ({ children }: { children: ReactNode }) => (
   <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 52, fontWeight: 900, lineHeight: 1.4 }}>
@@ -1802,7 +1802,7 @@ const PainLine = ({ children }: { children: ReactNode }) => (
 
 const OneKey: Page = () => (
   <Paper
-    chapter="第七章 · AA"
+    chapter="第六章 · AA"
     overlay={
       <>
         <MorphElement id="account-box">
@@ -1869,7 +1869,7 @@ const AfterMorph = ({ delay, children }: { delay: number; children: ReactNode })
 
 const SmartAccount: Page = () => (
   <Paper
-    chapter="第七章 · AA"
+    chapter="第六章 · AA"
     overlay={
       <>
         <MorphElement id="account-box">
@@ -1935,7 +1935,7 @@ const TimeNode = ({ eip, when, what, highlight }: { eip: string; when: string; w
 const AATimeline: Page = () => {
   const active = useActive();
   return (
-    <Paper chapter="第七章 · AA">
+    <Paper chapter="第六章 · AA">
       <Heading>一步一步，把帳戶升級</Heading>
       <div style={{ position: 'relative', marginTop: 120 }}>
         <div
@@ -1970,7 +1970,7 @@ const AATimeline: Page = () => {
 
 const InvisibleChain: Page = () => (
   <Statement
-    chapter="第七章 · AA"
+    chapter="第六章 · AA"
   >
     最好的區塊鏈體驗，
     <br />
@@ -1980,7 +1980,7 @@ const InvisibleChain: Page = () => (
 
 const AAToAgentic: Page = () => (
   <ImageFigure
-    chapter="第七章 · AA"
+    chapter="第六章 · AA"
     title="下一步：從 Account 到 Agentic"
     lead="當使用以太坊的，不只是人，還有 AI agent"
     img={imgFromAAToAgentic}
@@ -1990,10 +1990,10 @@ const AAToAgentic: Page = () => (
 
 /* ================================================ 第八章 · Lean Ethereum */
 
-const Ch8: Page = () => (
-  <ChapterDivider n={8} label="第八章" title="Lean Ethereum" sub="把以太坊變得更簡單、更長久" year="2025" />
+const ChLean: Page = () => (
+  <ChapterDivider n={7} label="第七章" title="Lean Ethereum" sub="把以太坊變得更簡單、更長久" year="2025" />
 );
-Ch8.transition = breath;
+ChLean.transition = breath;
 
 const Pillar = ({ en, zh, desc, delay }: { en: string; zh: string; desc: string; delay: number }) => (
   <Rise delay={delay} style={{ flex: 1 }}>
@@ -2017,7 +2017,7 @@ const Pillar = ({ en, zh, desc, delay }: { en: string; zh: string; desc: string;
 );
 
 const WhatIsLean: Page = () => (
-  <Paper chapter="第八章 · Lean">
+  <Paper chapter="第七章 · Lean">
     <Heading>Lean Ethereum 是什麼？</Heading>
     <div style={{ marginTop: 16 }}>
       <Hand size={34}>Vitalik，2025：把以太坊精簡到「可以被完全理解」的程度</Hand>
@@ -2032,7 +2032,7 @@ const WhatIsLean: Page = () => (
 
 const WalkawayTest: Page = () => (
   <Statement
-    chapter="第八章 · Lean"
+    chapter="第七章 · Lean"
     kicker="Walkaway Test"
   >
     如果所有開發者
@@ -2044,7 +2044,7 @@ const WalkawayTest: Page = () => (
 );
 
 const ProtocolNoUs: Page = () => (
-  <Statement chapter="第八章 · Lean">
+  <Statement chapter="第七章 · Lean">
     最好的協議，
     <br />
     是有一天
@@ -2181,26 +2181,26 @@ export default [
   L2BeatPage,
   ScalingCost,
   InfiniteGarden,
-  // 第六章 · Privacy
-  Ch6,
+  // 第六章 · AA
+  ChAA,
+  OneKey,
+  SmartAccount,
+  AATimeline,
+  InvisibleChain,
+  AAToAgentic,
+  // 第七章 · Lean Ethereum
+  ChLean,
+  WhatIsLean,
+  WalkawayTest,
+  ProtocolNoUs,
+  // 第八章 · Privacy
+  ChPrivacy,
   PublicDiary,
   ZkOneLine,
   WhoIsPse,
   MyPrivacy,
   BarryWhitehat,
   PrivacyFreedom,
-  // 第七章 · AA
-  Ch7,
-  OneKey,
-  SmartAccount,
-  AATimeline,
-  InvisibleChain,
-  AAToAgentic,
-  // 第八章 · Lean Ethereum
-  Ch8,
-  WhatIsLean,
-  WalkawayTest,
-  ProtocolNoUs,
   // 終章
   Ch9,
   SolidCore,
