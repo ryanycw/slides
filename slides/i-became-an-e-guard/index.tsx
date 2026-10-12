@@ -1995,9 +1995,9 @@ const KeepTheGood: Page = () => (
   <Statement chapter="終章" kicker="但也不用盲目地破舊立新">
     不是推翻一切，
     <br />
-    而是讓好的東西
+    而是知道自己
     <br />
-    <Hl delay={0.9}>留下來</Hl>。
+    <Hl delay={0.9}>為什麼而做</Hl>。
   </Statement>
 );
 
