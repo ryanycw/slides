@@ -2220,10 +2220,11 @@ const Ch9: Page = () => (
 );
 Ch9.transition = breath;
 
-const CoreLine = ({ n, title }: { n: string; title: string }) => (
+const CoreLine = ({ n, title, sub }: { n: string; title: string; sub: string }) => (
   <div style={{ display: 'flex', alignItems: 'baseline', gap: 40 }}>
     <span style={{ fontFamily: hand, fontSize: 64, fontWeight: 700, color: 'var(--osd-accent)', width: 70 }}>{n}</span>
-    <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, fontWeight: 900, lineHeight: 1.2 }}>{title}</span>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, fontWeight: 900, lineHeight: 1.2, width: 220 }}>{title}</span>
+    <span style={{ fontFamily: hand, fontSize: 44, color: pencil }}>{sub}</span>
   </div>
 );
 
@@ -2233,13 +2234,13 @@ const SolidCore: Page = () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 72, marginTop: 96 }}>
       <Steps>
         <Step>
-          <CoreLine n="①" title="堅持" />
+          <CoreLine n="①" title="堅持" sub="熊市裡，區塊還是一個一個地出" />
         </Step>
         <Step>
-          <CoreLine n="②" title="善良" />
+          <CoreLine n="②" title="善良" sub="做公共財，讓下一個人走得更容易" />
         </Step>
         <Step>
-          <CoreLine n="③" title="誠實" />
+          <CoreLine n="③" title="誠實" sub="公開透明，經得起驗證" />
         </Step>
       </Steps>
     </div>
