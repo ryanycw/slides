@@ -2024,11 +2024,6 @@ const Closing: Page = () => (
           會是<Underline delay={1}>什麼</Underline>？
         </div>
       </Rise>
-      <Rise delay={0.6}>
-        <div style={{ marginTop: 40 }}>
-          <Hand size={40}>謝謝大家 · Ryan Wang</Hand>
-        </div>
-      </Rise>
     </div>
   </Paper>
 );
