@@ -893,7 +893,7 @@ const Roadmap: Page = () => (
       }}
     >
       <Stop n="第一章" title="文藝復興" sub="為什麼這件事重要" delay={0.1} />
-      <Stop n="第二章" title="我做 NFT 的時期" sub="第一次覺得能參與" delay={0.18} />
+      <Stop n="第二章" title="NFT 夏天" sub="第一次覺得能參與" delay={0.18} />
       <Stop n="第三章" title="Luna、FTX" sub="信仰被測試的一年" delay={0.26} />
       <Stop n="第四章" title="走入 DeFi" sub="從旁觀到寫合約" delay={0.34} />
       <Stop n="第五章" title="L2 Scaling" sub="未來在誰手中？" delay={0.42} />
