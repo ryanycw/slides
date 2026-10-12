@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 import {
-  ImagePlaceholder,
   MorphElement,
   Step,
   Steps,
@@ -13,6 +12,20 @@ import img53L2s from '@assets/53L2s.png';
 import imgL2Beat from '@assets/L2Beat.png';
 import imgInfiniteGarden from '@assets/Infinite Garden.png';
 import imgFromAAToAgentic from '@assets/From AA to Agentic.png';
+import imgRpf from './assets/nft-rpf.jpg';
+import imgRpfTile from './assets/nft-rpf-tile.jpg';
+import imgKatana from './assets/nft-katana.jpg';
+import imgMurmur from './assets/nft-murmur.jpg';
+import imgMurmurTile from './assets/nft-murmur-tile.jpg';
+import imgChangling from './assets/nft-changling.jpg';
+import imgChenpu from './assets/nft-chenpu.jpg';
+import imgNpm from './assets/nft-npm.jpg';
+import imgMintverse from './assets/nft-mintverse.jpg';
+import imgMintverseTile from './assets/nft-mintverse-tile.jpg';
+import imgAsmeir from './assets/nft-asmeir.jpg';
+import imgGlenrothes from './assets/nft-glenrothes.jpg';
+import imgHuangdu from './assets/nft-huangdu.jpg';
+import imgObjectTheatre from './assets/nft-object-theatre.jpg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -850,7 +863,6 @@ Cover.transition = settle;
 const OpeningQuestion: Page = () => (
   <Statement
     chapter="開場"
-    note="這是一個關於「留下來」的故事。"
   >
     你會為了一件
     <br />
@@ -991,26 +1003,12 @@ const Ch1Summary: Page = () => (
 /* ================================================ 第二章 · NFT */
 
 const Ch2: Page = () => (
-  <ChapterDivider n={2} label="第二章" title="NFT 夏天" sub="第一次覺得：原來我也可以參與" year="2021" />
+  <ChapterDivider n={2} label="第二章" title="NFT 夏天" sub="和台灣藝術家、畫廊、品牌一起做 NFT" year="2021" />
 );
 Ch2.transition = breath;
 
-const RabbitHole: Page = () => (
-  <Paper chapter="第二章 · NFT">
-    <Heading>我是怎麼掉進兔子洞的</Heading>
-    <Rise delay={0.2}>
-      <div style={{ fontSize: 44, lineHeight: 1.5, marginTop: 48, maxWidth: 1300 }}>
-        一個大學生，半夜盯著一張會動的圖，第一次付了 gas。
-      </div>
-    </Rise>
-    <Rise delay={0.5} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky width={860}>第一次買 / 鑄造 NFT 是什麼時候？當時在做什麼？是什麼讓你被吸引？</Sticky>
-    </Rise>
-  </Paper>
-);
-
 const NftOneLine: Page = () => (
-  <Statement chapter="第二章 · NFT" kicker="NFT，一句話">
+  <Statement chapter="第二章 · NFT" kicker="NFT">
     不是一張圖，
     <br />
     是一份「誰擁有它」的
@@ -1019,16 +1017,152 @@ const NftOneLine: Page = () => (
   </Statement>
 );
 
-const WhatIBuilt: Page = () => (
+const WallTile = ({ img, name, kind, rotate, delay }: { img: string; name: string; kind: string; rotate: number; delay: number }) => (
+  <Rise delay={delay}>
+    <div
+      style={{
+        background: '#ffffff',
+        padding: '12px 12px 14px',
+        transform: `rotate(${rotate}deg)`,
+        boxShadow: '0 16px 26px -18px rgba(60,40,10,0.5)',
+      }}
+    >
+      <img src={img} style={{ display: 'block', width: '100%', height: 180, objectFit: 'cover' }} />
+      <div style={{ fontFamily: hand, fontSize: 26, fontWeight: 700, marginTop: 10, whiteSpace: 'nowrap' }}>{name}</div>
+      <div style={{ fontFamily: hand, fontSize: 22, color: pencil }}>{kind}</div>
+    </div>
+  </Rise>
+);
+
+const NftWall: Page = () => (
   <Paper chapter="第二章 · NFT">
-    <Heading>我做了什麼</Heading>
-    <div style={{ display: 'flex', gap: 72, marginTop: 48, flex: 1, minHeight: 0, alignItems: 'center' }}>
-      <Rise delay={0.2}>
-        <Sticky rotate={-1.5} width={600}>專案名稱、你的角色、做了多久、最驕傲的一件事、最大的失誤</Sticky>
+    <Heading>那個夏天，我們做了這些</Heading>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', columnGap: 32, rowGap: 36, marginTop: 52 }}>
+      <WallTile img={imgRpfTile} name="Rug Pull Frens" kind="PFP 社群型" rotate={-1.5} delay={0.1} />
+      <WallTile img={imgKatana} name="Katana N' Samurai" kind="PFP 社群型" rotate={1} delay={0.16} />
+      <WallTile img={imgMurmurTile} name="呢喃貓" kind="PASS 型" rotate={-0.8} delay={0.22} />
+      <WallTile img={imgChangling} name="常陵 × 印象畫廊" kind="實體藝術" rotate={1.4} delay={0.28} />
+      <WallTile img={imgChenpu} name="陳普《黑青》" kind="數位藝術" rotate={-1.2} delay={0.34} />
+      <WallTile img={imgNpm} name="故宮聯名" kind="文化藝術" rotate={1.2} delay={0.4} />
+      <WallTile img={imgMintverseTile} name="第二宇宙辭典" kind="文字型" rotate={-1} delay={0.46} />
+      <WallTile img={imgAsmeir} name="ASMeiR" kind="阿妹演唱會紀念" rotate={0.8} delay={0.52} />
+      <WallTile img={imgGlenrothes} name="格蘭路思" kind="品牌紀念" rotate={-1.4} delay={0.58} />
+      <WallTile img={imgHuangdu} name="皇都電姬" kind="阮劇團" rotate={1} delay={0.64} />
+    </div>
+  </Paper>
+);
+
+const Fact = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, fontSize: 34, lineHeight: 1.5 }}>
+    <span style={{ fontFamily: hand, color: 'var(--osd-accent)' }}>✎</span>
+    <span>{children}</span>
+  </div>
+);
+
+const Feature = ({
+  kind,
+  title,
+  img,
+  stat,
+  statLabel,
+  children,
+}: {
+  kind: string;
+  title: ReactNode;
+  img: string;
+  stat?: ReactNode;
+  statLabel?: string;
+  children?: ReactNode;
+}) => (
+  <Paper chapter="第二章 · NFT">
+    <div style={{ display: 'flex', gap: 64, flex: 1, minHeight: 0 }}>
+      <div style={{ width: 640, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Rise>
+          <Hand size={32} color="var(--osd-accent)" weight={700}>
+            {kind}
+          </Hand>
+        </Rise>
+        <Rise delay={0.1}>
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 84, fontWeight: 900, lineHeight: 1.15, marginTop: 12 }}>
+            {title}
+          </div>
+        </Rise>
+        {children ? (
+          <Rise delay={0.3}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 40 }}>{children}</div>
+          </Rise>
+        ) : null}
+        {stat ? (
+          <div style={{ marginTop: 48 }}>
+            <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 110, fontWeight: 900, lineHeight: 1.05, color: 'var(--osd-accent)' }}>
+              {stat}
+            </div>
+            <Hand size={30}>{statLabel}</Hand>
+          </div>
+        ) : null}
+      </div>
+      <Rise delay={0.2} style={{ flex: 1, minHeight: 0, position: 'relative' }}>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: '#ffffff',
+            padding: 16,
+            transform: 'rotate(0.8deg)',
+            boxShadow: '0 24px 40px -22px rgba(60,40,10,0.45)',
+          }}
+        >
+          <img src={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-3deg)' }} />
+        </div>
       </Rise>
-      <Rise delay={0.4} style={{ flex: 1, height: '100%' }}>
-        <ImagePlaceholder hint="我做的 NFT 專案畫面 / 作品截圖" />
-      </Rise>
+    </div>
+  </Paper>
+);
+
+const RugPullFrens: Page = () => (
+  <Feature
+    kind="PFP 社群型 NFT · 與藝術家 Raimochi"
+    title="Rug Pull Frens"
+    img={imgRpf}
+    stat={
+      <>
+        <CountUp to={1800} /> 萬
+      </>
+    }
+    statLabel="新台幣累積銷售額"
+  >
+    <Fact>能換膚色、改名字、寫故事的 PFP</Fact>
+    <Fact>藏家來自全球十多個國家</Fact>
+  </Feature>
+);
+
+const MurmurCats: Page = () => (
+  <Feature kind="PASS 型 NFT" title="呢喃貓學院" img={imgMurmur} stat="1 億+" statLabel="新台幣累積交易額">
+    <Fact>NFT 就是會員卡</Fact>
+    <Fact>持有它，才能進入交易研究社群</Fact>
+  </Feature>
+);
+
+const ArtPiece = ({ img, name, delay }: { img: string; name: string; delay: number }) => (
+  <Rise delay={delay} style={{ flex: 1 }}>
+    <div style={{ background: '#ffffff', padding: 14, boxShadow: '0 20px 34px -22px rgba(60,40,10,0.45)' }}>
+      <img src={img} style={{ display: 'block', width: '100%', height: 440, objectFit: 'cover' }} />
+    </div>
+    <div style={{ marginTop: 18 }}>
+      <Hand size={30} color="var(--osd-text)" weight={700}>
+        {name}
+      </Hand>
+    </div>
+  </Rise>
+);
+
+const ArtCertificate: Page = () => (
+  <Paper chapter="第二章 · NFT">
+    <Heading>NFT ＝ 藝術品的數位證書</Heading>
+    <div style={{ display: 'flex', gap: 56, marginTop: 56 }}>
+      <ArtPiece img={imgChangling} name="常陵 × 印象畫廊 · 實體藝術" delay={0.2} />
+      <ArtPiece img={imgChenpu} name="陳普《黑青》× 尊彩畫廊 · 數位藝術" delay={0.4} />
     </div>
   </Paper>
 );
@@ -1036,8 +1170,6 @@ const WhatIBuilt: Page = () => (
 const CreatorsPaid: Page = () => (
   <Statement
     chapter="第二章 · NFT"
-    kicker="讓我震撼的，不是價格"
-    note="沒有經紀公司、沒有平台抽三成，只有創作者和收藏者。"
   >
     創作者第一次，
     <br />
@@ -1047,11 +1179,23 @@ const CreatorsPaid: Page = () => (
   </Statement>
 );
 
+const Mintverse: Page = () => (
+  <Feature kind="文字型 NFT" title={<>第二宇宙<br />辭典</>} img={imgMintverse} stat="2100" statLabel="個詞彙，千人共同編寫">
+    <Fact>十位台灣作家一起發起</Fact>
+  </Feature>
+);
+
+const ObjectTheatre: Page = () => (
+  <Feature kind="劇場型 NFT · 中國信託新舞台藝術節" title={<>OBJECT @<br />THEATRE</>} img={imgObjectTheatre}>
+    <Fact>Code 演算法 ＝ 導演</Fact>
+    <Fact>NFT 物件 ＝ 演員</Fact>
+    <Fact>800 個物件，每天依心情演出</Fact>
+  </Feature>
+);
+
 const Bubble: Page = () => (
   <Statement
     chapter="第二章 · NFT"
-    kicker="然後，泡沫來了"
-    note="炒作會退潮，但「數位所有權」這個想法留了下來。"
   >
     我們賣的是 JPEG，
     <br />
@@ -1105,8 +1249,6 @@ const ThatTime: Page = () => (
 const NotDecentralized: Page = () => (
   <Statement
     chapter="第三章 · Luna、FTX"
-    kicker="回頭看才發現"
-    note="一個人說了算、看不到帳本、沒辦法驗證——正是第一章說的那些問題。"
   >
     它們會出事，
     <br />
@@ -1119,8 +1261,6 @@ const NotDecentralized: Page = () => (
 const NotYourKeys: Page = () => (
   <Statement
     chapter="第三章 · Luna、FTX"
-    kicker="最便宜的一課，也是最貴的一課"
-    note="Don't trust, verify. ——這句話從口號，變成了我的習慣。"
   >
     Not your keys,
     <br />
@@ -1185,8 +1325,7 @@ const Harvest: Page = () => (
 const MoneyLego: Page = () => (
   <Statement
     chapter="第四章 · DeFi"
-    kicker="DeFi，一句話"
-    note="借貸、交易、收益，像積木一樣，任何人都能接上別人的作品。"
+    kicker="DeFi"
   >
     金融，變成了
     <br />
@@ -1272,8 +1411,6 @@ const CodeIsLaw: Page = () => (
 const Verifiable: Page = () => (
   <Statement
     chapter="第四章 · DeFi"
-    kicker="DeFi 教我的事"
-    note="你不用相信我。你可以自己去看鏈上的每一筆交易。"
   >
     透明，讓信任
     <br />
@@ -1351,7 +1488,6 @@ const RollupCentric: Page = () => (
   <Statement
     chapter="第五章 · L2 Scaling"
     kicker="2020 · Rollup-centric roadmap"
-    note="以太坊選擇不自己變快，而是讓上面長出很多條快的鏈。"
   >
     <E>L1</E> 負責安全，
     <br />
@@ -1428,8 +1564,6 @@ Ch6.transition = breath;
 const PublicDiary: Page = () => (
   <Statement
     chapter="第六章 · Privacy"
-    kicker="透明的代價"
-    note="薪水、房租、捐款、你昨天在哪裡買了咖啡——全世界都看得到。"
   >
     你的錢包地址，
     <br />
@@ -1438,7 +1572,7 @@ const PublicDiary: Page = () => (
 );
 
 const ZkOneLine: Page = () => (
-  <Statement chapter="第六章 · Privacy" kicker="零知識證明 ZK，一句話">
+  <Statement chapter="第六章 · Privacy" kicker="零知識證明 ZK">
     證明「我知道」，
     <br />
     但不說出
@@ -1500,7 +1634,7 @@ const MyPrivacy: Page = () => (
 );
 
 const PrivacyFreedom: Page = () => (
-  <Statement chapter="第六章 · Privacy" kicker="我相信的事">
+  <Statement chapter="第六章 · Privacy">
     隱私，不是因為
     <br />
     有東西要藏，
@@ -1694,8 +1828,6 @@ const AATimeline: Page = () => {
 const InvisibleChain: Page = () => (
   <Statement
     chapter="第七章 · AA"
-    kicker="Mass Adoption 的樣子"
-    note="就像你不需要懂 TCP/IP，也能傳訊息給朋友。"
   >
     最好的區塊鏈體驗，
     <br />
@@ -1759,7 +1891,6 @@ const WalkawayTest: Page = () => (
   <Statement
     chapter="第八章 · Lean"
     kicker="Walkaway Test"
-    note="簡單，才能被更多人理解、驗證、接手維護。"
   >
     如果所有開發者
     <br />
@@ -1770,7 +1901,7 @@ const WalkawayTest: Page = () => (
 );
 
 const ProtocolNoUs: Page = () => (
-  <Statement chapter="第八章 · Lean" kicker="我最喜歡的一個想法">
+  <Statement chapter="第八章 · Lean">
     最好的協議，
     <br />
     是有一天
@@ -1817,7 +1948,6 @@ const NoIdols: Page = () => (
   <Statement
     chapter="終章"
     kicker="不要偶像崇拜"
-    note="尊敬建造者，但把信任放在可以被驗證的東西上。"
   >
     連 <Circled delay={0.8}>Vitalik</Circled> 也會錯。
   </Statement>
@@ -1889,10 +2019,14 @@ export default [
   Ch1Summary,
   // 第二章 · NFT
   Ch2,
-  RabbitHole,
   NftOneLine,
-  WhatIBuilt,
+  NftWall,
+  RugPullFrens,
+  MurmurCats,
+  ArtCertificate,
   CreatorsPaid,
+  Mintverse,
+  ObjectTheatre,
   Bubble,
   // 第三章 · Luna、FTX
   Ch3,
