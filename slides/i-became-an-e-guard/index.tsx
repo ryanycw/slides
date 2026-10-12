@@ -26,6 +26,8 @@ import imgAsmeir from './assets/nft-asmeir.jpg';
 import imgGlenrothes from './assets/nft-glenrothes.jpg';
 import imgHuangdu from './assets/nft-huangdu.jpg';
 import imgObjectTheatre from './assets/nft-object-theatre.jpg';
+import imgDoKwon from './assets/do-kwon.jpg';
+import imgSbf from './assets/sbf.jpg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -771,43 +773,71 @@ const ImageFigure = ({
   </Paper>
 );
 
+const Portrait = ({ img, name, credit }: { img: string; name: string; credit: string }) => (
+  <Rise delay={0.3} style={{ width: 500, flexShrink: 0 }}>
+    <div
+      style={{
+        background: '#ffffff',
+        padding: '16px 16px 20px',
+        transform: 'rotate(2deg)',
+        boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+        position: 'relative',
+      }}
+    >
+      <img src={img} style={{ display: 'block', width: '100%', height: 560, objectFit: 'cover', objectPosition: 'center top' }} />
+      <div style={{ fontFamily: hand, fontSize: 36, fontWeight: 700, marginTop: 14 }}>{name}</div>
+      <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+    </div>
+    <div style={{ marginTop: 18, textAlign: 'right' }}>
+      <Hand size={20}>{credit}</Hand>
+    </div>
+  </Rise>
+);
+
 const BigNumber = ({
   chapter,
   label,
   to,
   unit,
   caption,
+  portrait,
 }: {
   chapter: string;
   label: string;
   to: number;
   unit: string;
   caption: string;
+  portrait: ReactNode;
 }) => (
-  <Paper chapter={chapter} center>
-    <Rise>
-      <Hand size={40} color="var(--osd-accent)" weight={700}>
-        {label}
-      </Hand>
-    </Rise>
-    <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, marginTop: 8 }}>
-      <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 120, fontWeight: 900, color: pencil }}>≈</span>
-      <span
-        style={{
-          fontFamily: 'var(--osd-font-display)',
-          fontSize: 300,
-          fontWeight: 900,
-          lineHeight: 1.05,
-          color: 'var(--osd-accent)',
-        }}
-      >
-        <CountUp to={to} />
-      </span>
-      <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, fontWeight: 900 }}>{unit}</span>
+  <Paper chapter={chapter}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 80, flex: 1 }}>
+      <div style={{ flex: 1 }}>
+        <Rise>
+          <Hand size={40} color="var(--osd-accent)" weight={700}>
+            {label}
+          </Hand>
+        </Rise>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 20, marginTop: 8 }}>
+          <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 110, fontWeight: 900, color: pencil }}>≈</span>
+          <span
+            style={{
+              fontFamily: 'var(--osd-font-display)',
+              fontSize: 240,
+              fontWeight: 900,
+              lineHeight: 1.05,
+              color: 'var(--osd-accent)',
+            }}
+          >
+            <CountUp to={to} />
+          </span>
+          <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 88, fontWeight: 900 }}>{unit}</span>
+        </div>
+        <Rise delay={1.2}>
+          <div style={{ fontSize: 40, lineHeight: 1.5, marginTop: 32 }}>{caption}</div>
+        </Rise>
+      </div>
+      {portrait}
     </div>
-    <Rise delay={1.2}>
-      <div style={{ fontSize: 44, lineHeight: 1.5, marginTop: 32 }}>{caption}</div>
-    </Rise>
   </Paper>
 );
 
@@ -1208,6 +1238,7 @@ const LunaNumber: Page = () => (
     to={400}
     unit="億美元"
     caption="演算法穩定幣 UST 脫鉤，一週之內，整個生態系幾乎歸零。"
+    portrait={<Portrait img={imgDoKwon} name="Do Kwon · Terraform Labs" credit="Photo: FAQX / Wikimedia Commons · CC BY 3.0" />}
   />
 );
 
@@ -1218,6 +1249,7 @@ const FtxNumber: Page = () => (
     to={80}
     unit="億美元"
     caption="全球前幾大的交易所，挪用客戶資金後留下的缺口。"
+    portrait={<Portrait img={imgSbf} name="Sam Bankman-Fried · FTX" credit="Photo: Cointelegraph / Wikimedia Commons · CC BY 3.0" />}
   />
 );
 
