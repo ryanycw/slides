@@ -850,7 +850,6 @@ Cover.transition = settle;
 const OpeningQuestion: Page = () => (
   <Statement
     chapter="開場"
-    kicker="開始之前，想先問你"
     note="這是一個關於「留下來」的故事。"
   >
     你會為了一件
