@@ -806,44 +806,15 @@ const Cover: Page = () => (
   <Paper
     center
     overlay={
-      <>
-        <div style={{ position: 'absolute', left: 240, bottom: 110 }}>
-          <Rise delay={0.8}>
-            <div style={{ width: 80, height: 5, background: 'var(--osd-accent)', marginBottom: 24 }} />
-            <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900 }}>
-              Ryan<span style={{ color: pencil, fontWeight: 700 }}>（ryanycw）</span>
-            </div>
-            <Hand size={32}>當不了王以太可以來當以太王</Hand>
-          </Rise>
-        </div>
-        <div style={{ position: 'absolute', right: 180, top: 300, width: 360 }}>
-          <Rise delay={0.6}>
-            <div
-              style={{
-                position: 'relative',
-                background: '#ffffff',
-                padding: 20,
-                transform: 'rotate(2deg)',
-                boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
-              }}
-            >
-              <img src={imgLumaQr} style={{ display: 'block', width: '100%', imageRendering: 'pixelated' }} />
-              <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
-            </div>
-            <div style={{ marginTop: 20, textAlign: 'center' }}>
-              <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 40, fontWeight: 900 }}>DeFi TLDR</div>
-              <a
-                href="https://luma.com/j3bohbt9"
-                target="_blank"
-                rel="noreferrer"
-                style={{ fontFamily: hand, fontSize: 30, fontWeight: 700, color: 'var(--osd-accent)', textDecoration: 'none' }}
-              >
-                luma.com/j3bohbt9
-              </a>
-            </div>
-          </Rise>
-        </div>
-      </>
+      <div style={{ position: 'absolute', left: 240, bottom: 110 }}>
+        <Rise delay={0.8}>
+          <div style={{ width: 80, height: 5, background: 'var(--osd-accent)', marginBottom: 24 }} />
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900 }}>
+            Ryan<span style={{ color: pencil, fontWeight: 700 }}>（ryanycw）</span>
+          </div>
+          <Hand size={32}>當不了王以太可以來當以太王</Hand>
+        </Rise>
+      </div>
     }
   >
     <Rise delay={0.15}>
@@ -872,6 +843,55 @@ const Cover: Page = () => (
   </Paper>
 );
 Cover.transition = settle;
+
+const DefiTldr: Page = () => (
+  <Paper chapter="開場">
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 120, flex: 1 }}>
+      <div>
+        <Rise>
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 140, fontWeight: 900, lineHeight: 1.1 }}>
+            DeFi
+            <br />
+            TLDR
+          </div>
+        </Rise>
+        <Rise delay={0.3}>
+          <a
+            href="https://luma.com/j3bohbt9"
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: 'inline-block',
+              marginTop: 40,
+              fontFamily: hand,
+              fontSize: 44,
+              fontWeight: 700,
+              color: 'var(--osd-accent)',
+              textDecoration: 'none',
+            }}
+          >
+            luma.com/j3bohbt9
+          </a>
+        </Rise>
+      </div>
+      <Rise delay={0.2}>
+        <div
+          style={{
+            position: 'relative',
+            width: 560,
+            background: '#ffffff',
+            padding: 28,
+            transform: 'rotate(2deg)',
+            boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+          }}
+        >
+          <img src={imgLumaQr} style={{ display: 'block', width: '100%', imageRendering: 'pixelated' }} />
+          <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+        </div>
+      </Rise>
+    </div>
+  </Paper>
+);
 
 const OpeningQuestion: Page = () => (
   <Statement
@@ -2361,6 +2381,7 @@ export const meta: SlideMeta = {
 export default [
   // 開場
   Cover,
+  DefiTldr,
   OpeningQuestion,
   Roadmap,
   // 第一章 · 文藝復興
