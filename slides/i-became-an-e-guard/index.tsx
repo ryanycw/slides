@@ -1930,7 +1930,7 @@ const SolidCore: Page = () => (
           <CoreLine n="①" title="理由" sub="你為什麼在這裡？不是因為幣價。" />
         </Step>
         <Step>
-          <CoreLine n="②" title="價值" sub="市場崩盤時，你還願意為什麼留下？" />
+          <CoreLine n="②" title="堅持" sub="市場崩盤時，你還願意為什麼留下？" />
         </Step>
         <Step>
           <CoreLine n="③" title="行動" sub="寫一行 code、辦一場活動、問一個好問題。" />
