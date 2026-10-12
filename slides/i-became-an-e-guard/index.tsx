@@ -28,6 +28,7 @@ import imgHuangdu from './assets/nft-huangdu.jpg';
 import imgObjectTheatre from './assets/nft-object-theatre.jpg';
 import imgDoKwon from './assets/do-kwon.jpg';
 import imgSbf from './assets/sbf.jpg';
+import imgTestInProd from './assets/test-in-prod.jpg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -1308,24 +1309,42 @@ Ch4.transition = breath;
 
 const Harvest: Page = () => (
   <Paper chapter="第四章 · DeFi">
-    <Hand size={32} color="var(--osd-accent)" weight={700}>
-      HARVEST FINANCE · 2022 – 2025
-    </Hand>
-    <Heading>DeFi 的三年</Heading>
-    <div style={{ display: 'flex', gap: 36, marginTop: 48, flexWrap: 'wrap' }}>
-      <Rise delay={0.2}>
-        <Tag rotate={-2}>Looping vaults</Tag>
-      </Rise>
-      <Rise delay={0.35}>
-        <Tag rotate={1.5}>Universal Liquidation Router</Tag>
-      </Rise>
-      <Rise delay={0.5}>
-        <Tag rotate={-1}>Morpho 最大槓桿策略</Tag>
+    <div style={{ display: 'flex', gap: 64, flex: 1, minHeight: 0 }}>
+      <div style={{ width: 700, display: 'flex', flexDirection: 'column' }}>
+        <Hand size={32} color="var(--osd-accent)" weight={700}>
+          HARVEST FINANCE · 2022 – 2025
+        </Hand>
+        <Heading>DeFi 的三年</Heading>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 24, marginTop: 40 }}>
+          <Rise delay={0.2}>
+            <Tag rotate={-2}>Looping vaults</Tag>
+          </Rise>
+          <Rise delay={0.35}>
+            <Tag rotate={1.5}>Universal Liquidation Router</Tag>
+          </Rise>
+          <Rise delay={0.5}>
+            <Tag rotate={-1}>Morpho 最大槓桿策略</Tag>
+          </Rise>
+        </div>
+        <Rise delay={0.7} style={{ marginTop: 'auto' }}>
+          <Sticky width={680} rotate={-1}>怎麼加入 Harvest 的？第一個上線的合約是什麼？那時候的心情？</Sticky>
+        </Rise>
+      </div>
+      <Rise delay={0.4} style={{ flex: 1, minHeight: 0, display: 'flex', alignItems: 'center' }}>
+        <div
+          style={{
+            position: 'relative',
+            background: '#ffffff',
+            padding: '16px 16px 20px',
+            transform: 'rotate(1.5deg)',
+            boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+          }}
+        >
+          <img src={imgTestInProd} style={{ display: 'block', width: '100%' }} />
+          <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-3deg)' }} />
+        </div>
       </Rise>
     </div>
-    <Rise delay={0.7} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky width={860}>怎麼加入 Harvest 的？第一個上線的合約是什麼？那時候的心情？</Sticky>
-    </Rise>
   </Paper>
 );
 
