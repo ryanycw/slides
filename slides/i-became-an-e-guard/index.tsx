@@ -2004,11 +2004,6 @@ const KeepTheGood: Page = () => (
 const Closing: Page = () => (
   <Paper chapter="終章" overlay={<ChapterTrack current={9} />}>
     <div style={{ marginTop: 60 }}>
-      <Rise>
-        <Hand size={44} color="var(--osd-accent)" weight={700}>
-          路線圖走到這裡
-        </Hand>
-      </Rise>
       <Rise delay={0.2}>
         <div
           style={{
