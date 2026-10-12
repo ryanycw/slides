@@ -39,6 +39,7 @@ import imgOrb from './assets/ch1-orb.jpg';
 import imgBarry from './assets/barry-whitehat.jpg';
 import imgVitalik from './assets/vitalik.jpg';
 import imgTelegram from '@assets/Telegram.jpeg';
+import imgLumaQr from './assets/qr-luma.png';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -805,15 +806,43 @@ const Cover: Page = () => (
   <Paper
     center
     overlay={
-      <div style={{ position: 'absolute', left: 240, bottom: 110 }}>
-        <Rise delay={0.8}>
-          <div style={{ width: 80, height: 5, background: 'var(--osd-accent)', marginBottom: 24 }} />
-          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900 }}>
-            Ryan<span style={{ color: pencil, fontWeight: 700 }}>（ryanycw）</span>
-          </div>
-          <Hand size={32}>當不了王以太可以來當以太王</Hand>
-        </Rise>
-      </div>
+      <>
+        <div style={{ position: 'absolute', left: 240, bottom: 110 }}>
+          <Rise delay={0.8}>
+            <div style={{ width: 80, height: 5, background: 'var(--osd-accent)', marginBottom: 24 }} />
+            <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900 }}>
+              Ryan<span style={{ color: pencil, fontWeight: 700 }}>（ryanycw）</span>
+            </div>
+            <Hand size={32}>當不了王以太可以來當以太王</Hand>
+          </Rise>
+        </div>
+        <div style={{ position: 'absolute', right: 180, top: 300, width: 360 }}>
+          <Rise delay={0.6}>
+            <div
+              style={{
+                position: 'relative',
+                background: '#ffffff',
+                padding: 20,
+                transform: 'rotate(2deg)',
+                boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+              }}
+            >
+              <img src={imgLumaQr} style={{ display: 'block', width: '100%', imageRendering: 'pixelated' }} />
+              <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+            </div>
+            <div style={{ marginTop: 20, textAlign: 'center' }}>
+              <a
+                href="https://luma.com/j3bohbt9"
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontFamily: hand, fontSize: 30, fontWeight: 700, color: 'var(--osd-accent)', textDecoration: 'none' }}
+              >
+                luma.com/j3bohbt9
+              </a>
+            </div>
+          </Rise>
+        </div>
+      </>
     }
   >
     <Rise delay={0.15}>
