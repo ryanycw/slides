@@ -1732,9 +1732,6 @@ const MyPrivacy: Page = () => (
         <Tag rotate={2}>PSE CORE Program Fellow</Tag>
       </Rise>
     </div>
-    <Rise delay={0.8} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky width={860}>第一次接觸 ZK 的感受？做匿名社群，想解決的是什麼問題？</Sticky>
-    </Rise>
   </Paper>
 );
 
