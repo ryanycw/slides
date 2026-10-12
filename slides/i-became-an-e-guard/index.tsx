@@ -864,11 +864,7 @@ const OpeningQuestion: Page = () => (
   <Statement
     chapter="開場"
   >
-    你會為了一件
-    <br />
-    還不確定的事，
-    <br />
-    <Hl delay={0.9}>留下來</Hl>嗎？
+    一趟<Hl delay={0.9}>沒有終點</Hl>的旅程？
   </Statement>
 );
 
