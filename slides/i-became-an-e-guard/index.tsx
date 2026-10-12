@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 import {
+  ImagePlaceholder,
   MorphElement,
   Step,
   Steps,
@@ -1629,6 +1630,47 @@ const MyPrivacy: Page = () => (
   </Paper>
 );
 
+const BarryWhitehat: Page = () => (
+  <Paper chapter="第六章 · Privacy">
+    <div style={{ display: 'flex', alignItems: 'center', gap: 80, flex: 1 }}>
+      <div style={{ flex: 1 }}>
+        <Rise>
+          <Hand size={36} color="var(--osd-accent)" weight={700}>
+            PSE 的起點
+          </Hand>
+        </Rise>
+        <Rise delay={0.15}>
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 120, fontWeight: 900, lineHeight: 1.15, marginTop: 16 }}>
+            Barry
+            <br />
+            WhiteHat
+          </div>
+        </Rise>
+        <Rise delay={0.4}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 48 }}>
+            <Fact>2018 年提出 zk rollup</Fact>
+            <Fact>Semaphore、Unirep 的發想者</Fact>
+          </div>
+        </Rise>
+      </div>
+      <Rise delay={0.3} style={{ width: 520, flexShrink: 0 }}>
+        <div
+          style={{
+            position: 'relative',
+            background: '#ffffff',
+            padding: '16px 16px 20px',
+            transform: 'rotate(2deg)',
+            boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+          }}
+        >
+          <ImagePlaceholder hint="Barry WhiteHat 的照片" width={488} height={600} />
+          <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+        </div>
+      </Rise>
+    </div>
+  </Paper>
+);
+
 const PrivacyFreedom: Page = () => (
   <Statement chapter="第六章 · Privacy">
     隱私，不是因為
@@ -2051,6 +2093,7 @@ export default [
   ZkOneLine,
   WhoIsPse,
   MyPrivacy,
+  BarryWhitehat,
   PrivacyFreedom,
   // 第七章 · AA
   Ch7,
