@@ -935,7 +935,7 @@ const Renaissance: Page = () => (
 const CostOfTrust: Page = () => (
   <DraftPage
     title="信任，是有成本的"
-    direction="銀行、政府、平台——我們每天都在付「信任中介費」，只是沒看見帳單。"
+    direction="銀行、政府、平台——人們每天都在付「信任中介費」，只是沒看見帳單。"
     refNote="跨境匯款手續費數據、帳戶被凍結的案例、平台抽成比例"
   />
 );
@@ -1036,7 +1036,7 @@ const WallTile = ({ img, name, kind, rotate, delay }: { img: string; name: strin
 
 const NftWall: Page = () => (
   <Paper chapter="第二章 · NFT">
-    <Heading>那個夏天，我們做了這些</Heading>
+    <Heading>那個夏天的作品</Heading>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', columnGap: 32, rowGap: 36, marginTop: 52 }}>
       <WallTile img={imgRpfTile} name="Rug Pull Frens" kind="PFP 社群型" rotate={-1.5} delay={0.1} />
       <WallTile img={imgKatana} name="Katana N' Samurai" kind="PFP 社群型" rotate={1} delay={0.16} />
@@ -1197,7 +1197,7 @@ const Bubble: Page = () => (
   <Statement
     chapter="第二章 · NFT"
   >
-    我們賣的是 JPEG，
+    賣的是 JPEG，
     <br />
     還是<Hl delay={0.9}>可能性</Hl>？
   </Statement>
@@ -1234,7 +1234,7 @@ const FtxNumber: Page = () => (
 
 const ThatTime: Page = () => (
   <Paper chapter="第三章 · Luna、FTX">
-    <Heading>那時候的我</Heading>
+    <Heading>崩盤的那一刻</Heading>
     <Rise delay={0.2}>
       <div style={{ fontSize: 44, lineHeight: 1.5, marginTop: 48, maxWidth: 1300 }}>
         打開手機，群組裡每個人都在問同一句話：「還好嗎？」
@@ -1270,7 +1270,7 @@ const NotYourKeys: Page = () => (
 
 const WhyIStayed: Page = () => (
   <Paper chapter="第三章 · Luna、FTX">
-    <Heading>為什麼我沒有離開？</Heading>
+    <Heading>為什麼留下來？</Heading>
     <Rise delay={0.2}>
       <div
         style={{
@@ -1304,7 +1304,7 @@ const Harvest: Page = () => (
     <Hand size={32} color="var(--osd-accent)" weight={700}>
       HARVEST FINANCE · 2022 – 2025
     </Hand>
-    <Heading>我在 DeFi 的三年</Heading>
+    <Heading>DeFi 的三年</Heading>
     <div style={{ display: 'flex', gap: 36, marginTop: 48, flexWrap: 'wrap' }}>
       <Rise delay={0.2}>
         <Tag rotate={-2}>Looping vaults</Tag>
@@ -1533,7 +1533,7 @@ const ScalingCost: Page = () => (
           <CostLine n="②">每換一條鏈，就要再跨一次橋</CostLine>
         </Step>
         <Step>
-          <CostLine n="③">使用者：「我現在到底在哪條鏈？」</CostLine>
+          <CostLine n="③">使用者：「現在到底在哪條鏈？」</CostLine>
         </Step>
       </Steps>
     </div>
@@ -1573,11 +1573,11 @@ const PublicDiary: Page = () => (
 
 const ZkOneLine: Page = () => (
   <Statement chapter="第六章 · Privacy" kicker="零知識證明 ZK">
-    證明「我知道」，
+    證明一件事是真的，
     <br />
-    但不說出
+    卻不透露
     <br />
-    「<Underline delay={0.9}>我知道什麼</Underline>」。
+    <Underline delay={0.9}>任何細節</Underline>。
   </Statement>
 );
 
@@ -1612,7 +1612,7 @@ const WhoIsPse: Page = () => (
 
 const MyPrivacy: Page = () => (
   <Paper chapter="第六章 · Privacy">
-    <Heading>我的參與</Heading>
+    <Heading>Unirep Social TW 與 PSE</Heading>
     <div style={{ display: 'flex', gap: 32, marginTop: 52, flexWrap: 'wrap', maxWidth: 1400 }}>
       <Rise delay={0.2}>
         <Tag rotate={-2}>Unirep Social TW · 2023–2025</Tag>
@@ -1906,14 +1906,14 @@ const ProtocolNoUs: Page = () => (
     <br />
     是有一天
     <br />
-    <Hl delay={0.9}>不再需要我們</Hl>的協議。
+    <Hl delay={0.9}>不再需要維護者</Hl>的協議。
   </Statement>
 );
 
 /* ================================================ 終章 · 找到自己的理由 */
 
 const Ch9: Page = () => (
-  <ChapterDivider n={9} label="終章" title="找到自己的理由" sub="我成為 E 衛兵的原因，以及你的" year="2026" />
+  <ChapterDivider n={9} label="終章" title="找到自己的理由" sub="做這件事的理由" year="2026" />
 );
 Ch9.transition = breath;
 
@@ -1968,7 +1968,7 @@ const Closing: Page = () => (
     <div style={{ marginTop: 60 }}>
       <Rise>
         <Hand size={44} color="var(--osd-accent)" weight={700}>
-          我的路線圖走到這裡
+          路線圖走到這裡
         </Hand>
       </Rise>
       <Rise delay={0.2}>
