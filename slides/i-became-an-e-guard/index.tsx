@@ -831,6 +831,7 @@ const Cover: Page = () => (
               <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
             </div>
             <div style={{ marginTop: 20, textAlign: 'center' }}>
+              <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 40, fontWeight: 900 }}>DeFi TLDR</div>
               <a
                 href="https://luma.com/j3bohbt9"
                 target="_blank"
