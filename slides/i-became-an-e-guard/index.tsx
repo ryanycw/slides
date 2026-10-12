@@ -15,7 +15,7 @@ import imgInfiniteGarden from '@assets/Infinite Garden.png';
 import imgFromAAToAgentic from '@assets/From AA to Agentic.png';
 
 export const design: DesignSystem = {
-  palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#d4381e' },
+  palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
   fonts: {
     display: '"Noto Serif TC", "Songti TC", "PMingLiU", serif',
     body: '-apple-system, "PingFang TC", "Noto Sans TC", system-ui, sans-serif',
@@ -65,8 +65,8 @@ if (typeof document !== 'undefined' && !document.getElementById(STYLE_ID)) {
   100% { opacity: 1; transform: rotate(-8deg) scale(1); }
 }
 @keyframes eg-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(212, 56, 30, 0.45); }
-  100% { box-shadow: 0 0 0 22px rgba(212, 56, 30, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(43, 89, 195, 0.45); }
+  100% { box-shadow: 0 0 0 22px rgba(43, 89, 195, 0); }
 }
 @keyframes eg-drift { from { transform: translateY(0); } to { transform: translateY(-14px); } }
 @keyframes eg-pop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
@@ -407,7 +407,7 @@ const Heading = ({ children }: { children: ReactNode }) => (
 );
 
 const E = ({ children }: { children: ReactNode }) => <span style={{ color: eth }}>{children}</span>;
-const Red = ({ children }: { children: ReactNode }) => <span style={{ color: 'var(--osd-accent)' }}>{children}</span>;
+const Accent = ({ children }: { children: ReactNode }) => <span style={{ color: 'var(--osd-accent)' }}>{children}</span>;
 
 const TapeStrip = ({ style }: { style: CSSProperties }) => (
   <div style={{ position: 'absolute', width: 150, height: 40, background: tape, boxShadow: '0 1px 2px rgba(0,0,0,0.08)', ...style }} />
@@ -1218,7 +1218,7 @@ const LawCard = ({ tone, title, sub }: { tone: 'old' | 'new'; title: ReactNode; 
       flex: 1,
       height: 380,
       border: tone === 'old' ? `3px dashed ${pencil}` : '4px solid var(--osd-accent)',
-      background: tone === 'old' ? 'transparent' : 'rgba(212,56,30,0.06)',
+      background: tone === 'old' ? 'transparent' : 'rgba(43,89,195,0.06)',
       borderRadius: 'var(--osd-radius)',
       padding: '48px 52px',
       display: 'flex',
@@ -1402,7 +1402,7 @@ const InfiniteGarden: Page = () => (
     chapter="第五章 · L2 Scaling"
     title={
       <>
-        答案：在<Red>每一個 builder</Red> 手中
+        答案：在<Accent>每一個 builder</Accent> 手中
       </>
     }
     lead="Infinite Garden——以太坊不是一間公司，是一座沒有圍牆的花園"
@@ -1597,7 +1597,7 @@ const SmartAccount: Page = () => (
               width: 1440,
               height: 300,
               borderRadius: 24,
-              background: '#d4381e',
+              background: 'var(--osd-accent)',
               color: '#f5f0e6',
               display: 'flex',
               alignItems: 'center',
