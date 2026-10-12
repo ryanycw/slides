@@ -1275,7 +1275,7 @@ const NotDecentralized: Page = () => (
     <br />
     恰恰是因為它們
     <br />
-    <Hl delay={0.9}>不夠去中心化</Hl>。
+    <Hl delay={0.9}>中心化</Hl>。
   </Statement>
 );
 
