@@ -1326,9 +1326,6 @@ const Harvest: Page = () => (
             <Tag rotate={-1}>Morpho 最大槓桿策略</Tag>
           </Rise>
         </div>
-        <Rise delay={0.7} style={{ marginTop: 'auto' }}>
-          <Sticky width={680} rotate={-1}>怎麼加入 Harvest 的？第一個上線的合約是什麼？那時候的心情？</Sticky>
-        </Rise>
       </div>
       <Rise delay={0.4} style={{ flex: 1, minHeight: 0, display: 'flex', alignItems: 'center' }}>
         <div
