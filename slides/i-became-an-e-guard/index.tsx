@@ -991,7 +991,7 @@ const Ch1Summary: Page = () => (
 /* ================================================ 第二章 · NFT */
 
 const Ch2: Page = () => (
-  <ChapterDivider n={2} label="第二章" title="我做 NFT 的時期" sub="第一次覺得：原來我也可以參與" year="2021" />
+  <ChapterDivider n={2} label="第二章" title="NFT 夏天" sub="第一次覺得：原來我也可以參與" year="2021" />
 );
 Ch2.transition = breath;
 
