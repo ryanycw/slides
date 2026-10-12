@@ -1253,20 +1253,6 @@ const FtxNumber: Page = () => (
   />
 );
 
-const ThatTime: Page = () => (
-  <Paper chapter="第三章 · Luna、FTX">
-    <Heading>崩盤的那一刻</Heading>
-    <Rise delay={0.2}>
-      <div style={{ fontSize: 44, lineHeight: 1.5, marginTop: 48, maxWidth: 1300 }}>
-        打開手機，群組裡每個人都在問同一句話：「還好嗎？」
-      </div>
-    </Rise>
-    <Rise delay={0.5} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky width={860}>Luna / FTX 發生時你在做什麼？自己或身邊朋友有受傷嗎？當下的情緒是什麼？</Sticky>
-    </Rise>
-  </Paper>
-);
-
 const NotDecentralized: Page = () => (
   <Statement
     chapter="第三章 · Luna、FTX"
@@ -2053,7 +2039,6 @@ export default [
   Ch3,
   LunaNumber,
   FtxNumber,
-  ThatTime,
   NotDecentralized,
   NotYourKeys,
   WhyIStayed,
