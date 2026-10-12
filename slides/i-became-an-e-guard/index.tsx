@@ -1294,9 +1294,6 @@ const WhyIStayed: Page = () => (
         但<E>區塊</E>，還是一個一個地出。
       </div>
     </Rise>
-    <Rise delay={0.6} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky width={860}>身邊很多人離場了，你為什麼留下？哪一個瞬間讓你決定繼續？</Sticky>
-    </Rise>
   </Paper>
 );
 
