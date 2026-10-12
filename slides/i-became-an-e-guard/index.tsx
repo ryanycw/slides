@@ -1354,30 +1354,6 @@ const MoneyLego: Page = () => (
   </Statement>
 );
 
-const IncidentDay: Page = () => (
-  <Paper chapter="第四章 · DeFi">
-    <Heading>出事的那一天</Heading>
-    <Rise delay={0.2}>
-      <div
-        style={{
-          fontFamily: 'var(--osd-font-display)',
-          fontSize: 64,
-          fontWeight: 900,
-          lineHeight: 1.45,
-          marginTop: 56,
-        }}
-      >
-        合約上線的那一刻，
-        <br />
-        就沒有「下次再改」。
-      </div>
-    </Rise>
-    <Rise delay={0.6} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky width={860}>印象最深的一次 incident：發生了什麼、怎麼處理、學到什麼？</Sticky>
-    </Rise>
-  </Paper>
-);
-
 const LawCard = ({ tone, title, sub }: { tone: 'old' | 'new'; title: ReactNode; sub: string }) => (
   <div
     style={{
@@ -2059,7 +2035,6 @@ export default [
   Ch4,
   Harvest,
   MoneyLego,
-  IncidentDay,
   CodeIsLaw,
   Verifiable,
   // 第五章 · L2 Scaling
