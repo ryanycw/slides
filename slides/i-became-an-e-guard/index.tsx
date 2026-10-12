@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 import {
-  ImagePlaceholder,
   MorphElement,
   Step,
   Steps,
@@ -36,6 +35,7 @@ import imgGenesis from './assets/ch1-genesis.jpg';
 import imgDixon from './assets/ch1-dixon.jpg';
 import imgAltman from './assets/ch1-altman.jpg';
 import imgOrb from './assets/ch1-orb.jpg';
+import imgBarry from './assets/barry-whitehat.jpg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -1758,7 +1758,7 @@ const BarryWhitehat: Page = () => (
           </div>
         </Rise>
       </div>
-      <Rise delay={0.3} style={{ width: 520, flexShrink: 0 }}>
+      <Rise delay={0.3} style={{ width: 792, flexShrink: 0 }}>
         <div
           style={{
             position: 'relative',
@@ -1768,7 +1768,7 @@ const BarryWhitehat: Page = () => (
             boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
           }}
         >
-          <ImagePlaceholder hint="Barry WhiteHat 的照片" width={488} height={600} />
+          <img src={imgBarry} style={{ display: 'block', width: 760, height: 427, objectFit: 'cover' }} />
           <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
         </div>
       </Rise>
