@@ -844,51 +844,77 @@ const Cover: Page = () => (
 );
 Cover.transition = settle;
 
+const QrCard = ({
+  img,
+  title,
+  href,
+  label,
+  width,
+  padding,
+  rotate,
+  delay,
+  pixelated,
+}: {
+  img: string;
+  title: string;
+  href: string;
+  label: string;
+  width: number;
+  padding: number;
+  rotate: number;
+  delay: number;
+  pixelated?: boolean;
+}) => (
+  <Rise delay={delay} style={{ width, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div
+      style={{
+        position: 'relative',
+        width,
+        background: '#ffffff',
+        padding,
+        transform: `rotate(${rotate}deg)`,
+        boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+      }}
+    >
+      <img src={img} style={{ display: 'block', width: '100%', imageRendering: pixelated ? 'pixelated' : undefined }} />
+      <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+    </div>
+    <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 52, fontWeight: 900, marginTop: 36 }}>{title}</div>
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      style={{ fontFamily: hand, fontSize: 34, fontWeight: 700, color: 'var(--osd-accent)', textDecoration: 'none', marginTop: 4 }}
+    >
+      {label}
+    </a>
+  </Rise>
+);
+
 const DefiTldr: Page = () => (
   <Paper chapter="開場">
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 120, flex: 1 }}>
-      <div>
-        <Rise>
-          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 140, fontWeight: 900, lineHeight: 1.1 }}>
-            DeFi
-            <br />
-            TLDR
-          </div>
-        </Rise>
-        <Rise delay={0.3}>
-          <a
-            href="https://luma.com/j3bohbt9"
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              display: 'inline-block',
-              marginTop: 40,
-              fontFamily: hand,
-              fontSize: 44,
-              fontWeight: 700,
-              color: 'var(--osd-accent)',
-              textDecoration: 'none',
-            }}
-          >
-            luma.com/j3bohbt9
-          </a>
-        </Rise>
-      </div>
-      <Rise delay={0.2}>
-        <div
-          style={{
-            position: 'relative',
-            width: 560,
-            background: '#ffffff',
-            padding: 28,
-            transform: 'rotate(2deg)',
-            boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
-          }}
-        >
-          <img src={imgLumaQr} style={{ display: 'block', width: '100%', imageRendering: 'pixelated' }} />
-          <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
-        </div>
-      </Rise>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 160, flex: 1 }}>
+      <QrCard
+        img={imgLumaQr}
+        title="DeFi TLDR"
+        href="https://luma.com/j3bohbt9"
+        label="luma.com/j3bohbt9"
+        width={460}
+        padding={24}
+        rotate={-2}
+        delay={0.1}
+        pixelated
+      />
+      <QrCard
+        img={imgTelegram}
+        title="Telegram"
+        href="https://t.me/ryanycweth"
+        label="t.me/ryanycweth"
+        width={400}
+        padding={14}
+        rotate={2}
+        delay={0.25}
+      />
     </div>
   </Paper>
 );
@@ -2318,40 +2344,7 @@ const KeepTheGood: Page = () => (
 );
 
 const Closing: Page = () => (
-  <Paper
-    chapter="終章"
-    overlay={
-      <>
-        <div style={{ position: 'absolute', right: 180, top: 120, width: 340 }}>
-          <Rise delay={0.6}>
-            <div
-              style={{
-                position: 'relative',
-                background: '#ffffff',
-                padding: 14,
-                transform: 'rotate(2deg)',
-                boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
-              }}
-            >
-              <img src={imgTelegram} style={{ display: 'block', width: '100%' }} />
-              <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
-            </div>
-            <div style={{ marginTop: 20, textAlign: 'center' }}>
-              <a
-                href="https://t.me/ryanycweth"
-                target="_blank"
-                rel="noreferrer"
-                style={{ fontFamily: hand, fontSize: 34, fontWeight: 700, color: 'var(--osd-accent)', textDecoration: 'none' }}
-              >
-                t.me/ryanycweth
-              </a>
-            </div>
-          </Rise>
-        </div>
-        <ChapterTrack current={10} />
-      </>
-    }
-  >
+  <Paper chapter="終章" overlay={<ChapterTrack current={10} />}>
     <div style={{ marginTop: 60 }}>
       <Rise delay={0.2}>
         <div
