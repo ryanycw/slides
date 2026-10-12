@@ -30,6 +30,12 @@ import imgObjectTheatre from './assets/nft-object-theatre.jpg';
 import imgDoKwon from './assets/do-kwon.jpg';
 import imgSbf from './assets/sbf.jpg';
 import imgTestInProd from './assets/test-in-prod.jpg';
+import imgBretton from './assets/ch1-bretton.jpg';
+import imgNixon from './assets/ch1-nixon.jpg';
+import imgGenesis from './assets/ch1-genesis.jpg';
+import imgDixon from './assets/ch1-dixon.jpg';
+import imgAltman from './assets/ch1-altman.jpg';
+import imgOrb from './assets/ch1-orb.jpg';
 
 export const design: DesignSystem = {
   palette: { bg: '#f5f0e6', text: '#1f1c18', accent: '#2b59c3' },
@@ -481,32 +487,6 @@ const Sticky = ({
   </div>
 );
 
-const DraftStamp = () => {
-  const active = useActive();
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        right: 150,
-        top: 96,
-        border: '5px solid var(--osd-accent)',
-        borderRadius: 10,
-        color: 'var(--osd-accent)',
-        fontFamily: hand,
-        fontWeight: 700,
-        fontSize: 32,
-        letterSpacing: 4,
-        padding: '10px 26px',
-        opacity: 0.85,
-        transform: 'rotate(-8deg)',
-        animation: active ? `eg-stamp 0.5s ${EASE_OUT} 0.3s both` : undefined,
-      }}
-    >
-      草稿 · DRAFT
-    </div>
-  );
-};
-
 /* ------------------------------------------------ Chapter track (the thread through the talk) */
 
 const STATION_GAP = 180;
@@ -664,16 +644,14 @@ const Statement = ({
   chapter,
   kicker,
   note,
-  draft,
   children,
 }: {
   chapter: string;
   kicker?: string;
   note?: ReactNode;
-  draft?: boolean;
   children: ReactNode;
 }) => (
-  <Paper chapter={chapter} center overlay={draft ? <DraftStamp /> : null}>
+  <Paper chapter={chapter} center>
     {kicker ? (
       <Rise>
         <Hand size={40} color="var(--osd-accent)" weight={700}>
@@ -701,32 +679,6 @@ const Statement = ({
         </div>
       </Rise>
     ) : null}
-  </Paper>
-);
-
-const DraftPage = ({
-  title,
-  direction,
-  refNote,
-}: {
-  title: ReactNode;
-  direction: string;
-  refNote: string;
-}) => (
-  <Paper chapter="第一章 · 文藝復興" overlay={<DraftStamp />}>
-    <Rise>
-      <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 88, fontWeight: 900, lineHeight: 1.2, marginTop: 40 }}>
-        {title}
-      </div>
-    </Rise>
-    <Rise delay={0.2}>
-      <div style={{ fontSize: 44, lineHeight: 1.5, marginTop: 48, maxWidth: 1380 }}>{direction}</div>
-    </Rise>
-    <Rise delay={0.5} style={{ marginTop: 'auto', alignSelf: 'flex-end', marginRight: 40 }}>
-      <Sticky tone="ref" rotate={-1.5} width={860}>
-        {refNote}
-      </Sticky>
-    </Rise>
   </Paper>
 );
 
@@ -940,83 +892,239 @@ const Roadmap: Page = () => (
   </Paper>
 );
 
-/* ================================================ 第一章 · 文藝復興（DRAFT） */
+/* ================================================ 第一章 · 文藝復興 */
 
 const Ch1: Page = () => (
-  <ChapterDivider n={1} label="第一章" title="文藝復興" sub="區塊鏈、去中心化、抗審查，為什麼重要？" year="2008" />
+  <ChapterDivider n={1} label="第一章" title="文藝復興" sub="錢的價值，從黃金走到信任" year="1944" />
 );
 Ch1.transition = breath;
 
-const Renaissance: Page = () => (
-  <DraftPage
-    title="為什麼叫「文藝復興」？"
-    direction="印刷術讓知識不再被少數人壟斷；區塊鏈讓「信任」不再被少數人壟斷。"
-    refNote="古騰堡印刷術（1440）→ 宗教改革 → 知識去中心化的類比"
-  />
+const Snapshot = ({
+  img,
+  width,
+  height,
+  rotate = 2,
+  caption,
+  credit,
+  position = 'center',
+}: {
+  img: string;
+  width: number;
+  height: number;
+  rotate?: number;
+  caption: string;
+  credit?: string;
+  position?: string;
+}) => (
+  <Rise delay={0.3} style={{ width: width + 32, flexShrink: 0 }}>
+    <div
+      style={{
+        position: 'relative',
+        background: '#ffffff',
+        padding: '16px 16px 20px',
+        transform: `rotate(${rotate}deg)`,
+        boxShadow: '0 24px 40px -22px rgba(60,40,10,0.5)',
+      }}
+    >
+      <img src={img} style={{ display: 'block', width, height, objectFit: 'cover', objectPosition: position }} />
+      <div style={{ fontFamily: hand, fontSize: 30, fontWeight: 700, marginTop: 12 }}>{caption}</div>
+      <TapeStrip style={{ top: -16, left: '50%', marginLeft: -75, transform: 'rotate(-4deg)' }} />
+    </div>
+    {credit ? (
+      <div style={{ marginTop: 16, textAlign: 'right' }}>
+        <Hand size={20}>{credit}</Hand>
+      </div>
+    ) : null}
+  </Rise>
 );
 
-const CostOfTrust: Page = () => (
-  <DraftPage
-    title="信任，是有成本的"
-    direction="銀行、政府、平台——人們每天都在付「信任中介費」，只是沒看見帳單。"
-    refNote="跨境匯款手續費數據、帳戶被凍結的案例、平台抽成比例"
-  />
+const PhotoStory = ({
+  kicker,
+  title,
+  photo,
+  children,
+}: {
+  kicker: string;
+  title: ReactNode;
+  photo: ReactNode;
+  children?: ReactNode;
+}) => (
+  <Paper chapter="第一章 · 文藝復興">
+    <div style={{ display: 'flex', alignItems: 'center', gap: 72, flex: 1 }}>
+      <div style={{ flex: 1 }}>
+        <Rise>
+          <Hand size={36} color="var(--osd-accent)" weight={700}>
+            {kicker}
+          </Hand>
+        </Rise>
+        <Rise delay={0.15}>
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 80, fontWeight: 900, lineHeight: 1.25, marginTop: 16 }}>
+            {title}
+          </div>
+        </Rise>
+        {children ? (
+          <Rise delay={0.4}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 44 }}>{children}</div>
+          </Rise>
+        ) : null}
+      </div>
+      {photo}
+    </div>
+  </Paper>
+);
+
+const BrettonWoods: Page = () => (
+  <PhotoStory
+    kicker="1944 · 布列敦森林會議"
+    title={
+      <>
+        美元掛鉤<Hl delay={0.9}>黃金</Hl>
+      </>
+    }
+    photo={
+      <Snapshot
+        img={imgBretton}
+        width={720}
+        height={584}
+        caption="布列敦森林會議開幕"
+        credit="Photo: Public domain / Wikimedia Commons"
+      />
+    }
+  >
+    <Fact>1 盎司黃金 ＝ 35 美元</Fact>
+    <Fact>各國貨幣，再掛鉤美元</Fact>
+  </PhotoStory>
+);
+
+const NixonShock: Page = () => (
+  <PhotoStory
+    kicker="1971 · 尼克森震撼"
+    title={
+      <>
+        美元，
+        <br />
+        <Underline delay={0.9}>不再兌換黃金</Underline>
+      </>
+    }
+    photo={
+      <Snapshot
+        img={imgNixon}
+        width={480}
+        height={580}
+        position="center top"
+        caption="Richard Nixon"
+        credit="Photo: Public domain / Wikimedia Commons"
+      />
+    }
+  >
+    <Fact>布列敦森林體系就此瓦解</Fact>
+  </PhotoStory>
+);
+
+const TrustMoney: Page = () => (
+  <Statement chapter="第一章 · 文藝復興">
+    從此，錢的價值
+    <br />
+    錨定在<Hl delay={0.9}>信任</Hl>上。
+  </Statement>
+);
+
+const TrustWho: Page = () => (
+  <Statement chapter="第一章 · 文藝復興">
+    那這份信任，
+    <br />
+    該交給<Underline delay={0.9}>誰</Underline>？
+  </Statement>
 );
 
 const Genesis: Page = () => (
-  <DraftPage
-    title="2008：一份九頁的白皮書"
-    direction="金融海嘯之後，中本聰在比特幣創世區塊裡，留下一則《泰晤士報》的頭條。"
-    refNote="創世區塊訊息：“Chancellor on brink of second bailout for banks”"
-  />
+  <PhotoStory
+    kicker="2008 · 金融海嘯之後"
+    title="比特幣的創世區塊"
+    photo={
+      <Snapshot
+        img={imgGenesis}
+        width={760}
+        height={525}
+        rotate={-1.5}
+        caption="寫進區塊的頭條"
+        credit="Image: Public domain / Wikimedia Commons"
+      />
+    }
+  >
+    <Fact>“Chancellor on brink of second bailout for banks”</Fact>
+  </PhotoStory>
 );
 
-const WhatIsDecentralization: Page = () => (
-  <DraftPage
-    title="什麼是去中心化？"
-    direction="不是沒有人負責，而是沒有任何一個人，能說了算。"
-    refNote="Vitalik〈The Meaning of Decentralization〉(2017)：架構 / 政治 / 邏輯三個維度"
-  />
+const Decentralization: Page = () => (
+  <Statement chapter="第一章 · 文藝復興" kicker="去中心化">
+    不是沒有人負責，
+    <br />
+    而是沒有任何一個人
+    <br />
+    <Hl delay={0.9}>說了算</Hl>。
+  </Statement>
 );
 
-const CensorshipStory: Page = () => (
-  <DraftPage
-    title="抗審查：一個真實的故事"
-    direction="當你的錢、你說的話、你的身分，都可以被別人一鍵關掉。"
-    refNote="候選：WikiLeaks 金流封鎖、抗議者帳戶被凍結、高通膨國家的穩定幣使用"
-  />
-);
-
-const CredibleNeutrality: Page = () => (
-  <DraftPage
-    title="可信中立 Credible Neutrality"
-    direction="規則對每個人都一樣，而且每個人都能自己驗證。"
-    refNote="Vitalik〈Credible Neutrality as a Guiding Principle〉(2020)"
-  />
-);
-
-const WorldComputer: Page = () => (
-  <DraftPage
+const A16z: Page = () => (
+  <PhotoStory
+    kicker="a16z crypto"
     title={
       <>
-        <E>以太坊</E>：一台世界電腦
+        數十億美元，
+        <br />
+        押注區塊鏈
       </>
     }
-    direction="比特幣讓「錢」去中心化；以太坊讓「程式」去中心化。"
-    refNote="以太坊白皮書（2013）、智能合約、2015 主網上線、2022 The Merge"
-  />
+    photo={
+      <Snapshot
+        img={imgDixon}
+        width={480}
+        height={580}
+        position="center top"
+        caption="Chris Dixon · a16z crypto"
+        credit="Photo: TechCrunch / Wikimedia Commons · CC BY 2.0"
+      />
+    }
+  >
+    <Fact>2022 年募集 45 億美元的加密基金</Fact>
+  </PhotoStory>
 );
 
-const Permissionless: Page = () => (
-  <DraftPage
-    title="一個人，也可以⋯⋯"
-    direction="發行資產、建立市場、組織社群——不需要任何人的許可。"
-    refNote="Permissionless 案例：Uniswap、DAO、學生自己發起的鏈上專案"
-  />
+const AltmanWorld: Page = () => (
+  <PhotoStory
+    kicker="Sam Altman · World"
+    title={
+      <>
+        用區塊鏈，
+        <br />
+        證明「你是人類」
+      </>
+    }
+    photo={
+      <div style={{ position: 'relative', width: 800, height: 760, flexShrink: 0 }}>
+        <div style={{ position: 'absolute', right: 0, bottom: 0 }}>
+          <Snapshot
+            img={imgOrb}
+            width={520}
+            height={346}
+            rotate={-2}
+            caption="World 的虹膜掃描 Orb"
+            credit="Photos: TechCrunch / Wikimedia Commons · CC BY 2.0"
+          />
+        </div>
+        <div style={{ position: 'absolute', left: 0, top: 0 }}>
+          <Snapshot img={imgAltman} width={360} height={380} position="center top" rotate={2.5} caption="Sam Altman" />
+        </div>
+      </div>
+    }
+  >
+    <Fact>OpenAI 執行長共同創辦 World</Fact>
+  </PhotoStory>
 );
 
 const Ch1Summary: Page = () => (
-  <Statement chapter="第一章 · 文藝復興" kicker="小結" draft>
+  <Statement chapter="第一章 · 文藝復興" kicker="小結">
     這不是錢的事，
     <br />
     是「<Underline delay={0.9}>誰說了算</Underline>」的事。
@@ -2034,16 +2142,16 @@ export default [
   Cover,
   OpeningQuestion,
   Roadmap,
-  // 第一章 · 文藝復興（DRAFT）
+  // 第一章 · 文藝復興
   Ch1,
-  Renaissance,
-  CostOfTrust,
+  BrettonWoods,
+  NixonShock,
+  TrustMoney,
+  TrustWho,
   Genesis,
-  WhatIsDecentralization,
-  CensorshipStory,
-  CredibleNeutrality,
-  WorldComputer,
-  Permissionless,
+  Decentralization,
+  A16z,
+  AltmanWorld,
   Ch1Summary,
   // 第二章 · NFT
   Ch2,
