@@ -908,7 +908,7 @@ const Roadmap: Page = () => (
       <Stop n="第六章" title="Privacy · PSE" sub="另一群人的路" delay={0.5} />
       <Stop n="第七章" title="帳戶抽象 AA" sub="給一般人用的以太坊" delay={0.58} />
       <Stop n="第八章" title="Lean Ethereum" sub="簡單才能長久" delay={0.66} />
-      <Stop n="終章" title="找到自己的理由" sub="穩固內核" delay={0.74} />
+      <Stop n="終章" title="找到自己的理由" sub="核心價值" delay={0.74} />
     </div>
   </Paper>
 );
@@ -1923,7 +1923,7 @@ const CoreLine = ({ n, title, sub }: { n: string; title: string; sub: string }) 
 
 const SolidCore: Page = () => (
   <Paper chapter="終章">
-    <Heading>穩固內核</Heading>
+    <Heading>核心價值</Heading>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 72, marginTop: 96 }}>
       <Steps>
         <Step>
