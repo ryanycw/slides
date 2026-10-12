@@ -806,12 +806,20 @@ const BigNumber = ({
 /* ================================================ 開場 */
 
 const Cover: Page = () => (
-  <Paper center>
-    <Rise>
-      <Hand size={40} color="var(--osd-accent)" weight={700}>
-        Ryan Wang · 一本工程師的以太坊筆記
-      </Hand>
-    </Rise>
+  <Paper
+    center
+    overlay={
+      <div style={{ position: 'absolute', left: 240, bottom: 110 }}>
+        <Rise delay={0.8}>
+          <div style={{ width: 80, height: 5, background: 'var(--osd-accent)', marginBottom: 24 }} />
+          <div style={{ fontFamily: 'var(--osd-font-display)', fontSize: 44, fontWeight: 900 }}>
+            Ryan<span style={{ color: pencil, fontWeight: 700 }}>（ryanycw）</span>
+          </div>
+          <Hand size={32}>DeFi 與隱私工程師 · 台北以太坊社群 host</Hand>
+        </Rise>
+      </div>
+    }
+  >
     <Rise delay={0.15}>
       <h1
         style={{
@@ -819,7 +827,7 @@ const Cover: Page = () => (
           fontSize: 'var(--osd-size-hero)',
           fontWeight: 900,
           lineHeight: 1.18,
-          margin: '28px 0 0',
+          margin: 0,
         }}
       >
         我成為
