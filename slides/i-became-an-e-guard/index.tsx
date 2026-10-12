@@ -1277,7 +1277,7 @@ const NotYourKeys: Page = () => (
 
 const WhyIStayed: Page = () => (
   <Paper chapter="第三章 · Luna、FTX">
-    <Heading>為什麼留下來？</Heading>
+    <Heading>下一步往哪走？</Heading>
     <Rise delay={0.2}>
       <div
         style={{
