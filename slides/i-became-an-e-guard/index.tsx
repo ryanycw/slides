@@ -2060,11 +2060,10 @@ const Ch9: Page = () => (
 );
 Ch9.transition = breath;
 
-const CoreLine = ({ n, title, sub }: { n: string; title: string; sub: string }) => (
+const CoreLine = ({ n, title }: { n: string; title: string }) => (
   <div style={{ display: 'flex', alignItems: 'baseline', gap: 40 }}>
-    <span style={{ fontFamily: hand, fontSize: 56, fontWeight: 700, color: 'var(--osd-accent)', width: 60 }}>{n}</span>
-    <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 64, fontWeight: 900, width: 200 }}>{title}</span>
-    <span style={{ fontSize: 44, lineHeight: 1.4 }}>{sub}</span>
+    <span style={{ fontFamily: hand, fontSize: 64, fontWeight: 700, color: 'var(--osd-accent)', width: 70 }}>{n}</span>
+    <span style={{ fontFamily: 'var(--osd-font-display)', fontSize: 96, fontWeight: 900, lineHeight: 1.2 }}>{title}</span>
   </div>
 );
 
@@ -2074,13 +2073,13 @@ const SolidCore: Page = () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 72, marginTop: 96 }}>
       <Steps>
         <Step>
-          <CoreLine n="①" title="理由" sub="你為什麼在這裡？不是因為幣價。" />
+          <CoreLine n="①" title="堅持" />
         </Step>
         <Step>
-          <CoreLine n="②" title="堅持" sub="市場崩盤時，你還願意為什麼留下？" />
+          <CoreLine n="②" title="善良" />
         </Step>
         <Step>
-          <CoreLine n="③" title="行動" sub="寫一行 code、辦一場活動、問一個好問題。" />
+          <CoreLine n="③" title="誠實" />
         </Step>
       </Steps>
     </div>
